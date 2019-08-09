@@ -42,6 +42,8 @@ From the terminal enter into the folder where tsv2yaml.py is found. Run
 ````python tsv2yaml.py -y ../dcf_schemas/ -t ../tsvs/ -d dcf````
 
 Commandline arguments:
+````
 -y: The location of the yaml files. 
 -t: The destination of the output tsvs
 -d: The name of the data dictionary. 
+````
