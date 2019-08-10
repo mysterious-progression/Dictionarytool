@@ -3,7 +3,7 @@ tsv/yaml interconverter tools
 ### Modifying nodes_tsv
 
 #### Links and link subgroups
-Every link must contain one of "name", "backref", "label", "target" and "multiplicity." Failure to enter one of these fields will result in an error. If a subgroup is present, it must be listed first in each cell. A subgroup is specified using brackets. ````[name1, name2]```` is an example of an entry in the link name column that specifies the names of two links seperated by a comma in a subgroup. If there is a subgroup and a nongroup linked, it must be notated with the subgroup first, ````[name1, name2], name3````. 
+Every link must contain one of "name", "backref", "label", "target" and "multiplicity." Failure to enter one of these fields will result in an error. If a subgroup is present, it must be listed first in each cell. A subgroup is specified using brackets. ````[name1, name2]```` is an example of an entry in the link name column that specifies the names of two links that belong to a subgroup. The names are seperated by a comma. If there is a subgroup and a nongroup link, it must be notated with the subgroup first, ````[name1, name2], name3````. 
 
 ### Modifying variables_tsv
 
