@@ -371,7 +371,10 @@ if __name__ == "__main__":
             if k in linknames:
                 todel.append(k)
         for l in linknames:
-            del d['properties'][l]
+            delet = d['properties'].get(l)
+            if delet is not None:
+                
+                del delet
     
     yamprops = [(y['id'], y['properties']) for y in yamdics]
     for y in yamdics:
