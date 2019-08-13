@@ -11,6 +11,8 @@ import schema_utils
 from schema_utils import stripper
 
 S = ruamel.yaml.scalarstring.DoubleQuotedScalarString
+nodesbuilt = 0
+properties_added = 0
 def get_params():
     """Gets arguments entered from the commandline and returns them as a object containing their references."""
 
@@ -27,7 +29,7 @@ def get_params():
 def buildnode(node, terms):
     """Builds a python dictionary that will be used as a template for constructing nodes. Values are added to this stucture and
     this is the dictionary that will be used to dump to a yaml file"""
-    
+    global nodesbuilt
     if node['<category>'] == 'data_file':
         sy = ['id', 'project_id', 'state', 'created_datetime', 'updated_datetime', 'state', 'file_state', 'error_type']
     else:
@@ -55,11 +57,13 @@ def buildnode(node, terms):
 
     if terms == 't':
         del outdict['nodeTerms']
+    nodesbuilt += 1
     return outdict
 
 
 def properties_builder(node_name, vdictlist, category, omitterms):
     """Constructs the properties dictionary that will be added to the main node dictionary."""
+    global properties_added
     if category == 'data_file':
         propdict = {'$ref' : S("_definitions.yaml#/data_file_properties")}
     else:
@@ -96,6 +100,7 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                         pass
                 else:
                     del propdict[n['<field>']]['enums']
+                properties_added += 1
             else:
                 propdict[str(validate_property_name(n['<field>']))] = {
                     'description': n['<description>'],
@@ -126,6 +131,7 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                         pass
                 else:
                     del propdict[n['<field>']]['enumTerms']
+                properties_added += 1
     return schema_utils.sortdictionary(propdict)
 
 def properties_preprocessing(vdictlist, ndictlist):
@@ -412,6 +418,8 @@ def enum2list(enums):
 
 if __name__ == "__main__":
     args = get_params()
+    if args.output[-1] != '/':
+        args.output += '/'
     # Read in the nodes and variables tsvs located in current directory
     # files = glob.glob('./*')
     # nfile = [f for f in files if 'nodes' in f][0]
@@ -528,3 +536,6 @@ if __name__ == "__main__":
         fs = open(outpath, 'a')
         yaml.dump({'properties': dataprop}, fs)
         fs.close()
+
+    print(f"Completed with {nodesbuilt} nodes from tsv {args.nodes} and {properties_added} properties from {args.variables} modified")
+    print(f"Yamls outputted to {args.output}")
