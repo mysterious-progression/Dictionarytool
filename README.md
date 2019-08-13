@@ -46,7 +46,7 @@ This tool ignores _settings', '_definitions', '_terms', 'project', 'program' yam
 To convert yaml files to nodes and variables tsvs:
 
 From the terminal enter into the folder where tsv2yaml.py is found. Run 
-````python tsv2yaml.py -y ../dcf_schemas/ -t ../tsvs/ -d dcf````
+````python yaml2tsv.py -y ../dcf_schemas/ -t ../tsvs/ -d dcf````
 
 Commandline arguments:
 ````
