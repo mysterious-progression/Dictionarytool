@@ -29,14 +29,15 @@ def get_params():
 def buildnode(node, terms):
     """Builds a python dictionary that will be used as a template for constructing nodes. Values are added to this stucture and
     this is the dictionary that will be used to dump to a yaml file"""
+
     global nodesbuilt
-    if node['<category>'] == 'data_file':
+    if node['<category>'] in ['index_file', 'metadata_file', 'data_file']:
         sy = ['id', 'project_id', 'state', 'created_datetime', 'updated_datetime', 'state', 'file_state', 'error_type']
     else:
         sy = ['id', 'project_id', 'state', 'created_datetime', 'updated_datetime']
-    d = [["id"], ["project", "file"]]
+    d = [["id"], ["project_id", "submitter_id"]]
     
-    outdict = {'$schema': "http://json-schema.org/draft-04/schema#",
+    outdict = {'$schema': S("http://json-schema.org/draft-04/schema#"),
     'id': S(validate_node_name(node['<node>'])),
     'title': node['<title>'],
     'type': 'object',
@@ -64,8 +65,10 @@ def buildnode(node, terms):
 def properties_builder(node_name, vdictlist, category, omitterms):
     """Constructs the properties dictionary that will be added to the main node dictionary."""
     global properties_added
-    if category == 'data_file':
+    if category in ['data_file', 'index_file', 'metadata_file']:
         propdict = {'$ref' : S("_definitions.yaml#/data_file_properties")}
+    elif category == 'analysis':
+        propdict = {'$ref' : S("_definitions.yaml#/workflow_properties")}
     else:
         propdict = {'$ref' : S("_definitions.yaml#/ubiquitous_properties")}
 
@@ -152,9 +155,9 @@ def properties_preprocessing(vdictlist, ndictlist):
             n['<options7>'] = enum2list(n['<options7>'])
             n['<options8>'] = enum2list(n['<options8>'])
 
-        if n['<required>'] == True:
-            node2mod = next(d for d in ndictlist if d['id'] == n['<node>'])
-            node2mod['required'].append(n['<field>'])
+        # if n['<required>'] == True:
+        #     node2mod = next(d for d in ndictlist if d['id'] == n['<node>'])
+        #     node2mod['required'].append(n['<field>'])
 
 
 
@@ -250,6 +253,12 @@ def get_enum(enum):
             enum = stripper(enum[:end])
             return enum
     return enum
+
+def reqs2list(rstring):
+    if isinstance(rstring, str):
+        rlis = [stripper(r) for r in rstring.split(',')]
+        return rlis
+    return rstring
 
 
 def addlinks(ndict, maindict):
@@ -371,16 +380,16 @@ def property_reference_setter(diclinks):
     block"""
 
     l = diclinks
-    if l['name'] == 'project':
-        if l['multiplicity'] == 'many_to_one':
-            d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_many_project") }})
-        else:
+    if l['name'] == 'projects':
+        if l['multiplicity'] in ['many_to_one', 'one_to_one']:
             d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_one_project") }})
-    else:
-        if l['multiplicity'] == 'many_to_one':
-            d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_many") }})
         else:
+            d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_many_project") }})
+    else:
+        if l['multiplicity'] in ['many_to_one', 'one_to_one']:
             d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_one") }})
+        else:
+            d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_many") }})
 
 def enum2list(enums):
     """Transforms a string of enums into a list. For values that could be interpreted in yaml as nonstring, it adds quotations"""
@@ -444,6 +453,7 @@ if __name__ == "__main__":
     for i in range(len(dictlist)):
         links =  addlinks(nodedicts[i], dictlist[i])        
         dictlist[i]['links'] = links
+        dictlist[i]['required'] += [req for req in reqs2list(nodedicts[i]['<required>']) if req not in dictlist[i]['required']]
         
     
     vdictlist = variables.to_dict('records')
@@ -457,8 +467,8 @@ if __name__ == "__main__":
         for n in dictlist:
             if n['id'] == node:
                 n['properties'] = properties_builder(node, vdictlist, n['category'], args.noterms)
-                if n['category'] == 'data_file':
-                    n['required'] += ['file_name', 'file_size', 'data_format', 'md5sum']
+                if n['category'] in ['index_file', 'data_file', 'metadata_file']:
+                    n['required'] += [na for na in ['file_name', 'file_size', 'data_format', 'md5sum'] if na not in n['required']]
     #dump the dictionarys to yaml files
     
     yaml= YAML()

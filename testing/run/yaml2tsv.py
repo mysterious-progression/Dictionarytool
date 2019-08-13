@@ -9,6 +9,8 @@ import os
 from schema_utils import stripper
 
 tosave = set()
+noderows = 0
+propertyrows = 0
 def get_params():
     parser = argparse.ArgumentParser(description="name of directory containing yaml files, and TSV files.")
     parser.add_argument("-y", "--yamls", dest="yamls", required=True, help="Location of the yaml files")
@@ -23,7 +25,6 @@ def makedataframes():
     '<field>': None,
     '<description>': None,
     '<type>': None,
-    '<required>': None,
     '<terms>': None,
     '<pattern>': None,
     '<maximum>': None,
@@ -43,10 +44,11 @@ def makedataframes():
    '<category>': None,
     '<submittable>': None,
      '<description>': None,
-      '<link_name>': None,
        '<additionalProperties>' : False,
          '<program>': None,
           '<project>': None,
+          '<required>': None,
+          '<link_name>': None,
            '<backref>': None,
             '<label>': None,
              '<target>': None,
@@ -69,6 +71,12 @@ def list2string(lis):
     st = ''
     for s in lis:
         st += (s + ' | ')
+    return st
+
+def reqlist2string(rlis):
+    st = ''
+    for s in rlis:
+        st += (s + ', ')
     return st
 
 def dlist2string(dlis):
@@ -110,6 +118,7 @@ def getvarVals(props, frame):
     Returns:
         [dataframe] -- [The properties dataframe to be exported as a csv]
     """
+    global propertyrows
     rows = []
     global tosave
     propd = defaultdict(lambda: None, props[1])
@@ -137,10 +146,10 @@ def getvarVals(props, frame):
     '<options6>': None,
     '<options7>': None,
     '<options8>': None,
-    '<required>': None,}
+    }
         row['<node>'] = props[0]
         row['<field>'] = key
-        fkeys = ['description', 'type', 'enum', 'required', 'maximum', 'minimum', 'pattern']
+        fkeys = ['description', 'type', 'enum', 'maximum', 'minimum', 'pattern']
         row['<description>'] = propd[key].get('description')
         
         
@@ -198,7 +207,7 @@ def getvarVals(props, frame):
         #    pass
         
         # try:
-        row['<required>'] = propd[key].get('required')
+        # row['<required>'] = propd[key].get('required')
         # except TypeError:
         #    pass
         
@@ -237,6 +246,7 @@ def getvarVals(props, frame):
         rows.append(row)
     for r in rows:
         frame = frame.append(r, ignore_index = True)
+        propertyrows += 1
     return frame
 
 def get_linknames(dic):
@@ -271,7 +281,8 @@ def getnodevalues(node, frame):
     Returns:
         [dataframe] -- [Returns a dataframe with the fields and their values from the node part of the yaml file]
     """
-    row = {'<node>': node['id'], '<namespace>': node['namespace'], '<title>': node['title'], '<nodeTerms>': None, '<category>': node['category'], '<program>': node['program'], '<project>': node['project'], '<submittable>': node['submittable'], '<description>': node['description'],  '<additionalProperties>' : node['additionalProperties'], '<link_name>': None, '<backref>': None, '<label>': None, '<target>': None, '<multiplicity>': None, '<link_required>': None, '<link_group_required>': None, '<group_exclusive>': None}
+    global noderows
+    row = {'<node>': node['id'], '<namespace>': node['namespace'], '<title>': node['title'], '<nodeTerms>': None, '<category>': node['category'], '<program>': node['program'], '<project>': node['project'], '<required>': stripper(reqlist2string(node['required'])), '<submittable>': node['submittable'], '<description>': node['description'],  '<additionalProperties>' : node['additionalProperties'], '<link_name>': None, '<backref>': None, '<label>': None, '<target>': None, '<multiplicity>': None, '<link_required>': None, '<link_group_required>': None, '<group_exclusive>': None}
     names = ''
     backrefs = ''
     labels = ''
@@ -339,6 +350,7 @@ def getnodevalues(node, frame):
     nterms = node['<nodeTerms>']
     if nterms is not None:
         row['<nodeTerms>'] = lrefs_to_srefs(nterms)
+    noderows += 1
     
     return frame.append(row, ignore_index = True)
 
@@ -353,6 +365,7 @@ def yamfilter(yam):
 if __name__ == "__main__":
 
     args = get_params()
+        
     files = glob.glob(f'{args.yamls}*')
     yamfiles = [f for f in files if '.yaml' in f]
     
@@ -363,15 +376,17 @@ if __name__ == "__main__":
     for y in filteredyams:
         with open(y) as yam:
             yamdics.append(defaultdict(lambda: None, yaml.load(yam)))
-    for d in yamdics:
-        linknames = get_linknames(d)
-        todel = []
+    # for d in yamdics:
+    #     linknames = get_linknames(d)
+    #     todel = []
 
-        for k in d['properties']:
-            if k in linknames:
-                todel.append(k)
-        for l in linknames:
-            del d['properties'][l]
+    #     for k in d['properties']:
+    #         if k in linknames:
+    #             todel.append(k)
+    #     for l in linknames:
+    #         de = d['properties'].get(l)
+    #         if de is not None:
+    #             del de
     
     yamprops = [(y['id'], y['properties']) for y in yamdics]
     for y in yamdics:
@@ -389,7 +404,7 @@ if __name__ == "__main__":
     for dic in yamdics:
        
         ndf = getnodevalues(dic, ndf)
-        required.append(getrequired(dic))
+        # required.append(getrequired(dic))
 
     rkeys = [list(k.keys())[0] for k in required]
     ndf.to_csv(f'{args.tsvs}nodes_{args.data_dictionary}.tsv', sep= '\t', index = False, quoting = None)
@@ -420,4 +435,6 @@ if __name__ == "__main__":
                 
             with open(f"{fi[:-5]}_archive.yaml", 'w') as saver:
                 saver.write(syam)
-                
+    print(f"Completed with {noderows} nodes {propertyrows} properties added to {args.tsvs}nodes_{args.data_dictionary}.tsv and {args.tsvs}variables_{args.data_dictionary}.tsv")
+    
+    print(f"{len(tosave)} yaml files archived")     
