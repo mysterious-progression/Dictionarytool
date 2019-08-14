@@ -17,7 +17,7 @@ def get_params():
     """Gets arguments entered from the commandline and returns them as a object containing their references."""
 
     parser = argparse.ArgumentParser(description="name of directory containing target nodes, uses enum and nodeterms, and variables TSV files, and name of output dictionary.")
-    parser.add_argument("-noterms", "--noterms", dest="noterms", required=False, help="Location of the nodes tsv")
+    parser.add_argument("-terms", "--terms", dest="terms_", required=False, help="Location of the nodes tsv")
     parser.add_argument("-nodes", "--nodes", dest="nodes", required=True, help="Location of the nodes tsv")
     parser.add_argument("-var", "--variables", dest="variables", required=True, help="Location of the variables tsv")
     parser.add_argument("-out", "--output", dest="output", required=True, help="Location of the variables tsv")
@@ -75,12 +75,14 @@ def properties_builder(node_name, vdictlist, category, omitterms):
     for n in vdictlist:            
         if n['<node>'] == node_name:
             n['<description>'] = validate_descrip(n['<description>'])
-            if omitterms == 't':
+            if omitterms == 'at':
                 propdict[str(validate_property_name(n['<field>']))] = {
                 'description': n['<description>'],
                  'type': stripper(n['<type>']),
-                  'enums': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
+                  'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                   }
+                if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
+                    del propdict[str(validate_property_name(n['<field>']))]['description']
                 if n['<type>'] == 'string':
                     propdict[n['<field>']]['pattern'] = stripper(n['<pattern>'])
                     if propdict[n['<field>']]['pattern'] == None:
@@ -102,8 +104,47 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                     except KeyError:
                         pass
                 else:
-                    del propdict[n['<field>']]['enums']
+                    del propdict[n['<field>']]['enum']
                 properties_added += 1
+            elif omitterms == 'et':
+                term = get_termnoref(n['<terms>'])
+                propdict[str(validate_property_name(n['<field>']))] = {
+                'description': n['<description>'],
+                'term': S(term),  
+                 'type': stripper(n['<type>']),
+                  'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
+                  }
+                if term is None:
+                    propdict[str(validate_property_name(n['<field>']))]['term'] = None
+                if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
+                    del propdict[str(validate_property_name(n['<field>']))]['description']
+                if n['<type>'] == 'string':
+                    propdict[n['<field>']]['pattern'] = stripper(n['<pattern>'])
+                    if propdict[n['<field>']]['pattern'] == None:
+                        del propdict[n['<field>']]['pattern']
+
+                if not math.isnan(n['<maximum>']):
+                    propdict[n['<field>']]['maximum'] = stripper(int(n['<maximum>']))
+
+                if not math.isnan(n['<minimum>']):
+                    propdict[n['<field>']]['minimum'] = stripper(int(n['<minimum>']))
+
+
+                # if 'project' in links:
+                #     propdict[n['<field>']].update({'$ref': })
+                
+                if n['<type>'] == 'enum':
+                    try:    
+                        del propdict[n['<field>']]['type']
+                    except KeyError:
+                        pass
+                else:
+                    del propdict[n['<field>']]['enum']
+                properties_added += 1
+                
+            
+            
+            
             else:
                 propdict[str(validate_property_name(n['<field>']))] = {
                     'description': n['<description>'],
@@ -111,6 +152,8 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                     'type': stripper(n['<type>']),
                     'enumTerms': enums_builder(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                     }
+                if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
+                    del propdict[str(validate_property_name(n['<field>']))]['description']
                 if n['<type>'] == 'string':
                     propdict[n['<field>']]['pattern'] = stripper(n['<pattern>'])
                     if propdict[n['<field>']]['pattern'] == None:
@@ -205,6 +248,13 @@ def get_terms(terms):
         return terms
     return None
 
+def get_termnoref(terms):
+    if isinstance(terms, str):
+        lterms = terms.split(',')
+        terms = lterms[0]
+        return terms
+    return None
+
 def enums_builder(enums):
     enumdict = {}
     if isinstance(enums, list):
@@ -221,7 +271,7 @@ def enums_builder_noterms(enums):
         for e in enums:
             enum = get_enum(e)
             enuml.append(enum)
-        return enuml
+        return sorted(enuml)
     return None
     
 def nodeTerms2list(string):
@@ -446,7 +496,7 @@ if __name__ == "__main__":
     for r in range(len(nodedicts)):
 
         dict2add = nodedicts[r]
-        dictlist.append(buildnode(dict2add, args.noterms))
+        dictlist.append(buildnode(dict2add, args.terms_))
 
     # Add the properly formatted links contents to each dictonary
     linknames = {}
@@ -466,11 +516,11 @@ if __name__ == "__main__":
         assert node in nodes_available, "Must contruct a node before adding properties"
         for n in dictlist:
             if n['id'] == node:
-                n['properties'] = properties_builder(node, vdictlist, n['category'], args.noterms)
+                n['properties'] = properties_builder(node, vdictlist, n['category'], args.terms_)
                 if n['category'] in ['index_file', 'data_file', 'metadata_file']:
                     n['required'] += [na for na in ['file_name', 'file_size', 'data_format', 'md5sum'] if na not in n['required']]
-    #dump the dictionarys to yaml files
     
+                    #dump the dictionarys to yaml files
     yaml= YAML()
     yaml.default_flow_style = False
     yaml.indent(offset = 2, sequence = 4, mapping = 2)

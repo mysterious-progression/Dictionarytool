@@ -214,8 +214,10 @@ def getvarVals(props, frame):
         # try:
         t = propd[key].get('term')
         tdef = propd[key].get('termDef')
-        if t is not None:
+        if isinstance(t, dict):
             row['<terms>'] = t.get('$ref')
+        elif isinstance(t, str):
+            row['<terms>'] = stripper(t)
         elif tdef is not None:
             tosave.add(f"{args.yamls}" + f"{props[0]}.yaml")
             refs = []
@@ -376,17 +378,17 @@ if __name__ == "__main__":
     for y in filteredyams:
         with open(y) as yam:
             yamdics.append(defaultdict(lambda: None, yaml.load(yam)))
-    # for d in yamdics:
-    #     linknames = get_linknames(d)
-    #     todel = []
+    for d in yamdics:
+        linknames = get_linknames(d)
+        todel = []
 
-    #     for k in d['properties']:
-    #         if k in linknames:
-    #             todel.append(k)
-    #     for l in linknames:
-    #         de = d['properties'].get(l)
-    #         if de is not None:
-    #             del de
+        for k in d['properties']:
+            if k in linknames:
+                todel.append(k)
+        for l in linknames:
+            de = d['properties'].get(l)
+            if de is not None:
+                del de
     
     yamprops = [(y['id'], y['properties']) for y in yamdics]
     for y in yamdics:
