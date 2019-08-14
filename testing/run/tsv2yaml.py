@@ -32,7 +32,7 @@ def buildnode(node, terms):
 
     global nodesbuilt
     if node['<category>'] in ['index_file', 'metadata_file', 'data_file']:
-        sy = ['id', 'project_id', 'state', 'created_datetime', 'updated_datetime', 'state', 'file_state', 'error_type']
+        sy = ['id', 'project_id', 'state', 'created_datetime', 'updated_datetime', 'file_state', 'error_type']
     else:
         sy = ['id', 'project_id', 'state', 'created_datetime', 'updated_datetime']
     d = [["id"], ["project_id", "submitter_id"]]
@@ -445,8 +445,7 @@ def enum2list(enums):
     """Transforms a string of enums into a list. For values that could be interpreted in yaml as nonstring, it adds quotations"""
     if isinstance(enums, str):
 
-    #    :
-            #Enums already are in double quotes. Assumes no missing quotes
+    #Enums already are in double quotes. Assumes no missing quotes
         splitenums = enums.split('|')
         final = set()
         clean_enums = [stripper(x) for x in splitenums]
@@ -520,7 +519,7 @@ if __name__ == "__main__":
                 if n['category'] in ['index_file', 'data_file', 'metadata_file']:
                     n['required'] += [na for na in ['file_name', 'file_size', 'data_format', 'md5sum'] if na not in n['required']]
     
-                    #dump the dictionarys to yaml files
+     #dump the dictionarys to yaml files
     yaml= YAML()
     yaml.default_flow_style = False
     yaml.indent(offset = 2, sequence = 4, mapping = 2)
