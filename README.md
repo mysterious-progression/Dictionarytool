@@ -12,10 +12,13 @@ Every link must contain one of "name", "backref", "label", "target" and "multipl
 Only ASCII characters are allowed. 
 All values are not to be placed in quotations, however quotations within a field are allowed. Example:  
 
-`Valid: And the person said, "I feel great" at the end of the exam.
-Invalid: "And the person said, "I feel great" at the end of the exam."
-Invalid: "And the person said, I feel great at the end of the exam."
-`
+Valid: And the person said, "I feel great" at the end of the exam.  
+
+Invalid: "And the person said, "I feel great" at the end of the exam."  
+
+Invalid: "And the person said, I feel great at the end of the exam."  
+
+
 
 #### Terms
 Entries in the terms column are references to the location of the term definition. If more than one reference is used, they are comma separated. 
