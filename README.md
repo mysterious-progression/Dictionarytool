@@ -1,5 +1,6 @@
 # Dictionarytool
 tsv/yaml interconverter tools
+## The TSVS
 ### Modifying nodes_tsv
 
 #### Links and link subgroups
@@ -10,9 +11,10 @@ Every link must contain one of "name", "backref", "label", "target" and "multipl
 ### Forbidden characters
 Only ASCII characters are allowed. 
 All values are not to be placed in quotations, however quotations within a field are allowed. Example:
-Valid: And the person said, "I feel great" at the end of the exam.
+`Valid: And the person said, "I feel great" at the end of the exam.
 Invalid: "And the person said, "I feel great" at the end of the exam."
 Invalid: "And the person said, I feel great at the end of the exam."
+`
 
 #### Terms
 Entries in the terms column are references to the location of the term definition. If more than one reference is used, they are comma separated. 
@@ -28,7 +30,8 @@ This tool uses native order dictionaries and therefore must be run on a python v
 
 To convert tsv files to yaml files:
 
-From the terminal enter into the folder where tsv2yaml.py is found. Run ````python tsv2yaml.py -terms at -nodes ../tsvs/nodes_dcf.tsv -var variables_dcf.tsv -out ../dcf_demo/````
+From the terminal enter into the folder where tsv2yaml.py is found. 
+Run ````python tsv2yaml.py -terms et -nodes ../tsvs/nodes_dcf.tsv -var variables_dcf.tsv -out ../dcf_demo/````
 
 Commandline arguments:
 ````
@@ -50,7 +53,7 @@ From the terminal enter into the folder where tsv2yaml.py is found. Run
 
 Commandline arguments:
 ````
--y: The location of the yaml files. 
--t: The destination of the output tsvs
+-y: The location of the yaml files or specific yaml file. 
+-t: The destination for the output tsvs
 -d: The name of the data dictionary. 
 ````
