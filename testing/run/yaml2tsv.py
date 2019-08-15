@@ -71,18 +71,21 @@ def lrefs_to_srefs(refs):
 
 
 def list2string(lis):
+    """Converts a list of enums into a string seperated by |"""
     st = ''
     for s in lis:
         st += (s + ' | ')
     return st
 
 def reqlist2string(rlis):
+    """Convertes a list into comma sep string"""
     st = ''
     for s in rlis:
         st += (s + ', ')
     return st
 
 def dlist2string(dlis):
+    """Converts a list of dictionaries into a string sep by |"""
     st = ''
     for p, v, in dlis:
         s = ''
@@ -152,19 +155,14 @@ def getvarVals(props, frame):
     }
         row['<node>'] = props[0]
         row['<field>'] = key
-        fkeys = ['description', 'type', 'enum', 'maximum', 'minimum', 'pattern']
         row['<description>'] = propd[key].get('description')
         
-        
-        # try:
+        #For all implementations of enums
         if propd[key].get('enum') or propd[key].get('enumDef') or propd[key].get('enumTerms'):
             row['<type>'] = 'enum'
         else:
             row['<type>'] = propd[key].get('type')
-        # except TypeError:
-        #    pass
-        
-        # try:
+      
         enums = propd[key].get('enum')
         numDef = propd[key].get('enumDef')
         numterms = propd[key].get('enumTerms')
@@ -190,13 +188,6 @@ def getvarVals(props, frame):
                 enumrefs.append(pair)
                         
                         
-            # paired = list(zip(enums, numDef))
-            # for pair in paired:
-            #     ename = pair[1]['enumeration'].lower()
-            #     en = ename.replace('/s', '_')
-            #     namenum = pair[0].lower()
-            #     n = namenum.replace('/s', '_')
-            #     assert n == en, f"enumeration {en} not same as enum {n} it's paired with"
             
             chunks = enums_chunker(dlist2string(enumrefs))
             for chunk in range(len(chunks)):
@@ -207,15 +198,7 @@ def getvarVals(props, frame):
             for chunk in range(len(chunks)):
                 row[f'<options{chunk+1}>'] = stripper(chunks[chunk])
              
-        # except TypeError:
-        #    pass
-        
-        # try:
-        # row['<required>'] = propd[key].get('required')
-        # except TypeError:
-        #    pass
-        
-        # try:
+ 
         elif numterms is not None:
             enums = []
             for k, v in numterms.items():
@@ -247,23 +230,13 @@ def getvarVals(props, frame):
             row['<terms>'] = stripper(lrefs_to_srefs(refs))
         elif trefs is not None:
             row['<terms>'] = stripper(lrefs_to_srefs(trefs))
-        # except TypeError:
-        #    pass
-        
-        # try:
+       
         row['<maximum>'] = propd[key].get('maximum')
-        # except TypeError:
-        #    pass
         
-        # try:
         row['<minimum>'] = propd[key].get('minimum')
-        # except TypeError:
-        #    pass
         
-        # try:
+        
         row['<pattern>'] = propd[key].get('pattern')
-        # except TypeError:
-        #    pass
         
         rows.append(row)
     for r in rows:
@@ -273,6 +246,7 @@ def getvarVals(props, frame):
 
 
 def get_linknames(dic):
+    """Gets the names of links from links block so references can be made in properties list"""
     out = []
     links = dic['links']
     for link in links:

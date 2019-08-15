@@ -130,9 +130,6 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                     propdict[n['<field>']]['minimum'] = stripper(int(n['<minimum>']))
 
 
-                # if 'project' in links:
-                #     propdict[n['<field>']].update({'$ref': })
-                
                 if n['<type>'] == 'enum':
                     try:    
                         del propdict[n['<field>']]['type']
@@ -141,9 +138,7 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                 else:
                     del propdict[n['<field>']]['enum']
                 properties_added += 1
-                
-            
-            
+                   
             
             else:
                 propdict[str(validate_property_name(n['<field>']))] = {
@@ -491,10 +486,6 @@ if __name__ == "__main__":
     args = get_params()
     if args.output[-1] != '/':
         args.output += '/'
-    # Read in the nodes and variables tsvs located in current directory
-    # files = glob.glob('./*')
-    # nfile = [f for f in files if 'nodes' in f][0]
-    # vfile = [f for f in files if 'variables' in f][0]
 
     nodes = read_csv(args.nodes, index_col=None, header=0, sep = '\t', encoding = 'utf-8', engine='python')
     variables = read_csv(args.variables, index_col=None, header=0, sep = '\t', encoding = 'utf-8', engine='python')
