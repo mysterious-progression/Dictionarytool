@@ -10,7 +10,8 @@ Every link must contain one of "name", "backref", "label", "target" and "multipl
 
 ### Forbidden characters
 Only ASCII characters are allowed. 
-All values are not to be placed in quotations, however quotations within a field are allowed. Example:
+All values are not to be placed in quotations, however quotations within a field are allowed. Example:  
+
 `Valid: And the person said, "I feel great" at the end of the exam.
 Invalid: "And the person said, "I feel great" at the end of the exam."
 Invalid: "And the person said, I feel great at the end of the exam."
