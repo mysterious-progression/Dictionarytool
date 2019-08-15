@@ -1,3 +1,5 @@
+#!/usr/bin/env python3 
+
 import pandas as pd
 import ruamel.yaml
 from ruamel.yaml import YAML
@@ -63,7 +65,8 @@ def lrefs_to_srefs(refs):
     """Converts a list of references into a string"""
     sref = ''
     for s in refs:
-        sref += s['$ref'] + " ,"
+        if isinstance(s, dict):
+            sref += s['$ref'] + " ,"
     return sref
 
 
@@ -154,7 +157,7 @@ def getvarVals(props, frame):
         
         
         # try:
-        if propd[key].get('enum'):
+        if propd[key].get('enum') or propd[key].get('enumDef') or propd[key].get('enumTerms'):
             row['<type>'] = 'enum'
         else:
             row['<type>'] = propd[key].get('type')
@@ -164,6 +167,7 @@ def getvarVals(props, frame):
         # try:
         enums = propd[key].get('enum')
         numDef = propd[key].get('enumDef')
+        numterms = propd[key].get('enumTerms')
 
         if enums is not None and numDef is not None:
             tosave.add(f"{args.yamls}" + f"{props[0]}.yaml")
@@ -212,8 +216,23 @@ def getvarVals(props, frame):
         #    pass
         
         # try:
+        elif numterms is not None:
+            enums = []
+            for k, v in numterms.items():
+                enum = k + ' ' + '{'
+                if isinstance(v, list):
+                    for ref in v:
+                        r = (ref['$ref'] + ', ')
+                        enum += r
+                enum += '}'
+                enums.append(enum)
+            chunks = enums_chunker(list2string(enums))
+            for chunk in range(len(chunks)):
+                row[f'<options{chunk+1}>'] = stripper(chunks[chunk])
+
         t = propd[key].get('term')
         tdef = propd[key].get('termDef')
+        trefs = propd[key].get('terms')
         if isinstance(t, dict):
             row['<terms>'] = t.get('$ref')
         elif isinstance(t, str):
@@ -226,7 +245,8 @@ def getvarVals(props, frame):
                 if na is not None:
                     refs.append({'$ref': f"_terms.yaml#/{na}"})
             row['<terms>'] = stripper(lrefs_to_srefs(refs))
-
+        elif trefs is not None:
+            row['<terms>'] = stripper(lrefs_to_srefs(trefs))
         # except TypeError:
         #    pass
         
@@ -250,6 +270,7 @@ def getvarVals(props, frame):
         frame = frame.append(r, ignore_index = True)
         propertyrows += 1
     return frame
+
 
 def get_linknames(dic):
     out = []
@@ -370,6 +391,7 @@ if __name__ == "__main__":
         
     files = glob.glob(f'{args.yamls}*')
     yamfiles = [f for f in files if '.yaml' in f]
+    print(files)
     
     filteredyams = list(filter(yamfilter, yamfiles))
 

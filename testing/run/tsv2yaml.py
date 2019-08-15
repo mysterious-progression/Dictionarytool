@@ -110,7 +110,7 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                 term = get_termnoref(n['<terms>'])
                 propdict[str(validate_property_name(n['<field>']))] = {
                 'description': n['<description>'],
-                'term': S(term),  
+                'term': {'$ref': S(term)},  
                  'type': stripper(n['<type>']),
                   'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                   }
@@ -234,10 +234,13 @@ def validatestring(string):
         raise Exception(f"Illegal character {match} was found in {string}")
 
 def validate_descrip(string):
+    if string is None:
+        return None
     if type(string) != str and math.isnan(string):
         return None
     # S = ruamel.yaml.scalarstring.DoubleQuotedScalarString
     # st = f"""{string}"""
+    string = ' '.join([stripper(s) for s in string.split('\n')])
     string = stripper(string)
     return string.replace(':', '-')
 
@@ -430,16 +433,26 @@ def property_reference_setter(diclinks):
     block"""
 
     l = diclinks
+    # if l['name'] == 'projects':
+    #     if l['multiplicity'] in ['many_to_one', 'one_to_one']:
+    #         d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_one_project") }})
+    #     else:
+    #         d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_many_project") }})
+    # else:
+    #     if l['multiplicity'] in ['many_to_one', 'one_to_one']:
+    #         d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_one") }})
+    #     else:
+    #         d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_many") }})
     if l['name'] == 'projects':
         if l['multiplicity'] in ['many_to_one', 'one_to_one']:
-            d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_one_project") }})
+            d['properties']['projects'] = {'$ref':S("_definitions.yaml#/to_one_project") }
         else:
-            d['properties'].update({'projects': {'$ref':S("_definitions.yaml#/to_many_project") }})
+            d['properties']['projects'] = {'$ref':S("_definitions.yaml#/to_many_project") }
     else:
         if l['multiplicity'] in ['many_to_one', 'one_to_one']:
-            d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_one") }})
+            d['properties'][f"{l['name']}"] = {'$ref':S("_definitions.yaml#/to_one") }
         else:
-            d['properties'].update({f"{l['name']}": {'$ref':S("_definitions.yaml#/to_many") }})
+            d['properties'][f"{l['name']}"] = {'$ref':S("_definitions.yaml#/to_many") }
 
 def enum2list(enums):
     """Transforms a string of enums into a list. For values that could be interpreted in yaml as nonstring, it adds quotations"""
@@ -483,8 +496,8 @@ if __name__ == "__main__":
     # nfile = [f for f in files if 'nodes' in f][0]
     # vfile = [f for f in files if 'variables' in f][0]
 
-    nodes = read_csv(args.nodes, index_col=None, header=0, sep = '\t', encoding = 'utf-8')
-    variables = read_csv(args.variables, index_col=None, header=0, sep = '\t', encoding = 'utf-8')
+    nodes = read_csv(args.nodes, index_col=None, header=0, sep = '\t', encoding = 'utf-8', engine='python')
+    variables = read_csv(args.variables, index_col=None, header=0, sep = '\t', encoding = 'utf-8', engine='python')
     
     # Transform nodes tsv into a dictionary and process fields
     nodedicts = nodes.to_dict('records')
