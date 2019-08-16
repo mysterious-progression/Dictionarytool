@@ -1,5 +1,5 @@
-# Dictionarytool
-tsv/yaml interconverter tools
+# tsv/yaml interconverter tool
+
 ## The TSVS
 ### Modifying nodes_tsv
 
@@ -28,7 +28,7 @@ Enumerations are listed in the options column(s). Each cell should hold less tha
 
 ## The tool
 
-This tool uses native order dictionaries and therefore must be run on a python version 3.6 or above. 
+This tool uses native order dictionaries and therefore must be run on a python version 3.7 or above. The tool also assumes input yaml files have valid yaml syntax.
 
 ### tsv2yaml
 
