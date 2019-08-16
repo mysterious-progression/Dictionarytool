@@ -21,7 +21,11 @@ Invalid: "And the person said, I feel great at the end of the exam."
 
 
 #### Terms
-Entries in the terms column are references to the location of the term definition. If more than one reference is used, they are comma separated. 
+Entries in the terms column are references to the location of the term definition. If more than one reference is used, they are comma separated.  
+`<terms>
+_terms.yaml#/aref, _terms.yaml#/anotherref
+`
+
 
 #### Enums / Options with definitions
 Enumerations are listed in the options column(s). Each cell should hold less than 32000 characters. Any given enum should not be split into two seperate columns, much like a word should not be split across two pages. Each enum is seperated by the pipe character "|" and is formated as ````enumName {enumDefRef1, enumDefRef2}````. The name of the enum appears first followed by the references (if any) of the enumeration definition contained as comma seperated values inside a pair of braces. 
