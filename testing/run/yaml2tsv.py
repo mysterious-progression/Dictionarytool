@@ -156,7 +156,7 @@ def getvarVals(props, frame):
     }
         row['<node>'] = props[0]
         row['<field>'] = key
-        if isinstance(key, dict):
+        if isinstance(propd[key], dict):
             row['<description>'] = propd[key].get('description')
         
         #For all implementations of enums
