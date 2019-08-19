@@ -117,6 +117,7 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                 if isinstance(term, str) and "_definitions.yaml" in term:
                     del propdict[str(validate_property_name(n['<field>']))]['term']
                     propdict[str(validate_property_name(n['<field>']))]['$ref'] = S(term)
+                    del propdict[str(validate_property_name(n['<field>']))]['type']
                 if term is None:
                     propdict[str(validate_property_name(n['<field>']))]['term'] = None
                 if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
