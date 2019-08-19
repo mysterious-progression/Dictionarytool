@@ -16,8 +16,8 @@ properties_added = 0
 def get_params():
     """Gets arguments entered from the commandline and returns them as a object containing their references."""
 
-    parser = argparse.ArgumentParser(description="name of directory containing target nodes, uses enum and nodeterms, and variables TSV files, and name of output dictionary.")
-    parser.add_argument("-terms", "--terms", dest="terms_", required=False, help="Location of the nodes tsv")
+    parser = argparse.ArgumentParser(description="Specify whether yamls are generated with terms and enumDefs, name of directory containing target nodes, uses enum and nodeterms, and variables TSV files, and name of output dictionary.")
+    parser.add_argument("-terms", "--terms", dest="terms_", required=False, help="Use '-terms et' to generate yamls with original specification and '-terms at' to generate yamls with no terms or enumDefs")
     parser.add_argument("-nodes", "--nodes", dest="nodes", required=True, help="Location of the nodes tsv")
     parser.add_argument("-var", "--variables", dest="variables", required=True, help="Location of the variables tsv")
     parser.add_argument("-out", "--output", dest="output", required=True, help="Location of the variables tsv")
@@ -114,6 +114,9 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                  'type': stripper(n['<type>']),
                   'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                   }
+                if isinstance(term, str) and "_definitions.yaml" in term:
+                    del propdict[str(validate_property_name(n['<field>']))]['term']
+                    propdict[str(validate_property_name(n['<field>']))]['$ref'] = S(term)
                 if term is None:
                     propdict[str(validate_property_name(n['<field>']))]['term'] = None
                 if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
@@ -147,6 +150,9 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                     'type': stripper(n['<type>']),
                     'enumTerms': enums_builder(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                     }
+                # if isinstance(term, str) and "_definitions.yaml" in term:
+                #     del propdict[str(validate_property_name(n['<field>']))]['term']
+                #     propdict[str(validate_property_name(n['<field>']))]['$ref'] = S(term)
                 if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
                     del propdict[str(validate_property_name(n['<field>']))]['description']
                 if n['<type>'] == 'string':
@@ -268,7 +274,10 @@ def enums_builder_noterms(enums):
     if isinstance(enums, list):
         for e in enums:
             enum = get_enum(e)
-            enuml.append(enum)
+            if enum.lower() in ['yes', 'no', 'true', 'false'] or isinstance(enum, int) or isinstance(enum, float):
+                enuml.append(S(enum))
+            else:
+                enuml.append(enum)
         return sorted(enuml)
     return None
     
@@ -325,15 +334,15 @@ def addlinks(ndict, maindict):
     for lin in range(len(ndict['<link_name>'])):
         if isinstance(ndict['<link_name>'][lin], str):
             start = lin
-            for l in range(start, len(ndict['<link_name>'])):
+            # for l in range(start, len(ndict['<link_name>'])):
 
-                link = {'name': stripper(ndict['<link_name>'][l]),
-                        'backref': stripper(ndict['<backref>'][l]),
-                        'label': stripper(ndict['<label>'][l]),
-                        'target_type': stripper(ndict['<target>'][l]),
-                        'multiplicity': stripper(ndict['<multiplicity>'][l]),
-                        'required': stripper(ndict['<link_required>'][l])}
-                links.append(link)
+            link = {'name': stripper(ndict['<link_name>'][start]),
+                    'backref': stripper(ndict['<backref>'][start]),
+                    'label': stripper(ndict['<label>'][start]),
+                    'target_type': stripper(ndict['<target>'][start]),
+                    'multiplicity': stripper(ndict['<multiplicity>'][lin]),
+                    'required': stripper(ndict['<link_required>'][lin])}
+            links.append(link)
 
     # if len(ndict['<link_name>'][-1]) > 1:
     #     for l in range(len(ndict['<link_name>'][-1])):
