@@ -16,8 +16,8 @@ properties_added = 0
 def get_params():
     """Gets arguments entered from the commandline and returns them as a object containing their references."""
 
-    parser = argparse.ArgumentParser(description="name of directory containing target nodes, uses enum and nodeterms, and variables TSV files, and name of output dictionary.")
-    parser.add_argument("-terms", "--terms", dest="terms_", required=False, help="Location of the nodes tsv")
+    parser = argparse.ArgumentParser(description="Specify whether yamls are generated with terms and enumDefs, name of directory containing target nodes, uses enum and nodeterms, and variables TSV files, and name of output dictionary.")
+    parser.add_argument("-terms", "--terms", dest="terms_", required=False, help="Use '-terms et' to generate yamls with original specification and '-terms at' to generate yamls with no terms or enumDefs")
     parser.add_argument("-nodes", "--nodes", dest="nodes", required=True, help="Location of the nodes tsv")
     parser.add_argument("-var", "--variables", dest="variables", required=True, help="Location of the variables tsv")
     parser.add_argument("-out", "--output", dest="output", required=True, help="Location of the variables tsv")
@@ -268,7 +268,10 @@ def enums_builder_noterms(enums):
     if isinstance(enums, list):
         for e in enums:
             enum = get_enum(e)
-            enuml.append(enum)
+            if enum.lower() in ['yes', 'no', 'true', 'false'] or isinstance(enum, int) or isinstance(enum, float):
+                enuml.append(S(enum))
+            else:
+                enuml.append(enum)
         return sorted(enuml)
     return None
     

@@ -134,9 +134,9 @@ def getvarVals(props, frame):
             propd[k] = defaultdict(lambda: None, propd[k])
 
     for key in propd.keys():
-        if key == '$ref':
-            continue
     #     rows.append({'<node>': props[0],'<field>': key,'<description>': propd[key]['description'],'<type>':  propd[key]['type'],'<options>':  propd[key]['enum'],'<required>':  propd[key]['required'],'<terms>':  propd[key]['terms'], '<pattern>':  propd[key]['pattern'], '<maximum>':  propd[key]['maximum'], '<minimum>':  propd[key]['minimum']})
+        if isinstance(key, str) and key == '$ref':
+            continue
         row = {'<node>': None,
     '<field>': None,
     '<description>': None,
@@ -156,7 +156,8 @@ def getvarVals(props, frame):
     }
         row['<node>'] = props[0]
         row['<field>'] = key
-        row['<description>'] = propd[key].get('description')
+        if isinstance(key, dict):
+            row['<description>'] = propd[key].get('description')
         
         #For all implementations of enums
         if propd[key].get('enum') or propd[key].get('enumDef') or propd[key].get('enumTerms'):
@@ -187,8 +188,6 @@ def getvarVals(props, frame):
                 pair[1] = b
                 
                 enumrefs.append(pair)
-                        
-                        
             
             chunks = enums_chunker(dlist2string(enumrefs))
             for chunk in range(len(chunks)):
@@ -217,6 +216,7 @@ def getvarVals(props, frame):
         t = propd[key].get('term')
         tdef = propd[key].get('termDef')
         trefs = propd[key].get('terms')
+        rerefs = propd[key].get('$ref')
         if isinstance(t, dict):
             row['<terms>'] = t.get('$ref')
         elif isinstance(t, str):
@@ -234,6 +234,8 @@ def getvarVals(props, frame):
             row['<terms>'] = stripper(lrefs_to_srefs(refs))
         elif trefs is not None:
             row['<terms>'] = stripper(lrefs_to_srefs(trefs))
+        elif rerefs is not None:
+            row['<terms>'] = stripper(rerefs)
        
         row['<maximum>'] = propd[key].get('maximum')
         
