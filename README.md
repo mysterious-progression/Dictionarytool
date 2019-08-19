@@ -63,10 +63,12 @@ From the terminal enter into the folder where tsv2yaml.py is found. Run
 Commandline arguments:
 `
 -y: The location of the yaml files or specific yaml file. 
-`
+`  
+
 `
 -t: The destination for the output tsvs  
-`  
+`    
+
 `
 -d: The name of the data dictionary. 
 `
