@@ -114,6 +114,9 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                  'type': stripper(n['<type>']),
                   'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                   }
+                if isinstance(term, str) and "_definitions.yaml" in term:
+                    del propdict[str(validate_property_name(n['<field>']))]['term']
+                    propdict[str(validate_property_name(n['<field>']))]['$ref'] = S(term)
                 if term is None:
                     propdict[str(validate_property_name(n['<field>']))]['term'] = None
                 if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
