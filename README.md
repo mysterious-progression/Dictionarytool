@@ -39,15 +39,16 @@ This tool uses native order dictionaries and therefore must be run on a python v
 To convert tsv files to yaml files:
 
 From the terminal enter into the folder where tsv2yaml.py is found. 
-Run ````python tsv2yaml.py -terms et -nodes ../tsvs/nodes_dcf.tsv -var variables_dcf.tsv -out ../dcf_demo/````
+Run  
+`python tsv2yaml.py -terms et -nodes ../tsvs/nodes_dcf.tsv -var variables_dcf.tsv -out ../dcf_demo/`
 
 Commandline arguments:
-````
+`
 -terms: Optional argument. Assign to be "at" if desired yaml will not use any term/enum references or definitions and "et" if output yamls are to have term references but no enumDefs
 -nodes: The location of the nodes tsv you want to use
 -var: The location of the variables tsv you want to use
 -out: The destination of the yaml files. Creates a new folder if it does not already exist.
-````
+`
 
 
 ### yaml2tsv
@@ -60,8 +61,12 @@ From the terminal enter into the folder where tsv2yaml.py is found. Run
 ````python yaml2tsv.py -y ../dcf_schemas/ -t ../tsvs/ -d dcf````
 
 Commandline arguments:
-````
+`
 -y: The location of the yaml files or specific yaml file. 
--t: The destination for the output tsvs
+`
+`
+-t: The destination for the output tsvs  
+`  
+`
 -d: The name of the data dictionary. 
-````
+`
