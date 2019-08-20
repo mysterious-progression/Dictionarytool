@@ -113,7 +113,7 @@ def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
                     del propdict[n['<field>']]['enum']
                 properties_added += 1
             elif omitterms == 'et':
-                propdict['$ref'] = ndict['<property_ref>']
+                propdict['$ref'] = S(ndict['<property_ref>'])
                 term = get_termnoref(n['<terms>'])
                 propdict[str(validate_property_name(n['<field>']))] = {
                 'description': n['<description>'],
@@ -154,7 +154,7 @@ def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
                 
         
             else:
-                propdict['$ref'] = ndict['<property_ref>']
+                propdict['$ref'] = S(ndict['<property_ref>'])
                 propdict[str(validate_property_name(n['<field>']))] = {
                     '$ref': ndict['<property_ref>'],
                     'description': n['<description>'],
