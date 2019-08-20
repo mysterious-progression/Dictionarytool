@@ -594,14 +594,15 @@ if __name__ == "__main__":
         data.yaml_set_comment_before_after_key('properties', before='\n')
         data.yaml_set_comment_before_after_key('id', before='\n')
         datauni = ruamel.yaml.comments.CommentedMap(duniq)
-        datauni.yaml_set_comment_before_after_key('uniqueKeys', before='\n')
+        datauni.yaml_set_comment_before_after_key('uniqueKeys', before='\n', after='\n')
+
         #insert blank lines in properties
         dataprop = ruamel.yaml.comments.CommentedMap(dprop)
         for k in dprop.keys():
             dataprop.yaml_set_comment_before_after_key(k, before='\n')
 
         n = d['id']
-
+        
         # Write up to uniqueKeys
         outpath = args.output + f"{n}.yaml"
         os.makedirs(os.path.dirname(outpath), exist_ok=True)
@@ -616,6 +617,10 @@ if __name__ == "__main__":
         fs = open(outpath, 'a')
         yaml.dump(datauni, fs)
         fs.close()
+
+        #write a blank line between props and uniquekeys
+        with open(outpath, 'a') as line:
+            line.write('\n')
         #Write properties
         
         yaml= YAML()
