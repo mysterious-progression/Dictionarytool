@@ -48,6 +48,7 @@ def makedataframes():
     '<submittable>': None,
      '<description>': None,
        '<additionalProperties>' : False,
+       '<property_ref>': None,
          '<program>': None,
           '<project>': None,
           '<required>': None,
@@ -79,7 +80,7 @@ def list2string(lis):
     return st
 
 def reqlist2string(rlis):
-    """Convertes a list into comma sep string"""
+    """Convertes a list into comma separated string"""
     st = ''
     for s in rlis:
         st += (s + ', ')
@@ -123,7 +124,7 @@ def getvarVals(props, frame):
         frame {[dataframe]} -- [properties dataframe]
     
     Returns:
-        [dataframe] -- [The properties dataframe to be exported as a csv]
+        [dataframe] -- [The properties (variables) dataframe to be exported as a csv]
     """
     global propertyrows
     rows = []
@@ -285,7 +286,7 @@ def getnodevalues(node, frame):
         [dataframe] -- [Returns a dataframe with the fields and their values from the node part of the yaml file]
     """
     global noderows
-    row = {'<node>': node['id'], '<namespace>': node['namespace'], '<title>': node['title'], '<nodeTerms>': None, '<category>': node['category'], '<program>': node['program'], '<project>': node['project'], '<required>': stripper(reqlist2string(node['required'])), '<submittable>': node['submittable'], '<description>': node['description'],  '<additionalProperties>' : node['additionalProperties'], '<link_name>': None, '<backref>': None, '<label>': None, '<target>': None, '<multiplicity>': None, '<link_required>': None, '<link_group_required>': None, '<group_exclusive>': None}
+    row = {'<node>': node['id'], '<namespace>': node['namespace'], '<title>': node['title'], '<nodeTerms>': None, '<category>': node['category'], '<program>': node['program'], '<project>': node['project'], '<property_ref>': None, '<required>': stripper(reqlist2string(node['required'])), '<submittable>': node['submittable'], '<description>': node['description'],  '<additionalProperties>' : node['additionalProperties'], '<link_name>': None, '<backref>': None, '<label>': None, '<target>': None, '<multiplicity>': None, '<link_required>': None, '<link_group_required>': None, '<group_exclusive>': None}
     names = ''
     backrefs = ''
     labels = ''
@@ -301,6 +302,7 @@ def getnodevalues(node, frame):
         smulti= []
         sreq = []
         try: 
+            #By convention the last element in links list is the subgroup, if it exists
             for l in node['links'][-1]['subgroup']:
                 sname.append(l['name'])
                 sbackref.append(l['backref'])
@@ -317,6 +319,7 @@ def getnodevalues(node, frame):
             row['<group_exclusive>'] = node['links'][-1]['exclusive']
             row['<link_group_required>'] = node['links'][-1]['required']
         except KeyError:
+            #If for some reason the subgroup is not the last element it should be the first
             for l in node['links'][0]['subgroup']:
                 sname.append(l['name'])
                 sbackref.append(l['backref'])
@@ -350,6 +353,9 @@ def getnodevalues(node, frame):
     row['<multiplicity>'] = stripper(multis)
     row['<link_required>'] = stripper(lreqs)
 
+    propref = node['properties'].get('$ref')
+    if propref is not None:
+        row['<property_ref>'] = propref
     nterms = node['<nodeTerms>']
     if nterms is not None:
         row['<nodeTerms>'] = lrefs_to_srefs(nterms)
@@ -386,14 +392,15 @@ if __name__ == "__main__":
         for k in d['properties']:
             if k in linknames:
                 todel.append(k)
+
         for l in linknames:
             de = d['properties'].get(l)
             if de is not None:
                 del de
     
     yamprops = [(y['id'], y['properties']) for y in yamdics]
-    for y in yamdics:
-        del y['properties']
+    # for y in yamdics:
+    #     del y['properties']
     
     ndf, vdf = makedataframes()
 
@@ -403,31 +410,31 @@ if __name__ == "__main__":
 
 
     #create the nodes tsv
-    required = []
+    # required = []
     for dic in yamdics:
-       
         ndf = getnodevalues(dic, ndf)
         # required.append(getrequired(dic))
 
-    rkeys = [list(k.keys())[0] for k in required]
+    # rkeys = [list(k.keys())[0] for k in required]
     ndf.to_csv(f'{args.tsvs}nodes_{args.data_dictionary}.tsv', sep= '\t', index = False, quoting = None)
-    #create the properties tsv
-    
-    for dic in yamprops:
-        
-        vdf = getvarVals(dic, vdf)
-    rows2req = []
-    
-    for n in required:
-        key = list(n.keys())[0]
-        ns = vdf[vdf['<node>'] == key]
-        for v in n[key]:
-            rows2req.append(ns[ns['<field>'] == v].index.values.astype(int))
 
-    for ar in rows2req:
-        if len(ar) == 1:
-            reqrow = vdf.iloc[ar[0]]
-            reqrow['<required>'] = True
+    #create the properties tsv
+    for dic in yamprops:
+        vdf = getvarVals(dic, vdf)
+
+    ##########Obsolete code due to removing required field from variables tsv
+    # rows2req = []
+    
+    # for n in required:
+    #     key = list(n.keys())[0]
+    #     ns = vdf[vdf['<node>'] == key]
+    #     for v in n[key]:
+    #         rows2req.append(ns[ns['<field>'] == v].index.values.astype(int))
+
+    # for ar in rows2req:
+    #     if len(ar) == 1:
+    #         reqrow = vdf.iloc[ar[0]]
+    #         reqrow['<required>'] = True
             
     vdf.to_csv(f'{args.tsvs}/variables_{args.data_dictionary}.tsv', sep='\t', index=False, quoting=None)
 

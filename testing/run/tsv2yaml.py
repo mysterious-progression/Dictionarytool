@@ -62,25 +62,31 @@ def buildnode(node, terms):
     return outdict
 
 
-def properties_builder(node_name, vdictlist, category, omitterms):
+def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
     """Constructs the properties dictionary that will be added to the main node dictionary."""
     global properties_added
-    if category in ['data_file', 'index_file', 'metadata_file']:
-        propdict = {'$ref' : S("_definitions.yaml#/data_file_properties")}
-    elif category == 'analysis':
-        propdict = {'$ref' : S("_definitions.yaml#/workflow_properties")}
-    else:
-        propdict = {'$ref' : S("_definitions.yaml#/ubiquitous_properties")}
-
+    # if category in ['data_file', 'index_file', 'metadata_file']:
+    #     propdict = {'$ref' : S("_definitions.yaml#/data_file_properties")}
+    # elif category == 'analysis':
+    #     propdict = {'$ref' : S("_definitions.yaml#/workflow_properties")}
+    # else:
+    #     propdict = {'$ref' : S("_definitions.yaml#/ubiquitous_properties")}
+    propdict = {'$ref': None}
     for n in vdictlist:            
         if n['<node>'] == node_name:
+            
+            ndict = None
+            for v in ndicts:
+                if v['<node>'] == node_name:
+                    ndict = v
+                    break
             n['<description>'] = validate_descrip(n['<description>'])
             if omitterms == 'at':
                 propdict[str(validate_property_name(n['<field>']))] = {
                 'description': n['<description>'],
-                 'type': stripper(n['<type>']),
-                  'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
-                  }
+                'type': stripper(n['<type>']),
+                'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
+                }
                 if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
                     del propdict[str(validate_property_name(n['<field>']))]['description']
                 if n['<type>'] == 'string':
@@ -95,9 +101,9 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                     propdict[n['<field>']]['minimum'] = stripper(int(n['<minimum>']))
 
 
-                # if 'project' in links:
-                #     propdict[n['<field>']].update({'$ref': })
-                
+            # if 'project' in links:
+            #     propdict[n['<field>']].update({'$ref': })
+            
                 if n['<type>'] == 'enum':
                     try:    
                         del propdict[n['<field>']]['type']
@@ -107,19 +113,22 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                     del propdict[n['<field>']]['enum']
                 properties_added += 1
             elif omitterms == 'et':
+                propdict['$ref'] = ndict['<property_ref>']
                 term = get_termnoref(n['<terms>'])
                 propdict[str(validate_property_name(n['<field>']))] = {
                 'description': n['<description>'],
                 'term': {'$ref': S(term)},  
-                 'type': stripper(n['<type>']),
-                  'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
-                  }
+                'type': stripper(n['<type>']),
+                'enum': enums_builder_noterms(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
+                }
+                
+
                 if isinstance(term, str) and "_definitions.yaml" in term:
                     del propdict[str(validate_property_name(n['<field>']))]['term']
                     propdict[str(validate_property_name(n['<field>']))]['$ref'] = S(term)
                     del propdict[str(validate_property_name(n['<field>']))]['type']
                 if term is None:
-                    propdict[str(validate_property_name(n['<field>']))]['term'] = None
+                    del propdict[str(validate_property_name(n['<field>']))]['term']
                 if propdict[str(validate_property_name(n['<field>']))]['description'] is None:
                     del propdict[str(validate_property_name(n['<field>']))]['description']
                 if n['<type>'] == 'string':
@@ -142,15 +151,19 @@ def properties_builder(node_name, vdictlist, category, omitterms):
                 else:
                     del propdict[n['<field>']]['enum']
                 properties_added += 1
-                   
-            
+                
+        
             else:
+                propdict['$ref'] = ndict['<property_ref>']
                 propdict[str(validate_property_name(n['<field>']))] = {
+                    '$ref': ndict['<property_ref>'],
                     'description': n['<description>'],
                     'terms': get_terms(n['<terms>']),  
                     'type': stripper(n['<type>']),
                     'enumTerms': enums_builder(enum_merger(n['<options1>'] + n['<options2>'] + n['<options3>']+  n['<options4>'] +n['<options5>'] + n['<options6>'] + n['<options7>'] + n['<options8>']))
                     }
+                
+
                 # if isinstance(term, str) and "_definitions.yaml" in term:
                 #     del propdict[str(validate_property_name(n['<field>']))]['term']
                 #     propdict[str(validate_property_name(n['<field>']))]['$ref'] = S(term)
@@ -529,7 +542,7 @@ if __name__ == "__main__":
         assert node in nodes_available, "Must contruct a node before adding properties"
         for n in dictlist:
             if n['id'] == node:
-                n['properties'] = properties_builder(node, vdictlist, n['category'], args.terms_)
+                n['properties'] = properties_builder(node, vdictlist, n['category'], args.terms_, nodedicts)
                 if n['category'] in ['index_file', 'data_file', 'metadata_file']:
                     n['required'] += [na for na in ['file_name', 'file_size', 'data_format', 'md5sum'] if na not in n['required']]
     
@@ -571,15 +584,17 @@ if __name__ == "__main__":
         dprop = d['properties']
         del d['properties']
         duniq = d['uniqueKeys']
+        duniq = {'uniqueKeys': duniq}
         del d['uniqueKeys']
         #insert blank lines in node schema
         data = ruamel.yaml.comments.CommentedMap(d)
-        data.yaml_set_comment_before_after_key('required', before='\n')
         data.yaml_set_comment_before_after_key('systemProperties', before='\n')
         data.yaml_set_comment_before_after_key('links', before='\n')
-        data.yaml_set_comment_before_after_key('uniqueKeys', before='\n')
+        data.yaml_set_comment_before_after_key('required', before='\n')
         data.yaml_set_comment_before_after_key('properties', before='\n')
         data.yaml_set_comment_before_after_key('id', before='\n')
+        datauni = ruamel.yaml.comments.CommentedMap(duniq)
+        datauni.yaml_set_comment_before_after_key('uniqueKeys', before='\n')
         #insert blank lines in properties
         dataprop = ruamel.yaml.comments.CommentedMap(dprop)
         for k in dprop.keys():
@@ -599,7 +614,7 @@ if __name__ == "__main__":
         yaml.default_flow_style = None
         yaml.indent(offset = 2, sequence = 4, mapping = 2)
         fs = open(outpath, 'a')
-        yaml.dump({'uniqueKeys': duniq}, fs)
+        yaml.dump(datauni, fs)
         fs.close()
         #Write properties
         
