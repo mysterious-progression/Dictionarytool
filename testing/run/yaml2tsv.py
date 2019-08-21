@@ -394,9 +394,9 @@ if __name__ == "__main__":
                 todel.append(k)
 
         for l in linknames:
-            de = d['properties'].get(l)
+            de = d['properties'][l]
             if de is not None:
-                del de
+                del d['properties'][l]
     
     yamprops = [(y['id'], y['properties']) for y in yamdics]
     # for y in yamdics:
