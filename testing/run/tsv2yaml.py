@@ -510,8 +510,8 @@ if __name__ == "__main__":
     if args.output[-1] != '/':
         args.output += '/'
 
-    nodes = read_csv(args.nodes, index_col=None, header=0, sep = '\t', encoding = 'utf-8', engine='python')
-    variables = read_csv(args.variables, index_col=None, header=0, sep = '\t', encoding = 'utf-8', engine='python')
+    nodes = read_csv(args.nodes, index_col=None, header=0, sep = '\t', engine= 'python')
+    variables = read_csv(args.variables, index_col=None, header=0, sep = '\t', engine='python')
     
     # Transform nodes tsv into a dictionary and process fields
     nodedicts = nodes.to_dict('records')
