@@ -3,9 +3,10 @@
 ## Requirements
 ---
 * Python 3.6 or above. Python 3.7 recommended. 
-* Pandas
-* ruamel.yaml
-* argparse
+* Pandas v0.24.2
+* ruamel.yaml v0.15.98
+* argparse v1.1
+* re v2.2.1
 
 ## The TSVS
 ### Modifying nodes_tsv
