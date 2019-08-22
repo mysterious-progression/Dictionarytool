@@ -1,13 +1,20 @@
-# tsv/yaml interconverter tool
+# tsv/yaml interconvertion tool
+---
+## Requirements
+---
+* Python 3.6 or above. Python 3.7 recommended. 
+* Pandas
+* ruamel.yaml
+* argparse
 
 ## The TSVS
 ### Modifying nodes_tsv
-
+---
 #### Links and link subgroups
-Every link must contain one of "name", "backref", "label", "target" and "multiplicity." Failure to enter one of these fields will result in an error. If a subgroup is present, it must be listed first in each cell. A subgroup is specified using brackets. ````[name1, name2]```` is an example of an entry in the link name column that specifies the names of two links that belong to a subgroup. The names are seperated by a comma. If there is a subgroup and a nongroup link, it must be notated with the subgroup first, ````[name1, name2], name3````. 
+Every link must contain one of "name", "backref", "label", "target" and "multiplicity." Failure to enter one of these fields will result in an error. If a subgroup is present, it must be listed first in each cell. A subgroup is specified using brackets. ````[name1, name2]```` is an example of an entry in the `<link_name>` column that specifies the names of two links that belong to a subgroup. The names are seperated by a comma. If there is a subgroup and a nongroup link, it must be notated with the subgroup first, ````[name1, name2], name3````. Creation of more than one subgroup per node is not currently supported.
 
 ### Modifying variables_tsv
-
+---
 ### Forbidden characters
 Only ASCII characters are allowed. 
 All values are not to be placed in quotations, however quotations within a field are allowed. Example:  
@@ -31,7 +38,7 @@ _terms.yaml#/aref, _terms.yaml#/anotherref
 Enumerations are listed in the options column(s). Each cell should hold less than 32000 characters. Any given enum should not be split into two seperate columns, much like a word should not be split across two pages. Each enum is seperated by the pipe character "|" and is formated as ````enumName {enumDefRef1, enumDefRef2}````. The name of the enum appears first followed by the references (if any) of the enumeration definition contained as comma seperated values inside a pair of braces. 
 
 ## The tool
-
+---
 This tool uses native order dictionaries and therefore must be run on a python version 3.7 or above. The tool also assumes input yaml files have valid yaml syntax.
 
 ### tsv2yaml
