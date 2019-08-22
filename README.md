@@ -1,4 +1,4 @@
-# tsv/yaml interconvertion tool
+# The Data Dictonary tsv/yaml Interconvertion Tool
 ---
 ## Requirements
 ---
