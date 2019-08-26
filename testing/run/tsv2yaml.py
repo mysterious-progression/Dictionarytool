@@ -156,7 +156,7 @@ def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
             else:
                 propdict['$ref'] = S(ndict['<property_ref>'])
                 propdict[str(validate_property_name(n['<field>']))] = {
-                    '$ref': ndict['<property_ref>'],
+                    # '$ref': ndict['<property_ref>'],
                     'description': n['<description>'],
                     'terms': get_terms(n['<terms>']),  
                     'type': stripper(n['<type>']),
@@ -489,20 +489,7 @@ def enum2list(enums):
                 final.add(s)
         
         return list(final)
-        # else:
-        #     splitenums = enums.split('|')
-        #     stripped = []
-        #     final = set()
-        #     for s in splitenums:
-        #         stripped.append(s.strip())
-        #     for s in stripped:
-        #         if s.lower() in ['yes', 'no']:
-        #             final.add(S(s))
-        #         else:
-        #             final.add(s)
-
-        #     return list(final)
-    # else:
+        
     return [enums]
 
 if __name__ == "__main__":
