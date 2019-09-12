@@ -31,8 +31,8 @@ Invalid: "And the person said, I feel great at the end of the exam."
 #### Terms
 Entries in the terms column are references to the location of the term definition. If more than one reference is used, they are comma separated.  
 
-| <terms>        | 
-| ------------- |
+| terms                           | 
+| -------------                     |
 | _#areference, _#anotherreference  | 
 
 #### Enums / Options with definitions
