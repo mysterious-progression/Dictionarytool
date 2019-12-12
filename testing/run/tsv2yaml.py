@@ -75,7 +75,7 @@ def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
     for n in vdictlist:
         if n['<node>'] == node_name:
 
-            print("\t\t{}".format(n['<field>']))
+            print("\t\t{}".format(n['<field>'])) #trouble-shooting
 
             ndict = None
             for v in ndicts:
@@ -292,7 +292,7 @@ def enums_builder_noterms(enums):
     enuml = []
     if isinstance(enums, list):
         for e in enums:
-            print("\t\t\t{}".format(e)) #trouble-shooting
+            print("\t\t\t{}".format(e)) # trouble-shooting
             enum = get_enum(e)
             if enum.lower() in ['yes', 'no', 'true', 'false'] or isinstance(enum, int) or isinstance(enum, float):
                 enuml.append(S(enum))
@@ -535,7 +535,6 @@ if __name__ == "__main__":
         print("\tUpdating node {}.".format(node)) # trouble-shooting
         assert node in nodes_available, "Must contruct a node before adding properties"
         for n in dictlist:
-            #print("\t\t{}".format(n))
             if n['id'] == node:
                 n['properties'] = properties_builder(node, vdictlist, n['category'], args.terms_, nodedicts)
                 if n['category'] in ['index_file', 'data_file', 'metadata_file']:
