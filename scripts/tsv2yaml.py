@@ -190,13 +190,20 @@ def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
 
                 if n['<type>'] == 'enum':
                     try:
-
                         del propdict[n['<field>']]['type']
                     except KeyError:
                         pass
                 else:
                     del propdict[n['<field>']]['enumTerms']
                 properties_added += 1
+    # nullkeys = []
+    # for k, v in propdict.items():
+    #     if not v:
+    #         nullkeys.append(k)
+    # for k in nullkeys:
+    #     del propdict[k]
+    if not propdict['$ref']:
+        del propdict['$ref']
     return schema_utils.sortdictionary(propdict)
 
 def properties_preprocessing(vdictlist, ndictlist):
