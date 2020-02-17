@@ -202,7 +202,7 @@ def properties_builder(node_name, vdictlist, category, omitterms, ndicts):
     #         nullkeys.append(k)
     # for k in nullkeys:
     #     del propdict[k]
-    if not propdict['$ref']:
+    if not propdict['$ref'] or propdict['$ref'] == 'nan':
         del propdict['$ref']
     return schema_utils.sortdictionary(propdict)
 
