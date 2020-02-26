@@ -1,0 +1,1789 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "enrollment"
+title: Enrollment
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: study_administration
+program: '*'
+project: '*'
+description: Information related to the study enrollment for a patient. Answers to
+  Inclusion and Exclusion questionnaires; questions related to enrollment status,
+  including termination from a study.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: enrollments
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  adverse_clinical_effects_of_drugs:
+    description: Adverse Clinical Effects Of Drugs?
+    type: boolean
+
+  adverse_lab_tests_due_to_drugs:
+    description: Adverse Lab Tests Due To Drugs?
+    type: boolean
+
+  ae_form6000_present:
+    description: Adverse Experiences Form 6000 Present?
+    type: boolean
+
+  agreed_to_obtain_ctcc_uid:
+    description: Has Subject Agreed To Obtain Global Unique ID (CTCC UID)?
+    type: boolean
+
+  all_assessments_for_visit_completed:
+    description: Were All Assessments For Visit Completed?
+    type: boolean
+
+  appropriate_diagnosis:
+    description: Appropriate Diagnosis
+    enum:
+      - Genetic Cohort - PD
+      - Genetic Cohort - Unaffected
+      - Genetic Registry - PD
+      - Genetic Registry - Unaffected
+      - Healthy Control
+      - Parkinson's Disease
+      - Prodromal
+      - SWEDD
+
+  av133_incl_excl_quest_01:
+    description: AV-133 Inclusion Exclusion Question 01
+    type: boolean
+
+  av133_incl_excl_quest_02:
+    description: AV-133 Inclusion Exclusion Question 02
+    type: boolean
+
+  av133_incl_excl_quest_03:
+    description: AV-133 Inclusion Exclusion Question 03
+    type: boolean
+
+  av133_incl_excl_quest_04:
+    description: AV-133 Inclusion Exclusion Question 04
+    type: boolean
+
+  av133_incl_excl_quest_05:
+    description: AV-133 Inclusion Exclusion Question 05
+    type: boolean
+
+  av133_incl_excl_quest_06:
+    description: AV-133 Inclusion Exclusion Question 06
+    type: boolean
+
+  av133_incl_excl_quest_07:
+    description: AV-133 Inclusion Exclusion Question 07
+    type: boolean
+
+  av133_signed_consent:
+    description: AV-133 Signed Consent?
+    type: boolean
+
+  blood_urine_tests_normal:
+    description: Screening Form 1000- Blood and Urine Tests Normal?
+    type: boolean
+
+  center_number:
+    description: Center Number
+    type: string
+
+  clin_form1200_present:
+    description: Clinical Form 1200 Present?
+    type: boolean
+
+  clin_form1250_present:
+    description: Clinical Form 1250 Present?
+    type: boolean
+
+  consent_data_repo:
+    description: Gave permission to add data to repository.
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_enroll_excluded:
+    description: Consent And Enrollment- Excluded?
+    type: boolean
+
+  consent_enroll_reason_for_exclusion:
+    description: Consent And Enrollment- Reason For Exclusion
+    enum:
+      - Abnormal Safety Labs
+      - Did Not Meet Other Inclusion Criteria
+      - Enrolled In Other Study
+      - Other (Specify In Comments)
+      - Other Medical, Psychiatric, Or Surgical
+
+  consent_enroll_reason_for_exclusion_comment:
+    description: Describes the informed consent deviation
+    type: string
+
+  consent_enroll_referral_source:
+    description: Consent And Enrollment- Referral Source
+    type: string
+
+  consent_enroll_signed_consent:
+    description: Consent And Enrollment- Signed Consent?
+    type: boolean
+
+  consent_family_repo:
+    description: Gave permission to add family/kin contact information to repository
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_indicator:
+    description: Indicates whether a patient was consented to participate.
+    enum:
+      - "No"
+      - "Yes"
+
+  consent_inform_disease:
+    description: Gave permission to be told if blood sample indicates a potential
+      for future disease
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_neuroimg:
+    description: Gave permission to participate in neuroimaging if eligible. (Durham
+      only)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_note_entered:
+    description: Consent note entered into medical record?
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_personal_repo:
+    description: Gave permission to add personal contact information to repository
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_provided_before:
+    description: Participant provided consent before participation in study began
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consent_review_applicable:
+    description: Indicates that a consent form signed review is applicable
+    type: boolean
+
+  consent_scanned:
+    description: Consent form scanned into medical record?
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  consented_to_participate:
+    description: Screening Form 1000- Consented To Participate?
+    type: boolean
+
+  continue_study_participation:
+    description: Subject Is Planning To Continue To Participate In This Study
+    type: boolean
+
+  copy_provided:
+    description: Subject given a copy of the consent form?
+    enum:
+      - "No"
+      - "Yes"
+
+  csf_form_present:
+    description: CSF Form Present?
+    type: boolean
+
+  current_appropriate_diagnosis:
+    description: Current Appropriate Diagnosis
+    enum:
+      - Genetic Cohort - PD
+      - Genetic Cohort - Unaffected
+      - Genetic Registry - PD
+      - Genetic Registry - Unaffected
+      - Healthy Control
+      - Parkinson's Disease
+      - Prodromal
+      - SWEDD
+
+  current_pd_stage:
+    description: Current Parkinson's disease stage
+    enum:
+      - Advanced
+      - Early Untreated
+      - Healthy Control
+      - Moderate
+
+  data_source:
+    description: Data Source
+    type: string
+
+  data_value_code_in:
+    description: Value describing the source of patient referral to WWP program or
+      reason for leaving the WWP program (For Data_Value_Type = IN)
+    enum:
+      - Community Provider/Health Professional-Behavioral Health
+      - Community Provider/Health Professional-Non-Behavioral Health
+      - DoD Facility/Provider
+      - EMORY
+      - Friend
+      - Google/Internet sources
+      - MGH
+      - No Response
+      - Non-network AMC (Specify)
+      - Other (Specify)
+      - Other Military Organizations
+      - Other family (Specify)
+      - Parent/Guardian
+      - RUSH
+      - Self
+      - Significant Other/Romantic Partner
+      - Spouse
+      - UCLA
+      - VA Facility/Provider
+      - Veteran Peer
+      - Wounded Warrior Project
+
+  data_value_code_iop:
+    description: Value describing the source of patient referral to WWP program or
+      reason for leaving the WWP program (For Data_Value_Type = IOP)
+    enum:
+      - Deceased
+      - Feeling better
+      - Financial (have to return to work)
+      - IOP Completion
+      - Location/Transportation challenges
+      - Lost to Contac
+      - No Response
+      - Not applicable
+      - Not feeling better/does not think care is helpful
+      - Patient requires high level of care for cognitive issues
+      - Patient requires high level of care for physical issues
+      - Patient requires high level of care for psychiatric issues
+      - Patient requires high level of care for substance related conditions
+      - Personal or Other (Specify)
+      - Switching provider/Provider fit
+
+  data_value_code_op:
+    description: Value describing the source of patient referral to WWP program or
+      reason for leaving the WWP program (For Data_Value_Type = OP)
+    enum:
+      - Completed OP plan / treatment episode
+      - Deceased
+      - Feeling better
+      - Financial (have to return to work)
+      - Location/Transportation challenges
+      - Lost to Contact
+      - No Response
+      - Not applicable
+      - Not feeling better/does not think care is helpful
+      - Patient requires high level of care for cognitive issues
+      - Patient requires high level of care for physical issues
+      - Patient requires high level of care for psychiatric issues
+      - Patient requires high level of care for substance related conditions
+      - Personal or Other (Specify)
+      - Switching provider/Provider fit
+
+  data_value_code_out:
+    description: Value describing the source of patient referral to WWP program or
+      reason for leaving the WWP program (For Data_Value_Type = OUT or CON)
+    enum:
+      - Advocacy
+      - Allied Health Specialties
+      - Cognitive Therapy
+      - Community
+      - EMORY
+      - Education
+      - Employment
+      - Family Support Services
+      - Housing
+      - Legal
+      - MGH
+      - Medical
+      - Neurologist/Neurology Sub Specialist
+      - No Response
+      - Non-MD Mental Health Provider
+      - Non-Network AMC (Specify)
+      - Occupational Therapy
+      - Online Resources
+      - Other (Specify)
+      - Physical Therapy
+      - Primary Care
+      - Psychiatry
+      - RUSH
+      - Speech Therapy
+      - Substance Abuse including Detoxification
+      - UCLA
+      - Veteran Benefits Assessmen
+      - Veteran Support Services
+      - Wounded Warrior Project
+
+  data_value_code_self:
+    description: Value describing the source of patient referral to WWP program or
+      reason for leaving the WWP program (For Data_Value_Type = SELF)
+    enum:
+      - Anxiety
+      - Bipolar
+      - Depression
+      - Family Relationship Concerns
+      - No Response
+      - Other (Specify)
+      - PTSD
+      - Psychosis (e.g., delusions, hallucinations, talking incoherently) or related
+        disorders (e.g., schizophrenia)
+      - Substance Use
+      - TBI
+
+  data_value_specify:
+    description: Free text field to specify a patient's referral source or leave reason
+    type: string
+
+  days_screen_to_enroll_date_form1000:
+    description: Days From Screening To Enrollment Date (Screening Form 1000)
+    type: integer
+
+  days_screen_to_enroll_date_form4000:
+    description: Days From Screening To Enrollment Date (Screening Form 4000)
+    type: integer
+
+  days_screen_to_enroll_date_form4100:
+    description: Days From Screening To Enrollment Date (Screening Form 4100)
+    type: integer
+
+  days_to_av133_informed_consent:
+    description: The number of days between the case Index Date and the AV-133 Informed
+      Consent Date
+    type: integer
+
+  days_to_consent_review:
+    description: Days to Uconsent Review
+    type: integer
+
+  days_to_death:
+    description: Days to death since consent
+    type: integer
+
+  days_to_enrollment:
+    description: Number of days between the case's Index Date and the date of Enrollment
+      (0 if index date is enrollment date)
+    type: integer
+
+  days_to_family_start:
+    description: The number of days from the index date to the date the family begain
+      participation.
+    type: integer
+
+  days_to_florbetaben_informed_consent:
+    description: The number of days between the case Index Date and the Florbetaben
+      Informed Consent Date
+    type: integer
+
+  days_to_informed_consent:
+    description: The number of days between the case Index Date and the Informed Consent
+      Date
+    type: integer
+
+  days_to_last_communication:
+    description: Number of days from the last communication from subject, or clinical
+      update
+    type: integer
+
+  days_to_skin_biopsy_informed_consent:
+    description: The number of days between the case Index Date and the Skin Biopsy
+      Informed Consent Date
+    type: integer
+
+  days_to_tap_informed_consent:
+    description: The number of days between the case Index Date and the TAP Informed
+      Consent Date
+    type: integer
+
+  days_to_termination:
+    description: Number of days between the case's Index Date and the Date Of Termination
+    type: integer
+
+  days_to_termination_from_datatop:
+    description: Number of days between the case's Index Date and the date of Termination
+      From DATATOP
+    type: integer
+
+  days_to_withdrawal:
+    description: The number of days between the case Index Date and the Withdrawal
+      Date
+    type: integer
+
+  death_of_subject:
+    description: Death Of Subject?
+    type: boolean
+
+  decision_to_withdraw:
+    description: Who Made Decision To Withdraw Subject
+    enum:
+      - Investigator
+      - Subject
+
+  declined:
+    description: Declined?
+    type: boolean
+
+  demographic_form1100_present:
+    description: Demographic Form 1100 Present?
+    type: boolean
+
+  description_of_gene_category:
+    description: Description of Gene Category for enrollment purposes
+    enum:
+      - GBA negative
+      - GBA positive
+      - Hyposmia
+      - LRRK2 negative
+      - LRRK2 positive
+      - REM Sleep Behavior Disorder
+      - SNCA negative
+      - SNCA positive
+
+  deviation_result_termination:
+    description: Deviation result in termination from the study
+    type: boolean
+
+  discontinue_any_reportable_event:
+    description: Indicator Of Reportable Events Since The Last Visit
+    enum:
+      - "No"
+      - "Yes"
+
+  discontinue_reason:
+    description: Reason Subject Not Continuing To Participate In This Study
+    enum:
+      - Adverse Event
+      - Death Of Subject
+      - Inability To Continue Giving Consent
+      - Informant or Caregiver Decision
+      - Institutionalized
+      - Investigator Decision
+      - Lost To Follow-Up
+      - Other (Specify)
+      - Protocol Defined Final Study Visit
+      - Protocol Violation
+      - Subject Withdrew Consent
+      - Unwilling or Unable To Commit
+
+  discontinue_reason_comment:
+    description: All Relevant Information Related To Reason For Premature Discontinuation
+      Including Contributory Factors
+    type: string
+
+  discontinue_reason_other:
+    description: Reason Subject Not Continuing To Participate In This Study, Specify
+      Other
+    type: string
+
+  discontinue_reportable_event:
+    description: Reportable discontinue event.
+    enum:
+      - Consent Withdrawn
+      - Death
+      - Neurological Diagnosis (Including PD)
+      - Other
+
+  discontinue_reportable_event_comment:
+    description: Description Of Event
+    type: string
+
+  discontinue_reportable_event_study_related:
+    description: Event Related To Participating In The Study
+    enum:
+      - Definite
+      - Possible
+      - Unlikely
+      - Unrelated
+
+  drug_discontinuation_form3500_present:
+    description: Drug Discontinuation Form 3500 Present?
+    type: boolean
+
+  drugs_stopped_for_eligibility:
+    description: Screening Form 1000- Drugs Stopped For Eligibility?
+    type: boolean
+
+  durnham_patient:
+    description: Durham VAMC Patient?
+    enum:
+      - "No"
+      - "Yes"
+
+  ecg_abnormality1:
+    description: Screening Form 1000- ECG Abnormality 1
+    enum:
+      - Atrial Hypertrophy
+      - Bradykinesia
+      - Non-Specific ST-T Wave Changes
+      - Old Infarction
+      - Other
+      - Prolonged QRS Interval
+      - Significant Supraventricular Ectopy
+      - Significant Ventricular Ectopy
+      - Tachycardia
+      - Ventricular Hypertrophy
+
+  ecg_abnormality2:
+    description: Screening Form 1000- ECG Abnormality 2
+    enum:
+      - Atrial Hypertrophy
+      - Bradykinesia
+      - Non-Specific ST-T Wave Changes
+      - Old Infarction
+      - Other
+      - Significant Supraventricular Ectopy
+      - Ventricular Hypertrophy
+
+  ecg_abnormality3:
+    description: Screening Form 1000- ECG Abnormality 3
+    enum:
+      - Atrial Hypertrophy
+      - Non-Specific ST-T Wave Changes
+      - Old Infarction
+      - Other
+      - Prolonged QRS Interval
+
+  eligible:
+    description: Eligible
+    enum:
+      - "No"
+      - "Yes"
+
+  endpoint_form5000_present:
+    description: Endpoint Form 5000 Present?
+    type: boolean
+
+  enrollment_status:
+    description: Enrollment Status
+    enum:
+      - Declined
+      - Enrolled
+      - Excluded
+      - Pending
+      - Withdrew
+
+  facility_name:
+    description: The name of the facility where the patient's visit took place.
+    enum:
+      - EMORY
+      - MGH
+      - RUSH
+      - UCLA
+
+  family_participation:
+    description: The type of family member participation in a patient's treatment.
+    enum:
+      - IOP family participant-present
+      - IOP family participant-remote
+      - No Response
+      - OP family member (non-patient)-participating in veteran treatment / adjunctive
+        services
+      - OP family member (patient)-participating in treatment
+
+  family_relationship_type:
+    description: The relationship of the family member, who is participating in the
+      patient's treatment, with respect to the patient.
+    enum:
+      - Coparent (non-partner)
+      - Dependent Child
+      - Ex-Partner
+      - Father
+      - Friend
+      - Mother
+      - No Response
+      - Non-Dependent Child
+      - None
+      - Other
+      - Partner
+      - Sibling
+
+  florbetaben_incl_excl_quest_01:
+    description: Inclusion Exclusion Question 01
+    type: boolean
+
+  florbetaben_incl_excl_quest_02:
+    description: Inclusion Exclusion Question 02
+    type: boolean
+
+  florbetaben_incl_excl_quest_03:
+    description: Inclusion Exclusion Question 03
+    type: boolean
+
+  florbetaben_incl_excl_quest_04:
+    description: Inclusion Exclusion Question 04
+    type: boolean
+
+  florbetaben_signed_consent:
+    description: Signed Consent?
+    type: boolean
+
+  follow_up_drug_dispensing_form3100_present:
+    description: Follow-Up Drug Dispensing Form 3100 Present?
+    type: boolean
+
+  group_classification_baseline:
+    description: A Group- Group Classification For Baseline Visit
+    type: string
+
+  group_classification_visit1:
+    description: B Group- Group Classification For First Visit
+    type: string
+
+  group_classification_visit2:
+    description: C Group- Group Classification For Second Visit
+    type: string
+
+  guid:
+    description: Global Unique ID
+    type: string
+
+  hipaa_signed:
+    description: HIPAA authorization form signed?
+    enum:
+      - "No"
+      - "Yes"
+
+  image_consent_applicable:
+    description: Indicates that imaging consent form signed review is applicable
+    type: boolean
+
+  imaging_category:
+    description: Imaging Category for enrollment purposes
+    enum:
+      - Genetic Cohort - Parkinson's Disease (GENPD)
+      - Genetic Cohort - Unaffected (GENUN)
+      - Genetic Registry - Parkinson's Disease (REGPD)
+      - Genetic Registry - Unaffected (REGUN)
+      - Healthy Control (HC)
+      - No Image
+      - Parkinson's Disease (PD)
+      - Prodromal (PRODROMA)
+      - Subjects Without Evidence Of Dopaminergic Deficit (SWEDD)
+
+  incl_excl_quest_01:
+    description: Inclusion Exclusion Question 01
+    type: boolean
+
+  incl_excl_quest_02:
+    description: Inclusion Exclusion Question 02
+    type: boolean
+
+  incl_excl_quest_03:
+    description: Inclusion Exclusion Question 03
+    type: boolean
+
+  incl_excl_quest_04:
+    description: Inclusion Exclusion Question 04
+    type: boolean
+
+  incl_excl_quest_04a:
+    description: Inclusion Exclusion Question 04A
+    type: boolean
+
+  incl_excl_quest_05:
+    description: Inclusion Exclusion Question 05
+    type: boolean
+
+  incl_excl_quest_06:
+    description: Inclusion Exclusion Question 06
+    type: boolean
+
+  incl_excl_quest_07:
+    description: Inclusion Exclusion Question 07
+    type: boolean
+
+  incl_excl_quest_08:
+    description: Inclusion Exclusion Question 08
+    type: boolean
+
+  incl_excl_quest_09:
+    description: Inclusion Exclusion Question 09
+    type: boolean
+
+  incl_excl_quest_10:
+    description: Inclusion Exclusion Question 10
+    type: boolean
+
+  incl_excl_quest_10a:
+    description: Inclusion Exclusion Question 10A
+    type: boolean
+
+  incl_excl_quest_21:
+    description: Inclusion Exclusion Question 21
+    type: boolean
+
+  incl_excl_quest_22:
+    description: Inclusion Exclusion Question 22
+    type: boolean
+
+  incl_excl_quest_23:
+    description: Inclusion Exclusion Question 23
+    type: boolean
+
+  incl_excl_quest_24:
+    description: Inclusion Exclusion Question 24
+    type: boolean
+
+  incl_excl_quest_25:
+    description: Inclusion Exclusion Question 25
+    type: boolean
+
+  incl_excl_quest_26:
+    description: Inclusion Exclusion Question 26
+    type: boolean
+
+  incl_excl_quest_27:
+    description: Inclusion Exclusion Question 27
+    type: boolean
+
+  incl_excl_quest_28:
+    description: Inclusion Exclusion Question 28
+    type: boolean
+
+  incl_excl_quest_29:
+    description: Inclusion Exclusion Question 29
+    type: boolean
+
+  incl_excl_quest_30:
+    description: Inclusion Exclusion Question 30
+    type: boolean
+
+  incl_excl_quest_35:
+    description: Inclusion Exclusion Question 35
+    type: boolean
+
+  incl_excl_quest_36:
+    description: Inclusion Exclusion Question 36
+    type: boolean
+
+  inex01_informed_consent:
+    description: Inclusion Exclusion Criteria- 01. Informed Consent
+    type: boolean
+
+  inex02_duration_less_than_5_yr:
+    description: Inclusion Exclusion Criteria- 02. Duration < 5 Yr
+    type: boolean
+
+  inex03_bradykinesia_and_1_other_cardinal:
+    description: Inclusion Exclusion Criteria- 03. Bradykinesia And 1 Other Cardinal
+    type: boolean
+
+  inex04_age_30_or_older:
+    description: Inclusion Exclusion Criteria- 04. Age >=30
+    type: boolean
+
+  inex05_birth_control_and_not_pregnant:
+    description: Inclusion Exclusion Criteria- 05. Birth Control And Not Pregnant
+    type: boolean
+
+  inex06_able_to_comply:
+    description: Inclusion Exclusion Criteria- 06. Able To Comply
+    type: boolean
+
+  inex07a_need_symptomatic_therapy:
+    description: Inclusion Exclusion Criteria- 07a. Need Symptomatic Therapy
+    type: boolean
+
+  inex07b_prior_symptomatic_therapy_within_90_days:
+    description: Inclusion Exclusion Criteria- 07b. Prior Symptomatic Therapy<90 Day
+    type: boolean
+
+  inex08_drugs_within_180_days:
+    description: Inclusion Exclusion Criteria- 08. Drugs Within 180 Days
+    type: boolean
+
+  inex09_coq10_within_180_days:
+    description: Inclusion Exclusion Criteria- 09. COQ10 Within 180 Days
+    type: boolean
+
+  inex09_coq_gpi_within_90_days:
+    description: Inclusion Exclusion Criteria- 09. COQ and GPI Within 90 Days
+    type: boolean
+
+  inex10_drugs_within_90_days:
+    description: Inclusion Exclusion Criteria- 10. Drugs Within 90 Days
+    type: boolean
+
+  inex11_atypical_syndromes:
+    description: Inclusion Exclusion Criteria- 11. Atypical Syndromes
+    type: boolean
+
+  inex12_mino_creatine_within_90_days:
+    description: Inclusion Exclusion Criteria- 12. Mino and Creatine < 90 Days
+    type: boolean
+
+  inex13_other_study_within_90_days:
+    description: Inclusion Exclusion Criteria- 13. Other Study < 90 Days
+    type: boolean
+
+  inex14_freezing:
+    description: Inclusion Exclusion Criteria- 14. Freezing
+    type: boolean
+
+  inex15_pull_test_greater_than_0:
+    description: Inclusion Exclusion Criteria- 15. Pull Test >0
+    type: boolean
+
+  inex16_medical_condition:
+    description: Inclusion Exclusion Criteria- 16. Medical Condition
+    type: boolean
+
+  inex17_brain_surgery:
+    description: Inclusion Exclusion Criteria- 17. Brain Surgery
+    type: boolean
+
+  inex18_brain_disease:
+    description: Inclusion Exclusion Criteria- 18. Brain Disease
+    type: boolean
+
+  inex19_coq10_gpi_hypersensitivity_allergy:
+    description: Inclusion Exclusion Criteria- 19. Hypersensitivity and Allergy To
+      COQ10 and GPI
+    type: boolean
+
+  inex19_mino_creatine_hypersensitivity_allergy:
+    description: Inclusion Exclusion Criteria- 19. Hypersensitivity and Allergy To
+      Mino and Creatine
+    type: boolean
+
+  inex20_enroll_eligible:
+    description: Inclusion Exclusion Criteria- 20. Eligible To Enroll
+    type: boolean
+
+  inex20_psychiatric_disorder:
+    description: Inclusion Exclusion Criteria- 20. Psychiatric Disorder
+    type: boolean
+
+  inex21_enroll_eligible:
+    description: Inclusion Exclusion Criteria- 21. Eligible To Enroll
+    type: boolean
+
+  inex_days_from_enroll_visit:
+    description: Inclusion Exclusion Criteria- Days From Enrollment Visit
+    type: integer
+
+  insists_on_anti_pd_therapy:
+    description: Insists On Anti-PD Therapy
+    type: boolean
+
+  internal_study_id:
+    description: A de-identified identifier used by the study in which the patient
+      participated.
+    type: string
+
+  inv_code:
+    description: INV Code
+    type: integer
+
+  lab_test_form1300_present:
+    description: Laboratory Test Form 1300 Present?
+    type: boolean
+
+  last_visit_before_premature_withdrawal:
+    description: Last Visit Before Premature Withdrawal
+    type: string
+
+  lost_to_follow_up_cannot_locate:
+    description: Lost To Follow-up- Can't Locate
+    type: boolean
+
+  lost_to_followup_reason:
+    description: Lost To Follow-up- Moved Away
+    enum:
+      - Cannot Locate
+      - Moved Away
+
+  mailing_list:
+    enum:
+      - "No"
+      - "Yes"
+
+  major_neuropsychological_form4000_present:
+    description: Major Neuropsychological Form 4000 Present?
+    type: boolean
+
+  medication_log_form3200_present:
+    description: Medication Log Form 3200 Present?
+    type: boolean
+
+  meets_eligibility_criteria:
+    description: Screening Form 1000- Meets Eligibility Criteria
+    type: boolean
+
+  meta_1:
+    description: Gave permission to be contacted in the future for follow-up research
+      studies.
+    enum:
+      - "No"
+      - "Yes"
+
+  meta_13:
+    description: Labeling completed per protocol
+    enum:
+      - "No"
+      - "Yes"
+
+  meta_17:
+    description: Blood products stored per protocol
+    enum:
+      - "No"
+      - "Yes"
+
+  meta_3:
+    description: Gave permission to add blood data to repository (i.e. long term storage
+      of blood).
+    enum:
+      - "No"
+      - "Yes"
+
+  meta_4:
+    description: Gave permission for researchers to access VA medical records.
+    enum:
+      - "No"
+      - "Yes"
+
+  meta_5:
+    description: Study day of blood sample collection
+    type: string
+
+  meta_9:
+    description: Enrollment notes
+    type: string
+
+  minor_neuropsychological_form4100_present:
+    description: Minor Neuropsychological Form 4100 Present?
+    type: boolean
+
+  other_reason_for_termination:
+    description: Other Reason For Termination
+    type: boolean
+
+  participating_site:
+    description: Participating Site
+    type: integer
+
+  pat_status_enrollment_category:
+    description: Patient Status- Enrollment Category
+    enum:
+      - Genetic Cohort - Parkinson's Disease (GENPD)
+      - Genetic Cohort - Unaffected (GENUN)
+      - Genetic Registry - Parkinson's Disease (REGPD)
+      - Genetic Registry - Unaffected (REGUN)
+      - Healthy Control (HC)
+      - Parkinson's Disease (PD)
+      - Prodromal (PRODROMA)
+      - Subjects Without Evidence Of Dopaminergic Deficit (SWEDD)
+
+  pd_enrollment_category:
+    description: Enrollment Category
+    enum:
+      - No Parkinson's Disease
+      - Parkinson's Disease
+
+  permission_followup:
+    description: Gave permission to be contacted in the future for follow-up research
+      studies
+    enum:
+      - "No"
+      - "Yes"
+
+  permission_record:
+    description: Gave permission for webcam observation or digital audio recording
+      of interview
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  person_completing_form:
+    description: Person Completing Form
+    enum:
+      - Form Completed By Coordinator
+      - Form Completed By Investigator
+      - Form Completed By Patient
+
+  premature_withdrawal:
+    description: Premature Withdrawal
+    type: boolean
+
+  protocol_deviation_code:
+    description: Protocol Deviation Code
+    type: string
+
+  protocol_explained:
+    description: Study protocol was explained to the subject?
+    enum:
+      - "No"
+      - "Yes"
+
+  protocol_note_entered:
+    description: Research protocol note entered into medical record? Two copies of
+      SCID report mailed to patient?
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  reason_for_declining:
+    description: Reason For Declining
+    enum:
+      - Did Not Agree To Lumbar Puncture
+      - Other (Specify In Comments)
+      - Risks Of Protocol
+
+  reason_for_declining_comment:
+    description: Comments on Reason For Declining if 'other' was chosen
+    type: string
+
+  reason_for_disinterest_biggest_reason_for_disinterest:
+    description: Screening Form 1000- Biggest Reason For Disinterest
+    enum:
+      - Unlisted Reason
+
+  reason_for_disinterest_cost:
+    description: Screening Form 1000- Cost
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_delay_to_therapy:
+    description: Screening Form 1000- Delay To Therapy
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_double_blind:
+    description: Screening Form 1000- Double Blind
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_effects_deprenyl:
+    description: Screening Form 1000- Effects and Deprenyl
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_effects_tocopherol:
+    description: Screening Form 1000- Effects and Tocopherol
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_family_advice:
+    description: Screening Form 1000- Family Advice
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_length:
+    description: Screening Form 1000- Length
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_lumbar_puncture:
+    description: Screening Form 1000- Lumbar Puncture
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_overnight_in_hospital:
+    description: Screening Form 1000- Overnight In Hospital
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_physician_advice:
+    description: Screening Form 1000- Physician Advice
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_placebo:
+    description: Screening Form 1000- Placebo
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_stringent_prot:
+    description: Screening Form 1000- Stringent Prot.
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_surveillance_lab_tests:
+    description: Screening Form 1000- Surveillance Lab Tests
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_travel_requirement:
+    description: Screening Form 1000- Travel Requirement
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterest_unlisted_reason:
+    description: Screening Form 1000- Unlisted Reason
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_disinterestrandom_assignment:
+    description: Screening Form 1000- Random Assignment
+    enum:
+      - Applicable
+      - Not Applicable
+
+  reason_for_termination:
+    description: Primary reason for termination
+    enum:
+      - Death
+      - Other (specify)
+      - Site PI chose to discontinue subject participation
+      - Subject chose to discontinue the study
+      - Subject completed study procedures per protocol
+      - Subject is lost to follow up
+
+  reason_for_withdrawal:
+    description: Reason For Withdrawal
+    enum:
+      - Adverse Event
+      - Death Of Subject
+      - Inability To Continue Giving Consent
+      - Informant or Caregiver Decision
+      - Institutionalized
+      - Investigator Decision
+      - Lost To Follow-Up
+      - Other (Specify)
+      - Protocol Violation
+      - Subject Withdrew Consent
+      - Unwilling or Unable To Commit
+
+  reason_for_withdrawal_other:
+    description: Not Continuing Reason
+    type: string
+
+  reason_withdrew_consent:
+    description: Reason Withdrew Consent
+    enum:
+      - Adverse Event
+      - Lack Of Efficacy
+      - Other
+
+  recruitment_category:
+    description: Recruitment Category, or the study or test group or cohort the participant
+      belongs to
+    enum:
+      - Genetic Cohort - Parkinson's Disease (GENPD)
+      - Genetic Cohort - Unaffected (GENUN)
+      - Genetic Registry - Parkinson's Disease (REGPD)
+      - Genetic Registry - Unaffected (REGUN)
+      - Healthy Control (HC)
+      - Other (specify)
+      - Parkinson's Disease (PD)
+      - Prodromal (PRODROMA)
+
+  recruitment_category_other:
+    description: Recruitment Category if 'Other (specify)' was chosen for 'recruitment_category
+    type: string
+
+  recruitment_method:
+    description: The method of recruitment
+    type: string
+
+  referral_provider_type:
+    description: If Data_Value_Type = OUT or CON, then what type of provider was the
+      patient referred to
+    enum:
+      - Community/ civilian
+      - Department of Defense
+      - No Response
+      - Not Applicable
+      - Veterans Affairs
+
+  research_advance_directive_status:
+    description: Status Of Research Advance Directive
+    enum:
+      - Continued Consent
+      - Declined Participation
+      - Initial Consent
+      - Withdrew Consent
+
+  reviewed_ae_2:
+    description: Reviewed AE -2
+    enum:
+      - No Data Updates, Log Is Not Blank
+      - No Events Reported, Log Is Blank
+      - Updated Log At This Visit
+
+  reviewed_concomitant_medication_2:
+    description: Reviewed Concomitant Medication -2
+    enum:
+      - No Concomitant Medications Reported, Log Is Blank
+      - No Data Updates, Log Is Not Blank
+      - Updated Log At This Visit
+
+  reviewed_medical_conditions:
+    description: Reviewed Medical Conditions
+    enum:
+      - No Data Updates, Log Is Not Blank
+      - Subject Has Not Reported Any Medical Conditions, Log Is Blank
+      - Updated Log At This Visit
+
+  screening_ecg_normal:
+    description: Screening Form 1000- Screening ECG Normal
+    type: boolean
+
+  screening_form1000_present:
+    description: Screening Form 1000 Present?
+    type: boolean
+
+  signed_consent_excluded:
+    description: Signed Consent- Excluded
+    type: boolean
+
+  signed_consent_reason_for_exclusion:
+    description: Signed Consent- Reason For Exclusion
+    enum:
+      - Abnormal Safety Labs
+      - DX uncertain
+      - Did not meet other inclusion criteria
+      - Disease too advanced
+      - Exclusionary medication
+      - Other (specify in comments)
+      - Other medical, psychiatric, or surgical
+      - SPECT Scan
+
+  signed_consent_reason_for_exclusion_comment:
+    description: Comments on 'Signed Consent- Reason For Exclusion' if 'other' was
+      chosen
+    type: string
+
+  signed_consent_referral_source:
+    description: Signed Consent- Referral Source
+    type: string
+
+  site_number_listing:
+    description: Participant Site Number Listing (RCNO)
+    type: integer
+
+  skin_biopsy_incl_excl_quest_01:
+    description: Inclusion Exclusion Question 01
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_02:
+    description: Inclusion Exclusion Question 02
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_03:
+    description: Inclusion Exclusion Question 03
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_04:
+    description: Inclusion Exclusion Question 04
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_05:
+    description: Inclusion Exclusion Question 05
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_06:
+    description: Inclusion Exclusion Question 06
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_07:
+    description: Inclusion Exclusion Question 07
+    type: boolean
+
+  skin_biopsy_incl_excl_quest_08:
+    description: Inclusion Exclusion Question 08
+    type: boolean
+
+  skin_biopsy_signed_consent:
+    description: Signed Consent
+    type: boolean
+
+  start_pac_drug_dispensing_form3000_present:
+    description: Start-Pac Drug Dispensing Form 3000 Present?
+    type: boolean
+
+  study_eligibility_hc_age:
+    description: Male or female age 50 or older at the time of the screening visit
+    type: boolean
+
+  study_eligibility_hc_anticoagulants:
+    description: Current treatment with anticoagulants (e.g., Coumadin, heparin) that
+      would preclude safe completion of the lumbar puncture and tissue biopsy procedures
+    type: boolean
+
+  study_eligibility_hc_antiplatelet:
+    description: Current treatment with more than one antiplatelet agent (Plavix or
+      aspirin =325 mg/day)
+    type: boolean
+
+  study_eligibility_hc_botox:
+    description: Have received botulinum toxin injections to the submandibular gland
+      within the past year
+    type: boolean
+
+  study_eligibility_hc_coagulopathy:
+    description: A bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia
+    type: boolean
+
+  study_eligibility_hc_diabetes:
+    description: Has a diagnosis of diabetes mellitus requiring either an oral agent
+      or insulin therapy
+    type: boolean
+
+  study_eligibility_hc_disease_hx:
+    description: Has a history of cancer (other than basal and squamous cell skin
+      cancers), autoimmune disorder, liver disease, or other hematological disorder
+      within the past 5 years
+    type: boolean
+
+  study_eligibility_hc_drugs:
+    description: Use of investigational drugs or devices within 30 days prior to the
+      screening visit
+    type: boolean
+
+  study_eligibility_hc_family_hx:
+    description: Has a family history of PD in any first-degree relative
+    type: boolean
+
+  study_eligibility_hc_inf_cons:
+    description: Ability to provide written informed consent in accordance with Good
+      Clinical Practice (GCP), International Conference on Harmonization (ICH), and
+      local regulations
+    type: boolean
+
+  study_eligibility_hc_investigator:
+    description: Any other medical or psychiatric condition or laboratory abnormality,
+      which in the opinion of the investigator would preclude participation
+    type: boolean
+
+  study_eligibility_hc_lp:
+    description: Conditions that preclude safe performance of routine lumbar puncture,
+      such as prohibitive lumbar spinal disease
+    type: boolean
+
+  study_eligibility_hc_moca:
+    description: Has a Montreal Cognitive Assessment (MoCA) score < 26
+    type: boolean
+
+  study_eligibility_hc_movement:
+    description: Has a primary dystonia, restless legs syndrome, essential tremor,
+      or other movement disorder
+    type: boolean
+
+  study_eligibility_hc_neuro:
+    description: Has a significant neurological disorder (a neurodegenerative condition,
+      clinically significant stroke, brain tumor, hydrocephalus, epilepsy, other neurodegenerative
+      disorders, encephalitis, repeated head trauma, polyneuropathy)
+    type: boolean
+
+  study_eligibility_hc_rem:
+    description: Has a diagnosis of REM sleep behavior disorder
+    type: boolean
+
+  study_eligibility_hc_sigmoid:
+    description: Conditions that preclude the safe performance of the flexible sigmoidoscopy
+      procedure or may interfere with obtaining evaluable colonic tissue biopsies,
+      including a prior colonoscopy with any significant finding (e.g. polyp with
+      a positive finding, ulcerative colitis, Crohn's disease, inflammatory disease)
+    type: boolean
+
+  study_eligibility_hc_skin:
+    description: Conditions that preclude the safe performance of the skin punch biopsy
+      procedure or may interfere with obtaining evaluable skin tissue biopsies, including
+      any previous or active significant dermatological disease (e.g. previous biopsy
+      with any of the following findings- inflammatory disease, scar tissue, psoriasis,
+      keloid formation, skin cancer)
+    type: boolean
+
+  study_eligibility_hc_subman:
+    description: Conditions that preclude the safe performance of the submandibular
+      gland procedure or may interfere with obtaining evaluable submandibular tissue
+      biopsies, including any previous or active significant disease affecting the
+      submandibular gland (e.g. inflammatory disease, infection, tumor)
+    type: boolean
+
+  study_eligibility_hc_willing:
+    description: Willing and able to comply with scheduled visits, required study
+      procedures and laboratory tests
+    type: boolean
+
+  study_eligibility_pd_age:
+    description: Male or female age 50 or older at the time of the screening visit
+    type: boolean
+
+  study_eligibility_pd_anticoagulants:
+    description: Current treatment with anticoagulants (e.g., Coumadin, heparin) that
+      would preclude safe completion of the lumbar puncture and tissue biopsy procedures
+    type: boolean
+
+  study_eligibility_pd_antiplatelet:
+    description: Current treatment with more than one antiplatelet agent (Plavix or
+      aspirin =325 mg/day)
+    type: boolean
+
+  study_eligibility_pd_atypical_pd:
+    description: Has atypical features of parkinsonism including but not limited to
+      supranuclear gaze palsy, early recurrent falls, corticospinal track abnormalities,
+      cerebellar abnormalities, significant cognitive dysfunction
+    type: boolean
+
+  study_eligibility_pd_autonomic:
+    description: Has significant autonomic dysfunction (symptomatic orthostasis, hypotension
+      or urinary incontinence) suggestive of an atypical parkinsonismencephalitis,
+      repeated head trauma, polyneuropathy)
+    type: boolean
+
+  study_eligibility_pd_botox:
+    description: Have received botulinum toxin injections to the submandibular gland
+      within the past year
+    type: boolean
+
+  study_eligibility_pd_coagulopathy:
+    description: A bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia
+    type: boolean
+
+  study_eligibility_pd_datscan:
+    description: DAT deficit at screening based on visual interpretation of DaTSCAN
+      imaging
+    type: boolean
+
+  study_eligibility_pd_diabetes:
+    description: Has a diagnosis of diabetes mellitus requiring either an oral agent
+      or insulin therapy
+    type: boolean
+
+  study_eligibility_pd_disease_hx:
+    description: Has a history of cancer (other than basal and squamous cell skin
+      cancers), autoimmune disorder, liver disease, or other hematological disorder
+      within the past 5 years
+    type: boolean
+
+  study_eligibility_pd_drugs:
+    description: Use of investigational drugs or devices within 30 days prior to the
+      screening visit
+    type: boolean
+
+  study_eligibility_pd_dx_pd:
+    description: Clinical diagnosis of PD based on bradykinesia plus one of the following-
+      rest tremor or rigidity
+    type: boolean
+
+  study_eligibility_pd_inf_cons:
+    description: Ability to provide written informed consent in accordance with Good
+      Clinical Practice (GCP), International Conference on Harmonization (ICH), and
+      local regulations
+    type: boolean
+
+  study_eligibility_pd_investigator:
+    description: Any other medical or psychiatric condition or laboratory abnormality,
+      which in the opinion of the investigator would preclude participation
+    type: boolean
+
+  study_eligibility_pd_lp:
+    description: Conditions that preclude safe performance of routine lumbar puncture,
+      such as prohibitive lumbar spinal disease
+    type: boolean
+
+  study_eligibility_pd_neuro:
+    description: Has a significant neurological disorder (a neurodegenerative condition,
+      clinically significant stroke, brain tumor, hydrocephalus, epilepsy, other neurodegenerative
+      disorders, encephalitis, repeated head trauma, polyneuropathy)
+    type: boolean
+
+  study_eligibility_pd_sigmoid:
+    description: Conditions that preclude the safe performance of the flexible sigmoidoscopy
+      procedure or may interfere with obtaining evaluable colonic tissue biopsies,
+      including a prior colonoscopy with any significant finding (e.g. polyp with
+      a positive finding, ulcerative colitis, Crohn's disease, inflammatory disease)
+    type: boolean
+
+  study_eligibility_pd_skin:
+    description: Conditions that preclude the safe performance of the skin punch biopsy
+      procedure or may interfere with obtaining evaluable skin tissue biopsies, including
+      any previous or active significant dermatological disease (e.g. previous biopsy
+      with any of the following findings- inflammatory disease, scar tissue, psoriasis,
+      keloid formation, skin cancer)
+    type: boolean
+
+  study_eligibility_pd_stage:
+    description: PD stage
+    enum:
+      - Advanced PD with motor fluctuations or dyskinesias, > 5 years from diagnosis
+      - Early untreated PD not requiring dopamine replacement medication (anticholinergics,
+        MAO-B inhibitors and amantadine permitted), Hoehn and Yahr 1-2, < 2 years
+        from diagnosis
+      - Moderate PD responsive and currently treated with dopamine replacement therapy
+        without evidence of motor fluctuations or dyskinesias
+
+  study_eligibility_pd_stage_yn:
+    description: PD subjects will need to fall into one of the following stages
+    type: boolean
+
+  study_eligibility_pd_subman:
+    description: Conditions that preclude the safe performance of the submandibular
+      gland procedure or may interfere with obtaining evaluable submandibular tissue
+      biopsies, including any previous or active significant disease affecting the
+      submandibular gland (e.g. inflammatory disease, infection, tumor)
+    type: boolean
+
+  study_eligibility_pd_willing:
+    description: Willing and able to comply with scheduled visits, required study
+      procedures and laboratory tests
+    type: boolean
+
+  study_enroll_excl_quest_01:
+    description: Exclusion Question 01
+    type: boolean
+
+  study_enroll_excl_quest_02:
+    description: Exclusion Question 02
+    type: boolean
+
+  study_enroll_excl_quest_03:
+    description: Exclusion Question 03
+    type: boolean
+
+  study_enroll_excl_quest_04:
+    description: Exclusion Question 04
+    type: boolean
+
+  study_enroll_excl_quest_05:
+    description: Exclusion Question 05
+    type: boolean
+
+  study_enroll_excl_quest_06:
+    description: Exclusion Question 06
+    type: boolean
+
+  study_enroll_excl_quest_07:
+    description: Exclusion Question 07
+    type: boolean
+
+  study_enroll_excl_quest_08:
+    description: Exclusion Question 08
+    type: boolean
+
+  study_enroll_excl_quest_09:
+    description: Exclusion Question 09
+    type: boolean
+
+  study_enroll_excl_quest_10:
+    description: Exclusion Question 10
+    type: boolean
+
+  study_enroll_excl_quest_11:
+    description: Exclusion Question 11
+    type: boolean
+
+  study_enroll_excl_quest_12:
+    description: Exclusion Question 12
+    type: boolean
+
+  study_enroll_excl_quest_13:
+    description: Exclusion Question 13
+    type: boolean
+
+  study_enroll_excl_quest_14:
+    description: Exclusion Question 14
+    type: boolean
+
+  study_enroll_excl_quest_15:
+    description: Exclusion Question 15
+    type: boolean
+
+  study_enroll_incl_quest_01:
+    description: Inclusion Question 01
+    type: boolean
+
+  study_enroll_incl_quest_02:
+    description: Inclusion Question 02
+    type: boolean
+
+  study_enroll_incl_quest_03:
+    description: Inclusion Question 03
+    type: boolean
+
+  study_enroll_incl_quest_04:
+    description: Inclusion Question 04
+    type: boolean
+
+  study_enroll_incl_quest_05:
+    description: Inclusion Question 05
+    type: boolean
+
+  study_enroll_incl_quest_06:
+    description: Inclusion Question 06
+    type: boolean
+
+  study_enroll_incl_quest_07:
+    description: Inclusion Question 07
+    type: boolean
+
+  study_enroll_incl_quest_08:
+    description: Inclusion Question 08
+    type: boolean
+
+  study_enroll_incl_quest_09:
+    description: Inclusion Question 09
+    type: boolean
+
+  study_enroll_incl_quest_10:
+    description: Inclusion Question 10
+    type: boolean
+
+  study_enroll_incl_quest_11:
+    description: Inclusion Question 11
+    type: boolean
+
+  subject_complete_study:
+    description: Did The Subject Complete The Study?
+    enum:
+      - Discontinue Before Conclusion
+      - "No"
+      - Subject Completed Study Per Protocol
+      - "Yes"
+
+  symptomatic_tx_replaces_visit:
+    description: Symptomatic Therapy Replaces Visit
+    type: string
+
+  tap_pd_incl_excl_quest_01:
+    description: Inclusion Exclusion Question 01
+    type: boolean
+
+  tap_pd_incl_excl_quest_02:
+    description: Inclusion Exclusion Question 02
+    type: boolean
+
+  tap_pd_incl_excl_quest_03:
+    description: Inclusion Exclusion Question 03
+    type: boolean
+
+  tap_pd_incl_excl_quest_04:
+    description: Inclusion Exclusion Question 04
+    type: boolean
+
+  tap_pd_incl_excl_quest_05:
+    description: Inclusion Exclusion Question 05
+    type: boolean
+
+  tap_pd_incl_excl_quest_06:
+    description: Inclusion Exclusion Question 06
+    type: boolean
+
+  tap_pd_signed_consent:
+    description: Signed Consent?
+    type: boolean
+
+  termination_form7000_present:
+    description: Termination Form 7000 Present?
+    type: boolean
+
+  time_informed_consent_obtained:
+    description: Time consented
+    type: string
+
+  updrs_form2000_present:
+    description: UPDRS Form 2000 Present?
+    type: boolean
+
+  visit_completion_status:
+    description: Visit Completion Status
+    enum:
+      - Not Done (Enter The Target Visit Date In The Header)
+      - Other (Specify)
+      - Out Of Visit Window And Conducted By Investigator (Or Coordinator If Telephone
+        Contact)
+      - Out Of Visit Window And Not Conducted By Investigator
+      - Unscheduled Visit
+      - Within Visit Window And Conducted By Investigator (Or Coordinator If Telephone
+        Contact)
+      - Within Visit Window And Not Conducted By Investigator
+
+  visit_missed_reason:
+    description: Visit Missed Reason
+    enum:
+      - Other
+      - Scheduling
+      - Symptomatic Therapy Visit
+
+  visit_replaced_with_symptomatic_tx_event:
+    description: Visit Replaced With ST Event
+    type: boolean
+
+  washout_dispensing_form3300_present:
+    description: Washout Dispensing Form 3300 Present?
+    type: boolean
+
+  withdrew_consent:
+    description: Subject Withdrew Consent?
+    type: boolean
+
+  year_clinical_info_obtained:
+    description: The year clinical information was obtained.
+    type: integer
+
+  year_consent_form_signed:
+    description: Year Consent Form Signed
+    type: integer
+
+  year_of_screening:
+    description: Screening Form 1000- Year of Screening
+    type: integer
+
+  year_of_termination:
+    description: Year Of Termination
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,110 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "derived_checkup"
+title: Derived Checkup
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing information obtained from a derived checkup. These
+  checkups are usually performed when visiting a derived site but can also refer to
+  phone calls and other types of interactions between a subject and clinician.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: derived_checkups
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: clinical_checkups
+        backref: derived_checkups
+        label: performed_on
+        target_type: clinical_checkup
+        multiplicity: many_to_many
+        required: false
+      - name: app_checkups
+        backref: derived_checkups
+        label: performed_on
+        target_type: app_checkup
+        multiplicity: many_to_many
+        required: false
+      - name: sensor_checkups
+        backref: derived_checkups
+        label: performed_on
+        target_type: sensor_checkup
+        multiplicity: many_to_many
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - data_format
+  - md5sum
+  - data_category
+  - data_type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Derived Checkup
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    type: string
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    type: string
+
+  days_to_checkup:
+    description: The total number of days between the exam and the index date. The
+      date of the exam less the date of index.
+    type: integer
+
+  time_of_checkup:
+    description: The time of day at which the checkup was performed. Formatted HH-MM-SS.
+    type: string
+    pattern: ^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  clinical_checkups:
+    $ref: "_definitions.yaml#/to_many"
+
+  app_checkups:
+    $ref: "_definitions.yaml#/to_many"
+
+  sensor_checkups:
+    $ref: "_definitions.yaml#/to_many"

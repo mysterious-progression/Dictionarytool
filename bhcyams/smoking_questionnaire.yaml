@@ -1,0 +1,176 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "smoking_questionnaire"
+title: Smoking Questionnaire
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A questionnaire used to assess a patient's history of smoking cigarettes.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: smoking_questionnaires
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  X_sq_packyears:
+    description: Smoking pack years
+    type: integer
+
+  X_sq_score:
+    description: Smoking questionnaire score
+    type: integer
+
+  sq_1_1:
+    description: At what age did you first start smoking?
+    type: integer
+
+  sq_1_2:
+    description: How many total years have you smoked cigarettes? (Subtract any years
+      that you may Nave quit)
+    type: integer
+
+  sq_1_3:
+    description: On average, how many cigarettes did you smoke per day?
+    type: integer
+
+  sq_1_4:
+    description: How many times (in total) have you tried to quit smoking?
+    type: integer
+
+  sq_1_5_0_1:
+    description: If I tried to quit, I tried nicotine patch
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_5_0_2:
+    description: If I tried to quit, I tried zyban
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_5_0_3:
+    description: If I tried to quit, I tried nicotine gum
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_5_0_4:
+    description: If I tried to quit, I tried hypnosis
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_5_0_5:
+    description: If I tried to quit, I tried other
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_5_0_6:
+    description: If I tried to quit, I tried on my own
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_5_1:
+    description: Please specify
+    type: string
+
+  sq_1_6:
+    description: Have you ever successfully quit before?
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_1_6_1:
+    description: How many times have you successfully quit?
+    type: integer
+
+  sq_1_6_2:
+    description: For how long, at the longest, did you quit (days)?
+    type: integer
+
+  sq_1_6_3:
+    description: For how long, at the shortest, did you quit (days)?
+    type: integer
+
+  sq_2_1:
+    description: How soon after you wake up do you smoke your first cigarette ?
+    enum:
+      - 31-60 minutes
+      - 6-30 minutes
+      - 60 minutes
+      - after
+      - within 5 minutes
+
+  sq_2_2:
+    description: Do you find it difficult to refrain from smoking in places where
+      it is forbidden? (e.g. church, library, movie theater, etc)
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_2_3:
+    description: Which cigarette of the day would you hate most to give up?
+    enum:
+      - Any other one
+      - The first one of the morning
+
+  sq_2_4:
+    description: How many cigarettes per day do you smoke?
+    enum:
+      - 10 or less
+      - 11-20
+      - 21-30
+      - 31 or more
+
+  sq_2_5:
+    description: Do you smoke more frequently during the first hours after waking
+      than during the rest of the day?
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_2_6:
+    description: Do you smoke if you are so ill that you are in bed most of the day?
+    enum:
+      - "No"
+      - "Yes"
+
+  sq_2_7:
+    description: What brand of cigarettes do you smoke? Be specific (e.g. Marlboro
+      100s Hardpack, Salem Menthol Ultras, etc)
+    type: string
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

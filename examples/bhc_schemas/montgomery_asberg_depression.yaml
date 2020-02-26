@@ -1,0 +1,213 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "montgomery_asberg_depression"
+title: Montgomery-Asberg Depression Rating Scale (MADRS)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: The Montgomery-Asberg Depression Rating Scale (MADRS) is a questionnaire
+  used to measure the severity of depressive episodes in patients with mood disorders.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: montgomery_asberg_depressions
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  madrs10_suicidal_thoughts:
+    description: MADRS - 10. Suicidal Thoughts
+    enum:
+      - Enjoys Life Or Takes It As It Comes
+      - Explicit Plans For Suicide When There Is An Opportunity. Active Preparations
+        For Suicide
+      - Intermediate Level Between Enjoys Life Or Takes It As It Comes And Weary Of
+        Life. Only Fleeting Suicidal Thoughts
+      - Intermediate Level Between Probably Better Off Dead. Suicidal Thoughts Are
+        Common, And Suicide Is Considered As A Possible Solution, But Without Specific
+        Plans Or Intention And Explicit Plans For Suicide When There Is An Opportunity.
+        Active Preparations For Suicide
+      - Intermediate Level Between Weary Of Life. Only Fleeting Suicidal Thoughts
+        And Probably Better Off Dead. Suicidal Thoughts Are Common, And Suicide Is
+        Considered As A Possible Solution, But Without Specific Plans Or Intention
+      - Probably Better Off Dead. Suicidal Thoughts Are Common, And Suicide Is Considered
+        As A Possible Solution, But Without Specific Plans Or Intention
+      - Weary Of Life. Only Fleeting Suicidal Thoughts
+
+  madrs1_apparent_sadness:
+    description: MADRS - 1. Apparent Sadness
+    enum:
+      - Appears Sad And Unhappy Most Of The Time
+      - Intermediate Level Between Appears Sad And Unhappy Most Of The Time And Looks
+        Miserable All The Time. Extremely Despondent
+      - Intermediate Level Between Looks Dispirited But Does Brighten Up Without Difficulty
+        And Appears Sad And Unhappy Most Of The Time
+      - Intermediate Level Between No Sadness And Looks Dispirited But Does Brighten
+        Up Without Difficulty
+      - Looks Dispirited But Does Brighten Up Without Difficulty
+      - Looks Miserable All The Time. Extremely Despondent
+      - No Sadness
+
+  madrs2_reported_sadness:
+    description: MADRS - 2. Reported Sadness
+    enum:
+      - Continuous Or Unvarying Sadness, Misery Or Despondency
+      - Intermediate Level Between Occasional Sadness In Keeping With The Circumstances
+        And Sad Or Low But Brightens Up Without Difficulty
+      - Intermediate Level Between Pervasive Feelings Of Sadness Or Gloominess. The
+        Mood Is Still Influenced By External Circumstances And Continuous Or Unvarying
+        Sadness, Misery Or Despondency
+      - Intermediate Level Between Sad Or Low But Brightens Up Without Difficulty
+        And Pervasive Feelings Of Sadness Or Gloominess. The Mood Is Still Influenced
+        By External Circumstances
+      - Occasional Sadness In Keeping With The Circumstances
+      - Pervasive Feelings Of Sadness Or Gloominess. The Mood Is Still Influenced
+        By External Circumstances
+      - Sad Or Low But Brightens Up Without Difficulty
+
+  madrs3_inner_tension:
+    description: MADRS - 3. Inner Tension
+    enum:
+      - Continuous Feelings Of Inner Tension Or Intermittent Panic Which The Patient
+        Can Only Master With Some Difficulty
+      - Intermediate Level Between Occasional Feelings Of Edginess And Ill-Defined
+        Discomfort And Continuous Feelings Of Inner Tension Or Intermittent Panic
+        Which The Patient Can Only Master With Some Difficulty
+      - Intermediate Level Between Placid. Only Reflecting Inner Tension And Occasional
+        Feelings Of Edginess And Ill-Defined Discomfort
+      - Occasional Feelings Of Edginess And Ill-Defined Discomfort
+      - Placid. Only Reflecting Inner Tension
+
+  madrs4_reduced_sleep:
+    description: MADRS - 4. Reduced Sleep
+    enum:
+      - Intermediate Level Between Sleep Reduced Or Broken By At Least Two Hours And
+        Less Than Two Or Three Hours Sleep
+      - Intermediate Level Between Sleeps As Usual And Slight Difficulty Dropping
+        Off To Sleep Or Slightly Reduced, Light Or Fitful Sleep
+      - Intermediate Level Between Slight Difficulty Dropping Off To Sleep Or Slightly
+        Reduced, Light Or Fitful Sleep And Sleep Reduced Or Broken By At Least Two
+        Hours
+      - Less Than Two Or Three Hours Sleep
+      - Sleep Reduced Or Broken By At Least Two Hours
+      - Sleeps As Usual
+      - Slight Difficulty Dropping Off To Sleep Or Slightly Reduced, Light Or Fitful
+        Sleep
+
+  madrs5_reduced_appetite:
+    description: MADRS - 5. Reduced Appetite
+    enum:
+      - Intermediate Level Between No Appetite. Food Is Tasteless And Needs Persuasion
+        To Eat At All
+      - Intermediate Level Between Normal Or Increased Appetite And Slightly Reduced
+        Appetite
+      - Intermediate Level Between Slightly Reduced Appetite And No Appetite. Food
+        Is Tasteless
+      - Needs Persuasion To Eat At All
+      - No Appetite. Food Is Tasteless
+      - Normal Or Increased Appetite
+      - Slightly Reduced Appetite
+
+  madrs6_concentration_difficulties:
+    description: MADRS - 6. Concentration Difficulties
+    enum:
+      - Difficulties In Concentrating And Sustaining Thought Which Reduces Ability
+        To Read Or Hold A Conversation
+      - Intermediate Level Between Difficulties In Concentrating And Sustaining Thought
+        Which Reduces Ability To Read Or Hold A Conversation And Unable To Read Or
+        Converse Without Great Initiative
+      - Intermediate Level Between No Difficulties In Concentrating And Occasional
+        Difficulties In Collecting One's Thoughts
+      - Intermediate Level Between Occasional Difficulties In Collecting One's Thoughts
+        And Difficulties In Concentrating And Sustaining Thought Which Reduces Ability
+        To Read Or Hold A Conversation
+      - No Difficulties In Concentrating
+      - Occasional Difficulties In Collecting One's Thoughts
+      - Unable To Read Or Converse Without Great Initiative
+
+  madrs7_lassitude:
+    description: MADRS - 7. Lassitude
+    enum:
+      - Complete Lassitude. Unable To Do Anything Without Help
+      - Difficulties In Starting Activities
+      - Difficulties In Starting Simple Routine Activities Which Are Carried Out With
+        Effort
+      - Hardly Any Difficulty In Getting Started. No Sluggishness
+      - Intermediate Level Between Difficulties In Starting Activities And Difficulties
+        In Starting Simple Routine Activities Which Are Carried Out With Effort
+      - Intermediate Level Between Difficulties In Starting Simple Routine Activities
+        Which Are Carried Out With Effort And Complete Lassitude. Unable To Do Anything
+        Without Help
+      - Intermediate Level Between Hardly Any Difficulty In Getting Started. No Sluggishness
+        And Difficulties In Starting Activities
+
+  madrs8_inability_to_feel:
+    description: MADRS - 8. Inability To Feel
+    enum:
+      - Intermediate Level Between Loss Of Interest In Surroundings. Loss Of Feelings
+        For Friends And Acquaintances And The Experience Of Being Emotionally Paralyzed,
+        Inability To Feel Anger, Grief Or Pleasure And A Complete Or Even Painful
+        Failure To Feel For Close Relatives And Friends
+      - Intermediate Level Between Normal Interest In The Surroundings And In Other
+        People And Reduced Ability To Enjoy Usual Interests
+      - Intermediate Level Between Reduced Ability To Enjoy Usual Interests And Loss
+        Of Interest In Surroundings. Loss Of Feelings For Friends And Acquaintances
+      - Loss Of Interest In Surroundings. Loss Of Feelings For Friends And Acquaintances
+      - Normal Interest In The Surroundings And In Other People
+      - Reduced Ability To Enjoy Usual Interests
+      - The Experience Of Being Emotionally Paralyzed, Inability To Feel Anger, Grief
+        Or Pleasure And A Complete Or Even Painful Failure To Feel For Close Relatives
+        And Friends
+
+  madrs9_pessimistic_thoughts:
+    description: MADRS - 9. Pessimistic Thoughts
+    enum:
+      - Delusions Of Ruin, Remorse And Unredeemable Sin. Self-Accusations Which Are
+        Absurd And Unshakable
+      - Fluctuating Ideas Of Failure, Self-Reproach Or Self-Depreciation
+      - Intermediate Level Between Fluctuating Ideas Of Failure, Self-Reproach Or
+        Self-Depreciation And Persistent Self-Accusations, Or Definite But Still Rational
+        Ideas Of Guilt Or Sin. Increasingly Pessimistic About The Future
+      - Intermediate Level Between No Pessimistic Thoughts And Fluctuating Ideas Of
+        Failure, Self-Reproach Or Self-Depreciation
+      - Intermediate Level Between Persistent Self-Accusations, Or Definite But Still
+        Rational Ideas Of Guilt Or Sin. Increasingly Pessimistic About The Future
+        And Delusions Of Ruin, Remorse And Unredeemable Sin. Self-Accusations Which
+        Are Absurd And Unshakable
+      - No Pessimistic Thoughts
+      - Persistent Self-Accusations, Or Definite But Still Rational Ideas Of Guilt
+        Or Sin. Increasingly Pessimistic About The Future
+
+  madrs_total_score:
+    description: MADRS - Total Score
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,485 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "state_trait_anxiety_inventory"
+title: State-Trait Anxiety Inventory (STAI)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: State-Trait Anxiety Inventory (STAI)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: state_trait_anxiety_inventories
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  stai01_calm:
+    description: STAI- 01. I Feel Calm
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai02_secure:
+    description: STAI- 02. I Feel Secure
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai03_tense:
+    description: STAI- 03. I Am Tense
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai04_strained:
+    description: STAI- 04. I Feel Strained
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai05_at_ease:
+    description: STAI- 05. I Feel At Ease
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai06_upset:
+    description: STAI- 06. I Feel Upset
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai07_worrying_over_possible_misfortunes:
+    description: STAI- 07. I Am Presently Worrying Over Possible Misfortunes
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai08_satisfied:
+    description: STAI- 08. I Feel Satisfied
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai09_frightened:
+    description: STAI- 09. I Feel Frightened
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai10_comfortable:
+    description: STAI- 10. I Feel Comfortable
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai11_self_confident:
+    description: STAI- 11. I Feel Self-Confident
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai12_nervous:
+    description: STAI- 12. I Feel Nervous
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai13_jittery:
+    description: STAI- 13. I Am Jittery
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai14_indecisive:
+    description: STAI- 14. I Feel Indecisive
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai15_relaxed:
+    description: STAI- 15. I Am Relaxed
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai16_content:
+    description: STAI- 16. I Feel Content
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai17_worried:
+    description: STAI- 17. I Am Worried
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai18_confused:
+    description: STAI- 18. I Feel Confused
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai19_steady:
+    description: STAI- 19. I Feel Steady
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai20_pleasant:
+    description: STAI- 20. I Feel Pleasant
+    enum:
+      - Moderately So
+      - Not At All
+      - Somewhat
+      - Very Much So
+
+  stai21_pleasant:
+    description: STAI- 21. I Feel Pleasant
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai22_nervous_and_restless:
+    description: STAI- 22. I Feel Nervous And Restless
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai23_satisfied_with_myself:
+    description: STAI- 23. I Feel Satisfied With Myself
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai24_wish_could_be_as_happy_as_others_seem_to_be:
+    description: STAI- 24. I Wish I Could Be As Happy As Others Seem To Be
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai25_like_a_failure:
+    description: STAI- 25. I Feel Like A Failure
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai26_rested:
+    description: STAI- 26. I Feel Rested
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai27_calm_cool_and_collected:
+    description: STAI- 27. I Am Calm Cool And Collected
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai28_cannot_overcome_difficulties:
+    description: STAI- 28. I Feel That Difficulties Are Piling Up So That I Cannot
+      Overcome Them
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai29_worry_over_something_that_does_not_matter:
+    description: STAI- 29. I Worry Too Much Over Something That Really Does Not Matter
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai30_happy:
+    description: STAI- 30. I Am Happy
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai31_disturbing_thoughts:
+    description: STAI- 31. I Have Disturbing Thoughts
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai32_lack_self_confidence:
+    description: STAI- 32. I Lack Self-Confidence
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai33_secure:
+    description: STAI- 33. I Feel Secure
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai34_make_decisions_easily:
+    description: STAI- 34. I Make Decisions Easily
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai35_inadequate:
+    description: STAI- 35. I Feel Inadequate
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai36_content:
+    description: STAI- 36. I Am Content
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai37_unimportant_thoughts_bother:
+    description: STAI- 37. Some Unimportant Thought Runs Through My Mind And Bothers
+      Me
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai38_can_not_put_disappointments_out_of_mind:
+    description: STAI- 38. I Take Disappointments So Keenly That I Can Not Put Them
+      Out Of My Mind
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai39_a_steady_person:
+    description: STAI- 39. I Am A Steady Person
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai40_tension_turmoil_state_over_concerns_or_interests:
+    description: STAI- 40. I Get In A State Of Tension Or Turmoil As I Think Over
+      My Recent Concerns And Interests
+    enum:
+      - Almost Always
+      - Almost Never
+      - Moderately So
+      - Not At All
+      - Often
+      - Sometimes
+      - Somewhat
+      - Very Much So
+
+  stai_state_subscore:
+    description: STAI- STAI - State Subscore
+    type: integer
+
+  stai_total_score:
+    description: State Trait Anxiety Total Score
+    type: integer
+
+  stai_trait_subscore:
+    description: STAI- STAI - Trait Subscore
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

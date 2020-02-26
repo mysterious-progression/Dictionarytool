@@ -416,7 +416,7 @@ if __name__ == "__main__":
         # required.append(getrequired(dic))
 
     # rkeys = [list(k.keys())[0] for k in required]
-    ndf.to_csv(f'{args.tsvs}nodes_{args.data_dictionary}.tsv', sep= '\t', index = False, quoting = None)
+    ndf.to_csv(f'{args.tsvs}/nodes_{args.data_dictionary}.tsv', sep= '\t', index = False, quoting = None)
 
     #create the properties tsv
     for dic in yamprops:

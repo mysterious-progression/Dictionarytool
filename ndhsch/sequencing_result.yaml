@@ -1,0 +1,202 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "sequencing_result"
+title: Sequencing Result
+type: object
+nodeTerms: null
+namespace: http://ndh.bionimbus.org
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing different sequencing results
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: sequencing_results
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: experiments
+        backref: sequencing_results
+        label: data_from
+        target_type: experiment
+        multiplicity: one_to_many
+        required: false
+      - name: submitted_unaligned_reads_files
+        backref: sequencing_results
+        label: data_from
+        target_type: submitted_unaligned_reads
+        multiplicity: many_to_many
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - data_format
+  - md5sum
+  - data_category
+  - data_type
+  - experimental_strategy
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  amikacin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  capreomycin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  ciprofloxacin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  data_category:
+    terms:
+      - $ref: "_terms.yaml#/data_category"
+    enumTerms:
+      Microbial Analysis: null
+
+  data_format:
+    terms:
+      - $ref: "_terms.yaml#/data_format"
+    enumTerms:
+      CSV: null
+      TAR: null
+      TSV: null
+      TXT: null
+
+  data_type:
+    terms:
+      - $ref: "_terms.yaml#/data_type"
+    enumTerms:
+      16s Ribosome Sequencing ASV Results: null
+      16s Ribosome Sequencing OTU Results: null
+      cfDNA Sequencing OTU Results: null
+      cfDNA Sequencing Results: null
+
+  ethambutol_res_ariba:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  ethambutol_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  experimental_strategy:
+    terms:
+      - $ref: "_terms.yaml#/experimental_strategy"
+    enumTerms:
+      Ribosome Sequencing Experiment: null
+      Sequencing Experiment: null
+      Targeted Ribosome Sequencing Experiment: null
+      Targeted Sequencing Experiment: null
+
+  isoniazid_res_ariba:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  isoniazid_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  kanamycin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  moxifloxacin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  ofloxacin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  pyrazinamide_res_ariba:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  pyrazinamide_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  rifampicin_res_ariba:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  rifampicin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  streptomycin_res_mykrobe:
+    terms: null
+    enumTerms:
+      Resistant: null
+      Susceptible: null
+
+  type:
+    terms: null
+    enumTerms:
+      sequencing_result: null
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  experiments:
+    $ref: "_definitions.yaml#/to_many"
+
+  submitted_unaligned_reads_files:
+    $ref: "_definitions.yaml#/to_many"

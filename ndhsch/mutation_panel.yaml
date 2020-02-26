@@ -1,0 +1,86 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "mutation_panel"
+title: Mutation Panel
+type: object
+nodeTerms: null
+namespace: https://niaid.bionimbus.org/
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing information about a panel of mutations for a set
+  of subjects. This file can be a binary matrix.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: mutation_panels
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: subjects
+        backref: mutation_panels
+        label: data_from
+        target_type: subject
+        multiplicity: one_to_many
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  data_category:
+    terms:
+      - $ref: "_terms.yaml#/data_category"
+    enumTerms:
+      Aggregated Mutation Panel: null
+      Individual Mutation Panel: null
+
+  data_format:
+    terms:
+      - $ref: "_terms.yaml#/data_format"
+    enumTerms:
+      CSV: null
+      TSV: null
+      TXT: null
+
+  data_type:
+    terms:
+      - $ref: "_terms.yaml#/data_type"
+    enumTerms:
+      Mutation Panel: null
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  subjects:
+    $ref: "_definitions.yaml#/to_many"

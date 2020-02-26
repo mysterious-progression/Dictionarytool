@@ -1,0 +1,56 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "snp_array_workflow"
+title: SNP Array Workflow
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: analysis
+program: '*'
+project: '*'
+description: Metadata for the SNP array workflow used to generate SNP data.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: aggregated_snp_array_files
+    backref: snp_array_workflows
+    label: performed_on
+    target_type: aggregated_snp_array
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - workflow_type
+  - aggregated_snp_array_files
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/workflow_properties"
+
+  type:
+    enum:
+      - snp_array_workflow
+
+  workflow_type:
+    term:
+      $ref: "_terms.yaml#/workflow_type"
+    enum:
+      - Array Genotyping
+
+  aggregated_snp_array_files:
+    $ref: "_definitions.yaml#/to_one"

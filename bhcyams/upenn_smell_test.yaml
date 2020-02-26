@@ -1,0 +1,673 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "upenn_smell_test"
+title: UPenn Smell Identification Test (UPSIT)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: University of Pennsylvania Smell Identification Test (UPSIT)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: upenn_smell_tests
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  days_to_upsit:
+    description: The number of days between the case Index Date and the Olfactory
+      UPSIT Date Complete
+    type: integer
+
+  scent_01_correct:
+    description: Olfactory UPSIT- Scent 01 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_01_response:
+    description: Olfactory UPSIT- Scent 01 Response
+    enum:
+      - PIZZA
+      - gasoline
+      - lilac
+      - peanuts
+
+  scent_02_correct:
+    description: Olfactory UPSIT- Scent 02 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_02_response:
+    description: Olfactory UPSIT- Scent 02 Response
+    enum:
+      - BUBBLEGUM
+      - dillpickle
+      - watermelon
+      - wintergreen
+
+  scent_03_correct:
+    description: Olfactory UPSIT- Scent 03 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_03_response:
+    description: Olfactory UPSIT- Scent 03 Response
+    enum:
+      - MENTHOL
+      - licorice
+      - strawberry
+      - tomato
+
+  scent_04_correct:
+    description: Olfactory UPSIT- Scent 04 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_04_response:
+    description: Olfactory UPSIT- Scent 04 Response
+    enum:
+      - CHERRY
+      - honey
+      - lime
+      - whiskey
+
+  scent_05_correct:
+    description: Olfactory UPSIT- Scent 05 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_05_response:
+    description: Olfactory UPSIT- Scent 05 Response
+    enum:
+      - MOTOR OIL
+      - grass
+      - pineapple
+      - pizza
+
+  scent_06_correct:
+    description: Olfactory UPSIT- Scent 06 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_06_response:
+    description: Olfactory UPSIT- Scent 06 Response
+    enum:
+      - MINT
+      - cola
+      - fruitpunch
+      - skunk
+
+  scent_07_correct:
+    description: Olfactory UPSIT- Scent 07 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_07_response:
+    description: Olfactory UPSIT- Scent 07 Response
+    enum:
+      - BANANA
+      - cherry
+      - garlic
+      - motor oil
+
+  scent_08_correct:
+    description: Olfactory UPSIT- Scent 08 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_08_response:
+    description: Olfactory UPSIT- Scent 08 Response
+    enum:
+      - CLOVE
+      - banana
+      - chili
+      - licorice
+
+  scent_09_correct:
+    description: Olfactory UPSIT- Scent 09 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_09_response:
+    description: Olfactory UPSIT- Scent 09 Response
+    enum:
+      - LEATHER
+      - apple
+      - clove
+      - lilac
+
+  scent_10_correct:
+    description: Olfactory UPSIT- Scent 10 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_10_response:
+    description: Olfactory UPSIT- Scent 10 Response
+    enum:
+      - COCONUT
+      - cedar
+      - honey
+      - skunk
+
+  scent_11_correct:
+    description: Olfactory UPSIT- Scent 11 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_11_response:
+    description: Olfactory UPSIT- Scent 11 Response
+    enum:
+      - ONION
+      - banana
+      - chocolate
+      - fruitpunch
+
+  scent_12_correct:
+    description: Olfactory UPSIT- Scent 12 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_12_response:
+    description: Olfactory UPSIT- Scent 12 Response
+    enum:
+      - FRUITPUNCH
+      - menthol
+      - pumpkin pie
+      - soap
+
+  scent_13_correct:
+    description: Olfactory UPSIT- Scent 13 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_13_response:
+    description: Olfactory UPSIT- Scent 13 Response
+    enum:
+      - LICORICE
+      - cheddar cheese
+      - cherry
+      - pineapple
+
+  scent_14_correct:
+    description: Olfactory UPSIT- Scent 14 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_14_response:
+    description: Olfactory UPSIT- Scent 14 Response
+    enum:
+      - CHEDDAR CHEESE
+      - cherry
+      - coconut
+      - paint thinner
+
+  scent_15_correct:
+    description: Olfactory UPSIT- Scent 15 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_15_response:
+    description: Olfactory UPSIT- Scent 15 Response
+    enum:
+      - CINNAMON
+      - coconut
+      - cola
+      - pine
+
+  scent_16_correct:
+    description: Olfactory UPSIT- Scent 16 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_16_response:
+    description: Olfactory UPSIT- Scent 16 Response
+    enum:
+      - GASOLINE
+      - lemon
+      - peach
+      - rose
+
+  scent_17_correct:
+    description: Olfactory UPSIT- Scent 17 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_17_response:
+    description: Olfactory UPSIT- Scent 17 Response
+    enum:
+      - STRAWBERRY
+      - cedar
+      - chocolate
+      - dill pickle
+
+  scent_18_correct:
+    description: Olfactory UPSIT- Scent 18 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_18_response:
+    description: Olfactory UPSIT- Scent 18 Response
+    enum:
+      - CEDAR
+      - gasoline
+      - lemon
+      - root beer
+
+  scent_19_correct:
+    description: Olfactory UPSIT- Scent 19 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_19_response:
+    description: Olfactory UPSIT- Scent 19 Response
+    enum:
+      - CHOCOLATE
+      - black pepper
+      - lemon
+      - root beer
+
+  scent_20_correct:
+    description: Olfactory UPSIT- Scent 20 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_20_response:
+    description: Olfactory UPSIT- Scent 20 Response
+    enum:
+      - GINGERBREAD
+      - apple
+      - cheddar cheese
+      - menthol
+
+  scent_21_correct:
+    description: Olfactory UPSIT- Scent 21 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_21_response:
+    description: Olfactory UPSIT- Scent 21 Response
+    enum:
+      - LILAC
+      - chili
+      - coconut
+      - whiskey
+
+  scent_22_correct:
+    description: Olfactory UPSIT- Scent 22 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_22_response:
+    description: Olfactory UPSIT- Scent 22 Response
+    enum:
+      - TURPENTINE
+      - chili
+      - skunk
+      - soap
+
+  scent_23_correct:
+    description: Olfactory UPSIT- Scent 23 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_23_response:
+    description: Olfactory UPSIT- Scent 23 Response
+    enum:
+      - PEACH
+      - chocolate
+      - leather
+      - pizza
+
+  scent_24_correct:
+    description: Olfactory UPSIT- Scent 24 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_24_response:
+    description: Olfactory UPSIT- Scent 24 Response
+    enum:
+      - ROOT BEER
+      - banana
+      - smoke
+      - watermelon
+
+  scent_25_correct:
+    description: Olfactory UPSIT- Scent 25 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_25_response:
+    description: Olfactory UPSIT- Scent 25 Response
+    enum:
+      - DILL PICKLE
+      - black pepper
+      - pineapple
+      - root beer
+
+  scent_26_correct:
+    description: Olfactory UPSIT- Scent 26 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_26_response:
+    description: Olfactory UPSIT- Scent 26 Response
+    enum:
+      - PINEAPPLE
+      - onion
+      - smoke
+      - whiskey
+
+  scent_27_correct:
+    description: Olfactory UPSIT- Scent 27 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_27_response:
+    description: Olfactory UPSIT- Scent 27 Response
+    enum:
+      - LIME
+      - garlic
+      - musk
+      - turpentine
+
+  scent_28_correct:
+    description: Olfactory UPSIT- Scent 28 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_28_response:
+    description: Olfactory UPSIT- Scent 28 Response
+    enum:
+      - ORANGE
+      - bubble gum
+      - cheddar cheese
+      - turpentine
+
+  scent_29_correct:
+    description: Olfactory UPSIT- Scent 29 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_29_response:
+    description: Olfactory UPSIT- Scent 29 Response
+    enum:
+      - WINTERGREEN
+      - leather
+      - lime
+      - pumpkin pie
+
+  scent_30_correct:
+    description: Olfactory UPSIT- Scent 30 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_30_response:
+    description: Olfactory UPSIT- Scent 30 Response
+    enum:
+      - WATERMELON
+      - chili
+      - menthol
+      - orange
+
+  scent_31_correct:
+    description: Olfactory UPSIT- Scent 31 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_31_response:
+    description: Olfactory UPSIT- Scent 31 Response
+    enum:
+      - PAINT THINNER
+      - peanut
+      - rose
+      - watermelon
+
+  scent_32_correct:
+    description: Olfactory UPSIT- Scent 32 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_32_response:
+    description: Olfactory UPSIT- Scent 32 Response
+    enum:
+      - GRASS
+      - gingerbread
+      - mint
+      - strawberry
+
+  scent_33_correct:
+    description: Olfactory UPSIT- Scent 33 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_33_response:
+    description: Olfactory UPSIT- Scent 33 Response
+    enum:
+      - SMOKE
+      - dill pickle
+      - grass
+      - peach
+
+  scent_34_correct:
+    description: Olfactory UPSIT- Scent 34 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_34_response:
+    description: Olfactory UPSIT- Scent 34 Response
+    enum:
+      - PINE
+      - lilac
+      - orange
+      - smoke
+
+  scent_35_correct:
+    description: Olfactory UPSIT- Scent 35 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_35_response:
+    description: Olfactory UPSIT- Scent 35 Response
+    enum:
+      - GRAPE
+      - clove
+      - pizza
+      - turpentine
+
+  scent_36_correct:
+    description: Olfactory UPSIT- Scent 36 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_36_response:
+    description: Olfactory UPSIT- Scent 36 Response
+    enum:
+      - LEMON
+      - motor oil
+      - pumpkin pie
+      - rose
+
+  scent_37_correct:
+    description: Olfactory UPSIT- Scent 37 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_37_response:
+    description: Olfactory UPSIT- Scent 37 Response
+    enum:
+      - SOAP
+      - black pepper
+      - licorice
+      - peanut
+
+  scent_38_correct:
+    description: Olfactory UPSIT- Scent 38 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_38_response:
+    description: Olfactory UPSIT- Scent 38 Response
+    enum:
+      - NATURAL GAS
+      - cola
+      - musk
+      - orange
+
+  scent_39_correct:
+    description: Olfactory UPSIT- Scent 39 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_39_response:
+    description: Olfactory UPSIT- Scent 39 Response
+    enum:
+      - ROSE
+      - bubble gum
+      - lime
+      - mint
+
+  scent_40_correct:
+    description: Olfactory UPSIT- Scent 40 Identified Correctly
+    enum:
+      - Correct
+      - Incorrect
+
+  scent_40_response:
+    description: Olfactory UPSIT- Scent 40 Response
+    enum:
+      - PEANUT
+      - apple
+      - lemon
+      - root beer
+
+  score_from_booklet_1:
+    description: 'Score From Booklet #1'
+    type: integer
+
+  score_from_booklet_2:
+    description: 'Score From Booklet #2'
+    type: integer
+
+  score_from_booklet_3:
+    description: 'Score From Booklet #3'
+    type: integer
+
+  score_from_booklet_4:
+    description: 'Score From Booklet #4'
+    type: integer
+
+  total_correct_items_0_40:
+    description: Olfactory UPSIT- Total Correct Items (0 - 40)
+    type: integer
+
+  upsit_category_age_sex_adjusted:
+    description: UPSIT Category (Age- and Sex-Adjusted)
+    enum:
+      - Anosmia (Total loss of smell)
+      - Hyposmia (Mild, Moderate, or Severe Microsmia)
+      - Normosmia (Normal)
+
+  upsit_percentage_0_100:
+    description: Olfactory UPSIT- UPSIT Percentage (0 - 100)
+    type: integer
+
+  upsit_percentile:
+    description: Olfactory UPSIT- UPSIT Alternative Percentile (0 - 100)
+    type: integer
+
+  upsit_total_score:
+    description: UPSIT Total Score
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

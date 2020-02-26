@@ -1,0 +1,312 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "pittsburgh_sleep_quality_index"
+title: Pittsburgh Sleep Quality Index (PSQI)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: An  instrument used to measure the quality and patterns of sleep in older
+  adults.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: pittsburgh_sleep_quality_indices
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  X_psqi_disturbances:
+    description: synthetic score
+    type: integer
+
+  X_psqi_duration:
+    description: synthetic score
+    type: integer
+
+  X_psqi_dysfunction:
+    description: synthetic score
+    type: integer
+
+  X_psqi_efficiency:
+    description: synthetic score
+    type: integer
+
+  X_psqi_latency:
+    description: synthetic score
+    type: integer
+
+  X_psqi_medication:
+    description: synthetic score
+    type: integer
+
+  X_psqi_quality:
+    description: synthetic score
+    type: integer
+
+  X_psqi_total:
+    description: sum of synthetic scores
+    type: integer
+
+  psqi_1:
+    description: During the past month, when have you usually gone to bed at night?
+    type: string
+
+  psqi_10_1:
+    description: During the past month, how often have you had trouble sleeping because
+      you feel hot flashes
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_10_2:
+    description: During the past month, how often have you had trouble sleeping because
+      you feel general nervousness
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_10_3:
+    description: During the past month, how often have you had trouble sleeping because
+      you had memories or nightmares of a traumatic experience
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_10_4:
+    description: During the past month, how often have you had trouble sleeping because
+      you had severe anxiety or panic, not related to traumatic memories
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_10_5:
+    description: During the past month, how often have you had trouble sleeping because
+      you had bad dreams, not related to traumatic memories
+    enum:
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+      - less than once a week
+
+  psqi_10_6:
+    description: During the past month, how often have you had trouble sleeping because
+      you had episodes of terror or screaming during sleep without fully awakening
+    enum:
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+      - less than once a week
+
+  psqi_10_7:
+    description: During the past month, how often have you had trouble sleeping because
+      you had episodes or �acting out" your dreams, sucn as kicking, running or screaming
+    enum:
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+      - less than once a week
+
+  psqi_11:
+    description: How much anxiety did you feel during the memories/nightmares?
+    enum:
+      - Moderate
+      - None
+      - Severe
+      - Very little
+
+  psqi_12:
+    description: How much anger did you feel during the memories/nightmares?
+    enum:
+      - Moderate
+      - None
+      - Severe
+      - Very little
+
+  psqi_13:
+    description: What time of night did most memories or nightmares occur?
+    enum:
+      - Early in the night
+      - Late night, near morning
+      - Middle of the night
+      - No particular time
+
+  psqi_2:
+    description: During the past month, how long (in minutes) has it usually taken
+      you to fall asleep each night?
+    type: integer
+
+  psqi_3:
+    description: During the past month, when have you usually gotten up in the morning?
+    type: string
+
+  psqi_4:
+    description: During the past month, how many hours of actual sleep did you get
+      at night? This may be different than the number of hours you spend in bed.
+    type: integer
+
+  psqi_5_1:
+    description: During the past month, how often have you had trouble sleeping because
+      you cannot get to sleep within 30 minutes.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_10:
+    description: During the past month, how often have you had trouble sleeping because
+      you other reasons(s)
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_10_1:
+    description: Please describe
+    type: string
+
+  psqi_5_2:
+    description: During the past month, how often have you had trouble sleeping because
+      you wake up in the middle of the night or early morning.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_3:
+    description: During the past month, how often have you had trouble sleeping because
+      you have to get up to use the bathroom.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_4:
+    description: During the past month, how often have you had trouble sleeping because
+      you cannot breathe comfortably.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_5:
+    description: During the past month, how often have you had trouble sleeping because
+      you cough or snore loudly.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_6:
+    description: During the past month, how often have you had trouble sleeping because
+      you feel too cold.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_7:
+    description: During the past month, how often have you had trouble sleeping because
+      you feel too not.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_8:
+    description: During the past month, how often have you had trouble sleeping because
+      you had bad dreams.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_5_9:
+    description: During the past month, how often have you had trouble sleeping because
+      you have pain.
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_6:
+    description: During the past month, how would you rate your sleep quality overall?
+    enum:
+      - Fairly Bad
+      - Fairly Good
+      - Very Bad
+      - Very Good
+
+  psqi_7:
+    description: During the past month, how often have you taken medication (prescribed
+      or �over the counter ) to help you sleep?
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_8:
+    description: During the past month, how often have you had trouble staying awake
+      while driving, eating meals, or engaging in social activities ?
+    enum:
+      - Less than once a week
+      - Not during the past month
+      - Once or twice a week
+      - Three or more times a week
+
+  psqi_9:
+    description: During the past month, how much of a problem has it been for you
+      to Keep up enough enthusiasm to get things done?
+    enum:
+      - A very big problem
+      - No problem at all
+      - Only a very slight problem
+      - Somewhat of a problem
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

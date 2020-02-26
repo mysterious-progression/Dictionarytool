@@ -1,0 +1,348 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "brief_pain_inventory"
+title: Brief Pain Inventory (BPI)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A questionnaire used to rapidly assess the severity of pain and its impact
+  on functioning.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: brief_pain_inventories
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  bpi_1:
+    description: Have you had pain other than these "everyday" kinds of pain today?
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_10:
+    description: How long you have been experiencing this pain?
+    enum:
+      - 0-2 months
+      - 3-6 months
+      - 7-12 months
+      - More than 12 months
+
+  bpi_2:
+    description: Which area hurts the most?
+    enum:
+      - Abdomen
+      - Chest
+      - Head
+      - Jaw
+      - Left Ankle
+      - Left Elbow
+      - Left Foot
+      - Left Forearm
+      - Left Hand
+      - Left Hip
+      - Left Knee
+      - Left Shoulder
+      - Lower Back
+      - Lower Left Leg
+      - Lower Right Leg
+      - Neck
+      - Right Ankle
+      - Right Elbow
+      - Right Foot
+      - Right Forearm
+      - Right Hand
+      - Right Hip
+      - Right Knee
+      - Right Shoulder
+      - Upper Back
+      - Upper Left Arm
+      - Upper Left Leg
+      - Upper Right Arm
+      - Upper Right Leg
+
+  bpi_3:
+    description: Your pain at its WORST in the past 24 hours.
+    type: integer
+
+  bpi_4:
+    description: Your pain at its LEAST in the past 24 hours.
+    type: integer
+
+  bpi_5:
+    description: Your pain on the AVERAGE.
+    type: integer
+
+  bpi_6:
+    description: How much pain you have RIGHT NOW.
+    type: integer
+
+  bpi_7:
+    description: What treatments or medications are you receiving for your pain?
+    type: string
+
+  bpi_8:
+    description: In the past 24 hours, how much RELIEF have pain treatments or medications
+      provided?
+    enum:
+      - 0 percent
+      - 10 percent
+      - 100 percent
+      - 20 percent
+      - 30 percent
+      - 40 percent
+      - 50 percent
+      - 60 percent
+      - 70 percent
+      - 80 percent
+      - 90 percent
+
+  bpi_9a:
+    description: During the past 24 hours pain has interferred with your general activity
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_9b:
+    description: During the past 24 hours pain has interferred with your mood
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_9c:
+    description: During the past 24 hours pain has interferred with your walking ability
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_9d:
+    description: During the past 24 hours pain has interferred with your normal work
+      including both work outside the home and housework
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_9e:
+    description: During the past 24 hours pain has interferred with your relation
+      with other people
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_9f:
+    description: During the past 24 hours pain has interferred with your sleep
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_9g:
+    description: During the past 24 hours pain has interferred with your enjoyment
+      of life
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_abdomen:
+    description: Do you have pain in the abdomen
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_ankle_left:
+    description: Do you have pain in the ankle_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_ankle_right:
+    description: Do you have pain in the ankle_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_chest:
+    description: Do you have pain in the chest
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_elbow_left:
+    description: Do you have pain in the elbow_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_elbow_right:
+    description: Do you have pain in the elbow_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_foot_left:
+    description: Do you have pain in the foot_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_foot_right:
+    description: Do you have pain in the foot_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_forearm_left:
+    description: Do you have pain in the forearm_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_forearm_right:
+    description: Do you have pain in the forearm_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_hand_left:
+    description: Do you have pain in the hand_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_hand_right:
+    description: Do you have pain in the hand_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_head:
+    description: Do you have pain in the head
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_hip_left:
+    description: Do you have pain in the hip_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_hip_right:
+    description: Do you have pain in the hip_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_jaw:
+    description: Do you have pain in the jaw
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_knee_left:
+    description: Do you have pain in the knee_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_knee_right:
+    description: Do you have pain in the knee_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_lowerback:
+    description: Do you have pain in the lowerback
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_lowerleg_left:
+    description: Do you have pain in the lowerleg_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_lowerleg_right:
+    description: Do you have pain in the lowerleg_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_neck:
+    description: Do you have pain in the neck
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_shoulder_left:
+    description: Do you have pain in the shoulder_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_shoulder_right:
+    description: Do you have pain in the shoulder_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_upper_arm_left:
+    description: Do you have pain in the upper arm_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_upper_arm_right:
+    description: Do you have pain in the upper arm_right
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_upperback:
+    description: Do you have pain in the upperback
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_upperleg_left:
+    description: Do you have pain in the upperleg_left
+    enum:
+      - "No"
+      - "Yes"
+
+  bpi_upperleg_right:
+    description: Do you have pain in the upperleg_right
+    enum:
+      - "No"
+      - "Yes"
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

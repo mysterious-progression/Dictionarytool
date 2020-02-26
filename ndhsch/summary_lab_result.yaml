@@ -1,0 +1,481 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "summary_lab_result"
+title: Laboratory Result Summary
+type: object
+nodeTerms: null
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Summary of important values obtained from blood or other laboratory tests
+  required by a medical professional and performed at one of the recurrent patient
+  visit.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: follow_ups
+        backref: summary_lab_results
+        label: performed_at
+        target_type: follow_up
+        multiplicity: many_to_one
+        required: false
+      - name: samples
+        backref: summary_lab_results
+        label: performed_on
+        target_type: sample
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  baff:
+    description: The determination of the amount of B-cell activating factor present
+      in a sample.  Tumor necrosis factor ligand superfamily member 13B (285 aa, ~31
+      kDa) is encoded by the human TNFSF13B gene. This protein is involved in signal
+      transduction and the modulation of B- and T-cell proliferation.
+    terms: null
+    type: number
+
+  bca1:
+    description: The determination of the amount of chemokine (C-X-C motif) ligand
+      13 present in a sample.  C-C motif chemokine 13 (98 aa, ~11 kDa) is encoded
+      by the human CCL13 gene. This protein is involved in leukocyte chemotaxis and
+      inflammation.
+    terms: null
+    type: number
+
+  ccr5:
+    description: The determination of the amount of C-C chemokine receptor type 5
+      in a biological specimen.  C-C chemokine receptor type 5 (352 aa, ~41 kDa) is
+      encoded by the human CCR5 gene. This protein is involved in the modulation of
+      inflammatory responses and cellular signaling.
+    terms: null
+    type: number
+
+  ccr5d32:
+    description: Term will by requested to NCIt and the description will be updated
+      once the term is added to NCIt.
+    terms: null
+    type: number
+
+  cd27:
+    description: Term will by requested to NCIt and the description will be updated
+      once the term is added to NCIt.
+    terms: null
+    type: number
+
+  cd4dt:
+    description: Year that CD4 was collected
+    terms:
+      - $ref: "_terms.yaml#/C16300"
+      - $ref: "_terms.yaml#/C81286"
+    type: integer
+
+  chol:
+    description: Cholesterol (mg/dL)
+    terms:
+      - $ref: "_terms.yaml#/C105586"
+    type: number
+
+  chol_hdl_ration:
+    description: Cholesterol/HDL ratio
+    terms:
+      - $ref: "_terms.yaml#/C147362"
+    type: number
+
+  crp:
+    description: A quantitative measurement of the amount of C-reactive protein present
+      in a sample.  C-reactive protein (224 aa, ~25 kDa) is encoded by the human CRP
+      gene. This protein is cleaved during biological activation and is associated
+      with host defense mechanisms and inflammatory responses.
+    terms: null
+    type: number
+
+  eotaxin:
+    description: The determination of the amount of eotaxin present in a sample.  Eotaxin
+      (97 aa, ~11 kDa) is encoded by the human CCL11 gene. This protein plays a role
+      in allergen-dependent eosinophil chemotaxis.
+    terms: null
+    type: number
+
+  gmcsf:
+    description: The determination of the amount of granulocyte macrophage colony
+      stimulating factor present in a sample.  Granulocyte-macrophage colony-stimulating
+      factor (144 aa, ~16 kDa) is encoded by the human CSF2 gene. This protein plays
+      a role in the positive regulation of the growth and differentiation of cells
+      in the granulocyte, macrophage, eosinophil and erythrocyte lineages.
+    terms: null
+    type: number
+
+  gp130:
+    description: Interleukin-6 receptor subunit beta (918 aa, ~104 kDa) is encoded
+      by the human IL6ST gene. This protein is involved in cytokine receptor-mediated
+      signal transduction.
+    terms: null
+    type: number
+
+  hdlchol:
+    description: HDL Cholesterol (mg/dL)
+    terms:
+      - $ref: "_terms.yaml#/C105587"
+    type: number
+
+  hematocrit:
+    description: Hematocrit (%)
+    terms:
+      - $ref: "_terms.yaml#/C64796"
+    type: number
+
+  hemoglobin:
+    description: Hemoglobin (gm/dl)
+    terms:
+      - $ref: "_terms.yaml#/C64848"
+    type: number
+
+  hsrat:
+    description: Helper/Suppressor Ratio (CD4N/ CD8N)
+    terms:
+      - $ref: "_terms.yaml#/C129775"
+    type: number
+
+  ifng:
+    description: The determination of the amount of interleukin 1 beta present in
+      a sample.  Interleukin-1 beta (269 aa, ~31 kDa) is encoded by the human IL1B
+      gene. This protein is involved in the macrophage-dependent inflammatory response.
+    terms: null
+    type: number
+
+  il10:
+    description: The determination of the amount of interleukin 10 present in a sample.  Interleukin-10
+      (178 aa, ~21 kDa) is encoded by the human IL10 gene. This protein plays a role
+      in the negative regulation of cytokine expression.
+    terms: null
+    type: number
+
+  il12:
+    description: The determination of the amount of interleukin 12 present in a sample.  Exhibiting
+      a broad range of biological activities on T and natural killer cells, Interleukin-12
+      is a disulfide-bonded heterodimeric cytokine composed of a 35-kD IL12A subunit
+      (IL-6 Superfamily) and a 40-kDa IL12B subunit (Type I Cytokine Receptor 3 Family).
+      IL12 stimulates T-cell-independent production of IFN-gamma by PBMCs, enhances
+      NK cell lytic activity, acts as a growth factor for T- and NK-cells, and is
+      important for Th1 and Th2 cell differentiation. Lymphocyte responses to IL12
+      require NOS2A and are mediated by STAT4 activator of transcription. (NCI).
+    terms: null
+    type: number
+
+  il17:
+    description: The determination of the amount of interleukin 17 present in a sample.  Interleukin-17A
+      (155 aa, ~18 kDa) is encoded by the human IL17A gene. This protein is involved
+      in the positive regulation of cytokine production.
+    terms: null
+    type: number
+
+  il1b:
+    description: The determination of the amount of interferon gamma present in a
+      sample.  Interferon gamma (166 aa, ~19 kDa) is encoded by the human IFNG gene.
+      This protein is involved in antiviral activity, macrophage activation, antiproliferative
+      activity and immunopotentiation.
+    terms: null
+    type: number
+
+  il2:
+    description: The determination of the amount of interleukin 2 present in a sample.  Interleukin-2
+      (153 aa, ~18 kDa) is encoded by the human IL2 gene. This protein is involved
+      in T-cell proliferation, leukocyte stimulation and immune responses.
+    terms: null
+    type: number
+
+  il4:
+    description: The determination of the amount of interleukin 4 present in a sample.  Interleukin-4
+      (153 aa, ~17 kDa) is encoded by the human IL4 gene. This protein is involved
+      in the regulation of the expression of class II MHC molecules, Fc receptors
+      and cell surface-bound immunoglobulins.
+    terms: null
+    type: number
+
+  il6:
+    description: The determination of the amount of soluble interleukin 6 Receptor
+      present in a sample.  Interleukin-6 (212 aa, ~24 kDa) is encoded by the human
+      IL6 gene. This protein is involved in signaling affecting a wide variety of
+      cell types including monocytes, lymphocytes, hepatocytes and nerve cells.
+    terms: null
+    type: number
+
+  il8:
+    description: The determination of the amount of interleukin 8 present in a sample.  Interleukin-8
+      (99 aa, ~11 kDa) is encoded by the human CXCL8 gene. This protein is involved
+      in chemotaxis and neutrophil activation.
+    terms: null
+    type: number
+
+  ldlcholc:
+    description: LDL Cholesterol calculated from other measurements (mg/dL)
+    terms:
+      - $ref: "_terms.yaml#/C105588"
+    type: number
+
+  ldlchold:
+    description: LDL Cholesterol measured directly in the laboratory (mg/dL)
+    terms:
+      - $ref: "_terms.yaml#/C105588"
+    type: number
+
+  ldlchold_ratio:
+    description: LDL/HDL Cholesterol ratio
+    terms:
+      - $ref: "_terms.yaml#/C121182"
+    type: number
+
+  leu2n:
+    description: '# of CD8 positive cells (suppressors, cells per mm^3)'
+    terms:
+      - $ref: "_terms.yaml#/C103811"
+    type: integer
+
+  leu2p:
+    description: '% CD8 positive cells (suppressors)'
+    terms:
+      - $ref: "_terms.yaml#/C25613"
+      - $ref: "_terms.yaml#/C12542"
+    type: number
+
+  leu3n:
+    description: '# of CD4 positive cells (helpers, cells per mm^3)'
+    terms:
+      - $ref: "_terms.yaml#/C55931"
+    type: integer
+
+  leu3p:
+    description: '% CD4 positive cells (helpers)'
+    terms:
+      - $ref: "_terms.yaml#/C25613"
+      - $ref: "_terms.yaml#/C153220"
+    type: number
+
+  leu4n:
+    description: '# of CD3 positive cells (cells per mm^3)'
+    terms:
+      - $ref: "_terms.yaml#/C103809"
+    type: integer
+
+  leu4p:
+    description: '% CD3 positive cells'
+    terms:
+      - $ref: "_terms.yaml#/C25613"
+      - $ref: "_terms.yaml#/C131386"
+    type: number
+
+  llq_vl:
+    description: Lower limit of quantification of HIV RNA assay
+    terms:
+      - $ref: "_terms.yaml#/C25555"
+      - $ref: "_terms.yaml#/C129663"
+      - $ref: "_terms.yaml#/C60819"
+    enumTerms:
+      Abbott Real Time PCR: null
+      Bayer Branched DNA: null
+      Missing (some pre-HAART for new recruits): null
+      NASBA, .1 ml input: null
+      NucliSens, 1 ml input: null
+      Quantiplex: null
+      Roche Amplicor & NucliSens, .2 ml input: null
+      Roche Ultrasensitive, Chiron, & Siemens bDNA: null
+      TaqMan: null
+      Unknown: null
+
+  mcp1:
+    description: The determination of the amount of monocyte chemotactic protein 1
+      present in a sample.  Human CCL2 wild-type allele is located within 17q11.2-q12
+      and is approximately 2 kb in length. This allele, which encodes C-C motif chemokine
+      2 protein, is involved in the mediation of immune cell chemotaxis during tissue
+      injury.
+    terms: null
+    type: number
+
+  percent_infection:
+    description: percentage of cells that infected by virus.
+    terms:
+      - $ref: "_terms.yaml#/C25613"
+      - $ref: "_terms.yaml#/C12508"
+      - $ref: "_terms.yaml#/C128320"
+      - $ref: "_terms.yaml#/C14283"
+    type: number
+
+  platelets:
+    description: Platelets (thousands/mm3)
+    terms:
+      - $ref: "_terms.yaml#/C51951"
+    type: number
+
+  rbc:
+    description: Count of Red blood cells (millions/mm3)
+    terms:
+      - $ref: "_terms.yaml#/C12521"
+    type: number
+
+  s_cd14:
+    description: Term will by requested to NCIt and the description will be updated
+      once the term is added to NCIt. This term is the same as s_cd14 but was collected
+      at a different timepoint.
+    terms: null
+    type: number
+
+  scd14:
+    description: Term will by requested to NCIt and the description will be updated
+      once the term is added to NCIt. This term is the same as s_cd14 but was collected
+      at a different timepoint.
+    terms: null
+    type: number
+
+  sil2ra:
+    description: The determination of the amount of monocyte chemotactic protein 1
+      present in a sample.  Human CCL2 wild-type allele is located within 17q11.2-q12
+      and is approximately 2 kb in length. This allele, which encodes C-C motif chemokine
+      2 protein, is involved in the mediation of immune cell chemotaxis during tissue
+      injury.
+    terms: null
+    type: number
+
+  stnfr2:
+    description: Term will by requested to NCIt and the description will be updated
+      once the term is added to NCIt.
+    terms: null
+    type: number
+
+  titer_PFU_per_gram:
+    description: A numerical expression of the quantity of virus normalized by weight.
+      It is expressed in plaque forming unites (pfu) per gram.
+    terms: null
+    type: number
+
+  tnfa:
+    description: The determination of the amount of TNF-alpha production inhibitory
+      activity present in a sample.  Tumor necrosis factor (233 aa, ~26 kDa) is encoded
+      by the human TNF gene. This protein is involved in the induction of cytokine
+      expression, the stimulation of cell proliferation and the positive regulation
+      of cell differentiation.
+    terms: null
+    type: number
+
+  triglyc:
+    description: Triglycerides (mg/dL)
+    terms:
+      - $ref: "_terms.yaml#/C64812"
+    type: number
+
+  ud_vl:
+    description: HIV RNA detection status
+    terms: null
+    enumTerms:
+      Above upper limit of quantification (VLOAD set to upper limit):
+        - $ref: "_terms.yaml#/C85533"
+      Below lower limit of quantification (VLOAD set to lower limit):
+        - $ref: "_terms.yaml#/C82589"
+      Detected:
+        - $ref: "_terms.yaml#/C16210"
+
+  version:
+    description: Version number of data
+    terms:
+      - $ref: "_terms.yaml#/C51952"
+      - $ref: "_terms.yaml#/C29848"
+      - $ref: "_terms.yaml#/C25453"
+    type: string
+
+  viral_load:
+    description: Standardized viral load (copies/ml)
+    terms:
+      - $ref: "_terms.yaml#/C51952"
+    type: number
+
+  viral_load_kit:
+    description: Viral Load Kit used
+    terms: null
+    enumTerms:
+      Chiron 2nd Generation: null
+      Roche 2nd Generation: null
+      Roche Cobas TaqMan: null
+      Roche ultra-sensitive 2nd Generation: null
+
+  virus_NP_gRNA:
+    description: A numerical expression of the quantity of virus NP genomic RNA relative
+      to RPL14 with log transformation.
+    terms: null
+    type: number
+
+  virus_NP_mRNA:
+    description: A numerical expression of the quantity of virus NP mRNA level relative
+      to RPL14 with log transformation.
+    terms: null
+    type: number
+
+  virus_titer_rep1:
+    description: A numerical expression of the quantity of virus in a given volume
+      in first test. It is expressed in plaque forming unites (pfu) per mL.
+    terms: null
+    type: integer
+
+  virus_titer_rep2:
+    description: A numerical expression of the quantity of virus in a given volume
+      in second test. It is expressed in plaque forming unites (pfu) per mL.
+    terms: null
+    type: integer
+
+  virus_titer_rep3:
+    description: A numerical expression of the quantity of virus in a given volume
+      in third test. It is expressed in plaque forming unites (pfu) per mL.
+    terms: null
+    type: integer
+
+  virus_titer_rep4:
+    description: A numerical expression of the quantity of virus in a given volume
+      in fourth test. It is expressed in plaque forming unites (pfu) per mL.
+    terms: null
+    type: integer
+
+  virus_titer_rep5:
+    description: A numerical expression of the quantity of virus in a given volume
+      in fifth test. It is expressed in plaque forming unites (pfu) per mL.
+    terms: null
+    type: integer
+
+  vldt:
+    description: Year that Viral Load was collected
+    terms: null
+    type: integer
+
+  wbc:
+    description: Count of white blood cells
+    terms:
+      - $ref: "_terms.yaml#/C51948"
+    type: number
+
+  follow_ups:
+    $ref: "_definitions.yaml#/to_one"
+
+  samples:
+    $ref: "_definitions.yaml#/to_one"

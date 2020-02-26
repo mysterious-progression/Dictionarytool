@@ -1,0 +1,97 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "frontal_assessment_battery"
+title: Frontal Assessment Battery
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Frontal Assessment Battery
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: frontal_assessment_batteries
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  fab01_similarities:
+    description: Frontal Assessment Battery (FAB)- 01. Similarities
+    type: integer
+
+  fab02_lexical_fluency:
+    description: Frontal Assessment Battery (FAB)- 02. Lexical Fluency
+    type: integer
+
+  fab03_motor_series:
+    description: Frontal Assessment Battery (FAB)- 03. Motor Series
+    type: integer
+
+  fab04_conflicting_instructions:
+    description: Frontal Assessment Battery (FAB)- 04. Conflicting Instructions
+    type: integer
+
+  fab05_go_no_go:
+    description: Frontal Assessment Battery (FAB)- 05. Go-No Go
+    type: integer
+
+  fab06_prehension_behavior:
+    description: Frontal Assessment Battery (FAB)- 06. Prehension Behavior
+    type: integer
+
+  fab_total:
+    description: Frontal Assessment Battery (FAB)- FAB Total
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

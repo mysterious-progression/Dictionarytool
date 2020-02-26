@@ -1,0 +1,171 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "smoking_exposure_questionnaire"
+title: Smoking Exposure Questionnaire (SEQ)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A questionnaire used to evaluate a patient's exposure to cigarette smoking.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: smoking_exposure_questionnaires
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  X_seq_group1:
+    description: Exposure synthetic score
+    enum:
+      - Cannot be categorized
+      - Exposed but never became a regular smoker
+      - Exposed but never became a regular smoker with fewer than 100 cigs
+      - Heavy regular smoker during lifetime
+      - No exposure
+      - Regular smoker during lifetime
+
+  X_seq_group2:
+    description: Classification synthetic score
+    enum:
+      - Cannot be categorized
+      - Current irregular or very light smoker
+      - Current non-smoker
+      - Current regular smoker
+      - Current regular smoker who quit and relapsed in the past 30 day
+      - Current regular smoker who quit in the past 30 days
+
+  seq_1_1:
+    description: Have you ever in your life had a puff of a cigarette?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_1_2:
+    description: Have you ever in your life smoked an entire cigarette?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_1_3:
+    description: Have you smoked more than 100 cigarettes in your lifetime?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_1_4:
+    description: Was there ever a time when you smoked at least one cigarette every
+      day for at least a month?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_1_4_1:
+    description: How old were you when you first began smoking every day for at least
+      a month?
+    type: integer
+
+  seq_1_5:
+    description: Was there ever a time when you smoked at least six cigarettes everyday
+      for at least a month?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_1_6:
+    description: Have you quit smoking within the past 30 days?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_1_7:
+    description: I am a current smoker.
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_2_1:
+    description: Have you smoked a cigarette in the past 30 days?
+    enum:
+      - "No"
+      - "Yes"
+
+  seq_2_2:
+    description: How many days out of the past 30 have you smoked at least one whole
+      cigarette?
+    type: integer
+
+  seq_2_3:
+    description: On the days that you smoked, how many cigarettes on average did you
+      smoke?
+    enum:
+      - 1-10 cigarettes
+      - 11-20 cigarettes
+      - 21-30 cigarettes
+      - 31-40 cigarettes
+      - 41 cigarettes or more
+
+  seq_3_1:
+    description: As far as you are aware, did your mother smoke when she was pregnant
+      with you?
+    enum:
+      - Maybe
+      - "No"
+      - "Yes"
+
+  seq_3_2:
+    description: As far as you are aware, did your mother smoke when you were 1-10
+      years old?
+    enum:
+      - Maybe
+      - "No"
+      - "Yes"
+
+  seq_3_3:
+    description: As far as you are aware, did your father smoke when you were 1-10
+      years old?
+    enum:
+      - Maybe
+      - "No"
+      - "Yes"
+
+  seq_3_4:
+    description: As far as you are aware, how many people (including your mother,
+      father, siblings, aunts, uncles, grandparents, etc) smoked in your household
+      when you were 1-10 years old?
+    enum:
+      - 1 person
+      - 2 people
+      - 3 people
+      - 4 people
+      - 5 or more people
+      - Nobody
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

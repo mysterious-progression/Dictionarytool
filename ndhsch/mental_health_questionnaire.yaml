@@ -1,0 +1,275 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "mental_health_questionnaire"
+title: Mental Health Questionnaire
+type: object
+nodeTerms: null
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Values obtained from a mental health questionnaire performed at one of
+  the recurrent patient visit. The mental health test includes depression, quality
+  of life and daily activities questions.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: follow_ups
+    backref: mental_health_questionnaires
+    label: performed_at
+    target_type: follow_up
+    multiplicity: one_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - follow_ups
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  freq_as_good:
+    description: Frequency of feeling as good as others.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_blue:
+    description: Frequency of feeling blue.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_bothering:
+    description: Frequency of feeling bothered in the past week.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_crying:
+    description: Frequency crying spells.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_depressed:
+    description: Frequency feeling depressed.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_disliked:
+    description: Frequency disliked.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_effort:
+    description: Frequency everything effort.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_enjoy_life:
+    description: Frequency enjoyed life.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_fearful:
+    description: Frequency fearful.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_focused:
+    description: Frequency trouble keeping the mind on what doing.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_fresh_rested:
+    description: Frequency waking up fresh and rested during the past month
+    terms: null
+    enumTerms:
+      Every day: null
+      Fairly often: null
+      Less than half the time: null
+      Mostly every data: null
+      None: null
+      Rarely: null
+
+  freq_happy:
+    description: Frequency happy.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_hopeful:
+    description: Frequency hopeful for future.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_life_failure:
+    description: Frequency thought life was failure.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_lonely:
+    description: Frequency lonely.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_not_eating:
+    description: Frequency of not feeling like eating.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_not_going:
+    description: Frequency of feeling could not get going.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_restless:
+    description: Frequency restless sleep.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_sadness:
+    description: Frequency sadness.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_talked_less:
+    description: Frequency talked less.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  freq_unfriendly:
+    description: Frequency people unfriendly.
+    terms: null
+    enumTerms:
+      Most: null
+      Occasionally: null
+      Rarely: null
+      Some: null
+
+  life_feeling:
+    description: Feeling description about life as a whole
+    terms: null
+    enumTerms:
+      Delighted: null
+      Mixed: null
+      Mostly dissatisfied: null
+      Mostly satisfied: null
+      Pleased: null
+      Terrible: null
+      Unhappy: null
+
+  run_own_life:
+    description: Ability to run your own life
+    terms: null
+    type: boolean
+
+  talk_support:
+    description: Number of people the subject can count on for understanding and support
+    terms: null
+    enumTerms:
+      2-3 people: null
+      4-5 people: null
+      '>6 people': null
+      No one: null
+      One person: null
+
+  worth_feeling:
+    description: Feeling about being a person of worth, at least as much as others
+    terms: null
+    enumTerms:
+      Always true: null
+      Never true: null
+      Often true: null
+      Rarely true: null
+      Sometimes true: null
+
+  follow_ups:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,471 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "demographic"
+title: Demographic
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: subject_characteristics
+program: '*'
+project: '*'
+description: Data for the characterization of the patient by means of segmenting the
+  population (e.g., characterization by age, sex, or race).
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: demographics
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  adopted:
+    description: Were you adopted?
+    enum:
+      - "No"
+      - "Yes"
+
+  age_from_crf:
+    description: The age of the study subject at CRF, if the age is less than 90 years.
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  age_to_subject_full_time_disability:
+    description: The age of the study subject at full-time disability, if the age
+      is less than 90 years.
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  age_to_subject_full_time_work:
+    description: The age of the study subject at full-time work, if the age is less
+      than 90 years.
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  age_to_subject_partial_disability:
+    description: The age of the study subject at partial disability, if the age is
+      less than 90 years.
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  children_number:
+    description: The patient's total number of children (living or deceased).
+    type: integer
+
+  current_last_full_time_job:
+    description: Current and Last Full-time Job
+    enum:
+      - Clerical
+      - Craftsman or Artist
+      - Farmer
+      - Homemaker
+      - Laborer
+      - Other
+      - Professional
+      - Self-employed
+      - Student
+      - Technical
+
+  days_to_baseline:
+    description: The number of days between the case Index Date and the date of subject's
+      first visit (Baseline)
+    type: integer
+
+  days_to_info:
+    description: The number of days between the case Index Date and the date information
+      was recorded (Demographics Form)
+    type: integer
+
+  days_to_subject_full_disability:
+    description: The number of days between the case Index Date and the date subject
+      At full disability
+    type: integer
+
+  days_to_subject_full_time_work:
+    description: The number of days between the case Index Date and the date subject
+      last worked full time
+    type: integer
+
+  days_to_subject_partial_disability:
+    description: The number of days between the case Index Date and the date subject
+      at partial disability
+    type: integer
+
+  desire_working_retiring:
+    description: Desire - Working and Retiring
+    enum:
+      - Need To Work
+      - No Desire To Work
+      - Plans To Retire Within 3 Months Due To PD Disability
+      - Strong Desire To Work
+      - Weak Desire To Work
+
+  disability_status:
+    description: The disability status of the subject
+    enum:
+      - Not Disabled
+      - Not Reported
+      - Officially Fully Disabled
+      - Officially Partly Disabled
+      - Unknown
+
+  divorce_status:
+    description: The subject's divorce status (see also- 'marital_status')
+    enum:
+      - Divorced
+      - Not Divorced
+
+  education_describe:
+    description: Describe Education
+    type: string
+
+  education_level:
+    description: The highest level of education obtained by the subject.
+    enum:
+      - 9 School Years/8 School Years
+      - College/University Or Equivalent (14-16 Years)
+      - Elementary/Middle School Or Equivalent (<=8 Years)
+      - High School (10 School Years)
+      - High School Or Equivalent (9-13 Years)
+      - Junior College (13 School Years)
+      - Post College/University (>16 Years)
+
+  education_years:
+    description: Number of years the subject studied.
+    type: integer
+
+  employed_or_works:
+    description: Is subject employed or working
+    type: boolean
+
+  employment_employed_months:
+    description: How Long at current or most recent employer (months)?
+    type: integer
+
+  employment_job_title:
+    description: Current or most recent occupation job title
+    type: string
+
+  employment_not_working_status:
+    description: Not working, status is
+    enum:
+      - Full-time student
+      - Medical disability
+      - Other
+      - Retired
+      - Unemployed
+
+  employment_not_working_status_describe:
+    description: Describe current status, if not working status is other.
+    type: string
+
+  employment_status:
+    description: Indicate the employment status of the study subject.
+    enum:
+      - Employed Full-time
+      - Employed Less Than Part Time Due To PD
+      - Employed Less Than Part Time Not Due To The Illness
+      - Employed Part Time Due To PD
+      - Employed Part Time Not Due To The Illness
+      - Employed Part-time
+      - Not Reported
+      - Unemployed
+      - Unknown
+
+  employment_working_status:
+    description: Are you currently working?
+    enum:
+      - Full-time
+      - "No"
+      - Part-time
+
+  father_living:
+    description: Is your biological (related by blood) father living?
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  female_child_bearing_potential:
+    description: Female Child Bearing Potential
+    enum:
+      - Female of child bearing potential
+      - Female of non-child bearing potential
+
+  full_time_homemaker:
+    description: Full-time Homemaker
+    type: boolean
+
+  homemaking:
+    description: Describe the homemaking of the subject
+    enum:
+      - Homemaker
+      - Not Reported
+      - Not a homemaker
+      - Other
+      - Part-time Homemaker
+      - Unknown
+
+  housekeeping_status:
+    description: The housekeeping status.
+    enum:
+      - Considerable Limitations
+      - Help Partially Necessary
+      - Incapable Of Keeping A House
+      - Independent
+
+  in_jail:
+    description: Have you ever been in jail or prison i your life?
+    enum:
+      - "No"
+      - Yes, for less than 2 weeks
+      - Yes, for more than 2 weeks
+
+  info_reported:
+    description: Method Information Has Been Confirmed.
+    enum:
+      - Other
+      - Subject
+
+  jewish_ashkenazi_pct:
+    description: If jewish- percent of ashkenazi
+    type: integer
+
+  jewish_sephardic_pct:
+    description: If jewish- percent of sephardic
+    type: integer
+
+  livingstatus_1:
+    description: Where do you live currently?
+    enum:
+      - I am temporarily living with family or friends.
+      - I live in a domestic violence shelter.
+      - I live in a group home.
+      - I live in a house/apartment/mobile home/condominium that I/we own or rent.
+      - I live in a residential substance abuse treatment program.
+      - I live in a shelter.
+      - I live in an assisted living facility or nursing home.
+      - I live in transitional housing.
+      - None of the above describes me.
+
+  livingstatus_1_other:
+    description: Where do you live currently (other)?
+    type: string
+
+  livingstatus_2:
+    description: With whom do you live currently?
+    enum:
+      - I live alone.
+      - I live with a friend/roommate.
+      - I live with family members.
+      - I live with my children.
+      - I live with my partner/spouse and children.
+      - I live with my partner/spouse.
+      - I live with non-partner/spouse family members and my children.
+      - I live with others, not friends or family.
+      - Other, please describe.
+
+  livingstatus_2_other:
+    description: Where do you live currently (other)?
+    type: string
+
+  longest_held_job:
+    description: Longest held occupation
+    type: string
+
+  marital_status:
+    description: The subject's marital status (see also- 'divorce_status' and 'widowed').
+    enum:
+      - First Marriage Lives With Spouse
+      - First Marriage Separated
+      - Other
+      - Remarried Lives with Spouse
+      - Remarried Separated
+      - Single Never Married
+
+  mother_contact:
+    description: Are you in contact with her?
+    enum:
+      - "No"
+      - "Yes"
+
+  mother_living:
+    description: Is your biological (related by blood) mother living?
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  not_working_reason:
+    description: The reason for not working.
+    enum:
+      - Incapacitated For Work
+      - Retired
+      - Unemployed
+      - Voluntarily
+
+  occupation:
+    description: Professional occupation of the subject.
+    type: string
+
+  pd_effect_on_current_job:
+    description: PD's Effect On Current Job
+    enum:
+      - "No"
+      - Some, But Minor. No Serious Problems
+      - Yes, Causing Concern To Employer Or Family, But Work Not In Immediate Jeopardy
+      - Yes, Causing Concern, But No Comments From Employer Or Family
+      - Yes, Full Time Work Or Homemaking Role Is In Immediate Jeopardy
+
+  pd_effect_on_most_recent_job:
+    description: PD's Effect On Most Recent Job
+    enum:
+      - Considerable, Leading To Early Full Retirement
+      - Considerable, Leading To Early Semi-Retirement
+      - Considerable, Leading To Present Part-Time Employment Or Homemaking
+      - Considerable, Leading To Present Unemployment Or No Homemaking
+      - Moderate
+      - More Than One
+      - None
+      - Other
+      - Slight
+
+  pedigree_available:
+    description: Is Pedigree Available At Your Local Site
+    type: boolean
+
+  religion:
+    description: Religion
+    enum:
+      - Catholic
+      - Islamic
+      - Jewish
+      - No Affiliation
+      - Not Reported
+      - Other (specify)
+      - Protestant
+      - Unknown
+
+  religion_other:
+    description: Religion if other, specify
+    type: string
+
+  retirement_status:
+    description: The subject's retirement status
+    enum:
+      - Fully Retired
+      - Not Reported
+      - Not Retired
+      - Semi-retired
+      - Unknown
+
+  student_status:
+    description: The subject's status as a student
+    enum:
+      - Full-time Student
+      - Not Reported
+      - Not a student
+      - Part-time Student
+      - Unknown
+
+  times_divorced:
+    description: Number of times divorced.
+    type: integer
+
+  times_married:
+    description: Number of times married.
+    type: integer
+
+  twin:
+    description: Are you a twin?
+    enum:
+      - "No"
+      - "Yes"
+
+  twin_kind:
+    description: What kind?
+    enum:
+      - Fraternal
+      - Identical
+
+  vegetarian_vegan:
+    description: Is subject vegetarian or vegan.
+    type: boolean
+
+  veteran_status:
+    description: Was The Subject A Veteran Per Criteria?
+    enum:
+      - "No"
+      - "Yes"
+
+  vital_status:
+    term:
+      $ref: "_terms.yaml#/vital_status"
+    enum:
+      - Alive
+      - Dead
+      - Lost to Follow-up
+      - Not Reported
+      - Unknown
+
+  volunteer_status:
+    description: Indicate whether the study subject does volunteer work.
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  widowed:
+    description: Indicate whether the study subject has been widowed.
+    enum:
+      - Not Widowed
+      - Widowed
+
+  year_demographic_info_obtained:
+    description: The year demographic information was obtained
+    type: integer
+
+  years_to_subject_full_time_disability:
+    description: The number of years between study subject Index Date and date subject
+      experienced full time disability
+    type: integer
+
+  years_to_subject_full_time_work:
+    description: The number of years between study subject Index Date and date subject
+      employed full time
+    type: integer
+
+  years_to_subject_partial_disability:
+    description: The number of years between study subject Index Date and date subject
+      experienced partial disability
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

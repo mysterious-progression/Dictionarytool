@@ -1,0 +1,305 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "treatment"
+title: Treatment
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Record of the administration and intention of therapeutic agents provided
+  to a patient to alter the course of a pathologic process.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: treatments
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  active_deep_brain_stimulation_electrodes:
+    description: Active Deep Brain Stimulation Electrodes
+    type: boolean
+
+  daily_dose:
+    description: Daily Dose Of Study Treatment
+    type: string
+
+  days_to_treatment_end:
+    term:
+      $ref: "_terms.yaml#/days_to_treatment_end"
+    type: integer
+
+  days_to_treatment_start:
+    term:
+      $ref: "_terms.yaml#/days_to_treatment_start"
+    type: integer
+
+  dopaminergic_therapy:
+    description: Subject has started dopaminergic therapy
+    type: boolean
+
+  dopaminergic_therapy_response:
+    description: Substantial response to dopaminergic therapy
+    enum:
+      - Absent
+      - Present
+      - Unknown
+
+  drug_discontinued:
+    description: Drug Discontinued
+    enum:
+      - Deprenyl
+      - Tocopherol
+
+  levodopa_response_type:
+    description: Levodopa response (type) (LDOPRTYP)
+    enum:
+      - Negative Response To Large Dose Of Ldopa
+      - Not Had Adequate Trial Of Ldopa Or Dopa Agonist
+      - Response To Ldopa Or Dopa Agonist, But Not Substantial Or Not Sustained
+      - Substantial And Sustained Response To Ldopa Or Dopa Agonist
+
+  levodopa_responsive_5_years_or_more:
+    description: If responsive to levodopa has response been present for 5 years or
+      more (DCLPDO5Y)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  neuroleptic_treatment_at_onset_of_symptoms:
+    description: Neuroleptic treatment at onset of symptoms (NELEONSX)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  regimen_or_line_of_therapy:
+    description: General name for a the group of treatments of which this treatment
+      was a part. This reference name can be used to identify treatments involved
+      in a certain outcome later one.
+    type: string
+
+  response_to_l_dopa_group:
+    description: Response to L-dopa (group) (LDOPRSPC)
+    enum:
+      - 1 Pct-49 Pct Reduction In PD Signs And Symptoms
+      - 50 Pct-69 Pct Reduction In PD Signs And Symptoms
+      - 70 Pct-100 Pct Reduction In PD Signs And Symptoms
+      - Greater Than Or Equal To 50 Pct Reduction In PD Signs And Symptoms
+      - Has Never Had An Adequate Trial Of Levoda
+      - No (0 Pct) Reduction In PD Signs And Symptoms
+
+  subject_on_deprenyl:
+    description: Subject On Deprenyl
+    enum:
+      - "No"
+      - Not Reported
+      - Unknown
+      - "Yes"
+
+  subject_on_tocopherol:
+    description: Subject On Tocopherol
+    enum:
+      - "No"
+      - Not Reported
+      - Unknown
+      - "Yes"
+
+  th_1:
+    description: In the last three years, have you been treated or evaluated for a
+      medical problem?
+    enum:
+      - "No"
+      - "Yes"
+
+  th_1_1:
+    description: Have you been treated at a VA Medical Center?
+    enum:
+      - "No"
+      - "Yes"
+
+  th_1_2:
+    description: Have you been treated at a non VA office or center?
+    enum:
+      - "No"
+      - "Yes"
+
+  th_2:
+    description: In the last three years, have you been treated or evaluated for a
+      psychological/mental health problem?
+    enum:
+      - "No"
+      - "Yes"
+
+  th_2_1:
+    description: Have you been treated at a VA Medical Center?
+    enum:
+      - "No"
+      - "Yes"
+
+  th_2_2:
+    description: Have you been treated at a non VA office or center?
+    enum:
+      - "No"
+      - "Yes"
+
+  th_3:
+    description: Have you ever had treatment for trauma-related psychological symptoms
+      ?
+    enum:
+      - "No"
+      - "Yes"
+
+  therapeutic_agents:
+    term:
+      $ref: "_terms.yaml#/therapeutic_agents"
+    type: string
+
+  treatment_anatomic_site:
+    term:
+      $ref: "_terms.yaml#/treatment_anatomic_site"
+    enum:
+      - Abdomen, total
+      - Arm
+      - Ascites
+      - Axillary
+      - Body, total
+      - Bone
+      - Bone, non-spine
+      - Brain, focal
+      - Brain, whole
+      - Brain-C2
+      - Breast
+      - Cervical
+      - Chest Wall
+      - Effusion
+      - Epitrochlear
+      - Eye
+      - Femoral
+      - Gastrointestinal, Colon
+      - Gastrointestinal, Gallbladder
+      - Gastrointestinal, Intestine
+      - Gastrointestinal, Liver
+      - Gastrointestinal, NOS
+      - Gastrointestinal, Pancreas
+      - Gastrointestinal, Rectum
+      - Gastrointestinal, Stomach
+      - Genitourinary, Bladder
+      - Genitourinary, Kidney
+      - Genitourinary, NOS
+      - Genitourinary, Prostate
+      - Genitourinary, Prostate and Seminal Vesicles
+      - Head
+      - Head, Face, or Neck
+      - Hilar
+      - Iliac-common
+      - Iliac-external
+      - Inguinal
+      - Internal Mammary Nodes
+      - Leg
+      - Lung
+      - Lymph Nodes
+      - Lymph node, distant (specify site)
+      - Lymph node, locoregional (specify site)
+      - Mantle
+      - Mediastinal
+      - Mediastinum
+      - Mesenteric
+      - Occipital
+      - Other
+      - Paraaortic
+      - Parametrium
+      - Parotid
+      - Pelvis
+      - Popliteal
+      - Primary tumor site
+      - Prostate
+      - Prostate Bed
+      - Prostate, Seminal Vesicles and Lymph Nodes
+      - Rectum
+      - Retroperitoneal
+      - Sacrum
+      - Seminal vesicles
+      - Shoulder
+      - Skin, lower extremity, local
+      - Skin, total
+      - Skin, trunk, local
+      - Skin, upper extremity, local
+      - Spine
+      - Spine, whole
+      - Splenic
+      - Submandibular
+      - Supraclavicular
+      - Supraclavicular/Axillary Level 3
+      - Thorax
+      - Trunk
+      - Unknown
+
+  treatment_arm:
+    description: Study Protocol For Treatment
+    type: string
+
+  treatment_intent_type:
+    term:
+      $ref: "_terms.yaml#/treatment_intent_type"
+    type: string
+
+  treatment_outcome:
+    term:
+      $ref: "_terms.yaml#/treatment_outcome"
+    enum:
+      - Complete Response
+      - Partial Response
+      - Treatment Ongoing
+      - Treatment Stopped Due to Toxicity
+      - Unknown
+
+  treatment_type:
+    term:
+      $ref: "_terms.yaml#/treatment_type"
+    enum:
+      - Ablation
+      - Chemotherapy
+      - Concurrent Chemoradiation
+      - Cryoablation
+      - Embolization
+      - Hormone Therapy
+      - Immunotherapy (Including Vaccines)
+      - Internal Radiation
+      - Other
+      - Pharmaceutical Therapy
+      - Radiation Therapy
+      - Stem Cell Treatment
+      - Surgery
+      - Targeted Molecular Therapy
+      - Unknown
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

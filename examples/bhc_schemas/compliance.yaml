@@ -1,0 +1,126 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "compliance"
+title: Compliance
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: study_administration
+program: '*'
+project: '*'
+description: A record of patient compliance with respect to proper use of medications
+  and treatments.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: compliances
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  alpha_tocopherol:
+    description: Alpha Tocopherol
+    type: number
+
+  alpha_vitamin_e_level:
+    description: Alpha Vitamin E Level
+    enum:
+      - Negative Vitamin E2
+      - Positive Vitamin E
+
+  anomaly_type:
+    description: Type of protocol anomaly
+    type: string
+
+  careless_about_meds:
+    description: Is the person careless about medications?
+    type: boolean
+
+  cmlp_self_reported_compliance:
+    description: Self-Reported Compliance
+    enum:
+      - High
+      - Low
+      - Medium
+
+  compliance_deviation:
+    description: Protocol compliance deviation
+    enum:
+      - Enrollment of a subject who did not meet all inclusion/exclusion criteria
+      - Failure to complete all study procedures at a study visit as specified
+      - Failure to conduct a study visit
+      - Other (specify)
+      - Protocol-specified study therapy not administered as directed
+      - Study procedures/visits conducted out of window
+
+  days_to_compliance:
+    description: The number of days between the Index Date and the date of compliance
+    type: integer
+
+  days_to_compliance_form:
+    description: The number of days between the Index Date and the date information
+      was collected from the compliance form
+    type: integer
+
+  days_to_protocol_anomaly:
+    description: Days to evaluation of the Protocol anomaly
+    type: integer
+
+  deprenyl_compliance:
+    description: Does the person have a history of deprenyl compliance?
+    enum:
+      - No Deprenyl
+      - Unknown
+      - Yes Deprenyl
+
+  forget_to_take_meds:
+    description: Has the person forgotten to take medications?
+    type: boolean
+
+  gamma_tocopherol:
+    description: Gamma Tocopherol
+    type: number
+
+  if_feel_better_stop_meds:
+    description: If Feel Better, Stop Meds?
+    type: boolean
+
+  if_feel_worse_stop_meds:
+    description: If Feel Worse, Stop Meds?
+    type: boolean
+
+  protocol_anomaly_comment:
+    description: Protocol anomaly description
+    type: string
+
+  protocol_deviation:
+    description: Protocol deviation indicator of whether there has been a deviation
+      from protocol
+    type: boolean
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

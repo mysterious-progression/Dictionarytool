@@ -1,0 +1,507 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "quality_of_life_scale"
+title: Quality Of Life Scale
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Quality Of Life Scale (PDQ39)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: quality_of_life_scales
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  pdq39_01_doing_leisure_activity:
+    description: PDQ39 01. Doing Leisure Activity
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_02_looking_after_home:
+    description: PDQ39 02. Looking After Home
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_03_carrying_shopping_bags:
+    description: PDQ39 03. Carrying Shopping Bags
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_04_walking_half_mile:
+    description: PDQ39 04. Walking 1 and 2 Mile
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_05_walking_100_yards:
+    description: PDQ39 05. Walking 100 Yrds
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_06_getting_around_house:
+    description: PDQ39 06. Getting Around House
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_07_getting_around_in_public:
+    description: PDQ39 07. Getting Around In Public
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_08_need_someone_to_accompany:
+    description: PDQ39 08. Need Someone To Accompany
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_09_worried_about_falling:
+    description: PDQ39 09. Worried About Falling
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_10_confined_to_house:
+    description: PDQ39 10. Confined To House
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_11_showering:
+    description: PDQ39 11. Showering
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_12_dressing:
+    description: PDQ39 12. Dressing
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_13_buttons_and_shoelaces:
+    description: PDQ39 13. Buttons And Shoelaces
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_14_writing:
+    description: PDQ39 14. Writing
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_15_cutting_food:
+    description: PDQ39 15. Cutting Food
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_16_spill_drink:
+    description: PDQ39 16. Spill Drink
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_17_depressed:
+    description: PDQ39 17. Depressed
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_18_lonely:
+    description: PDQ39 18. Lonely
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_19_weepy:
+    description: PDQ39 19. Weepy
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_20_angry:
+    description: PDQ39 20. Angry
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_21_anxious:
+    description: PDQ39 21. Anxious
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_22_worried_about_future:
+    description: PDQ39 22. Worried About Future
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_23_hide_pd_from_people:
+    description: PDQ39 23. Hide PD From People
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_24_avoid_eat_drink_in_public:
+    description: PDQ39 24. Avoid Eat and Drink In Public
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_25_embarassed_in_public:
+    description: PDQ39 25. Embarassed In Public
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_26_worried_about_reactions:
+    description: PDQ39 26. Worried About Reactions
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_27_close_personal_relations:
+    description: PDQ39 27. Close Personal Relations
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_28_support_from_spouse:
+    description: PDQ39 28. Support From Spouse
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_29_support_from_family:
+    description: PDQ39 29. Support From Family
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_30_sleep_in_day:
+    description: PDQ39 30. Sleep In Day
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_31_problem_with_concentration:
+    description: PDQ39 31. Problem With Concentration
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_32_memory_is_failing:
+    description: PDQ39 32. Memory Is Failing
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_33_hallucinations:
+    description: PDQ39 33. Hallucinations
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_34_speaking:
+    description: PDQ39 34. Speaking
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_35_unable_to_communicate:
+    description: PDQ39 35. Unable To Communicate
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_36_felt_ignored:
+    description: PDQ39 36. Felt Ignored
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_37_muscle_cramps:
+    description: PDQ39 37. Muscle Cramps
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_38_joint_pains:
+    description: PDQ39 38. Joint Pains
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_39_hot_or_cold:
+    description: PDQ39 39. Hot Or Cold
+    enum:
+      - Always Or Cannot Do At All
+      - Never
+      - Often
+      - Rarely
+      - Sometimes
+      - Unknown Score
+
+  pdq39_days_from_enroll_visit:
+    description: PDQ39 Days From Enrollment Visit
+    type: integer
+
+  pdq39_mean_value:
+    description: PDQ39 Mean Value
+    type: number
+
+  pdq39_pdq_39_adl_score:
+    description: PDQ39 PDQ-39 ADL Score
+    type: number
+
+  pdq39_pdq_39_cognition_score:
+    description: PDQ39 PDQ-39 Cognition Score
+    type: number
+
+  pdq39_pdq_39_communication_score:
+    description: PDQ39 PDQ-39 Communication Score
+    type: number
+
+  pdq39_pdq_39_discomfort_score:
+    description: PDQ39 PDQ-39 Discomfort Score
+    type: number
+
+  pdq39_pdq_39_emotional_score:
+    description: PDQ39 PDQ-39 Emotional Score
+    type: number
+
+  pdq39_pdq_39_mobility_score:
+    description: PDQ39 PDQ-39 Mobility Score
+    type: number
+
+  pdq39_pdq_39_social_score:
+    description: PDQ39 PDQ-39 Social Score
+    type: number
+
+  pdq39_pdq_39_stigma_score:
+    description: PDQ39 PDQ-39 Stigma Score
+    type: number
+
+  pdq39_pdq_39_summary_index:
+    description: PDQ39 PDQ-39 Summary Index
+    type: number
+
+  pdq39_total_score:
+    description: PDQ39 Total Score
+    type: number
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

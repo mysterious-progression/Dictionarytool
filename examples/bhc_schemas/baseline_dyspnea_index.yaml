@@ -1,0 +1,348 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "baseline_dyspnea_index"
+title: Baseline Dyspnea Index (BDI)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: The Baseline Dyspnea Index (BDI) is an interviewer-administered rating
+  of severity of dyspnea at a single state. It provides a multidimensional measurement
+  of dyspnea based on 3 components that evoke dyspnea in activities of daily living,
+  in symptomatic individuals.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: baseline_dyspnea_indexes
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  bdi_a_sadness:
+    description: BDI - A. Sadness
+    enum:
+      - I Am Sad All The Time And I Can't Snap Out Of It
+      - I Am So Sad And Unhappy That I Can't Stand It
+      - I Do Not Feel Sad
+      - I Feel Sad
+      - Intermediate Level Between I Am Sad All The Time And I Can't Snap Out Of It
+        And I Am So Sad And Unhappy That I Can't Stand It
+      - Intermediate Level Between I Do Not Feel Sad And I Feel Sad
+      - Intermediate Level Between I Feel Sad And I Am Sad All The Time And I Can't
+        Snap Out Of It
+
+  bdi_b_pessimism:
+    description: BDI - B. Pessimism
+    enum:
+      - I Am Not Particularly Discouraged About The Future
+      - I Feel Discouraged About The Future
+      - I Feel I Have Nothing To Look Forward To
+      - I Feel The Future Is Hopeless And That Things Cannot Improve
+      - Intermediate Level Between I Am Not Particularly Discouraged About The Future
+        And I Feel Discouraged About The Future
+      - Intermediate Level Between I Feel Discouraged About The Future And I Feel
+        I Have Nothing To Look Forward To
+      - Intermediate Level Between I Feel I Have Nothing To Look Forward To And I
+        Feel The Future Is Hopeless And That Things Cannot Improve
+
+  bdi_c_past_failure:
+    description: BDI - C. Past Failure
+    enum:
+      - As I Look Back On My Life, All I Can See Is A Lot Of Failures
+      - I Do Not Feel Like A Failure
+      - I Feel I Have Failed More Than The Average Person
+      - I feel I am a complete failure as a person
+      - Intermediate Level Between As I Look Back On My Life, All I Can See Is A Lot
+        Of Failures And I feel I am a complete failure as a person
+      - Intermediate Level Between I Do Not Feel Like A Failure And I Feel I Have
+        Failed More Than The Average Person
+      - Intermediate Level Between I Feel I Have Failed More Than The Average Person
+        And As I Look Back On My Life, All I Can See Is A Lot Of Failures
+
+  bdi_d_loss_of_pleasure:
+    description: BDI - D. Loss Of Pleasure
+    enum:
+      - I Am Dissatisfied Or Bored With Everything
+      - I Don't Enjoy Things The Way I Used To
+      - I Don't Get Real Satisfaction Out Of Anything Anymore
+      - I Get As Much Satisfaction Out Of Things As I Used To
+      - Intermediate Level Between I Don't Enjoy Things The Way I Used To And I Don't
+        Get Real Satisfaction Out Of Anything Anymore
+      - Intermediate Level Between I Don't Get Real Satisfaction Out Of Anything Anymore
+        And I Am Dissatisfied Or Bored With Everything
+      - Intermediate Level Between I Get As Much Satisfaction Out Of Things As I Used
+        To And I Don't Enjoy Things The Way I Used To
+
+  bdi_e_guilty_feelings:
+    description: BDI - E. Guilty Feelings
+    enum:
+      - I Almost Always Feel Guilty
+      - I Don't Feel Particularly Guilty
+      - I Often Feel Guilty
+      - I feel guilty all of the time
+      - Intermediate Level Between I Almost Always Feel Guilty And I feel guilty all
+        of the time
+      - Intermediate Level Between I Don't Feel Particularly Guilty And I Often Feel
+        Guilty
+      - Intermediate Level Between I Often Feel Guilty And I Almost Always Feel Guilty
+
+  bdi_f_punishment_feelings:
+    description: BDI - F. Punishment Feelings
+    enum:
+      - I Don't Feel I Am Being Punished
+      - I Feel I Am Being Punished
+      - I Feel I May Be Punished
+      - I expect to be punished
+      - Intermediate Level Between I Don't Feel I Am Being Punished And I Feel I May
+        Be Punished
+      - Intermediate Level Between I Feel I May Be Punished And I expect to be punished
+      - Intermediate Level Between I expect to be punished And I Feel I Am Being Punished
+
+  bdi_g_self_dislike:
+    description: BDI - G. Self-Dislike
+    enum:
+      - I Am Disappointed In Myself
+      - I Am Disgusted With Myself
+      - I Don't Feel Disappointed In Myself
+      - I Hate Myself
+      - Intermediate Level Between I Am Disappointed In Myself And I Am Disgusted
+        With Myself
+      - Intermediate Level Between I Am Disgusted With Myself And I Hate Myself
+      - Intermediate Level Between I Don't Feel Disappointed In Myself And I Am Disappointed
+        In Myself
+
+  bdi_h_self_criticalness:
+    description: BDI - H. Self-Criticalness
+    enum:
+      - I Am Critical Of Myself For My Weaknesses Or Mistakes
+      - I Blame Myself All The Time For My Faults
+      - I Blame Myself For Everything Bad That Happens
+      - I Don't Feel I Am Any Worse Than Anybody Else
+      - Intermediate Level Between I Am Critical Of Myself For My Weaknesses Or Mistakes
+        And I Blame Myself All The Time For My Faults
+      - Intermediate Level Between I Blame Myself All The Time For My Faults And I
+        Blame Myself For Everything Bad That Happens
+      - Intermediate Level Between I Don't Feel I Am Any Worse Than Anybody Else And
+        I Am Critical Of Myself For My Weaknesses Or Mistakes
+
+  bdi_i_suicidal_thoughts_or_wishes:
+    description: BDI - I. Suicidal Thoughts Or Wishes
+    enum:
+      - I Am Critical Of Myself For My Weaknesses Or Mistakes
+      - I Blame Myself All The Time For My Faults
+      - I Blame Myself For Everything Bad That Happens
+      - I Don't Feel I Am Any Worse Than Anybody Else
+      - Intermediate Level Between I Am Critical Of Myself For My Weaknesses Or Mistakes
+        And I Blame Myself All The Time For My Faults
+      - Intermediate Level Between I Blame Myself All The Time For My Faults And I
+        Blame Myself For Everything Bad That Happens
+      - Intermediate Level Between I Don't Feel I Am Any Worse Than Anybody Else And
+        I Am Critical Of Myself For My Weaknesses Or Mistakes
+
+  bdi_j_crying:
+    description: BDI - J. Crying
+    enum:
+      - I Cry More Now Than I Used To
+      - I Don't Cry Any More Than Usual
+      - I Used To Be Able To Cry, But Now I Can't Cry Even Though I Want To
+      - I cry all the time now
+      - Intermediate Level Between I Cry More Now Than I Used To And I cry all the
+        time now
+      - Intermediate Level Between I Don't Cry Any More Than Usual And I Cry More
+        Now Than I Used To
+      - Intermediate Level Between I cry all the time now And I Used To Be Able To
+        Cry, But Now I Can't Cry Even Though I Want To
+
+  bdi_k_agitation:
+    description: BDI - K. Agitation
+    enum:
+      - I Am No More Irritated By Things Than I Ever Was
+      - I Am Slightly More Irritated Now Than Usual
+      - I Feel Irritated All The Time
+      - Intermediate Level Between I Am No More Irritated By Things Than I Ever Was
+        And I Am Slightly More Irritated Now Than Usual
+      - Intermediate Level Between I Am Slightly More Irritated Now Than Usual And
+        I Feel Irritated All The Time
+      - Intermediate Level Between I Feel Irritated All The Time And The Things That
+        Used To Irritate Me Are Not Touching Me Anymore
+      - The Things That Used To Irritate Me Are Not Touching Me Anymore
+
+  bdi_l_loss_of_interest:
+    description: BDI - L. Loss Of Interest
+    enum:
+      - I Am Less Interested In Other People Than I Used To Be
+      - I Have Lost All Of My Interest In Other People
+      - I Have Lost Most Of My Interest In Other People
+      - I Have Not Lost Interest In Other People
+      - Intermediate Level Between I Am Less Interested In Other People Than I Used
+        To Be And I Have Lost Most Of My Interest In Other People
+      - Intermediate Level Between I Have Lost Most Of My Interest In Other People
+        And I Have Lost All Of My Interest In Other People
+      - Intermediate Level Between I Have Not Lost Interest In Other People And I
+        Am Less Interested In Other People Than I Used To Be
+
+  bdi_m_indecisiveness:
+    description: BDI - M. Indecisiveness
+    enum:
+      - I Can't Make Decisions At All Anymore
+      - I Have Greater Difficulty In Making Decisions More Than I Used To
+      - I Make Decisions About As Well As I Ever Could
+      - I Put Off Making Decisions More Than I Used To
+      - Intermediate Level Between I Have Greater Difficulty In Making Decisions More
+        Than I Used To And I Can't Make Decisions At All Anymore
+      - Intermediate Level Between I Make Decisions About As Well As I Ever Could
+        And I Put Off Making Decisions More Than I Used To
+      - Intermediate Level Between I Put Off Making Decisions More Than I Used To
+        And I Have Greater Difficulty In Making Decisions More Than I Used To
+
+  bdi_mean_value:
+    description: BDI - Mean Value
+    type: number
+
+  bdi_n_negative_self_conception:
+    description: BDI - N. Negative Self-Conception
+    enum:
+      - I Am Worried That I Am Looking Old Or Unattractive
+      - I Believe That I Look Ugly
+      - I Don't Feel That I Look Any Worse Than I Used To
+      - I Feel There Are Permanent Changes In My Appearance That Make Me Look Unattractive
+      - Intermediate Level Between I Am Worried That I Am Looking Old Or Unattractive
+        And I Feel There Are Permanent Changes In My Appearance That Make Me Look
+        Unattractive
+      - Intermediate Level Between I Don't Feel That I Look Any Worse Than I Used
+        To And I Am Worried That I Am Looking Old Or Unattractive
+      - Intermediate Level Between I Feel There Are Permanent Changes In My Appearance
+        That Make Me Look Unattractive And I Believe That I Look Ugly
+
+  bdi_o_loss_of_energy:
+    description: BDI - O. Loss Of Energy
+    enum:
+      - I Can Work About As Well As Before
+      - I Can't Do Any Work At All
+      - I Have To Push Myself Very Hard To Do Anything
+      - Intermediate Level Between I Can Work About As Well As Before And It Takes
+        An Extra Effort To Get Started At Doing Something
+      - Intermediate Level Between I Have To Push Myself Very Hard To Do Anything
+        And I Can't Do Any Work At All
+      - Intermediate Level Between It Takes An Extra Effort To Get Started At Doing
+        Something And I Have To Push Myself Very Hard To Do Anything
+      - It Takes An Extra Effort To Get Started At Doing Something
+
+  bdi_p_changes_in_sleeping_pattern:
+    description: BDI - P. Changes In Sleeping Pattern
+    enum:
+      - I Can Sleep As Well As Usual
+      - I Don't Sleep As Well As I Used To
+      - I Wake Up 1-2 Hours Earlier Than Usual And Find It Hard To Get Back To Sleep
+      - I Wake Up Several Hours Earlier Than I Used To And Cannot Get Back To Sleep
+      - Intermediate Level Between I Can Sleep As Well As Usual And I Don't Sleep
+        As Well As I Used To
+      - Intermediate Level Between I Don't Sleep As Well As I Used To And I Wake Up
+        1-2 Hours Earlier Than Usual And Find It Hard To Get Back To Sleep
+      - Intermediate Level Between I Wake Up 1-2 Hours Earlier Than Usual And Find
+        It Hard To Get Back To Sleep And I Wake Up Several Hours Earlier Than I Used
+        To And Cannot Get Back To Sleep
+
+  bdi_q_tiredness_or_fatigue:
+    description: BDI - Q. Tiredness Or Fatigue
+    enum:
+      - I Don't Get More Tired Than Usual
+      - I Get Tired From Doing Almost Anything
+      - I Get Tired More Easily Than I Used To
+      - Intermediate Level Between I Don't Get More Tired Than Usual And I Get Tired
+        More Easily Than I Used To
+      - Intermediate Level Between I Get Tired From Doing Almost Anything And I Am
+        Too Tired To Do Anything
+      - Intermediate Level Between I Get Tired More Easily Than I Used To And I Get
+        Tired From Doing Almost Anything
+
+  bdi_r_change_in_appetite:
+    description: BDI - R. Change In Appetite
+    enum:
+      - I Have No Appetite At All Anymore
+      - Intermediate Level Between My Appetite Is Much Worse Now And I Have No Appetite
+        At All Anymore
+      - Intermediate Level Between My Appetite Is No Worse Than Usual And My Appetite
+        Is Not As Good As It Used To Be
+      - Intermediate Level Between My Appetite Is Not As Good As It Used To Be And
+        My Appetite Is Much Worse Now
+      - My Appetite Is Much Worse Now
+      - My Appetite Is No Worse Than Usual
+      - My Appetite Is Not As Good As It Used To Be
+
+  bdi_s_weight_loss_weight_gain:
+    description: BDI - S. Weight Loss - Weight Gain
+    enum:
+      - I Have Lost Less Than Two Kilograms
+      - I Have Lost More Than 8 Kilograms
+      - I Have Lost More Than Five But Less Than 8 Kilograms
+      - I Have Lost More Than Five Kilograms
+      - I Have Lost More Than Two But Less Than Five Kilograms
+      - I Have Lost More Than Two Kilograms
+      - I Haven't Lost Much Weight, If Any, Lately
+
+  bdi_t_hypochondria:
+    description: BDI - T. Hypochondria
+    enum:
+      - I Am No More Worried About My Health Than Usual
+      - I Am So Worried About My Physical Problems That I Cannot Think Of Anything
+        Else
+      - I Am Very Worried About Physical Problems And It's Hard To Think Of Much Else
+      - I Am Worried About Physical Problems Like Aches, Pains, Upset Stomach, Or
+        Constipation
+      - Intermediate Level Between I Am No More Worried About My Health Than Usual
+        And I Am Worried About Physical Problems Like Aches, Pains, Upset Stomach,
+        Or Constipation
+      - Intermediate Level Between I Am Very Worried About Physical Problems And It's
+        Hard To Think Of Much Else And I Am So Worried About My Physical Problems
+        That I Cannot Think Of Anything Else
+      - Intermediate Level Between I Am Worried About Physical Problems Like Aches,
+        Pains, Upset Stomach, Or Constipation And I Am Very Worried About Physical
+        Problems And It's Hard To Think Of Much Else
+
+  bdi_total_score:
+    description: BDI - Total Score
+    type: number
+
+  bdi_u_loss_of_interest_in_sex:
+    description: BDI - U. Loss Of Interest in Sex
+    enum:
+      - I Am Less Interested In Sex Than I Used To Be
+      - I Have Almost No Interest In Sex
+      - I Have Lost Interest In Sex Completely
+      - I Have Not Noticed Any Recent Change In My Interest In Sex
+      - Intermediate Level Between I Am Less Interested In Sex Than I Used To Be And
+        I Have Almost No Interest In Sex
+      - Intermediate Level Between I Have Almost No Interest In Sex And I Have Lost
+        Interest In Sex Completely
+      - Intermediate Level Between I Have Not Noticed Any Recent Change In My Interest
+        In Sex And I Am Less Interested In Sex Than I Used To Be
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

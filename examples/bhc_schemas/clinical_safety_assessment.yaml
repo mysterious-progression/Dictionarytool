@@ -1,0 +1,94 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "clinical_safety_assessment"
+title: Clinical Safety Assessment
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Clinical Safety Asssessment data.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: clinical_safety_assessments
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  abnormal_test:
+    description: Abnormality present
+    enum:
+      - "No"
+      - Not Done
+      - "Yes"
+
+  blood_test_result_flag:
+    description: Blood Chemistry And Hematology Test Result Flag
+    type: string
+
+  days_to_collection:
+    description: The number of days between the case Index Date and the date when
+      the results were collected
+    type: integer
+
+  ecg_test_result_flag:
+    description: ECG Test Result Flag
+    type: string
+
+  test_result:
+    description: The categorical result of the laboratory test.
+    enum:
+      - Abnormal
+      - Clinically Significant Abnormal
+      - Equivocal
+      - Negative
+      - "No"
+      - Normal
+      - Not Reported
+      - Positive
+      - Too High
+      - Too Low
+      - Unknown
+      - "Yes"
+
+  test_type:
+    description: The general type or category of the clinical safety assessment.
+    enum:
+      - Blood Test (Unspecified)
+      - Creatine Phosphokinase
+      - ECG
+      - Hearing
+      - Liver Function
+      - Neurological Exam
+      - Pancreatic Enzymes
+      - Renal Function
+      - Visual
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

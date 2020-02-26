@@ -1,0 +1,227 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "brief_mult_measure_religious_spirit"
+title: Brief Multidimensional Measure of Religiousness/Spirituality (BMMRS)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A commonly used measure in the US used to assess the spirituality and
+  religiosity of people with disabilities.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: brief_mult_measure_religious_spirits
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  bmmrs_1:
+    description: To what extent do you consider yourself a religious person?
+    enum:
+      - Moderately religious
+      - Not religious at all
+      - Slightly religious
+      - Very religious
+
+  bmmrs_10:
+    description: I know that God forgives me.
+    enum:
+      - Always or almost always
+      - Never
+      - Not Applicable
+      - Often
+      - Seldom
+
+  bmmrs_11:
+    description: I look to God for strength, support, and guidance.
+    enum:
+      - A great deal
+      - Not Applicable
+      - Not at all
+      - Quite a bit
+      - Somewhat
+
+  bmmrs_12:
+    description: I feel God is punishing me for my sins or lack of spirituality.
+    enum:
+      - A great deal
+      - Not Applicable
+      - Not at all
+      - Quite a bit
+      - Somewhat
+
+  bmmrs_13:
+    description: I wonder whether God has abandoned me.
+    enum:
+      - A great deal
+      - Not Applicable
+      - Not at all
+      - Quite a bit
+      - Somewhat
+
+  bmmrs_14:
+    description: Is religion or spirituality important as you cope with life stressors?
+    enum:
+      - "No"
+      - "Yes"
+
+  bmmrs_15a:
+    description: If religion or spirituality is important to you, how much strength
+      or comfort do you get from your religion or spirituality right now?
+    enum:
+      - All that I need
+      - None at all
+      - Somewhat less than I need
+
+  bmmrs_15b:
+    description: If religion or spirituality is not important to you now, has there
+      ever been a time when religion or spirituality was important to you?
+    enum:
+      - "No"
+      - "Yes"
+
+  bmmrs_16:
+    description: Do you think a visit with a VA chaplain could be helpful for you?
+    enum:
+      - "No"
+      - "Yes"
+
+  bmmrs_2:
+    description: To what extent do you consider yourself a spiritual person?
+    enum:
+      - Moderately spiritual
+      - Not spiritual at all
+      - Slightly spiritual
+      - Very spiritual
+
+  bmmrs_3:
+    description: What, if any, is your religious affiliation?
+    enum:
+      - Adventist
+      - African Methodist
+      - Anabaptist
+      - Assemblies of God
+      - Baha'i
+      - Baptist
+      - Bible Church
+      - Brethren
+      - Buddhist
+      - Catholic or Roman Catholic
+      - Chinese Folk Religion
+      - Christian Reformed
+      - Christian Science
+      - Christian and Missionary Alliance
+      - Church of Christ
+      - Church of God
+      - Church of the Nazarene
+      - Congregational
+      - Disciples of Christ
+      - Don't know
+      - Eastern, Russian, or Greek Orthodox
+      - Episcopal or Anglican
+      - Hindu
+      - Holiness
+      - Jehovah's Witnesses
+      - Jewish
+      - Latter-day Saints
+      - Lutheran
+      - Mennonite
+      - Methodist
+      - Muslim
+      - No religion
+      - Non-denominational Christian
+      - Other
+      - Pentecostal
+      - Presbyterian
+      - Quaker or Friends
+      - Reformed Church of America or Dutch Reformed
+      - Seventh-day Adventist
+      - Unitarian Universalist
+      - United Church of Christ
+
+  bmmrs_4:
+    description: Have you ever had a religious or spiritual experience that changed
+      you?
+    enum:
+      - "No"
+      - "Yes"
+
+  bmmrs_5:
+    description: To what extent do you consider yourself a spiritual person?
+    enum:
+      - Every day
+      - Many times a day
+      - Most days
+      - Never or almost never
+      - Not applicable
+      - Once in a while
+      - Some days
+
+  bmmrs_6:
+    description: How often do you attend church, temple or other religious meeting?
+    enum:
+      - A few times a month
+      - A few times a year
+      - More than once a week
+      - Never
+      - Not applicable
+      - Once a week
+      - Once a year or less
+
+  bmmrs_7:
+    description: How often do you spend time in private religious or spiritual activities,
+      such as prayer, meditation, or reading sacred texts?
+    enum:
+      - A few times a month
+      - A few times a year
+      - More than once a week
+      - Never
+      - Not applicable
+      - Once a week
+      - Once a year or less
+
+  bmmrs_8:
+    description: I have forgiven myself for things that I have done wrong.
+    enum:
+      - Always or almost always
+      - Never
+      - Often
+      - Seldom
+
+  bmmrs_9:
+    description: I have forgiven those who hurt me.
+    enum:
+      - Always or almost always
+      - Never
+      - Often
+      - Seldom
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

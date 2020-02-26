@@ -1,0 +1,213 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "beck_scale_for_suicide_ideation"
+title: Beck Scale for Suicide Ideation (BSS)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A tool used by clinicians to examine suicidal intent in patients 17 years
+  and older.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: beck_scale_for_suicide_ideations
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  X_bss_score:
+    description: sum of all responses
+    type: integer
+
+  bss_1:
+    description: Over the last week, including today
+    enum:
+      - I have a moderate to strong wish to live
+      - I have a weak wish to live
+      - I have no wish to live
+
+  bss_10:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I am not or only a little concerned about killing myself because of my family,
+        friends, religion, possible injury from an unsuccessful attempt, etc
+      - I am somewhat concerned about killing myself because of my family, friends,
+        religion, possible injury from an unsuccessful attempt, etc
+      - I would not kill myself because of my family, friends, religion, possible
+        injury from an unsuccessful attempt, etc
+
+  bss_11:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - My reasons for wanting to commit suicide are not only aimed at influencing
+        other people, but also represent a way of solving my problems
+      - My reasons for wanting to commit suicide are primarily aimed at influencing
+        other people, such as getting even with people, making people happier, making
+        people pay attention to me, etc
+      - My reasons for wanting to commit suicide are primarily based upon escaping
+        from my problems
+
+  bss_12:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I have a specific plan for killing myself
+      - I have considered ways of killing myself, but have not worked out the details
+      - I have no specific plan about how to kill myself
+
+  bss_13:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I do not have access to a method or an opportunity to kill myself
+      - I have access or anticipate having access to the method that I would choose
+        for killing myself and also have or shall have the opportunity to use it
+      - The method that I would use for committing suicide takes time, and I really
+        do not have a good opportunity to use this method
+
+  bss_14:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I am unsure that I have the courage or the ability to commit suicide
+      - I do not have the courage or the ability to commit suicide
+      - I have the courage and the ability to commit suicide
+
+  bss_15:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I am sure that I shall make a suicide attempt
+      - I am unsure that I shall make a suicide attempt
+      - I do not expect to make a suicide attempt
+
+  bss_16:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I have almost finished or completed my preparations for committing suicide
+      - I have made no preparations for committing suicide
+      - I have made some preparations for committing suicide
+
+  bss_17:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I have completed a suicide note
+      - I have not written a suicide note
+      - I have thought about writing a suicide note or have started to write one,
+        but have not completed it
+
+  bss_18:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I have made definite arrangements for what will happen after I have committed
+        suicide
+      - I have made no arrangements for what will happen after I have committed suicide
+      - I have thought about making some arrangements for what will happen after I
+        have committed suicide
+
+  bss_19:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I have attempted to hide, conceal, or lie about wanting to commit suicide
+      - I have held back telling people about wanting to kill myself
+      - I have not hidden my desire to kill myself from people
+
+  bss_2:
+    description: Over the last week, including today
+    enum:
+      - I have a moderate to strong wish to die
+      - I have a weak wish to die
+      - I have no wish to die
+
+  bss_20:
+    description: Over the last week, including today
+    enum:
+      - I have attempted suicide once
+      - I have attempted suicide two or more times
+      - I have never attempted suicide
+
+  bss_21:
+    description: If you have attempted suicide in the past, then, over the last week,
+      including today
+    enum:
+      - My wish to die during the last suicide attempt was high
+      - My wish to die during the last suicide attempt was low
+      - My wish to die during the last suicide attempt was moderate
+
+  bss_3:
+    description: Over the last week, including today
+    enum:
+      - My reasons for dying outweigh my reasons for living
+      - My reasons for living and dying are equal
+      - My reasons for living outweigh my reasons for dying
+
+  bss_4:
+    description: Over the last week, including today
+    enum:
+      - I have a moderate to strong desire to kill myself
+      - I have a weak desire to kill myself
+      - I have no desire to kill myself
+
+  bss_5:
+    description: Over the last week, including today
+    enum:
+      - I would not take the steps necessary to avoid death if I found myself in a
+        life-threatening situation
+      - I would take a chance on life or death if I found myself in a life-threatening
+        situation
+      - I would try to save my life if I found myself in a life-threatening situation
+
+  bss_6:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I have brief periods of thinking about killing myself which pass quickly
+      - I have long periods of thinking about killing myself
+      - I have periods of thinking about killing myself which last for moderate amounts
+        of time
+
+  bss_7:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I continuously think about killing myself
+      - I have frequent thoughts about killing myself
+      - I rarely or only occasionally think about killing myself
+
+  bss_8:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I accept the idea of killing myself
+      - I do not accept the idea of killing myself
+      - I neither accept nor reject the idea of killing myself
+
+  bss_9:
+    description: If bss_4>0 or bss_5>0, then, over the last week, including today
+    enum:
+      - I am unsure that I can keep myself from committing suicide
+      - I can keep myself from committing suicide
+      - I cannot keep myself from committing suicide
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

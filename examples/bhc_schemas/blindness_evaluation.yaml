@@ -1,0 +1,189 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "blindness_evaluation"
+title: Blindness Evaluation
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Blindness Evaluation
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: blindness_evaluations
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_evaluation:
+    description: Number of days bewteen the case's Index Date and the date of evaluation
+      or collection of blindness form data
+    type: integer
+
+  f9000_04_person_completing_form:
+    description: Identify the person who completed the form
+    enum:
+      - Form Completed By Coordinator
+      - Form Completed By Investigator
+      - Form Completed By Patient
+
+  f9000_06_sugar_pill_or_active_deprenyl:
+    description: Sugar Pill or Active Deprenyl
+    enum:
+      - Active Deprenyl
+      - Placebo
+
+  f9000_07_how_sure_of_answer:
+    description: How Sure Of Answer To Question (range 0 (not sure at all) - 100 (completely
+      sure))
+    type: integer
+
+  f9000_09_sugar_pill_or_active_tocopherol:
+    description: Sugar Pill Or Active Tocopherol
+    enum:
+      - Active Tocopherol
+      - Placebo
+
+  f9000_10_how_sure_of_answer_to_quest:
+    description: How Sure Of Answer To Question (range 0 (not sure at all) - 100 (completely
+      sure))
+    type: integer
+
+  f9000_12_comments_by_enrolling_center:
+    description: Comments By Enrolling Center
+    type: boolean
+
+  f9000_13_staff_code_for_form_completer:
+    description: Staff Code For Form Completer
+    type: integer
+
+  f9000_number_of_blindness_forms:
+    description: Number of Blindness Forms (F9000)
+    type: integer
+
+  f9000a11_based_on_symptom_improvement:
+    description: A. Based On Symptom Improvement (F9000A11)
+    type: boolean
+
+  f9000a8_based_on_symptom_improvement:
+    description: A. Based On Symptom Improvement (F9000A8)
+    type: boolean
+
+  f9000b11_based_on_no_symptom_improvement:
+    description: B. Based On No Symptom Improvement (F9000B11)
+    type: boolean
+
+  f9000b8_based_on_no_symptom_improvement:
+    description: B. Based On No Symptom Improvement (F9000B8)
+    type: boolean
+
+  f9000c11_based_on_slowing_halting_parkinsons:
+    description: C. Based On Slowing and Halting Parkinsons (F9000C11)
+    type: boolean
+
+  f9000c8_based_on_slowing_halting_parkinsons:
+    description: C. Based On Slowing and Halting Parkinsons (F9000C8)
+    type: boolean
+
+  f9000d11_based_on_no_slowing_halting:
+    description: D. Based On No Slowing and Halting (F9000D11)
+    type: boolean
+
+  f9000d8_based_on_no_slowing_halting:
+    description: D. Based On No Slowing and Halting (F9000D8)
+    type: boolean
+
+  f9000e11_based_on_adverse_side_effects:
+    description: E. Based On Adverse Side Effects (F9000E11)
+    type: boolean
+
+  f9000e8_based_on_adverse_side_effects:
+    description: E. Based On Adverse Side Effects (F9000E8)
+    type: boolean
+
+  f9000f11_based_on_lack_of_side_effects:
+    description: F. Based On Lack Of Side Effects (F9000F11)
+    type: boolean
+
+  f9000f8_based_on_lack_of_side_effects:
+    description: F. Based On Lack Of Side Effects (F9000F8)
+    type: boolean
+
+  f9000g11_based_on_pill_appearance_etc:
+    description: G. Based On Pill Appearance, etc (F9000G11)
+    type: boolean
+
+  f9000g8_based_on_pill_appearance_etc:
+    description: G. Based On Pill Appearance, etc. (F9000G8)
+    type: boolean
+
+  f9000h11_based_on_another_reason:
+    description: H. Based On Another Reason (F9000H11)
+    type: boolean
+
+  f9000h8_based_on_another_reason:
+    description: H. Based On Another Reason (F9000H8)
+    type: boolean
+
+  f9000y5_year_form_completed:
+    description: Year Form Completed (F9000Y5)
+    type: integer
+
+  time_form_completed:
+    description: Time Form Completed. "CTCC" (Clinical Trials Coordination Center)
+      was previously called "CDC".
+    enum:
+      - CTCC Request 1
+      - Conclusion Of The Study
+      - Endpoint
+      - Final
+      - Other
+      - Termination
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

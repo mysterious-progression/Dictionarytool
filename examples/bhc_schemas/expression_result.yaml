@@ -1,0 +1,271 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "expression_result"
+title: Expression Result
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_observations
+program: '*'
+project: '*'
+description: Expression profiling results
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: expression_results
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  analyte_name:
+    description: The name of the gene, protein, miRNA, RNA, antibody or other molecule
+      that corresponds to the 'test_result' or 'test_value
+    type: string
+
+  comments:
+    description: Specific comments about or customization of the experiment
+    type: string
+
+  days_to_test:
+    description: The total number of days between the test and the index date. The
+      date of the test less the date of index.
+    type: integer
+
+  experimental_method:
+    description: The experimental method used for the genotyping test
+    enum:
+      - Comparative Genomic Hybridization
+      - FISH
+      - Flow Cytometry
+      - IHC
+      - Karyotype
+      - Microarray
+      - Microsatellite Analysis
+      - Not Reported
+      - Nuclear Staining
+      - Other (specify)
+      - RNA Sequencing
+      - RT-qPCR
+      - Sequencing, NOS
+      - Southern Blotting
+      - Targeted Sequencing
+      - Unknown
+      - WGS
+      - WXS
+
+  experimental_method_other:
+    description: The test method if 'Other (specify)' was chosen for 'test_method
+    type: string
+
+  gene_category:
+    description: Gene Category
+    enum:
+      - GBA
+      - LRRK2
+      - LRRKG2019S
+      - LRRKR1441G
+      - Other (specify)
+      - SNCA
+
+  gene_category_other:
+    description: Specify the Gene Category if 'Other (specify)' was chosen for 'gene_category
+    type: string
+
+  high_range:
+    description: Lab Test High Range
+    type: number
+
+  lab_result_changed:
+    description: Result Has Changed From The Value Reported On The 1st Visit (DELTA)
+    type: string
+
+  low_range:
+    description: Lab Test Low Range
+    type: number
+
+  mutant_copies:
+    description: Mutant DNA absolute copies in the ctDNA. Requires copies_unit.
+    type: integer
+
+  mutant_fraction_percent:
+    description: Percent of the target that is identified as mutant.
+    type: number
+
+  mutation_result:
+    description: Observed mutation type.
+    enum:
+      - Deletion
+      - Duplication
+      - Frameshift
+      - Insertion
+      - Missense
+      - No Mutation Detected
+      - Nonsense
+      - Unspecified
+
+  neurox_genotyping_dna_test_type:
+    description: NeuroX Genotyping DNA Test Type
+    type: string
+
+  sample_composition:
+    description: The type or composition of the sample or biological specimen taken
+      from a study subject used for the test
+    enum:
+      - Bone Marrow
+      - Buccal Mucosa
+      - Buffy Coat
+      - Cerebrospinal Fluid
+      - Connective Tissue
+      - Embryonic Fluid
+      - Embryonic Tissue
+      - Feces
+      - Granulocyte
+      - Muscle Tissue
+      - Nerve Tissue
+      - Not Reported
+      - Oral Swab
+      - Other (specify)
+      - Peritoneal Fluid
+      - Plasma
+      - Pleural Fluid
+      - Saliva
+      - Serum
+      - Skin
+      - Soft Tissue
+      - Tissue, NOS
+      - Tumor
+      - Unknown
+      - Urine
+      - Whole Blood
+
+  sample_composition_other:
+    description: If 'other' was chosen for 'sample_type', the type or composition
+      of the sample or biological specimen taken from a study subject used for the
+      test
+    type: string
+
+  test_analyte_type:
+    description: The biological molecule that was used for the test
+    enum:
+      - DNA
+      - Not Reported
+      - Protein
+      - Total RNA
+      - Unknown
+      - mRNA
+      - miRNA
+
+  test_code:
+    description: The code used for a laboratory test
+    type: string
+
+  test_method:
+    description: The method used to obtain the test results
+    enum:
+      - Microarray
+      - Sequencing
+      - qPCR
+
+  test_method_other:
+    description: The method used to obtain the test results if 'Other (specify)' was
+      chosen for 'test_method
+    type: string
+
+  test_name:
+    description: The name of the laboratory test
+    type: string
+
+  test_out_of_range_alert:
+    description: Out Of Range Alert
+    type: string
+
+  test_project_id:
+    description: The identifier of a project for the laboratory test
+    type: string
+
+  test_result:
+    description: The categorical result of the laboratory test.
+    enum:
+      - Abnormal
+      - Clinically Significant Abnormal
+      - Equivocal
+      - Negative
+      - "No"
+      - Normal
+      - Not Reported
+      - Positive
+      - Too High
+      - Too Low
+      - Unknown
+      - "Yes"
+
+  test_units:
+    description: The units corresponding to a test_value for a test_analyte_type
+    enum:
+      - Array Signal (log2)
+      - Average Ct
+      - Cell Count
+      - Copy Number per 25ng RNA
+      - Cycle threshold (Ct)
+      - Normalized Ion Intensity by Endogenous Arginine and Autoscaled
+      - Optical Density
+      - Other (specify)
+      - Pct
+      - SD
+      - Standard Deviation Ct
+      - U/mL
+      - Units of Activity
+      - cells/microliter
+      - copies/microliter
+      - counts
+      - katal
+      - mM
+      - mg/dL
+      - mg/mL
+      - micrograms/mL
+      - micromoles/g/h
+      - nM
+      - ng/mL
+      - pg/mL
+      - uIU/mL
+
+  test_units_other:
+    description: The units corresponding to a test_value for a test_analyte_type if
+      'Other (specify)' was chosen for 'test_units
+    type: string
+
+  test_value:
+    description: The numerical value representing the laboratory test result for the
+      analyte_type
+    type: number
+
+  year_of_test:
+    description: Year of Test
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

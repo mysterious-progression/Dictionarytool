@@ -1,0 +1,377 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "health_questionnaire"
+title: Health Questionnaire
+type: object
+nodeTerms: null
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Values obtained from a general health questionnaire performed at one
+  of the recurrent patient visit.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: follow_ups
+    backref: health_questionnaires
+    label: performed_at
+    target_type: follow_up
+    multiplicity: one_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - follow_ups
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  blue:
+    description: Frequency feeling downhearted and blue in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  bodpn:
+    description: Amount of bodily pain during the past four weeks.
+    terms: null
+    enumTerms:
+      Mild: null
+      Moderate: null
+      None: null
+      Severe: null
+      Very mild: null
+      Very severe: null
+
+  calm:
+    description: Frequency feeling calm and peaceful in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  comhl:
+    description: Subject perception of current health compared to one year ago.
+    terms: null
+    enumTerms:
+      About the same: null
+      Much better: null
+      Much worse: null
+      Somewhat better: null
+      Somewhat worse: null
+
+  dumps:
+    description: Frequency feeling so down in the dumps that nothing could cheer up
+      in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  energy:
+    description: Frequency having a lot of energy in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  epcar:
+    description: Didn't work as carefully as usual due to emotional problems in the
+      last four weeks.
+    terms: null
+    type: boolean
+
+  eples:
+    description: Emotional problems produced less accomplishment than desired in the
+      last four weeks.
+    terms: null
+    type: boolean
+
+  epwta:
+    description: Emotional problems cut down the amount of time on work or other activities
+      in the last four weeks.
+    terms: null
+    type: boolean
+
+  excel:
+    description: Feeling health is excellent.
+    terms: null
+    enumTerms:
+      Definitively false: null
+      Definitively true: null
+      Mostly false: null
+      Mostly true: null
+      Unknown: null
+
+  genhl:
+    description: Subject perception about his current health.
+    terms: null
+    enumTerms:
+      Excellent: null
+      Fair: null
+      Good: null
+      Poor: null
+      Very Good: null
+
+  happy:
+    description: Frequency feeling a happy person in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  health:
+    description: Feeling as healthy as anybody known.
+    terms: null
+    enumTerms:
+      Definitively false: null
+      Definitively true: null
+      Mostly false: null
+      Mostly true: null
+      Unknown: null
+
+  hltba:
+    description: Health limitation for bathing or dressing.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltbe:
+    description: Health limitation for bending, kneeling or stooping.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltli:
+    description: Health limitation for lifting or carrying groceries.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltma:
+    description: Health limitation for moderate activities such as moving a table,
+      pushing a vacuum cleaner, bowling or playing golf..
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hlts1:
+    description: Health limitation for climbing one flight of stairs.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltst:
+    description: Health limitation for climbing several flights of stairs.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltva:
+    description: Health limitation for vigorous activities such as running, lifting
+      heavy objects, participating in strenuous sports..
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltw1:
+    description: Health limitation for walking one block.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltwb:
+    description: Health limitation for walking several blocks.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  hltwm:
+    description: Health limitation for walking more than one mile.
+    terms: null
+    enumTerms:
+      No at all: null
+      Yes a little: null
+      Yes a lot: null
+
+  nerves:
+    description: Frequency feeling a very nervous person in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  peppy:
+    description: Frequency feeling full of pep in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  phdwa:
+    description: Physical health resulted in having difficulties performing the work
+      or other activities in the last four weeks.
+    terms: null
+    type: boolean
+
+  phkwa:
+    description: Physical health limited some kind of work or other activities in
+      the last four weeks.
+    terms: null
+    type: boolean
+
+  phles:
+    description: Physical health produced less accomplishment than desired in the
+      last four weeks.
+    terms: null
+    type: boolean
+
+  phwta:
+    description: Physical health cut down the amount of time on work or other activities
+      in the last four weeks.
+    terms: null
+    type: boolean
+
+  sick:
+    description: Feeling to get sick a little easier than other people.
+    terms: null
+    enumTerms:
+      Definitively false: null
+      Definitively true: null
+      Mostly false: null
+      Mostly true: null
+      Unknown: null
+
+  socac:
+    description: Interference of your physical health or emotional problems with your
+      normal social activities with family, friends, neighbors or other groups in
+      the last four weeks.
+    terms: null
+    enumTerms:
+      Extremely: null
+      Moderately: null
+      Not at all: null
+      Quite a bit: null
+      Slightly: null
+
+  soctm:
+    description: Frequency feeling your physical health or emotional problems interfered
+      with your social activities (family, friends, neighbors or other groups) in
+      the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  tired:
+    description: Frequency feeling tired in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  workp:
+    description: Interference of your bodily pain with your normal work (including
+      both work outside the home and housework).
+    terms: null
+    enumTerms:
+      Extremely: null
+      Moderately: null
+      Not at all: null
+      Quite a bit: null
+      Slightly: null
+
+  worn:
+    description: Frequency feeling worn out in the last four weeks.
+    terms: null
+    enumTerms:
+      A good bit of the time: null
+      A little of the time: null
+      All of the time: null
+      Most of the time: null
+      None of the time: null
+      Some of the time: null
+
+  worse:
+    description: Feeling health is getting worse.
+    terms: null
+    enumTerms:
+      Definitively false: null
+      Definitively true: null
+      Mostly false: null
+      Mostly true: null
+      Unknown: null
+
+  follow_ups:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,229 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "ces_depression_scale"
+title: CES Depression Scale
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Center for Epidemiologic Studies Depression Scale (CES-D)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: ces_depression_scales
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  cesd_10_fearful:
+    description: 10. Felt Fearful
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_11_restless_sleep:
+    description: 11. My Sleep Was Restless
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_12_happy:
+    description: 12. I Was Happy
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_13_talked_less:
+    description: 13. I Talked Less Than Usual
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_14_felt_lonely:
+    description: 14. Felt Lonely
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_15_people_unfriendly:
+    description: 15. People Were Unfriendly
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_16_enjoyed_life:
+    description: 16. Enjoyed Life
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_17_crying_spells:
+    description: 17. Had Crying Spells
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_18_sad:
+    description: 18. Felt Sad
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_19_people_deslike:
+    description: 19. Felt That People Dislike Me
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_1_bothered_by_things:
+    description: 01. Was Bothered By Things That Usually Do Not Bother Me
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_20_could_not_get_going:
+    description: 20. Could Not Get Going
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_2_poor_appetite:
+    description: 02. Did Not Feel Like Eating Appetite Poor
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_3_could_not_shake_off_the_blues:
+    description: 03. Could Not Shake Off The Blues
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_4_felt_good_as_others:
+    description: 04. Felt I Was As Good As Other People
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_5_trouble_keep_mind_on_task:
+    description: 05. Trouble Keeping Mind On Task
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_6_felt_depressed:
+    description: 06. Felt Depressed
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_7_everything_was_an_effort:
+    description: 07. Felt Everything Was An Effort
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_8_hopeful_about_future:
+    description: 08. Felt Hopeful About The Future
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  cesd_9_life_had_been_failure:
+    description: 09. Thought My Life Had Been A Failure
+    enum:
+      - Moderate
+      - Most
+      - Rarely
+      - Some
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,114 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "regensburg_verbal_fluency_test"
+title: Regensburg Verbal Fluency Test (RWT)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: The Regensburg Word Fluency Test (RWT) or Regensburger Wortflussigkeits-Test
+  is a diagnostic method for testing verbal fluency. The RWT includes five subtests
+  on formal-lexical vocabulary and five sub-tests on semantic fluency, allowing parallel
+  measurements for both forms of verbal fluency.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: regensburg_word_fluency_tests
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  rwt_letter_1_minute_p_words:
+    description: RWT - Verbal Fluency Letter- 1. Minute - P-Words
+    type: integer
+
+  rwt_letter_1_minute_p_words_percentile:
+    description: RWT - Verbal Fluency Letter- 1. Minute - P-Words Percentile
+    type: integer
+
+  rwt_letter_2_minute_p_words:
+    description: RWT - Verbal Fluency Letter- 2. Minute - P-Words
+    type: integer
+
+  rwt_letter_2_minute_p_words_percentile:
+    description: RWT - Verbal Fluency Letter- 2. Minute - P-Words Percentile
+    type: integer
+
+  rwt_letter_category_1min_g_r:
+    description: RWT - Verbal Fluency Letter Category Change- 1. Minute - G-R
+    type: integer
+
+  rwt_letter_category_1min_g_r_percentile:
+    description: RWT - Verbal Fluency Letter Category Change- 1. Minute - G-R Percentile
+    type: integer
+
+  rwt_letter_category_2min_g_r:
+    description: RWT - Verbal Fluency Letter Category Change- 2. Minute - G-R
+    type: integer
+
+  rwt_letter_category_2min_g_r_percentile:
+    description: RWT - Verbal Fluency Letter Category Change- 2. Minute - G-R Percentile
+    type: integer
+
+  rwt_semantic_1min_animals:
+    description: RWT - Verbal Fluency Semantic- 1. Minute - Animals
+    type: integer
+
+  rwt_semantic_1min_animals_percentile:
+    description: RWT - Verbal Fluency Semantic- 1. Minute - Animals Percentile
+    type: integer
+
+  rwt_semantic_2min_animals:
+    description: RWT - Verbal Fluency Semantic- 2. Minute - Animals
+    type: integer
+
+  rwt_semantic_2min_animals_percentile:
+    description: RWT - Verbal Fluency Semantic- 2. Minute - Animals Percentile
+    type: integer
+
+  rwt_semantic_category_1min_sports_fruits:
+    description: RWT - Verbal Fluency Semantic Category Change- 1. Minute - Sports-Fruits
+    type: integer
+
+  rwt_semantic_category_1min_sports_fruits_percentile:
+    description: RWT - Verbal Fluency Semantic Category Change- 1. Minute - Sports-Fruits
+      Percentile
+    type: integer
+
+  rwt_semantic_category_2min_sports_fruits_percentile:
+    description: RWT - Verbal Fluency Semantic Category Change- 2. Minute - Sports-Fruits
+      Percentile
+    type: integer
+
+  rwt_semantic_categorye_2min_sports_fruits:
+    description: RWT - Verbal Fluency Semantic Category Change- 2. Minute - Sports-Fruits
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

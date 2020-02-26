@@ -1,0 +1,244 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "endpoint"
+title: Endpoint
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: study_administration
+program: '*'
+project: '*'
+description: Information related to the study endpoint for a patient
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: endpoints
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  activities_of_daily_living:
+    description: Activities Of Daily Living
+    enum:
+      - Full
+      - Mildly Impaired
+      - Moderately Impaired
+
+  code_pd_threat_to_balance:
+    description: The code corresponding to pd_threat_to_balance.
+    type: number
+
+  code_pd_threat_to_gait:
+    description: The code corresponding to pd_threat_to_gait.
+    type: number
+
+  days_to_datatop_endpoint:
+    description: The number of days between the Index Date and the DATATOP Endpoint
+    type: integer
+
+  days_to_endpoint_form:
+    description: The number of days between the Index Date and the Endpoint Form Evaluation
+      Date
+    type: integer
+
+  days_to_final_evaluation_scheduled:
+    description: The number of days between the Index Date and the Final Evaluation
+      Scheduled
+    type: integer
+
+  days_to_levodopa_need:
+    description: The number of days between the Index Date and the Need For Levodopa
+    type: integer
+
+  days_to_termination_from_datatop:
+    description: Number of days between the case's Index Date and the date of Termination
+      From DATATOP
+    type: integer
+
+  domestic_responsibilities:
+    description: Domestic Responsibilities
+    enum:
+      - Full
+      - Impaired
+      - Unable
+
+  financial_abilities:
+    description: Describe Financial Abilities
+    enum:
+      - Full
+      - Requires Major Assistance
+      - Requires Minor Assistance
+      - Unable
+
+  investigator_id_code:
+    description: Investigator ID Code
+    type: integer
+
+  need_of_levodopa:
+    description: Need Of Levodopa
+    type: boolean
+
+  occupational_abilities:
+    description: Describe the Occupational Abilities
+    enum:
+      - Lower Level
+      - Marginal Level
+      - Unable
+      - Usual Level
+
+  pd_threat_employed_full_time_flag:
+    description: PD Threat- Employed Full-time?
+    type: boolean
+
+  pd_threat_employed_part_time_flag:
+    description: PD Threat- Employed Part-time?
+    type: boolean
+
+  pd_threat_full_time_homemaker_flag:
+    description: PD Threat- Full-time Homemaker?
+    type: boolean
+
+  pd_threat_full_time_homemaking:
+    description: PD Threat To Full-time Homemaking
+    enum:
+      - Considerable, Prompting Concern By Patient Or Family
+      - Imminent, Will Likely Need To Give Up Full-Time Homemaking Within Next Month
+      - Moderate, Prompting Concern By Family
+      - Moderate, Prompting Concern By Patient
+      - None
+      - Slight But Not Serious (No Expressed Concern)
+
+  pd_threat_part_time_homemaker_flag:
+    description: PD Threat- Part-time Homemaker?
+    type: boolean
+
+  pd_threat_to_balance:
+    description: Describe the Threat Of PD To Balance
+    enum:
+      - Absence Of Postural Reflexes; Would Fall If Not Caught By Examiner
+      - Intermediate
+      - None
+      - Retropulsive, But Recovers Unaided
+      - Very Unstable, Tends To Lose Balance Spontaneously
+
+  pd_threat_to_full_time:
+    description: PD Threat To Full-time
+    enum:
+      - Considerable, Prompting Concern By Patient (Or Family) And Employer
+      - Imminent, Will Likely Lose Or Stop Full-Time Work Within Next Month
+      - Moderate, Prompting Concern By Employer
+      - Moderate, Prompting Concern By Patient Or Family
+      - None
+      - Slight But Not Serious (No Expressed Concern)
+
+  pd_threat_to_gait:
+    description: Threat Of PD To Gait
+    enum:
+      - Intermediate
+      - None
+      - Walks Slowly, May Shuffle Occasionally With Short Steps, But No Festination
+        Or Propulsion
+      - 'Walks With Difficulty, But Requires Little Or No Assistance: May Have Some
+        Festination, Short Steps Or Propulsion'
+
+  pd_threat_to_part_time:
+    description: PD Threat To Part-time
+    enum:
+      - Considerable, Prompting Concern By Patient (Or Family) And Employer
+      - Imminent, Will Likely Lose Or Stop Part-Time Work Within Next Month
+      - Moderate, Prompting Concern By Employer
+      - Moderate, Prompting Concern By Patient Or Family
+      - None
+      - Slight But No Serious (No Expressed Concern)
+
+  pd_threat_to_part_time_homemaking:
+    description: PD Threat To Part-time Homemaking
+    enum:
+      - Considerable, Prompting Concern By Patient And Family
+      - Imminent, Will Likely Need To Give Up Part-Time Homemaking Within Next Month
+      - Moderate, Prompting Concern By Family
+      - Moderate, Prompting Concern By Patient
+      - None
+      - Slight But Not Serious (No Expressed Concern)
+
+  primary_motor_reason:
+    description: Primary Motor Reason
+    enum:
+      - Bradykinesia
+      - Gait
+      - Other
+      - Postural Imbalance
+      - Rigidity
+      - Tremor
+
+  primary_reason:
+    description: Primary Reason
+    enum:
+      - Both
+      - Functional Disability
+      - Other
+      - Social Embarrassment
+
+  prompter:
+    description: Prompter
+    enum:
+      - Coordinator
+      - Investigator
+      - Mutual Consensus By All Of The Above
+      - Other
+      - Patient
+      - Patient's Family
+
+  reached_endpoint_in_datatop:
+    description: Reached Endpoint In DATATOP
+    type: boolean
+
+  staff_code_of_form_completer:
+    description: Staff Code Of Form Completer
+    type: integer
+
+  when_determined:
+    description: When Determined
+    enum:
+      - At Other Time
+      - At Scheduled Follow-Up Evaluation
+      - At Unscheduled Follow-Up Evaluation
+
+  year_final_evaluation_scheduled:
+    description: Year Final Evaluation Scheduled
+    type: integer
+
+  year_levodopa_need_determined:
+    description: Levodopa - Year Determined
+    type: integer
+
+  year_of_evaluation:
+    description: Year Of Evaluation
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

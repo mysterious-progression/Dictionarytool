@@ -1,0 +1,349 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "gynecological_exam"
+title: Gynecological Examination
+type: object
+nodeTerms: null
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Values obtained from a extense gynecological exam required by a medical
+  professional and performed at one of the recurrent patient visit.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: follow_ups
+    backref: gynecological_exams
+    label: performed_at
+    target_type: follow_up
+    multiplicity: one_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - follow_ups
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  adnexae_left_mass:
+    description: Presence of left adnexal mass
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  adnexae_left_tenderness:
+    description: Presence of left adnexal tenderness
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  adnexae_presence:
+    description: Presence of Adnexae
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  adnexae_right_mass:
+    description: Presence of right  adnexal mass
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  adnexae_right_tenderness:
+    description: Presence of right  adnexal tenderness
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  amine_odor_koh_test:
+    description: Amine odor KOH mount test
+    terms: null
+    enumTerms:
+      Refusal: null
+      Unknown: null
+      negative: null
+      not obtained: null
+      not read: null
+      positive: null
+      unclear: null
+
+  cervical_discharge_color:
+    description: Cervical discharge color
+    terms: null
+    enumTerms:
+      Brown/Blood: null
+      Refusal: null
+      Unknown: null
+      White: null
+      Yellow/Green: null
+
+  cervical_exam_done:
+    description: Check if the cervical exam has been done
+    terms: null
+    type: boolean
+
+  cervical_lesion_presence:
+    description: Presence of cervical lesions
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  cervical_motion_tenderness:
+    description: Presence of ervical motion tenderness
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  cervix_presence:
+    description: Presence of cervix
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  clinical_impression_lesions:
+    description: List of clinical impression episodes
+    terms: null
+    type: string
+
+  clue_cells_percentage:
+    description: Percentage of clue cells observed (more or less 20%)
+    terms: null
+    enumTerms:
+      <20%: null
+      '>=20%': null
+      Refusal: null
+      Unknown: null
+
+  clue_cells_test:
+    description: Clue cells wet prep test
+    terms: null
+    enumTerms:
+      Refusal: null
+      Unknown: null
+      negative: null
+      not obtained: null
+      not read: null
+      positive: null
+      unclear: null
+
+  ectopy_presence:
+    description: Presence of visible ectopy
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  exudate_presence:
+    description: Presence of exudate
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  friability_presence:
+    description: Presence of friability
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  genital_lesions:
+    description: Genital lesions
+    terms: null
+    type: string
+
+  increased_wbcs:
+    description: Increased wbcs
+    terms: null
+    enumTerms:
+      Refusal: null
+      Unknown: null
+      negative: null
+      not obtained: null
+      not read: null
+      positive: null
+      unclear: null
+
+  lesions_count:
+    description: Total number of lesions
+    terms: null
+    type: integer
+
+  trichomonas_test:
+    description: Trichomonas wet prep test
+    terms: null
+    enumTerms:
+      Refusal: null
+      Unknown: null
+      negative: null
+      not obtained: null
+      not read: null
+      positive: null
+      unclear: null
+
+  uterine_enlargement:
+    description: Presence of uterine enlargement
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  uterine_tenderness:
+    description: Presence of uterine tenderness
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  uterus_presence:
+    description: Presence of uterus
+    terms: null
+    enumTerms:
+      Absent: null
+      Present: null
+      Refusal: null
+      Unknown: null
+
+  vagina_ph:
+    description: Vagina PH
+    terms: null
+    type: number
+
+  vaginal_discharge_character_bloody:
+    description: Vaginal discharge character- bloody
+    terms: null
+    enumTerms:
+      Circled: null
+      Not Circled: null
+      Refusal: null
+      Unknown: null
+
+  vaginal_discharge_character_curdy:
+    description: Vaginal discharge character- curdy
+    terms: null
+    enumTerms:
+      Circled: null
+      Not Circled: null
+      Refusal: null
+      Unknown: null
+
+  vaginal_discharge_character_frothy:
+    description: Vaginal discharge character- frothy
+    terms: null
+    enumTerms:
+      Circled: null
+      Not Circled: null
+      Refusal: null
+      Unknown: null
+
+  vaginal_discharge_character_mucoid:
+    description: Vaginal discharge character- mucoid/floccular
+    terms: null
+    enumTerms:
+      Circled: null
+      Not Circled: null
+      Refusal: null
+      Unknown: null
+
+  vaginal_discharge_character_nonfloccular:
+    description: Vaginal discharge character- milky/creamy (non-floccular)
+    terms: null
+    enumTerms:
+      Circled: null
+      Not Circled: null
+      Refusal: null
+      Unknown: null
+
+  vaginal_discharge_character_purulent:
+    description: Vaginal discharge character- purulent
+    terms: null
+    enumTerms:
+      Circled: null
+      Not Circled: null
+      Refusal: null
+      Unknown: null
+
+  vaginal_discharge_color:
+    description: Vaginal discharge volume
+    terms: null
+    enumTerms:
+      Brown/Blood: null
+      Refusal: null
+      Unknown: null
+      White: null
+      Yellow/Green: null
+
+  vaginal_discharge_volume:
+    description: Vaginal discharge volume
+    terms: null
+    enumTerms:
+      Increased: null
+      Normal: null
+      Refusal: null
+      Unknown: null
+
+  yeast_koh_test:
+    description: Yeast KOH mount test
+    terms: null
+    enumTerms:
+      Refusal: null
+      Unknown: null
+      negative: null
+      not obtained: null
+      not read: null
+      positive: null
+      unclear: null
+
+  follow_ups:
+    $ref: "_definitions.yaml#/to_one"

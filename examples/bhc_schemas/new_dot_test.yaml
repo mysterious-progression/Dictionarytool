@@ -1,0 +1,79 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "new_dot_test"
+title: New Dot Test
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Data from the New Dot Test, a test of visuospatial working memory, in
+  which the patient must identify the new dot among other dots previously shown on
+  the screen. He thus must learn the spatial location of the other dots to achieve
+  this goal
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: new_dot_tests
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  new_dot_test_score:
+    description: New Dot Test Score, which is the number of dots correctly located.
+    type: integer
+
+  new_dot_test_version:
+    description: The version of the New Dot Test Administered
+    type: integer
+
+  year_of_assessment:
+    description: Year Of UDPRS Evaluation
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

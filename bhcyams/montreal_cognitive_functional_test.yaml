@@ -1,0 +1,244 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "montreal_cognitive_functional_test"
+title: Montreal Cognitive Assessment Functional Test (MOCA)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Montreal Cognitive Assessment Functional Test (MOCA)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: montreal_cognitive_functional_tests
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  moca01_alternating_trail_making:
+    description: MOCA- 01. Alternating Trail Making
+    type: integer
+
+  moca02_visuoconstr_skills_cube:
+    description: MOCA- 02. Visuoconstructional Skills - Copy Cube
+    type: integer
+
+  moca03_visuoconstr_skills_clock_cont:
+    description: MOCA- 03. Visuoconstructional Skills - Draw Clock Contour
+    type: integer
+
+  moca04_visuoconstr_skills_clock_num:
+    description: MOCA- 04. Visuoconstructional Skills - Draw Clock Numbers
+    type: integer
+
+  moca05_visuoconstr_skills_clock_hands:
+    description: MOCA- 05. Visuoconstructional Skills - Draw Clock Hands
+    type: integer
+
+  moca06_naming_lion:
+    description: MOCA- 06. Naming - Lion
+    type: integer
+
+  moca07_naming_rhino:
+    description: MOCA- 07. Naming - Rhino
+    type: integer
+
+  moca08_naming_camel:
+    description: MOCA- 08. Naming - Camel
+    type: integer
+
+  moca09_attention_forward_digit_span:
+    description: MOCA- 09. Attention - Forward Digit Span
+    type: integer
+
+  moca10_attention_backward_digit_span:
+    description: MOCA- 10. Attention - Backward Digit Span
+    type: integer
+
+  moca11_attention_vigilance:
+    description: MOCA- 11. Attention - Vigilance
+    type: integer
+
+  moca12_attention_serial_7s:
+    description: MOCA- 12. Attention - Serial 7s
+    type: integer
+
+  moca13_sentence_repetition:
+    description: MOCA- 13. Sentence Repetition
+    type: integer
+
+  moca13a_sentence_rep_john:
+    description: MOCA- 13a. Sentence Repetition with John
+    type: integer
+
+  moca13b_sentence_rep_cat:
+    description: MOCA- 13b. Sentence Repetition with Cat
+    type: integer
+
+  moca14_verbal_fluency_number_of_words:
+    description: MOCA- 14. Verbal Fluency - Number Of Words
+    type: integer
+
+  moca15_verbal_fluency:
+    description: MOCA- 15. Verbal Fluency
+    type: integer
+
+  moca16_abstraction:
+    description: MOCA- 16. Abstraction
+    type: integer
+
+  moca16a_abstraction_train:
+    description: MOCA- 16a. Abstraction Train Bicycle
+    type: integer
+
+  moca16b_abstraction_watch:
+    description: MOCA- 16b. Abstraction Watch Ruler
+    type: integer
+
+  moca17_delayed_recall_face:
+    description: MOCA- 17. Delayed Recall - Face
+    type: integer
+
+  moca18_delayed_recall_velvet:
+    description: MOCA- 18. Delayed Recall - Velvet
+    type: integer
+
+  moca19_delayed_recall_church:
+    description: MOCA- 19. Delayed Recall - Church
+    type: integer
+
+  moca20_delayed_recall_daisy:
+    description: MOCA- 20. Delayed Recall - Daisy
+    type: integer
+
+  moca21_delayed_recall_red:
+    description: MOCA- 21. Delayed Recall - Red
+    type: integer
+
+  moca22_orientation_date:
+    description: MOCA- 22. Orientation - Date
+    type: integer
+
+  moca23_orientation_month:
+    description: MOCA- 23. Orientation - Month
+    type: integer
+
+  moca24_orientation_year:
+    description: MOCA- 24. Orientation - Year
+    type: integer
+
+  moca25_orientation_day:
+    description: MOCA- 25. Orientation - Day
+    type: integer
+
+  moca26_orientation_place:
+    description: MOCA- 26. Orientation - Place
+    type: integer
+
+  moca27_orientation_city:
+    description: MOCA- 27. Orientation - City
+    type: integer
+
+  moca_abstruction_subscore:
+    description: MOCA- Abstruction Subscore
+    type: integer
+
+  moca_add_point_less_12_year_educ:
+    description: Additional Point For Education Level (Add 1 Point For < 12 Years
+      Of Education)
+    type: integer
+
+  moca_attention_subscore:
+    description: MOCA- Attention Subscore
+    type: integer
+
+  moca_delayed_recall_subscore:
+    description: MOCA- Delayed Recall Subscore
+    type: integer
+
+  moca_language_subscore:
+    description: MOCA- Language Subscore
+    type: integer
+
+  moca_reconstr_from_mmse_score:
+    description: MOCA - Reconstructed Values From MMSE Score
+    type: integer
+
+  moca_score_attention_digits:
+    description: MOCA- 09-10. Forward/Backward Repeat Lists Of Digits Subscore
+    type: integer
+
+  moca_subtotal:
+    description: MOCA Subtotal Score (visuospatial, naming, attention digits, attention
+      letters, attention serial7, language repeat, language fluency, abstraction,
+      delayed recall, orientation)
+    type: integer
+
+  moca_total_score:
+    description: MOCA Total Score
+    type: integer
+
+  naming_subscore:
+    description: MOCA- Naming Subscore
+    type: integer
+
+  orientation_subscore:
+    description: MOCA- Orientation Subscore
+    type: integer
+
+  visuospatial_executive_subscore:
+    description: MOCA- Visuospatial and Executive Subscore
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

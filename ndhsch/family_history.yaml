@@ -1,0 +1,120 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "family_history"
+title: Family History
+type: object
+nodeTerms: null
+namespace: http://gdc.nci.nih.gov
+category: clinical
+program: '*'
+project: '*'
+description: Record of a patient's background regarding cancer events of blood relatives.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: family_histories
+    label: describes
+    target_type: subject
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  created_datetime:
+    terms:
+      - $ref: "_definitions.yaml#/datetime"
+    type: null
+
+  id:
+    terms:
+      - $ref: "_definitions.yaml#/UUID"
+    type: null
+
+  project_id:
+    terms:
+      - $ref: "_definitions.yaml#/project_id"
+    type: null
+
+  relationship_age_at_diagnosis:
+    terms:
+      - $ref: "_terms.yaml#/relationship_age_at_diagnosis"
+    type: "['number', 'null']"
+    maximum: 89
+    minimum: 0
+
+  relationship_age_at_diagnosis_gt89:
+    terms:
+      - $ref: "_terms.yaml#/relationship_age_at_diagnosis_gt89"
+    enumTerms:
+      No: null
+      Yes: null
+
+  relationship_gender:
+    terms:
+      - $ref: "_terms.yaml#/gender"
+    enumTerms:
+      female: null
+      male: null
+      not reported: null
+      unknown: null
+      unspecified: null
+
+  relationship_primary_diagnosis:
+    terms:
+      - $ref: "_terms.yaml#/primary_diagnosis"
+    type: string
+
+  relationship_type:
+    terms:
+      - $ref: "_terms.yaml#/relationship_type"
+    type: string
+
+  relative_with_hiv_history:
+    description: Indicator to signify whether or not an individual's biological relative
+      has been diagnosed with HIV.
+    terms: null
+    enumTerms:
+      no: null
+      not reported: null
+      unknown: null
+      yes: null
+
+  state:
+    terms:
+      - $ref: "_definitions.yaml#/state"
+    type: null
+
+  submitter_id:
+    terms: null
+    type: "['string', 'null']"
+
+  type:
+    terms: null
+    enumTerms:
+      family_history: null
+
+  updated_datetime:
+    terms:
+      - $ref: "_definitions.yaml#/datetime"
+    type: null
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

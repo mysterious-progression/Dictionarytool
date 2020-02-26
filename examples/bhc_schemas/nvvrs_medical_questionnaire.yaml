@@ -1,0 +1,880 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "nvvrs_medical_questionnaire"
+title: NVVRS Medical Questionnaire
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A questionnaire used for the National Vietnam Veterans Longitudinal Study.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: nvvrs_medical_questionnaires
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  X_nvvrs_healthcomp:
+    description: sum(X_nvvrs_1_2_1-nvvrs_1_2_22)
+    type: integer
+
+  X_nvvrs_lifetime:
+    description: sum(part 2 - "started" questions)
+    type: integer
+
+  X_nvvrs_pastyear:
+    description: sum(part 2 - "last year" questions)
+    type: integer
+
+  X_nvvrs_physdiag:
+    description: sum(nvvrs_1_1_1-nvvrs_1_1_12)
+    type: integer
+
+  nvvrs_1_1_1:
+    description: Diagnosed with Diabetes
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_10:
+    description: Diagnosed with Cancer
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_11:
+    description: Diagnosed with Allergies
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_12:
+    description: Diagnosed with Respiratory Disease
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_2:
+    description: Diagnosed with Epilepsy
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_3:
+    description: Diagnosed with Head Injury
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_4:
+    description: Diagnosed with Ulcer
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_5:
+    description: Diagnosed with Heart Diagnosed
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_6:
+    description: Diagnosed with Kidney Disorder
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_7:
+    description: Diagnosed with Liver Diagnosed
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_8:
+    description: Diagnosed with Hypertension
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_1_9:
+    description: Diagnosed with Hearing Loss
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_1:
+    description: Problems with Headaches
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_10:
+    description: Problems with Heart Flutters
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_11:
+    description: Problems with Sexual Disinterest
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_12:
+    description: Problems with Impotence
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_13:
+    description: Problems with Inability to Achieve Orgasm
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_14:
+    description: Problems with Constipation
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_15:
+    description: Problems with Diarrhea
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_16:
+    description: Problems with Nausea
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_17:
+    description: Problems with Butterflies
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_18:
+    description: Problems with Gas
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_19:
+    description: Problems with Stomach Cramps
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_2:
+    description: Problems with Dizziness
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_20:
+    description: Problems with Muscle Aches
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_21:
+    description: Problems with Nail Biting
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_22:
+    description: Problems with Backache
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_3:
+    description: Problems with Black-out Spells
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_4:
+    description: Problems with Ringing in Ears
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_5:
+    description: Problems with Blurred Vision
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_6:
+    description: Problems with Shortness of Breath
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_7:
+    description: Problems with Rapid Breathing
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_8:
+    description: Problems with Racing Heart
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_1_2_9:
+    description: Problems with Irregular Heartbeat
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_1:
+    description: Ever had asthma?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_10:
+    description: Ever had any other heart trouble or condition affecting blood circulation?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_10_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_10_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_11:
+    description: Cancer of any kind, including leukemia?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_11_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_11_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_12:
+    description: A non-cancerous or benign tumor, growth or cyst?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_12_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_12_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_13:
+    description: Cirrhosis of the liver, hepatitis, jaundice, or other liver condition?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_13_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_13_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_14:
+    description: Ulcers of the digestive system?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_14_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_14_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_15:
+    description: A digestive disorder other than ulcers or liver problems, such as
+      gall bladder trouble, stomach or intestinal problems?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_15_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_15_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_16:
+    description: Anemia or "Tired Blood"?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_16_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_16_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_17:
+    description: Rheumatic fever or rheumatic heart disease?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_17_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_17_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_18:
+    description: A chronic skin condition such as eczema, psoriasis, chloracne or
+      dermatitis?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_18_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_18_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_19:
+    description: Deafness in one or both ears, or any other serious trouble with hearing?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_19_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_19_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_1_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_1_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_2:
+    description: Ever had tuberculosis?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_20:
+    description: Blindness in one or both eyes, or any other serious trouble with
+      seeing, even when wearing glasses?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_20_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_20_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_21:
+    description: Stammering, stuttering or any other speech defect or impairment?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_21_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_21_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_22:
+    description: A kidney, bladder, or urinary tract-problems?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_22_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_22_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_23:
+    description: Repeated seizures, convulsions, blackouts or fainting spells (including
+      epilepsy)?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_23_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_23_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_24:
+    description: A missing finger, hand or arm?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_24_1:
+    description: Specify-
+    type: string
+
+  nvvrs_2_24_2:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_24_3:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_25:
+    description: A missing toe, foot or leg?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_25_1:
+    description: Specify-
+    type: string
+
+  nvvrs_2_25_2:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_25_3:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_26:
+    description: A missing breast, kidney or lung?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_26_1:
+    description: Specify-
+    type: string
+
+  nvvrs_2_26_2:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_26_3:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_27:
+    description: Repeated trouble with your neck, back or spine?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_27_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_27_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_28:
+    description: Permanent stiffness (joints will not move at all) or any deformity
+      of the foot, leg or back?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_28_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_28_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_29:
+    description: Permanent stiffness or any deformity of the fingers, hand or arm?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_29_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_29_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_2_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_2_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_3:
+    description: Ever had any other trouble breathing such as emphysema, chronic bronchitis
+      or brown lung?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_30:
+    description: Paralysis or any kind?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_30_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_30_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_31:
+    description: Any other physical or mental problem or illness that seriously affects
+      your health?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_31_1:
+    description: Specify-
+    type: string
+
+  nvvrs_2_31_2:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_31_3:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_32:
+    description: Prostate trouble?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_32_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_32_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_33:
+    description: Amenorrhea, irregular menstrual periods or other trouble with menstruation?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_33_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_33_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_34:
+    description: A tumor, cyst or growth of the uterus or ovaries?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_34_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_34_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_35:
+    description: A hysterectomy?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_35_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_35_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_36:
+    description: Any other disease of the uterus or ovaries?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_36_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_36_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_37:
+    description: Any other female trouble?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_37_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_37_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_3_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_3_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_4:
+    description: Ever had arthritis, rheumatism or gout?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_4_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_4_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_5:
+    description: Ever had high sugar or diabetes?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_5_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_5_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_6:
+    description: Ever had hardening of the arteries (arterosclerosis)
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_6_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_6_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_7:
+    description: Ever had high blood pressure or hypertension?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_7_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_7_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_8:
+    description: Ever had a stroke (or cerebrovascular accident)?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_8_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_8_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_9:
+    description: Ever had a myocardial infarction or heart attack?
+    enum:
+      - "No"
+      - "Yes"
+
+  nvvrs_2_9_1:
+    description: How old were you when it started?
+    type: integer
+
+  nvvrs_2_9_2:
+    description: Have you had this problem in the past year?
+    enum:
+      - "No"
+      - "Yes"
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

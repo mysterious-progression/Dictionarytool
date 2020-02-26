@@ -1,0 +1,635 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "family_history"
+title: Family History
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: subject_characteristics
+program: '*'
+project: '*'
+description: A subject's background regarding their blood relative's ancestoral origin,
+  general health, and disease events.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: family_histories
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  affected_relative_gt1:
+    description: More than one affected relative (GT1AFREL)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  age_alzheimers_symptom:
+    description: Age Alzheimer's Disease Symptoms Developed
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  age_pd_symptom:
+    description: Age Parkinson's Disease Symptoms Developed
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  any_new_neurological_disorder_family:
+    description: Are New Neurological Disorders Occurred Since The Last Visit In The
+      Family
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  biological_father_number:
+    description: Biological Father-Number (biodad)
+    type: integer
+
+  biological_mother_number:
+    description: Biological Mother-Number (biomom)
+    type: integer
+
+  c228s_family:
+    description: Family LRRK2 Mutation Details- C228S Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  cancer_relative_age_at_diagnosis:
+    term:
+      $ref: "_terms.yaml#/relationship_age_at_diagnosis"
+    type: number
+    maximum: 89
+    minimum: 0
+
+  cancer_relative_gender:
+    term:
+      $ref: "_terms.yaml#/gender"
+    enum:
+      - Female
+      - Male
+      - Not Reported
+      - Unknown
+      - Unspecified
+
+  cancer_relative_primary_diagnosis:
+    term:
+      $ref: "_terms.yaml#/primary_diagnosis"
+    type: string
+
+  cancer_relative_type:
+    term:
+      $ref: "_terms.yaml#/relationship_type"
+    type: string
+
+  cancer_relative_with_history:
+    term:
+      $ref: "_terms.yaml#/relative_with_cancer_history"
+    enum:
+      - "no"
+      - not reported
+      - unknown
+      - "yes"
+
+  children_number:
+    description: Children-Number (kidsnum)
+    type: integer
+
+  days_to_info:
+    description: Days to information since consent
+    type: integer
+
+  family_history_als:
+    description: Family Member With Lou Gehrig's disease (ALS)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_alzheimers:
+    description: Family History Of Alzheimer's
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_alzheimers_specify:
+    description: Family Member With Alzheimer's Disease - Specify
+    type: string
+
+  family_history_atypical_parkinsonism:
+    description: Family Member With Atypical Parkinsonism
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_cerebellar_ataxia:
+    description: Family Member With Cerebellar Ataxia
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_corticobasal_degeneration:
+    description: Family Member With Corticobasal Degeneration
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_dementia:
+    description: Family Member With Dementia
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_dementia_specify:
+    description: Family Member With Dementia - Specify
+    type: string
+
+  family_history_essential_tremor:
+    description: Family History Of Essential Tremor
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_essential_tremor_specify:
+    description: Family Member With Essential Tremor - Specify
+    type: string
+
+  family_history_genetic_disease:
+    description: Family History Of Genetic Disease
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_huntingtons:
+    description: Family Member With Huntington's Disease
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_huntingtons_specify:
+    description: Family Member With Huntington's Disease - Specify
+    type: string
+
+  family_history_lewy_bodies:
+    description: Family Member With Dementia With Lewy-Bodies
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_lewy_bodies_specify:
+    description: Family Member With Dementia With Lewy-Bodies - Specify
+    type: string
+
+  family_history_member_dystonia:
+    description: Family Member With Dystonia
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_multiple_system_atrophy:
+    description: Family Member With Multiple System Atrophy
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_myoklonus:
+    description: Family Member With Myoklonus
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_neurodegeneration:
+    description: Family History Of Neurodegeneration
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_new_neurological_disorder:
+    description: New Neurological Disorders - family member
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_new_neurological_disorder_specify:
+    description: New Neurological Disorders - family member, other
+    type: string
+
+  family_history_pd:
+    description: Subject Has Family History of PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_pd_specify:
+    description: Family Member With Parkinson's Disease - Specify
+    type: string
+
+  family_history_progressive_supranuclear_palsy:
+    description: Family Member With Progressive Supranuclear Palsy
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_psychiatric_illness:
+    description: Family History Of Psychiatric Illness
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_tremor:
+    description: Family History Of Tremor
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  family_history_tremor_specify:
+    description: Family Member With Tremor - Specify
+    type: string
+
+  family_issue_or_illness:
+    description: Describes an issue or illness affecting one or more of the patient's
+      family members.
+    type: string
+
+  family_member_affected:
+    description: Describes the family member affected by the issue or illness.
+    enum:
+      - Brother
+      - Father
+      - Father's half brother
+      - Father's half sister
+      - Half brother
+      - Half sister
+      - Maternal aunt
+      - Maternal grandfather
+      - Maternal grandmother
+      - Maternal uncle
+      - Mother
+      - Mother's half brother
+      - Mother's half sister
+      - Paternal aunt
+      - Paternal grandfather
+      - Paternal grandmother
+      - Paternal uncle
+      - Sister
+
+  father_status:
+    description: Father's Status
+    enum:
+      - Deceased
+      - Living
+      - Status Unknown
+
+  first_degree_relatives_alzheimers:
+    description: Any First Degree Relatives With Alzheimer's Disease
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  first_degree_relatives_with_pd:
+    description: Any first degree relatives with Parkinson's Disease?
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  full_siblings_number:
+    description: Full Siblings-Number (fulsib)
+    type: integer
+
+  g2019s_family:
+    description: Family LRRK2 Mutation Details- G2019S Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  g2385r_family:
+    description: Family LRRK2 Mutation Details- G2385R Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  grandparents_religion:
+    description: Grandparents religious group
+    enum:
+      - Catholic
+      - Islamic
+      - Jewish
+      - No Affiliation
+      - Not Reported
+      - Other (specify)
+      - Protestant
+      - Unknown
+
+  grandparents_religion_other:
+    description: Grandparents religious group if other, specify
+    type: string
+
+  half_siblings_number:
+    description: Half Siblings-Number (hafsib)
+    type: integer
+
+  i2020t_family:
+    description: Family LRRK2 Mutation Details- I2020T Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  l1114l_family:
+    description: Family LRRK2 Mutation Details- L1114L Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  lrrk2_mutation_in_family:
+    description: Is There A LRRK2 Mutation In The Family (excl subj)
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  maternal_ancestors_origin:
+    description: Where family originated before they first arrived in the united states-
+      homeland maternal ancestors
+    type: string
+
+  maternal_aunts_and_uncles_number:
+    description: Maternal Aunts and Uncles-Number (matau)
+    type: integer
+
+  maternal_grandparents_number:
+    description: Maternal Grandparents-Number (magpar)
+    type: integer
+
+  mother_status:
+    description: Mother's Status
+    enum:
+      - Deceased
+      - Living
+      - Status Unknown
+
+  n1437h_family:
+    description: Family LRRK2 Mutation Details- N1437H Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  number_of_deceased_children:
+    description: Number Of Deceased Children
+    type: integer
+
+  number_of_deceased_siblings:
+    description: Number Of Deceased Siblings
+    type: integer
+
+  number_of_living_children:
+    description: Number Of Living Children
+    type: integer
+
+  number_of_living_siblings:
+    description: Number Of Living Siblings
+    type: integer
+
+  other_family_lrrk2:
+    description: Family LRRK2 Mutation Details- Other Family (othlrkfc)
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  other_relatives_number:
+    description: More than one affected relative (GT1AFREL)
+    type: integer
+
+  paternal_ancestors_origin:
+    description: Where family originated before they first arrived in the united states-
+      homeland of paternal ancestors
+    type: string
+
+  paternal_aunts_and_uncles_number:
+    description: Paternal Aunts and Uncles-Number (patau)
+    type: integer
+
+  paternal_grandparents_number:
+    description: Paternal Grandparents-Number (pagpar)
+    type: integer
+
+  pd_biological_father:
+    description: Any Biological Father With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_biological_father_number:
+    description: Biological Father-Number with PD (biodadpd)
+    type: integer
+
+  pd_biological_mother:
+    description: Any Biological Mother With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_biological_mother_number:
+    description: Biological Mother-Number with PD (biomompd)
+    type: integer
+
+  pd_biologically_related:
+    description: Subject biologically related to someone with PD (biorelpd)
+    type: boolean
+
+  pd_biologically_related_category:
+    description: Family History of PD - new categories
+    enum:
+      - First Degree Family w/PD
+      - No Family w/PD
+      - Non-1st Degree Family w/PD
+
+  pd_children:
+    description: Any Children With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_children_number:
+    description: Children-Number with PD (kidspd)
+    type: integer
+
+  pd_full_siblings:
+    description: Any Full Siblings With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_full_siblings_number:
+    description: Full Siblings-Number with PD (fulsibpd)
+    type: integer
+
+  pd_half_siblings:
+    description: Any Half Siblings With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_half_siblings_number:
+    description: Half Siblings-Number with PD (hafsibpd)
+    type: integer
+
+  pd_maternal_aunts_and_uncles_number:
+    description: Maternal Aunts and Uncles-Number with PD (mataupd)
+    type: integer
+
+  pd_maternal_aunts_uncles:
+    description: Any Maternal Aunts And Uncles With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_maternal_grandparents:
+    description: Any Maternal Grandparents With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_maternal_grandparents_number:
+    description: Maternal Grandparents-Number with PD (magparpd)
+    type: integer
+
+  pd_other_relatives_number:
+    description: Number of Other Relatives with PD
+    type: integer
+
+  pd_paternal_aunts_and_uncles:
+    description: Any Paternal Aunts And Uncles With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_paternal_aunts_and_uncles_number:
+    description: Paternal Aunts and Uncles-Number with PD (pataupd)
+    type: integer
+
+  pd_paternal_grandparents:
+    description: Any Paternal Grandparents With PD
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  pd_paternal_grandparents_number:
+    description: Paternal Grandparents-Number with PD (pagparpd)
+    type: integer
+
+  pedigree_available_locally:
+    description: Is pedigree available at your local site (pedgravl)
+    type: boolean
+
+  q930r_family:
+    description: Family LRRK2 Mutation Details- Q930R Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  r1325q_family:
+    description: Family LRRK2 Mutation Details- R1325Q Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  r1441c_family:
+    description: Family LRRK2 Mutation Details- R1441C Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  r1441g_family:
+    description: Family LRRK2 Mutation Details- R1441G Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  r1628p_family:
+    description: Family LRRK2 Mutation Details- R1628P Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  s1228t_family:
+    description: Family LRRK2 Mutation Details- S1228T Family
+    enum:
+      - "No"
+      - Not Available/Will Not Be Tested
+      - "Yes"
+
+  specify_other_family_lrrk2:
+    description: Family LRRK2 Mutation Details- Specify Other Family (othlrkfc)
+    type: string
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

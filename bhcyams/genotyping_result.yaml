@@ -1,0 +1,424 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "genotyping_result"
+title: Genotyping Result
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_observations
+program: '*'
+project: '*'
+description: Genotyping results; an individual's genotype at a particular locus or
+  set of loci
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: genotyping_results
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  acceptable_sample:
+    description: Is the sample acceptable for testing?
+    type: boolean
+
+  apoe_genotype:
+    description: ApoE Genotype
+    type: string
+
+  c228s_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- C228S Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  comments:
+    description: Specific comments about the test
+    type: string
+
+  days_to_sample_collection:
+    description: Days from the index date to the date of CSF Sample
+    type: integer
+
+  days_to_test:
+    description: The total number of days between the test and the index date. The
+      date of the test less the date of index.
+    type: integer
+
+  dna_neurox_genotyping_result:
+    description: NeuroX Genotyping DNA Test Value
+    type: string
+
+  experimental_method:
+    description: The experimental method used for the genotyping test
+    enum:
+      - Comparative Genomic Hybridization
+      - FISH
+      - Flow Cytometry
+      - IHC
+      - Karyotype
+      - Microarray
+      - Microsatellite Analysis
+      - Not Reported
+      - Nuclear Staining
+      - Other (specify)
+      - RNA Sequencing
+      - RT-qPCR
+      - Sequencing, NOS
+      - Southern Blotting
+      - Targeted Sequencing
+      - Unknown
+      - WGS
+      - WXS
+
+  experimental_method_other:
+    description: The test method if 'Other (specify)' was chosen for 'test_method
+    type: string
+
+  g2019s_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- G2019S Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  g2385r_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- G2385R Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  gba1_genotyping:
+    description: Project 125 - GBA1 Genotyping by GBA sequencing (Ref NM 000157.3)
+      and NGS Test Result
+    type: string
+
+  gene_category:
+    description: Gene Category
+    enum:
+      - GBA
+      - LRRK2
+      - LRRKG2019S
+      - LRRKR1441G
+      - Other (specify)
+      - SNCA
+
+  gene_category_other:
+    description: Specify the Gene Category if 'Other (specify)' was chosen for 'gene_category
+    type: string
+
+  genetic_risk_score:
+    description: Genetic Risk Score
+    type: string
+
+  genotyping_array:
+    description: The specific genotyping array or chip used for the test
+    enum:
+      - NeuroChip
+      - NeuroX
+      - Other (specify)
+
+  genotyping_array_other:
+    description: The specific genotyping array or chip used for the test if 'Other
+      (specify)' was chosen for 'chip_name
+    type: string
+
+  i2020t_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- I2020T Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  l1114l_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- L1114L Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  lrrk2_mutation_status:
+    description: LRRK2 Mutation Status
+    enum:
+      - LRRK2 Negative
+      - LRRK2 Positive
+      - Not Reported
+      - Unknown
+
+  molecular_consequence:
+    description: The consequence of the molecular variant
+    enum:
+      - 3 Prime UTR Variant
+      - 5 Prime UTR Variant
+      - Coding Sequence Variant
+      - Downstream Gene Variant
+      - Feature Elongation
+      - Feature Truncation
+      - Frameshift Variant
+      - Incomplete Terminal Codon Variant
+      - Inframe Deletion
+      - Inframe Insertion
+      - Intergenic Variant
+      - Intron Variant
+      - Mature miRNA Variant
+      - Missense Variant
+      - NMD Transcript Variant
+      - Non-coding Transcript Exon Variant
+      - Non-coding Transcript Variant
+      - Protein Altering Variant
+      - Regulatory Region Ablation
+      - Regulatory Region Amplification
+      - Regulatory Region Variant
+      - Splice Acceptor Variant
+      - Splice Donor Variant
+      - Splice Region Variant
+      - Start Lost
+      - Stop Gain
+      - Stop Lost
+      - Stop Retained Variant
+      - Synonymous Variant
+      - TF Binding Site Variant
+      - TFBS Ablation
+      - TFBS Amplification
+      - Transcript Ablation
+      - Transcript Amplification
+      - Unknown
+      - Upstream Gene Variant
+
+  mutation_result:
+    description: Mutation Result
+    enum:
+      - Deletion
+      - Duplication
+      - Frameshift
+      - Insertion
+      - Missense
+      - Negative
+      - No Mutation Detected
+      - Nonsense
+      - Not Reported
+      - Positive
+      - Unknown
+      - Unspecified
+
+  n1437h_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- N1437H Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  neuroX_pc_1:
+    type: number
+
+  neuroX_pc_2:
+    type: number
+
+  neuroX_pc_3:
+    type: number
+
+  neuroX_pc_4:
+    type: number
+
+  neuroX_pc_5:
+    type: number
+
+  neurox_genotyping_dna_test_type:
+    description: NeuroX Genotyping DNA Test Type
+    type: string
+
+  number_of_allele_copies:
+    description: Number of allele copies
+    enum:
+      - '0'
+      - '1'
+      - '2'
+
+  other_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- Other Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  polya_rnaseq_test_name:
+    description: Genetic Data Project 109 - aSyn mRNA Transcript Differential 3'UTR
+      (polyA-RNAseq)- Test Name
+    type: string
+
+  polya_rnaseq_test_result:
+    description: Genetic Data Project 109 - aSyn mRNA Transcript Differential 3'UTR
+      (polyA-RNAseq)- Test Result
+    type: integer
+
+  polya_rnaseq_test_result_text:
+    description: Genetic Data Project 109 - aSyn mRNA Transcript Differential 3'UTR
+      (polyA-RNAseq)- Test Result, Textual
+    type: string
+
+  q930r_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- Q930R Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  r1325q_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- R1325Q Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  r1441c_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- R1441C Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  r1441g_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- R1441G Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  r1628p_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- R1628P Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  s1228t_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- S1228T Subject
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  snca_multiplication:
+    description: SNCA Multiplication
+    type: string
+
+  snp_genotype:
+    description: The genotype at the specified SNP
+    enum:
+      - A/A
+      - A/C
+      - A/G
+      - C/C
+      - C/G
+      - C/T
+      - G/G
+      - G/T
+      - Not Available
+      - T/T
+
+  snp_id:
+    description: The ID of the SNP (single nucleotide polymorphism) being tested,
+      e.g., a dbSNP id 'rs1234
+    type: string
+
+  specify_other_subject:
+    description: Subject's LRRK2 Gene Status LRRK2 Mutation Details- Specify Other
+      Subject
+    enum:
+      - I810V
+      - L1795F
+      - R1441H
+      - R793M
+
+  subject_carries_lrrk2_mutation:
+    description: Subject's LRRK2 Gene Status- Does Subject Carry LRRK2 Mutation
+    enum:
+      - "No"
+      - Not Available
+      - Will Not Be Tested
+      - "Yes"
+
+  test_analyte_type:
+    description: The biological molecule that was used for the test
+    enum:
+      - DNA
+      - Not Reported
+      - Protein
+      - Total RNA
+      - Unknown
+      - mRNA
+      - miRNA
+
+  variant_type:
+    description: The text term used to describe the type of genetic variation.
+    enum:
+      - Alleles
+      - Amplification
+      - Chrimerism
+      - Conversion
+      - Deletion
+      - Deletion-Insertion
+      - Duplication
+      - Extension
+      - Gain
+      - Hypermethylation
+      - Insertion
+      - Inversion
+      - Loss
+      - Methylation
+      - Mosaicism
+      - Not Reported
+      - Other
+      - Partial Methylation
+      - Rearrangement
+      - Repeated Sequences
+      - Splice
+      - Substitution
+      - Translocation
+      - Unknown
+
+  year_tests_obtained:
+    description: Year sequencing assay results were obtained
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

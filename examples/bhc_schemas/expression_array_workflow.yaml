@@ -1,0 +1,57 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "expression_array_workflow"
+title: Expression Array Workflow
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: analysis
+program: '*'
+project: '*'
+description: Metadata for the expression array workflow used to generate expression
+  data.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: submitted_expression_array_files
+    backref: expression_array_workflows
+    label: performed_on
+    target_type: submitted_expression_array
+    multiplicity: many_to_many
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - workflow_type
+  - submitted_expression_array_files
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/workflow_properties"
+
+  type:
+    enum:
+      - expression_array_workflow
+
+  workflow_type:
+    term:
+      $ref: "_terms.yaml#/workflow_type"
+    enum:
+      - Expression Array
+
+  submitted_expression_array_files:
+    $ref: "_definitions.yaml#/to_many"

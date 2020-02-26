@@ -1,0 +1,98 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "surgery"
+title: Surgery
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Information related to surgerical procedures in medical history
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: surgeries
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  major_surgery_with_general_anesthesia:
+    description: Major Surgery with General Anesthesia?
+    type: boolean
+
+  pd_surgery_location_gpi:
+    description: PD Surgery Location - GPi?
+    type: boolean
+
+  pd_surgery_location_not_applicable:
+    description: PD Surgery Location - Not Applicable
+    type: boolean
+
+  pd_surgery_location_stn:
+    description: PD Surgery Location - STN
+    type: boolean
+
+  pd_surgery_location_unknown:
+    description: PD Surgery Location - Unknown
+    type: boolean
+
+  side_of_surgery_for_pd:
+    description: Side Of Surgery For Parkinson Disease
+    enum:
+      - Bilateral
+      - Left
+      - Not Applicable
+      - Right
+      - Unknown
+
+  surgery_for_pd:
+    description: Had Surgery For Parkinson Disease?
+    type: boolean
+
+  surgery_location:
+    description: Location in the body where surgery was performed
+    enum:
+      - Globus Pallidus (GPi)
+      - Not Applicable
+      - Subthalamic Nucleus (STN)
+      - Unknown
+
+  surgery_location_other:
+    description: If 'other (specify)' was chosen for 'surgery_location', location
+      in the body where surgery was performed
+    type: string
+
+  type_of_surgery_for_pd:
+    description: Type Of Surgery For Parkinson Disease
+    enum:
+      - DBS (Deep Brain Stimulation)
+      - Levodopa Intestinal Gel Infusion
+      - Other, Specify
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

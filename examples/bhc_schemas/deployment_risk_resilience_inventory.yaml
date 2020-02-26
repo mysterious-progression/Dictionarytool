@@ -1,0 +1,296 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "deployment_risk_resilience_inventory"
+title: Deployment Risk Resilience Inventory (DRRI)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A questionnaire used to assess the key deployment-related factors implicated
+  in the health and well-being of military veterans.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: deployment_risk_resilience_inventories
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  drri_1_1:
+    description: I went on combat patrols or missions.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_10:
+    description: My unit engaged in battle in which it suffered casualties.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_11:
+    description: I personally witnessed someone from my unit or an ally unit being
+      seriously wounded or killed.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_12:
+    description: I personally witnessed soldiers from enemy troops being seriously
+      wounded or killed.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_13:
+    description: I was wounded or injured in combat.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_14:
+    description: I fired my weapon at the enemy.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_15:
+    description: I killed or think I killed the enemy in combat.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_16:
+    description: I participated in a support convoy.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_2:
+    description: I encountered land or water mines and/or booby traps.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_3:
+    description: I received hostile incoming fire from small arms, artillery, rockets,
+      mortars, or bombs.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_4:
+    description: I received 'friendly' incoming fire from small arms, artillery, rockets,
+      mortars, or bomb
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_5:
+    description: I was in a vehicle (for example, a truck, tank, APC, helicopter,
+      plane, or boat) that was under fire.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_6:
+    description: I was attacked by terrorists or civilians.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_7:
+    description: I was part of a land or naval artillery unit that fired on the enemy.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_8:
+    description: I was part of an assault on entrenched or fortified positions.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_1_9:
+    description: I took part in an invasion that involved naval and/or land forces.
+    enum:
+      - A few times each month
+      - A few times each week
+      - A few times over the entire deployment
+      - Daily or almost daily
+      - Never
+
+  drri_2_1:
+    description: I observed homes or villages that had been destroyed.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_10:
+    description: I saw enemy soldiers after they had been severely wounded or disfigured
+      in combat.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_11:
+    description: I experienced unwanted sexual activity as a result of force, threat
+      of harm, or manipulation.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_12:
+    description: I saw civilians after they had been severely wounded or disfigured.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_13:
+    description: I saw the bodies of dead civilians.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_14:
+    description: I saw Americans or allies after they had been severely wounded or
+      disfigured in combat.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_15:
+    description: I saw the bodies of dead Americans or allies.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_16:
+    description: I saw the bodies of dead enemy soldiers.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_2:
+    description: I saw refugees who had lost their homes and belongings as a result
+      of battle.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_3:
+    description: I saw people begging for food.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_4:
+    description: I took prisoners of war.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_5:
+    description: I interacted with enemy soldiers who were taken as prisoners of war.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_6:
+    description: I was exposed to the sight, sound, or smell of animals that had been
+      wounded or killed from war-related causes.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_7:
+    description: I took care of injured or dying people.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_8:
+    description: I was involved in removing dead bodies after battle.
+    enum:
+      - "No"
+      - "Yes"
+
+  drri_2_9:
+    description: I was exposed to the sight, sound, or smell of dying men and women.
+    enum:
+      - "No"
+      - "Yes"
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

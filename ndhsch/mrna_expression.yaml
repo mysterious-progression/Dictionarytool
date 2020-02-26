@@ -1,0 +1,104 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "mrna_expression"
+title: mRNA Expression
+type: object
+nodeTerms: null
+namespace: http://niaid.bionimbus.org
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing normalized mRNA expression.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: mrna_expressions
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: mrna_microarrays
+        backref: mrna_expressions
+        label: derived_from
+        target_type: mrna_microarray
+        multiplicity: one_to_many
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - data_format
+  - md5sum
+  - data_category
+  - data_type
+  - experimental_strategy
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    terms:
+      - $ref: "_terms.yaml#/data_category"
+    enumTerms:
+      Transcriptome Profiling: null
+
+  data_format:
+    terms:
+      - $ref: "_terms.yaml#/data_format"
+    enumTerms:
+      CSV: null
+      TSV: null
+      TXT: null
+
+  data_type:
+    terms:
+      - $ref: "_terms.yaml#/data_type"
+    enumTerms:
+      mRNA Expression Quantification: null
+
+  experimental_strategy:
+    terms:
+      - $ref: "_terms.yaml#/experimental_strategy"
+    enumTerms:
+      DNA Panel: null
+      Low Pass WGS: null
+      RNA-Seq: null
+      RNA-microarray: null
+      Total RNA-Seq: null
+      Validation: null
+      WGS: null
+      WXS: null
+      miRNA-Seq: null
+
+  type:
+    terms: null
+    enumTerms:
+      mrna_expression: null
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  mrna_microarrays:
+    $ref: "_definitions.yaml#/to_many"

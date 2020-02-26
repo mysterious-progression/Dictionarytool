@@ -1,0 +1,736 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "physical_exam"
+title: Physical Exam
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: The results of a physical exam, including vital signs
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: physical_exams
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  abdomen_abnormality:
+    description: Physical Exam- Abdomen Abnormality
+    type: boolean
+
+  abdomen_finding_significant:
+    description: Abdomen system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  arm_used_for_blood_pressure:
+    description: Arm Used For Blood Pressure
+    enum:
+      - Left Arm
+      - Right Arm
+
+  body_mass_index:
+    description: Body Mass Index (BMI) is a general indicator of the body fat an individual
+      is carrying based upon the ratio of weight to height
+    type: number
+
+  body_system_category:
+    description: Physical Exam- Physical Examination- Body System Category
+    enum:
+      - Allergy/Immunologic
+      - Cardiovascular
+      - Dermatologic
+      - ENT
+      - Gastrointestinal
+      - Gynecologic
+      - Hemato-lymphatic
+      - Hepatobiliary
+      - Metabolic/Endocrine
+      - Musculoskeletal
+      - Neurologic (other than PD)
+      - Not Specified
+      - Ophthalmological
+      - Other
+      - Psychiatric
+      - Pulmonary
+      - Renal
+      - Urologic
+
+  brainstem_auditory_evoked_response:
+    description: Physical Exam- Brainstem Auditory Evoked Response (BAER)
+    enum:
+      - Normal
+      - Not Obtained
+
+  cardiovascular_abnormality:
+    description: Physical Exam- Cardiovascular Abnormality
+    type: boolean
+
+  cardiovascular_abnormality_significant:
+    description: Cardiovascular Abnormality - Clinically Significant.
+    type: boolean
+
+  cardiovascular_finding_significant:
+    description: Cardiovascular system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  cerebrospinal_fluid_csf_exam:
+    description: Physical Exam- Cerebrospinal Fluid (CSF) Exam
+    enum:
+      - Normal
+      - Not Obtained
+      - Other
+
+  convergence:
+    description: Physical Exam- Convergence
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  days_to_exam:
+    description: Number of days between the case Index Date and the date the physical
+      exam was performed
+    type: integer
+
+  ears_abnormal:
+    description: Physical Exam- Ears Abnormal
+    type: boolean
+
+  ears_abnormality_significant:
+    description: Ears Abnormality - Clinically Significant.
+    type: boolean
+
+  ears_finding_significant:
+    description: Ears system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  eeg_electroencephalogram:
+    description: Physical Exam- Electroencephalogram (EEG)
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+      - Other
+
+  eyes_abnormal:
+    description: Physical Exam- Eyes Abnormal
+    type: boolean
+
+  eyes_abnormal_specify:
+    description: Physical Exam- Ears Abnormality - Specify
+    type: string
+
+  eyes_abnormality_significant:
+    description: Eyes Abnormality - Clinically Significant.
+    type: boolean
+
+  eyes_finding_significant:
+    description: Eyes system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  finger_to_nose_left_hand:
+    description: Physical Exam- Finger to Nose - Left Hand
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  finger_to_nose_right_hand:
+    description: Physical Exam- Finger to Nose - Right Hand
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  general_phys_exam_category:
+    description: General Physical Exam- General Physical Exam Category
+    type: string
+
+  genital_abnormality:
+    description: Physical Exam- Genital Abnormality
+    type: boolean
+
+  head_ct_scan:
+    description: Physical Exam- Head CT Scan
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+      - Other
+
+  head_mri:
+    description: Physical Exam- Head MRI
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+      - Other
+
+  head_neck_abnormal:
+    description: Head neck system normal
+    type: boolean
+
+  head_neck_finding_significant:
+    description: Head neck system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  head_neck_lymphatic_abnormality:
+    type: boolean
+
+  head_neck_lymphatic_abnormality_significant:
+    description: Physical Exam- Head, Neck, Lymphatic Abnormality - Clinically Significant
+    type: boolean
+
+  hearing_left_ear:
+    description: Physical Exam- Hearing - Left Ear
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  hearing_right_ear:
+    description: Physical Exam- Hearing - Right Ear
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  heel_to_shin_left_leg:
+    description: Physical Exam- Heel to Shin - Left Leg
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  heel_to_shin_right_leg:
+    description: Physical Exam- Heel to Shin - Right Leg
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  height:
+    description: The height of the patient in centimeters.
+    type: number
+
+  hip:
+    description: Subject hip (cm)
+    type: integer
+
+  horizontal_eye_movement_left_eye:
+    description: Physical Exam- Horizontal Eye Movement - Left Eye
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  horizontal_eye_movement_right_eye:
+    description: Physical Exam- Horizontal Eye Movement - Right Eye
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  left_arm_sensation:
+    description: Physical Exam- Left Arm Sensation
+    enum:
+      - Mildly Impaired
+      - Normal
+
+  left_arm_strength:
+    description: Physical Exam- Left Arm Strength
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  left_leg_sensation:
+    description: Physical Exam- Left Leg Sensation
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  left_leg_strength:
+    description: Physical Exam- Left Leg Strength
+    enum:
+      - Mildly Impaired
+      - Normal
+      - Severely Impaired
+
+  left_plantar_response:
+    description: Physical Exam- Left Plantar Response
+    enum:
+      - Clearly Extensor
+      - Clearly Flexor
+      - Dystonic Toe
+      - Equivocal
+      - Not Elicitable
+      - Uninterpretable
+
+  lungs_abnormal:
+    description: Physical Exam- Lungs Abnormal
+    type: boolean
+
+  lungs_abnormality_significant:
+    description: Lungs Abnormality - Clinically Significant.
+    type: boolean
+
+  lungs_finding_significant:
+    description: Lungs system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  musculoskel_abnormality:
+    description: Physical Exam- Musculoskel Abnormality
+    type: boolean
+
+  musculoskel_abnormality_significant:
+    description: Musculoskeletal Abnormality - Clinically Significant.
+    type: boolean
+
+  musculoskel_abnormality_specify:
+    description: Physical Exam- Musculoskeletal Abnormality - Specify
+    type: string
+
+  musculoskel_finding_significant:
+    description: Musculoskeletal system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  neurological_abnormality:
+    type: boolean
+
+  neurological_abnormality_significant:
+    description: Physical Exam- Neurological Abnormality - Clinically Significant
+    type: boolean
+
+  neurological_abnormality_specify:
+    description: Physical Exam- Neurological Abnormality - Specify
+    type: string
+
+  neurological_not_pd_abnormal:
+    description: Neurological system (other than PD) abnormal.
+    type: boolean
+
+  neurological_not_pd_finding_significant:
+    description: Neurological system (other than PD) finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  nose_throat_abnormal:
+    description: Nose throat system abnormal.
+    type: boolean
+
+  nose_throat_finding_significant:
+    description: Nose throat system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  other_neurodiagnostic_1:
+    description: Physical Exam- Other Neurodiagnastic 1
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+      - Other
+
+  other_neurodiagnostic_2:
+    description: Physical Exam- Other Neurodiagnastic 2
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+      - Other
+
+  other_organ_abnormality:
+    description: Physical Exam- Physical Exam- Other Organ Abnormality
+    type: boolean
+
+  other_organ_abnormality_describe:
+    description: Physical Exam- Other Organ Abnormality - Describe
+    type: string
+
+  other_organ_abnormality_significant:
+    description: Other Organ Abnormality - Clinically Significant.
+    type: boolean
+
+  other_organ_abnormality_specify:
+    description: Physical Exam- Other Organ Abnormality - Specify
+    type: string
+
+  other_organ_finding_significant:
+    description: Other body system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  peripheral_abnormality:
+    description: Peripheral vascular system abnormal.
+    type: boolean
+
+  peripheral_finding_significant:
+    description: Peripheral vascular system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  phys_exam_response:
+    description: General Physical Exam- Response
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  phys_exam_result:
+    description: Physical Exam- Physical Examination Result
+    enum:
+      - Abnormal
+      - Normal
+      - Not Done
+
+  psychiatric_abnormality:
+    type: boolean
+
+  psychiatric_abnormality_significant:
+    description: Physical Exam- Psychiatric Abnormality - Clinically Significant
+    type: boolean
+
+  psychiatric_abnormality_specify:
+    description: Physical Exam- Psychiatric Abnormality - Specify
+    type: string
+
+  reflex_left_ankle:
+    description: Physical Exam- Reflex - Left Ankle
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_left_biceps:
+    description: Physical Exam- Reflex - Left Biceps
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_left_patellar:
+    description: Physical Exam- Reflex - Left Patellar
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_left_triceps:
+    description: Physical Exam- Reflex - Left Triceps
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_right_ankle:
+    description: Physical Exam- Reflex - Right Ankle
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_right_biceps:
+    description: Physical Exam- Reflex - Right Biceps
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_right_patellar:
+    description: Physical Exam- Reflex - Right Patellar
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  reflex_right_triceps:
+    description: Physical Exam- Reflex - Right Triceps
+    enum:
+      - Absent
+      - Hyperactive With Clonus
+      - Just Obtainable
+      - Mildly Hyperactive
+      - Normal
+
+  respiratory_rate:
+    description: Physical Exam- Respiratory Rate (breaths per minute)
+    type: integer
+
+  right_arm_sensation:
+    description: Physical Exam- Right Arm Sensation
+    enum:
+      - Mildly Impaired
+      - Normal
+
+  right_arm_strength:
+    description: Physical Exam- Right Arm Strength
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  right_leg_sensation:
+    description: Physical Exam- Right Leg Sensation
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  right_leg_strength:
+    description: Physical Exam- Right Leg Strength
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  right_plantar_response:
+    description: Physical Exam- Right Plantar Response
+    enum:
+      - Clearly Extensor
+      - Clearly Flexor
+      - Dystonic Toe
+      - Equivocal
+      - Not Elicitable
+      - Uninterpretable
+
+  sitting_diastolic_blood_pressure:
+    description: Sitting Blood Pressure - Diastolic (mmHg)
+    type: integer
+
+  sitting_heart_rate:
+    description: Sitting Heart Rate (beats and min)
+    type: integer
+
+  sitting_systolic_blood_pressure:
+    description: Sitting Blood Pressure - Systolic (mmHg)
+    type: integer
+
+  skin_abnormal:
+    description: Physical Exam- Skin Abnormal
+    type: boolean
+
+  skin_abnormal_significant:
+    description: Physical Exam- Skin Abnormal - Clinically Significant
+    type: boolean
+
+  skin_abnormal_specify:
+    description: Skin Abnormal - Specify.
+    type: string
+
+  skin_finding_significant:
+    description: Skin system finding is clinically significant
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  spine_ct_scan:
+    description: Physical Exam- Spine CT Scan
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+
+  spine_mri:
+    description: Physical Exam- Spine MRI
+    enum:
+      - Abnormal
+      - Normal
+      - Not Obtained
+      - Other
+
+  standing_diastolic_blood_pressure:
+    description: Standing Blood Pressure - Diastolic (mmHg)
+    type: integer
+
+  standing_heart_rate:
+    description: Standing Heart Rate (beats/min)
+    type: integer
+
+  standing_systolic_blood_pressure:
+    description: Standing Blood Pressure - Systolic (mmHg)
+    type: integer
+
+  supine_diastolic_blood_pressure:
+    description: Supine Blood Pressure - Diastolic (mmHg)
+    type: integer
+
+  supine_heart_rate:
+    description: Supine Heart Rate (beats and min)
+    type: integer
+
+  supine_systolic_blood_pressure:
+    description: Supine Blood Pressure - Systolic (mmHg)
+    type: integer
+
+  swallowing:
+    description: Physical Exam- Swallowing
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  tandem_walking:
+    description: Physical Exam- Tandem Walking
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  temperature:
+    description: Temperature (C)
+    type: number
+
+  temperature_method:
+    description: Physical Exam- Temperature Method
+    enum:
+      - Axilary
+      - Oral
+      - Other (specify)
+      - Tympanic
+
+  unlinked_height:
+    description: Subject height (e.g. enter "five feet, ten inches" as "5-10")
+    type: string
+
+  urinary_abnormality:
+    description: Physical Exam- Urinary Abnormality
+    type: boolean
+
+  vertical_eye_movement_down:
+    description: Physical Exam- Vertical Eye Movement - Down
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+
+  vertical_eye_movement_up:
+    description: Physical Exam- Vertical Eye Movement - Up
+    enum:
+      - Mildly Impaired
+      - Moderately Impaired
+      - Normal
+      - Severely Impaired
+
+  visual_acuity_left_eye:
+    description: Physical Exam- Visual Acuity - Left Eye
+    type: integer
+
+  visual_acuity_right_eye:
+    description: Physical Exam- Visual Acuity - Right Eye
+    type: integer
+
+  visual_evoked_response:
+    description: Physical Exam- Visual Evoked Response (VER)
+    enum:
+      - Normal
+      - Not Obtained
+
+  waist:
+    description: Subject waist (cm)
+    type: integer
+
+  weight:
+    description: The weight of the patient measured in kilograms.
+    type: number
+
+  year_of_physical_examination:
+    description: Year Of Physical Examination
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

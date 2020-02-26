@@ -1,0 +1,198 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "pd_sleep_scale"
+title: Parkinson's Disease Sleep Scale-Validation (PDSS-2)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: The Parkinson's Disease Sleep Scale-Validation (PDSS-2) is a scale used
+  to characterise and quantify the various aspects of nocturnal sleep problems in
+  Parkinson's disease (PD). The PDSS-2 is a revised version of the Parkinson's Disease
+  Sleep Scale (PDSS).
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: pd_sleep_scales
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  pdss2_10_pain_arms_legs_woke_up_whilst_sleeping:
+    description: PDSS 2 - 10. Did You Feel Pain In Your Arms Or Legs Which Woke You
+      Up Whilst Sleeping At Night
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_11_muscle_cramps_arm_leg_woke_up_whilst_sleeping:
+    description: PDSS 2 - 11. Did You Have Muscle Cramps In Your Arms Or Legs Which
+      Woke You Up Whilst Sleeping At Night
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_12_wake_early_painful_posturing_arms_legs:
+    description: PDSS 2 - 12. Did You Wake Early In The Morning With Painful Posturing
+      Of Arms And Legs
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_13_waking_experience_tremor:
+    description: PDSS 2 - 13. On Waking, Did You Experience Tremor
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_14_tired_sleepy_after_waking_morning:
+    description: PDSS 2 - 14. Did You Feel Tired And Sleepy After Waking In The Morning
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_15_wake_up_night_snoring_difficulties_breathing:
+    description: PDSS 2 - 15. Did You Wake Up At Night Due To Snoring Or Difficulties
+      With Breathing
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_1_sleep_well_last_week:
+    description: PDSS 2 - 1. Overall, Did You Sleep Well During The Last Week
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_2_did_difficulty_falling_asleep:
+    description: PDSS 2 - 2. Did You Have Difficulty Falling Asleep Each Night
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_3_difficulty_staying_asleep:
+    description: PDSS 2 - 3. Did You Have Difficulty Staying Asleep
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_4_restlessness_legs_arms_nights_disruption_sleep:
+    description: PDSS 2 - 4. Did You Have Restlessness Of Legs Or Arms At Nights Causing
+      Disruption Of Sleep
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_5_sleep_disturbed_urge_move_legs_arms:
+    description: PDSS 2 - 5. Was Your Sleep Disturbed Due To An Urge To Move Your
+      Legs Or Arms
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_6_distressing_dreams:
+    description: PDSS 2 - 6. Did You Suffer From Distressing Dreams At Night
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_7_distressing_hallucinations:
+    description: PDSS 2 - 7. Did You Suffer From Distressing Hallucinations At Night
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_8_get_up_night_urine:
+    description: PDSS 2 - 8. Did You Get Up At Night To Pass Urine
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_9_uncomfortable_night_unable_turn_around_bed:
+    description: PDSS 2 - 9. Did You Feel Uncomfortable At Night Because You Were
+      Unable To Turn Around In Bed Or Move Due To Immobility
+    enum:
+      - Never
+      - Often
+      - Rare
+      - Sometimes
+      - Very Often
+
+  pdss2_mean_value:
+    description: PDSS 2 - Mean Value
+    type: number
+
+  pdss2_total_score:
+    description: PDSS 2 - Total Score
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

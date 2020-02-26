@@ -1,0 +1,282 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "hiv_history"
+title: HIV History
+type: object
+nodeTerms: null
+namespace: https://niaid.bionimbus.org
+category: clinical
+program: '*'
+project: '*'
+description: History of HIV and other important dates related to the subject.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: hiv_history_records
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - subjects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  arthxbase:
+    description: Did participant report use of ART prior to baseline (screening) visit?
+    terms:
+      - $ref: "_terms.yaml#/C159709"
+      - $ref: "_terms.yaml#/C94631"
+    type: boolean
+
+  bsdate:
+    description: Baseline year. First year enrolled.
+    terms:
+      - $ref: "_terms.yaml#/C121182"
+    type: integer
+
+  bsvisit:
+    description: Baseline visit ID
+    terms: null
+    type: integer
+
+  cd4nadir:
+    description: HAART experienced only, CD4 nadir prior to HAART initiation (measured
+      during followup or at HAART initiation for HAART- experienced recruits)
+    terms:
+      - $ref: "_terms.yaml#/C16300"
+      - $ref: "_terms.yaml#/C43517"
+    type: integer
+
+  ehaart:
+    description: Ever HAART use (This is a derived value)
+    terms:
+      - $ref: "_terms.yaml#/C159710"
+      - $ref: "_terms.yaml#/C16165"
+    type: boolean
+
+  fcd4lowd:
+    description: First year seen with CD4N < 200 or CD4% < 14
+    terms:
+      - $ref: "_terms.yaml#/C159703"
+      - $ref: "_terms.yaml#/C103810"
+      - $ref: "_terms.yaml#/C61585"
+      - $ref: "_terms.yaml#/C159711"
+      - $ref: "_terms.yaml#/C16300"
+      - $ref: "_terms.yaml#/C70460"
+      - $ref: "_terms.yaml#/C113428"
+    type: integer
+
+  fcd4lowv:
+    description: First visit seen with CD4N < 200 or CD4% < 14
+    terms:
+      - $ref: "_terms.yaml#/C159696"
+      - $ref: "_terms.yaml#/C103810"
+      - $ref: "_terms.yaml#/C61585"
+      - $ref: "_terms.yaml#/C159711"
+      - $ref: "_terms.yaml#/C16300"
+      - $ref: "_terms.yaml#/C70460"
+      - $ref: "_terms.yaml#/C113428"
+    type: integer
+
+  fposdate:
+    description: First time seen seropositive (year)
+    terms:
+      - $ref: "_terms.yaml#/C159693"
+      - $ref: "_terms.yaml#/C159692"
+    type: integer
+
+  frstaidd:
+    description: First reported AIDS year
+    terms:
+      - $ref: "_terms.yaml#/C159699"
+      - $ref: "_terms.yaml#/C2851"
+    type: integer
+
+  frstaidv:
+    description: First reported AIDS visit
+    terms:
+      - $ref: "_terms.yaml#/C159701"
+      - $ref: "_terms.yaml#/C2851"
+    type: integer
+
+  frstartd:
+    description: First reported ART year
+    terms:
+      - $ref: "_terms.yaml#/C159699"
+      - $ref: "_terms.yaml#/C94631"
+    type: integer
+
+  frstartv:
+    description: First reported ART visit
+    terms: null
+    type: integer
+
+  frstdthd:
+    description: Year of death
+    terms:
+      - $ref: "_terms.yaml#/C156426"
+    type: integer
+
+  frsthaad:
+    description: First reported HAART year
+    terms: null
+    type: integer
+
+  frsthaav:
+    description: First reported HAART visit
+    terms:
+      - $ref: "_terms.yaml#/C159701"
+      - $ref: "_terms.yaml#/C16165"
+    type: integer
+
+  lastafrd:
+    description: Last reported AIDS free year
+    terms:
+      - $ref: "_terms.yaml#/C159698"
+      - $ref: "_terms.yaml#/C16165"
+    type: integer
+
+  lastafrv:
+    description: Last reported AIDS free visit (derived from WIHS only)
+    terms:
+      - $ref: "_terms.yaml#/C159698"
+      - $ref: "_terms.yaml#/C2851"
+    type: integer
+
+  lastcond:
+    description: Year of last study visit attended
+    terms:
+      - $ref: "_terms.yaml#/C159712"
+    type: integer
+
+  lastcontact:
+    description: Last year of contact (includes in-person or phone contact)
+    terms:
+      - $ref: "_terms.yaml#/C159713"
+    type: integer
+
+  lastconv:
+    description: Last study visit attended
+    terms: null
+    type: integer
+
+  lastnoad:
+    description: Last reported ART free
+    terms:
+      - $ref: "_terms.yaml#/C159697"
+      - $ref: "_terms.yaml#/C94631"
+    type: integer
+
+  lastnoav:
+    description: Last reported ART free visit
+    terms:
+      - $ref: "_terms.yaml#/C159698"
+      - $ref: "_terms.yaml#/C94631"
+    type: integer
+
+  lastnohd:
+    description: Last reported HAART free year
+    terms:
+      - $ref: "_terms.yaml#/C159700"
+      - $ref: "_terms.yaml#/C16165"
+    type: integer
+
+  lastnohv:
+    description: Last reported HAART free visit
+    terms:
+      - $ref: "_terms.yaml#/C159698"
+      - $ref: "_terms.yaml#/C16165"
+    type: integer
+
+  lcd4higd:
+    description: Last year seen with CD4N >= 200 and CD4% >= 14
+    terms:
+      - $ref: "_terms.yaml#/C159702"
+      - $ref: "_terms.yaml#/C103810"
+      - $ref: "_terms.yaml#/C61583"
+      - $ref: "_terms.yaml#/C159711"
+      - $ref: "_terms.yaml#/C16300"
+      - $ref: "_terms.yaml#/C70460"
+      - $ref: "_terms.yaml#/C113428"
+    type: integer
+
+  lcd4higv:
+    description: Last visit seen with CD4N >= 200 and CD4% >= 14
+    terms:
+      - $ref: "_terms.yaml#/C159694"
+      - $ref: "_terms.yaml#/C103810"
+      - $ref: "_terms.yaml#/C61583"
+      - $ref: "_terms.yaml#/C159711"
+      - $ref: "_terms.yaml#/C16300"
+      - $ref: "_terms.yaml#/C70460"
+      - $ref: "_terms.yaml#/C113428"
+    type: integer
+
+  lnegdate:
+    description: Last time seen seronegative (year)
+    terms:
+      - $ref: "_terms.yaml#/C159693"
+      - $ref: "_terms.yaml#/C119994"
+    type: integer
+
+  mortcutd:
+    description: Mortality cut-off year based on NDI submission (site-level year)
+    terms:
+      - $ref: "_terms.yaml#/C159714"
+    type: integer
+
+  negvis:
+    description: Last visit seen seronegative
+    terms:
+      - $ref: "_terms.yaml#/C159694"
+      - $ref: "_terms.yaml#/C119994"
+    type: integer
+
+  posvis:
+    description: First visit seen seropositive
+    terms:
+      - $ref: "_terms.yaml#/C159695"
+      - $ref: "_terms.yaml#/C159692"
+    type: integer
+
+  status:
+    description: Summarized HIV sero-status
+    terms:
+      - $ref: "_terms.yaml#/C159691"
+    enumTerms:
+      Converter identified at death:
+        - $ref: "_terms.yaml#/C159690"
+      Converter:
+        - $ref: "_terms.yaml#/C159689"
+      Negative:
+        - $ref: "_terms.yaml#/C38757"
+      Prevalent:
+        - $ref: "_terms.yaml#/C159688"
+
+  version:
+    description: Version number of data
+    terms: null
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

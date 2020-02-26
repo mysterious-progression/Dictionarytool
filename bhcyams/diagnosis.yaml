@@ -1,0 +1,469 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "diagnosis"
+title: Diagnosis
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Data from the investigation, analysis and recognition of the presence
+  and nature of disease, condition, or injury from expressed signs and symptoms; also,
+  the scientific determination of any kind; the concise results of such an investigation.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: diagnoses
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+  - primary_diagnosis
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  adult_trauma_diagnosis:
+    description: Diagnosis of adult trauma in the patient.
+    type: string
+
+  adult_trauma_scale:
+    description: Scale used to determine the adult trauma score.
+    type: string
+
+  adult_trauma_score:
+    description: Score given to quantify the patient's level of adult trauma at the
+      time of diagnosis.
+    type: string
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years. See age_at_assessment_gt89 if the age is over
+      89 years.
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years.
+    enum:
+      - "No"
+      - "Yes"
+
+  age_at_diagnosis:
+    description: The age of the subject when the primary diagnosis was determined,
+      if the age is less than 90 years. See age_at_diagnosis_gt89 if the age is over
+      89 years.
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_diagnosis_gt89:
+    description: Indicates whether the age of the subject when the primary diagnosis
+      was determined is greater than 89 years.
+    enum:
+      - "No"
+      - "Yes"
+
+  age_at_onset:
+    description: Age at onset (ageonset) in years. If age is greater than 89 years,
+      see age_at_onset_gt89.
+    type: number
+    maximum: 89
+    minimum: 0
+
+  age_at_onset_gt89:
+    description: Indicate whether the 'Age at onset (ageonset) in years' is greater
+      than 89 years.
+    enum:
+      - "No"
+      - "Yes"
+
+  age_from_crf:
+    description: Age from CRF (agecrf) in years. If age is greater than 89 years,
+      see age_from_crf_gt89.
+    type: number
+    maximum: 89
+    minimum: 0
+
+  age_from_crf_gt89:
+    description: Indicate whether the 'Age from CRF (agecrf) in years' is greater
+      than 89 years.
+    enum:
+      - "No"
+      - "Yes"
+
+  asymmetric_onset:
+    description: Asymmetric onset (ASYMMONS)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  asymmetric_unilateral_onset:
+    description: If asymmetric was it unilateral onset (DCUNONST)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  babinski_sign:
+    description: Babinski sign (BABINSKI)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  bradykinesia_diagnosis:
+    description: Bradykinesia (DCBRADY)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  caps_diagnosis:
+    description: PTSD diagnosis as determined through the CAPS questionnaire.
+    type: string
+
+  caps_index:
+    description: The traumatic event used as an index trauma for CAPS.
+    type: string
+
+  cerebellar_signs:
+    description: Cerebellar signs (CERESIGN)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  certainty_of_idiopathic_pd_diagnosis:
+    description: Most Likely Diagnosis
+    enum:
+      - Dementia Of The Lewy Body Type
+      - Multiple System Atrophy
+      - Other
+      - Participant Has Idiopathic PD
+
+  childhood_trauma_diagnosis:
+    description: The determined diagnosis of childhood trauma.
+    type: string
+
+  childhood_trauma_scale:
+    description: The scale used to determine the childhood trauma score.
+    type: string
+
+  childhood_trauma_score:
+    description: Score given to quantify the patient's level of childhood trauma at
+      the time of diagnosis.
+    type: string
+
+  confidence_level_motor_signs_of_parkinsonian_syndrome:
+    description: Diagnostic Questionnaire (Prodromal)- Confidence Level - Motor Signs
+      of Parkinsonian Syndrome
+    enum:
+      - Motor Abnormalities Are PS (90-100 Pct)
+      - Motor Abnormalities Likely PS (70-89 Pct)
+      - Motor Abnormalities May Be PS (50-69 Pct)
+      - No Evidence Of Parkinsonian Motor Signs (0-24 Pct)
+      - Non-Specific Motor Abnormalities (25-49 Pct)
+
+  current_medical_condition_name:
+    description: Current Medical Condition - Preferred Term Name
+    type: string
+
+  current_medical_condition_resolved:
+    description: Resolved
+    type: boolean
+
+  days_to_best_overall_response:
+    description: Number of days between the date used for index and the date of the
+      patient's best overall response.
+    type: integer
+
+  days_to_diagnosis:
+    description: Number of days between the date used for index and the date of the
+      patient's diagnosis.
+    type: integer
+
+  depression_diagnosis:
+    description: The patient's depression diagnosis.
+    type: string
+
+  depression_diagnosis_scale:
+    description: The scale used to diagnose the patient's depression.
+    type: string
+
+  depression_severity:
+    description: The severity of the patient's depression.
+    type: string
+
+  diagnostic_code:
+    description: A code used to describe the patient's diagnosis.
+    type: string
+
+  diagnostic_code_type:
+    description: Text term used to describe the code used to describe the patient's
+      diagnosis.
+    enum:
+      - International Classification of Diseases (ICD)
+
+  oculogyric_crisis:
+    description: Oculogyric crisis (OGC)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  other_neurol_disorders_specify:
+    description: Other Neurological Disorder(s) Specify
+    type: string
+
+  pd_diagnosis_category:
+    description: Diagnosis Category
+    enum:
+      - Accepted PD By Diagnosis Form
+      - Definitely Not PD By Autopsy
+      - Definitely PD By Autopsy
+      - Definitely PD By Diagnosis Form
+      - Not PD by Diagnosis Form
+      - Undetermined
+
+  pd_most_affected_side_onset:
+    description: Side most affected at PD onset
+    enum:
+      - Left
+      - Right
+      - Symmetric
+
+  pd_primary_diagnosis:
+    description: Most Likely Primary Diagnosis
+    enum:
+      - Alzheimer's Disease
+      - Dementia With Lewy Bodies
+      - Dopa-Responsive Dystonia
+      - Essential Tremor
+      - Hemiparkinson/Hemiatrophy Syndrome
+      - Idiopathic PD
+      - Motor Neuron Disease With Parkinsonism
+      - Multiple System Atrophy
+      - Neuroleptic-induced Parkinsonism
+      - No PD Nor Other Neurological Disorder
+      - Other Neurological Disorder(s) (Specify)
+      - Prodromal Motor PD
+      - Prodromal Non-motor PD
+      - Progressive Supranuclear Palsy
+      - Psychogenic Illness
+      - Spinocerebellar Ataxia (SCA)
+      - Vascular Parkinsonism
+
+  pd_probability:
+    description: Probability that individual has Parkinson's disease (PROBIPD)
+    enum:
+      - 0 Pct - 9 Pct
+      - 10 Pct - 49 Pct
+      - 50 Pct - 89 Pct
+      - 90 Pct - 100 Pct
+
+  persistent_asymmetry_side_onset_most:
+    description: Persistent asymmetry affecting the side of onset most (DCASYMM)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  primary_diagnosis:
+    term:
+      $ref: "_terms.yaml#/primary_diagnosis"
+    enum:
+      - Alcohol Abuse
+      - Alzheimer's Disease
+      - Anxiety
+      - Attention Deficit Hyperactivity Disorder (ADHD)
+      - Bipolar Disorder
+      - Cancer
+      - Depression
+      - Drug Abuse
+      - Drug- or toxin-induced parkinsonism
+      - Genetic Cohort - PD
+      - Genetic Cohort - Unaffected
+      - Genetic Registry - PD
+      - Genetic Registry - Unaffected
+      - Healthy
+      - Healthy Control
+      - Lewy-body disease
+      - Parkinson's Disease
+      - Parkinsonism-dementia complex of Guam
+      - Post-traumatic Stress Disorder (PTSD)
+      - Post-traumatic parkinsonism
+      - Prodromal
+      - Progressive supranuclear palsy
+      - SWEDD
+      - Schizophrenia
+      - Trauma
+      - Traumatic Brain Injury/Post-Concussion Syndrome
+      - Viral parkinsonism
+
+  progressive_disorder:
+    description: Progressive disorder (DCPRGDIS)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  ptsd_diagnosis_current:
+    description: The patient's PTSD diagnosis at the time of diagnosis.
+    type: string
+
+  ptsd_diagnosis_lifetime:
+    description: The patient's PTSD diagnosis over the course of their lifetime.
+    type: string
+
+  ptsd_diagnosis_scale:
+    description: The scale used to diagnose the patient with PTSD.
+    type: string
+
+  ptsd_severity_current:
+    description: The patient's PTSD severity at the time of diagnosis.
+    type: string
+
+  ptsd_severity_lifetime:
+    description: The patient's PTSD severity over the course of their lifetime.
+    type: string
+
+  ptsd_severity_scale:
+    description: The scale used to determine the severity of the patient's PTSD.
+    type: string
+
+  ptsd_symptom_duration:
+    description: The number of years the patient has experienced PTSD symptoms.
+    type: number
+
+  resting_tremor_4_6hz:
+    description: If resting tremor is it 4-6Hx (RTRMHZ)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  resting_tremor_diagnosis:
+    description: Resting Tremor (DCRTREM)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  rigidity_diagnosis:
+    description: Rigidity (DCRIGID)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  severe_dementia:
+    description: If severe dementia did it include disturbance of memory, language
+      and praxis (MEMLNGPR)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  severe_levodopa_induced_chorea:
+    description: Severe levodopa-induced chorea (DCLDOPCH)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  substance_abuse_scale:
+    description: The scale used to determine the patient's substance abuse score.
+    type: string
+
+  substance_abuse_score:
+    description: Score given to quantify the patient's substance abuse at the time
+      of diagnosis.
+    type: string
+
+  supranuclear_gaze_palzy_or_slowing_vert_saccades:
+    description: Supranuclear gaze palsy or slowing of vertical saccades (SGPSVSAC)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  sustained_remission:
+    description: Sustained remission (SUSTRMS)
+    enum:
+      - "No"
+      - Not Applicable
+      - "Yes"
+
+  system_organ_class_1:
+    description: System Organ Class 1
+    enum:
+      - Blood and lymphatic system disorders
+      - Cardiac disorders
+      - Congenital, familial and genetic disorders
+      - Ear and labyrinth disorders
+      - Endocrine disorders
+      - Eye disorders
+      - Gastrointestinal disorders
+      - General disorders and administration site conditions
+      - Hepatobiliary disorders
+      - Immune system disorders
+      - Infections and infestations
+      - Injury, poisoning and procedural complications
+      - Investigations
+      - Metabolism and nutrition disorders
+      - Musculoskeletal and connective tissue disorders
+      - Neoplasms benign, malignant and unspecified (incl cysts and polyps)
+      - Nervous system disorders
+      - Pregnancy, puerperium and perinatal conditions
+      - Psychiatric disorders
+      - Renal and urinary disorders
+      - Reproductive system and breast disorders
+      - Respiratory, thoracic and mediastinal disorders
+      - Skin and subcutaneous tissue disorders
+      - Social Circumstances
+      - Surgical and medical procedures
+      - Vascular disorders
+
+  tbi_diagnosis:
+    description: The patient's diagnosis for a traumatic brain injury.
+    type: string
+
+  tbi_type:
+    description: The type of TBI with which the patient has been diagnosed.
+    type: string
+
+  total_tbi:
+    description: The total number of TBIs that the patient has experienced.
+    type: integer
+
+  year_of_diagnosis:
+    description: Year of initial diagnosis
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

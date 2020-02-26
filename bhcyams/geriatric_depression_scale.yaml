@@ -1,0 +1,177 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "geriatric_depression_scale"
+title: Geriatric Depression Scale Short Form Questionnaire
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Geriatric Depression Scale Short Form Questionnaire (GDS SHORT FORM)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: geriatric_depression_scales
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  depression_category:
+    description: Depression Category
+    enum:
+      - Depressed
+      - Mild Depression
+      - Moderate Depression
+      - Normal Depending On Age, Education, Complaints
+      - Not Depressed
+      - Severe Depression
+
+  gds0201_basically_satisfied_with_life:
+    description: 01. GDS-SF - Basically Satisfied With Life
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0202_dropped_activities_and_interests:
+    description: 02. GDS-SF - Dropped Activities And Interests
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0203_feel_life_is_empty:
+    description: 03. GDS-SF - Feel Life Is Empty
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0204_often_get_bored:
+    description: 04. GDS-SF - Often Get Bored
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0205_good_spirits_most_of_time:
+    description: 05. GDS-SF - Good Spirits Most Of Time
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0206_afraid_something_bad_happening:
+    description: 06. GDS-SF - Afraid Of Something Bad Happening
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0207_feel_happy_most_of_time:
+    description: 07. GDS-SF - Feel Happy Most Of Time
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0208_often_feel_helpless:
+    description: 08. GDS-SF - Often Feel Helpless
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0209_prefer_to_stay_home:
+    description: 09. GDS-SF - Prefer To Stay Home
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0210_more_memory_problems_than_most:
+    description: 10. GDS-SF - More Memory Problems Than Most
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0211_think_wonderful_to_be_alive:
+    description: 11. GDS-SF - Think Wonderful To Be Alive
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0212_feel_worthless:
+    description: 12. GDS-SF - Feel Worthless
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0213_feel_full_of_energy:
+    description: 13. GDS-SF - Feel Full Of Energy
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0214_feel_situation_is_hopeless:
+    description: 14. GDS-SF - Feel Situation Is Hopeless
+    enum:
+      - "No"
+      - "Yes"
+
+  gds0215_think_most_people_better_off:
+    description: 15. GDS-SF - Think Most People Better Off Than You
+    enum:
+      - "No"
+      - "Yes"
+
+  gds_sf_summary_score:
+    description: GDS-SF Summary Score
+    type: integer
+
+  gds_summary_score:
+    description: GDS Summary Score
+    type: number
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

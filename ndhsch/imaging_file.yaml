@@ -1,0 +1,107 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "imaging_file"
+title: Imaging File
+type: object
+nodeTerms: null
+namespace: https://niaid.bionimbus.org
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing raw imaging data
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: imaging_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: imaging_exams
+        backref: imaging_files
+        label: data_for
+        target_type: imaging_exam
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - data_format
+  - md5sum
+  - data_category
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    terms:
+      - $ref: "_terms.yaml#/data_category"
+    type: string
+
+  data_format:
+    terms:
+      - $ref: "_terms.yaml#/data_format"
+    type: string
+
+  data_type:
+    terms:
+      - $ref: "_terms.yaml#/data_type"
+    type: string
+
+  experimental_strategy:
+    terms:
+      - $ref: "_terms.yaml#/experimental_strategy"
+    type: string
+
+  image_quality:
+    description: Good, poor, or average image quality
+    terms: null
+    enumTerms:
+      Average image quality: null
+      Good image quality: null
+      Not Reported: null
+      Poor image quality: null
+
+  series_instance_number:
+    description: order number for this image or other content.
+    terms: null
+    type: integer
+
+  series_instance_uid:
+    description: Formal identifier for this image or other content.
+    terms: null
+    type: string
+
+  type:
+    terms: null
+    enumTerms:
+      imaging_file: null
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  imaging_exams:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,220 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "aliquot"
+title: Aliquot
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: biospecimen
+program: '*'
+project: '*'
+description: Pertaining to a portion of the whole; any one of two or more subsamples
+  of the original sample.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: samples
+    backref: aliquots
+    label: derived_from
+    target_type: sample
+    multiplicity: many_to_many
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - samples
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  a260_a280_ratio:
+    description: Ratio 260 and 280 nm
+    type: number
+
+  aliquot_container:
+    description: The device in which the final aliquot is held. Slides or vials.
+    enum:
+      - Slide
+      - Vial
+
+  aliquot_quantity:
+    term:
+      $ref: "_terms.yaml#/aliquot_quantity"
+    type: number
+
+  aliquot_volume:
+    term:
+      $ref: "_terms.yaml#/aliquot_volume"
+    type: number
+
+  analyte_isolation_method:
+    description: The name or general description of the method used to isolate the
+      analyte. Alternatively, if you have provided a protocol, put the file_name here.
+    type: string
+
+  analyte_qc_class:
+    description: Analyte QC Class
+    enum:
+      - Acceptable
+      - Does Not Meet Spec
+      - High
+      - Low
+
+  analyte_qc_status:
+    description: Analyte QC Status
+    enum:
+      - Complete
+      - Incomplete
+
+  analyte_type:
+    description: Any aspect of an aliquot used in an analysis or assay to characterize
+      the sample. These aspects range from molecules, such as DNA and RNA, that can
+      be extracted from the aliquot to general descriptions of the aliquot's components,
+      such as cell count and morphology.
+    enum:
+      - Blood For Paxgene RNA
+      - Cell Count
+      - DNA
+      - Morphology
+      - Peptide
+      - Plasma
+      - Protein
+      - RNA
+      - Serum
+      - Whole blood
+
+  cell_identifier:
+    description: The identifying name or number for the cell being identified.
+    type: string
+
+  cell_type:
+    description: In the case of single cell analysis, this is the type of cell being
+      analyzed.
+    enum:
+      - Apoptotic CTC
+      - Cytokeratin Negative CTC
+      - Cytokeratin Negative CTC Cluster
+      - Small CTC
+      - Small CTC Cluster
+      - Traditional CTC
+      - Traditional CTC Cluster
+      - White Blood Cell
+
+  clinical_or_contrived:
+    description: Is the aliquot clinical or contrived?
+    enum:
+      - Clinical
+      - Contrived
+
+  concentration:
+    description: Concentration of the analyte in the aliquot
+    type: number
+
+  contrivance_method:
+    description: The name or general description of the contrivance(s) added to the
+      biological aliquot. Alternatively, if you have provided a contrivance protocol,
+      enter its file_name here.
+    type: string
+
+  days_to_aliquoting:
+    description: The amount of time, in days, between the date used for index and
+      the time the aliquot was separated from the whole sample.
+    type: integer
+
+  days_to_assay:
+    description: The amount of time, in days, between the date used for index and
+      the assay used to address this analyte.
+    type: integer
+
+  frame_identifier:
+    description: In an analysis of a slide, the frame denotes the region of the slide
+      that is being examined. Within a frame are multiple cells.
+    type: string
+
+  hours_to_freezer_lower:
+    description: The lower limit on the amount of time, in hours, that it took between
+      the sample being fractionated and the aliquot being frozen or otherwise preserved.
+    type: number
+
+  hours_to_freezer_upper:
+    description: The upper limit on the amount of time, in hours, that it took between
+      the sample being fractionated and the aliquot being frozen or otherwise preserved.
+    type: number
+
+  llod:
+    description: The lower limit of detection. lowest quantity of a substance that
+      can be distinguished from the absence of that substance (a blank value) within
+      a stated confidence limit (generally 1%).
+    type: number
+
+  methanol_added:
+    description: In the preparation of a slide, was methanol added as a fixative?
+      True/False.
+    type: boolean
+
+  preservation_method:
+    term:
+      $ref: "_terms.yaml#/preservation_method"
+    enum:
+      - Cryopreserved
+      - FFPE
+      - Fresh
+      - Frozen
+      - OCT
+      - Snap Frozen
+      - Unknown
+
+  rna_integrity_number:
+    description: RIN
+    type: number
+
+  rna_integrity_number_robot:
+    description: RIN Robot
+    type: string
+
+  run_identifier:
+    description: The identifier given to the run during which this particular analyte
+      was tested or evaluated. If you analyze multiple analytes through the same experimentation
+      run, this is a good way to keep track.
+    type: string
+
+  sensitivity:
+    description: The true positive rate.
+    type: number
+
+  specificity:
+    description: The true negative rate.
+    type: number
+
+  storage_temperature:
+    description: The temperature, in centigrade, at which the aliquot was preserved
+      and/or stored.
+    type: number
+
+  time_aliquotted:
+    description: Time aliquot was created
+    type: string
+
+  tube_volume_collected:
+    description: Volume collected
+    enum:
+      - Complete tube
+      - Incomplete tube
+
+  samples:
+    $ref: "_definitions.yaml#/to_many"

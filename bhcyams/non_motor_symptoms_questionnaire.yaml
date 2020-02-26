@@ -1,0 +1,191 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "non_motor_symptoms_questionnaire"
+title: Parkinson's Disease Non-motor Symptoms Questionnaire (PD NMS)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: The Parkinson's Disease Non-motor Symptoms Questionnaire (PD NMS) is
+  a questionnaire used to detect non-motor symptoms (NMS) in patients with Parkinson's
+  disease (PD). Developed in 2004. The NMS Scale (NMSS) was simultaneously developed
+  for clinicians.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: non_motor_symptoms_questionnaires
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  pd_nms01_dribbling_saliva_daytime:
+    description: PD NMS - 01. Dribbling Of Saliva During The Daytime
+    type: boolean
+
+  pd_nms02_loss_taste_smell:
+    description: PD NMS - 02. Loss Or Change In Your Ability To Taste Or Smell
+    type: boolean
+
+  pd_nms03_difficulty_swallowing:
+    description: PD NMS - 03. Difficulty Swallowing Food Or Drink Or Problems With
+      Choking
+    type: boolean
+
+  pd_nms04_vomiting:
+    description: PD NMS - 04. Vomiting Or Feelings Of Sickness (Nausea)
+    type: boolean
+
+  pd_nms05_constipation:
+    description: PD NMS - 05. Constipation (Less Than Three Bowel Movements A Week)
+      Or Having To Strain To Pass A Stool
+    type: boolean
+
+  pd_nms06_bowel_incontinence:
+    description: PD NMS - 06. Bowel (Faecal) Incontinence
+    type: boolean
+
+  pd_nms07_feeling_bowel_emptying_incomplete:
+    description: PD NMS - 07. Feeling That Your Bowel Emptying Is Incomplete After
+      Having Been To The Toilet
+    type: boolean
+
+  pd_nms08_urgency_urine:
+    description: PD NMS - 08. A Sense Of Urgency To Pass Urine Makes You Rush To The
+      Toilet
+    type: boolean
+
+  pd_nms09_getting_up_night_urine:
+    description: PD NMS - 09. Getting Up Regularly At Night To Pass Urine
+    type: boolean
+
+  pd_nms10_unexplained_pains:
+    description: PD NMS - 10. Unexplained Pains (Not Due To Known Conditions Such
+      As Arthritis)
+    type: boolean
+
+  pd_nms11_change_in_weight:
+    description: PD NMS - 11. Unexplained Change In Weight (Not Due To Change In Diet)
+    type: boolean
+
+  pd_nms12_remembering_forgetting_recent_things:
+    description: PD NMS - 12. Problems Remembering Things That Have Happened Recently
+      Or Forgetting To Do Things
+    type: boolean
+
+  pd_nms13_loss_of_interest:
+    description: PD NMS - 13. Loss Of Interest In What Is Happening Around You Or
+      In Doing Things
+    type: boolean
+
+  pd_nms14_seeing_or_hearing_things:
+    description: PD NMS - 14. Seeing Or Hearing Things That You Know Or Are Told Are
+      Not There
+    type: boolean
+
+  pd_nms15_difficulty_concentrating:
+    description: PD NMS - 15. Difficulty Concentrating Or Staying Focused
+    type: boolean
+
+  pd_nms16_feeling_sad:
+    description: PD NMS - 16. Feeling Sad, "Low" Or "Blue
+    type: boolean
+
+  pd_nms17_feeling_anxious:
+    description: PD NMS - 17. Feeling Anxious, Frightened Or Panicky
+    type: boolean
+
+  pd_nms18_change_interest_sex:
+    description: PD NMS - 18. Feeling Less Interested In Sex Or More Interested In
+      Sex
+    type: boolean
+
+  pd_nms19_difficult_sex:
+    description: PD NMS - 19. Finding It Difficult To Have Sex When You Try
+    type: boolean
+
+  pd_nms20_light_headed_dizzy_weak_standing:
+    description: PD NMS - 20. Feeling Light-Headed, Dizzy Or Weak Standing From Sitting
+      Or Lying
+    type: boolean
+
+  pd_nms21_falling:
+    description: PD NMS - 21. Falling
+    type: boolean
+
+  pd_nms22_stay_awake:
+    description: PD NMS - 22. Finding It Difficult To Stay Awake During Activities
+      Such As Working, Driving Or Eating
+    type: boolean
+
+  pd_nms23_getting_sleep:
+    description: PD NMS - 23. Difficulty Getting To Sleep At Night Or Staying Asleep
+      At Night
+    type: boolean
+
+  pd_nms24_intense_vivid_frightening_dreams:
+    description: PD NMS - 24. Intense, Vivid Or Frightening Dreams
+    type: boolean
+
+  pd_nms25_talking_moving_sleep:
+    description: PD NMS - 25. Talking Or Moving About In Your Sleep, As If You Are
+      "Acting Out" A Dream
+    type: boolean
+
+  pd_nms26_sensations_legs_night_resting:
+    description: PD NMS - 26. Unpleasant Sensations In Your Legs At Night Or While
+      Resting, And A Feeling That You Need To Move
+    type: boolean
+
+  pd_nms27_swelling_legs:
+    description: PD NMS - 27. Swelling Of The Legs
+    type: boolean
+
+  pd_nms28_excessive_sweating:
+    description: PD NMS - 28. Excessive Sweating
+    type: boolean
+
+  pd_nms29_double_vision:
+    description: PD NMS - 29. Double Vision
+    type: boolean
+
+  pd_nms30_believing_things_happening:
+    description: PD NMS - 30. Believing Things Are Happening To You That Other People
+      Say Are Not
+    type: boolean
+
+  pd_nms_mean_value:
+    description: PD NMS - Mean Value
+    type: number
+
+  pd_nms_total_score:
+    description: PD NMS - Total Score
+    type: number
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

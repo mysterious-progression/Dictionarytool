@@ -1,0 +1,145 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "visit_file"
+title: Visit File
+type: object
+nodeTerms: null
+namespace: http://gdc.nci.nih.gov
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing information obtained from a any baseline visit or
+  follow-up. These follow-ups are usually performed when visiting a clinical site.
+  Files can include physical examinations, laboratory results, neurocognitive tests,
+  etc.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: visit_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: neurocognitive_tests
+        backref: visit_files
+        label: derived_from
+        target_type: neurocognitive_test
+        multiplicity: one_to_one
+        required: false
+      - name: mental_health_questionnaires
+        backref: visit_files
+        label: derived_from
+        target_type: mental_health_questionnaire
+        multiplicity: one_to_one
+        required: false
+      - name: gynecological_exams
+        backref: visit_files
+        label: derived_from
+        target_type: gynecological_exam
+        multiplicity: one_to_one
+        required: false
+      - name: behavior_questionnaires
+        backref: visit_files
+        label: derived_from
+        target_type: behavior_questionnaire
+        multiplicity: one_to_one
+        required: false
+      - name: summary_lab_results
+        backref: visit_files
+        label: derived_from
+        target_type: summary_lab_result
+        multiplicity: one_to_one
+        required: false
+      - name: summary_socio_demographics
+        backref: visit_files
+        label: derived_from
+        target_type: summary_socio_demographic
+        multiplicity: one_to_one
+        required: false
+      - name: summary_drug_uses
+        backref: visit_files
+        label: derived_from
+        target_type: summary_drug_use
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    terms:
+      - $ref: "_terms.yaml#/data_category"
+    enumTerms:
+      Behavior Questionnaire: null
+      Drug Use Questionnaire: null
+      Gynecological Examination: null
+      Health Questionnaire: null
+      Laboratory Results: null
+      Mental Health Questionnaire: null
+      Neurocognitive Test: null
+      Physical Examination: null
+      Socio-Demographic Questionnaire: null
+
+  data_format:
+    terms:
+      - $ref: "_terms.yaml#/data_format"
+    type: string
+
+  data_type:
+    terms:
+      - $ref: "_terms.yaml#/data_type"
+    type: string
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  neurocognitive_tests:
+    $ref: "_definitions.yaml#/to_one"
+
+  mental_health_questionnaires:
+    $ref: "_definitions.yaml#/to_one"
+
+  gynecological_exams:
+    $ref: "_definitions.yaml#/to_one"
+
+  behavior_questionnaires:
+    $ref: "_definitions.yaml#/to_one"
+
+  summary_lab_results:
+    $ref: "_definitions.yaml#/to_one"
+
+  summary_socio_demographics:
+    $ref: "_definitions.yaml#/to_one"
+
+  summary_drug_uses:
+    $ref: "_definitions.yaml#/to_one"

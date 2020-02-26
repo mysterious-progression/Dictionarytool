@@ -1,0 +1,1310 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "sample"
+title: Sample
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: biospecimen
+program: '*'
+project: '*'
+description: Any material sample taken from a biological entity for testing, diagnostic,
+  propagation, treatment or research purposes, including a sample obtained from a
+  living organism or taken from the biological object after halting of all its life
+  functions. Biospecimen can contain one or more components including but not limited
+  to cellular molecules, cells, tissues, organs, body fluids, embryos, and body excretory
+  products. In the case of contrived samples, it describes any material obtained from
+  a normal donor.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: samples
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - composition
+  - biospecimen_anatomic_site
+  - method_of_procurement
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  acceptable_sample:
+    description: Is the sample acceptable for laboratory testing?
+    type: boolean
+
+  additional_stock_available:
+    description: Is additional stock available?
+    type: boolean
+
+  amount_of_protease_inhibitor_added:
+    description: Amount of protease inhibitor added, report in microliters.
+    type: number
+
+  amphetamines_urine:
+    description: Was urine collected for amphetamines?
+    type: boolean
+
+  anesthesia_administered:
+    description: Was Anesthesia Administered
+    type: boolean
+
+  anesthesia_type:
+    description: Type of anesthesia used
+    enum:
+      - Lidocaine
+      - None
+      - Other (specify)
+
+  anesthesia_type_specify:
+    description: Type of anesthesia used
+    type: string
+
+  average_hemoglobin:
+    description: Average Hemoglobin
+    type: number
+
+  biopsy_body_side:
+    description: Which Side Of Body Was Biopsy Performed
+    enum:
+      - Left
+      - Right
+
+  biopsy_completed:
+    description: Was Biopsy Completed
+    type: boolean
+
+  biopsy_needle_16_gauge:
+    description: Use of 16-gauge core biopsy needle
+    type: boolean
+
+  biospecimen_anatomic_site:
+    description: Text term that represents the name of the primary site of the collected
+      sample.
+    enum:
+      - Abdomen
+      - Abdominal Wall
+      - Acetabulum
+      - Adenoid
+      - Adipose
+      - Adrenal
+      - Alveolar Ridge
+      - Amniotic Fluid
+      - Ampulla Of Vater
+      - Anal Sphincter
+      - Ankle
+      - Anorectum
+      - Antecubital Fossa
+      - Antrum
+      - Anus
+      - Aorta
+      - Aortic Body
+      - Appendix
+      - Aqueous Fluid
+      - Arm
+      - Artery
+      - Ascending Colon
+      - Ascending Colon Hepatic Flexure
+      - Auditory Canal
+      - Autonomic Nervous System
+      - Axilla
+      - Back
+      - Bile Duct
+      - Bladder
+      - Blood
+      - Blood Vessel
+      - Bone
+      - Bone Marrow
+      - Bowel
+      - Brain
+      - Brain Stem
+      - Breast
+      - Broad Ligament
+      - Bronchiole
+      - Bronchus
+      - Brow
+      - Buccal Cavity
+      - Buccal Mucosa
+      - Buttock
+      - Calf
+      - Capillary
+      - Cardia
+      - Carina
+      - Carotid Artery
+      - Carotid Body
+      - Cartilage
+      - Cecum
+      - Cell-Line
+      - Central Nervous System
+      - Cerebellum
+      - Cerebral Cortex
+      - Cerebrospinal Fluid
+      - Cerebrum
+      - Cervical Spine
+      - Cervix
+      - Chest
+      - Chest Wall
+      - Chin
+      - Clavicle
+      - Clitoris
+      - Colon
+      - Colon - Mucosa Only
+      - Common Duct
+      - Conjunctiva
+      - Connective Tissue
+      - Dermal
+      - Descending Colon
+      - Diaphragm
+      - Duodenum
+      - Ear
+      - Ear Canal
+      - Ear, Pinna (External)
+      - Effusion
+      - Elbow
+      - Endocrine Gland
+      - Epididymis
+      - Epidural Space
+      - Esophageal, Distal
+      - Esophageal, Mid
+      - Esophageal, Proximal
+      - Esophagogastric Junction
+      - Esophagus
+      - Esophagus - Mucosa Only
+      - Eye
+      - Fallopian Tube
+      - Femoral Artery
+      - Femoral Vein
+      - Femur
+      - Fibroblasts
+      - Fibula
+      - Finger
+      - Floor Of Mouth
+      - Fluid
+      - Foot
+      - Forearm
+      - Forehead
+      - Foreskin
+      - Frontal Cortex
+      - Frontal Lobe
+      - Fundus Of Stomach
+      - Gallbladder
+      - Ganglia
+      - Gastroesophageal Junction
+      - Gastrointestinal Tract
+      - Groin
+      - Gum
+      - Hand
+      - Hard Palate
+      - Head & Neck
+      - Head - Face Or Neck, Nos
+      - Heart
+      - Hepatic
+      - Hepatic Duct
+      - Hepatic Flexure
+      - Hepatic Vein
+      - Hip
+      - Hippocampus
+      - Humerus
+      - Hypopharynx
+      - Ileum
+      - Ilium
+      - Index Finger
+      - Ischium
+      - Islet Cells
+      - Jaw
+      - Jejunum
+      - Joint
+      - Kidney
+      - Knee
+      - Lacrimal Gland
+      - Large Bowel
+      - Laryngopharynx
+      - Larynx
+      - Leg
+      - Leptomeninges
+      - Ligament
+      - Lip
+      - Liver
+      - Lumbar Spine
+      - Lung
+      - Lymph Node
+      - Lymph Node(s) Axilla
+      - Lymph Node(s) Cervical
+      - Lymph Node(s) Distant
+      - Lymph Node(s) Epitrochlear
+      - Lymph Node(s) Femoral
+      - Lymph Node(s) Hilar
+      - Lymph Node(s) Iliac-Common
+      - Lymph Node(s) Iliac-External
+      - Lymph Node(s) Inguinal
+      - Lymph Node(s) Internal Mammary
+      - Lymph Node(s) Mammary
+      - Lymph Node(s) Mesenteric
+      - Lymph Node(s) Occipital
+      - Lymph Node(s) Paraaortic
+      - Lymph Node(s) Parotid
+      - Lymph Node(s) Pelvic
+      - Lymph Node(s) Popliteal
+      - Lymph Node(s) Regional
+      - Lymph Node(s) Retroperitoneal
+      - Lymph Node(s) Scalene
+      - Lymph Node(s) Splenic
+      - Lymph Node(s) Subclavicular
+      - Lymph Node(s) Submandibular
+      - Lymph Node(s) Supraclavicular
+      - Lymph Nodes(s) Mediastinal
+      - Mandible
+      - Maxilla
+      - Mediastinal Soft Tissue
+      - Mediastinum
+      - Mesentery
+      - Mesothelium
+      - Middle Finger
+      - Mitochondria
+      - Muscle
+      - Nails
+      - Nasal Cavity
+      - Nasal Soft Tissue
+      - Nasopharynx
+      - Neck
+      - Nerve
+      - Nerve(s) Cranial
+      - Not Allowed To Collect
+      - Not Reported
+      - Occipital Cortex
+      - Ocular Orbits
+      - Omentum
+      - Oral Cavity
+      - Oral Cavity - Mucosa Only
+      - Oropharynx
+      - Other (specify)
+      - Ovary
+      - Palate
+      - Pancreas
+      - Paraspinal Ganglion
+      - Parathyroid
+      - Parotid Gland
+      - Patella
+      - Pelvis
+      - Penis
+      - Pericardium
+      - Periorbital Soft Tissue
+      - Peritoneal Cavity
+      - Peritoneum
+      - Pharynx
+      - Pineal
+      - Pineal Gland
+      - Pituitary Gland
+      - Placenta
+      - Pleura
+      - Popliteal Fossa
+      - Prostate
+      - Pylorus
+      - Rectosigmoid Junction
+      - Rectum
+      - Retina
+      - Retro-Orbital Region
+      - Retroperitoneum
+      - Rib
+      - Ring Finger
+      - Round Ligament
+      - Sacrum
+      - Salivary Gland
+      - Scalp
+      - Scapula
+      - Sciatic Nerve
+      - Scrotum
+      - Seminal Vesicle
+      - Shoulder
+      - Sigmoid Colon
+      - Sinus
+      - Sinus(es), Maxillary
+      - Skeletal Muscle
+      - Skin
+      - Skull
+      - Small Bowel
+      - Small Bowel - Mucosa Only
+      - Small Finger
+      - Soft Tissue
+      - Spinal Column
+      - Spinal Cord
+      - Spleen
+      - Splenic Flexure
+      - Sternum
+      - Stomach
+      - Stomach - Mucosa Only
+      - Subcutaneous Tissue
+      - Synovium
+      - Temporal Cortex
+      - Tendon
+      - Testis
+      - Thigh
+      - Thoracic Spine
+      - Thorax
+      - Throat
+      - Thumb
+      - Thymus
+      - Thyroid
+      - Tibia
+      - Tongue
+      - Tonsil
+      - Tonsil (Pharyngeal)
+      - Trachea / Major Bronchi
+      - Transverse Colon
+      - Trunk
+      - Umbilical Cord
+      - Unknown
+      - Ureter
+      - Urethra
+      - Urinary Tract
+      - Uterus
+      - Uvula
+      - Vagina
+      - Vas Deferens
+      - Vein
+      - Venous
+      - Vertebra
+      - Vulva
+      - White Blood Cells
+      - Wrist
+
+  biospecimen_anatomic_site_other:
+    description: If 'Other (specify)' was chosen for 'anatomic_site', enter the anatomic
+      site here.
+    type: string
+
+  biospecimen_laterality:
+    description: The side of the organ or body the biospecimen was taken from (e.g.,
+      'Left' if 'anatomic_site' was 'Lung' and it was taken from the left lung)
+    enum:
+      - Bilateral
+      - Left
+      - Not Reported
+      - Right
+      - Unknown
+
+  blood_and_urine_samples_collected:
+    type: boolean
+
+  blood_for_PAXgene:
+    description: Indicate whether blood was collected for PAX gene.
+    enum:
+      - Collected
+      - Collected, Unable to Process/Ship
+      - Not Collected
+      - Not Required
+      - Partial Collection
+
+  blood_for_plasma_level:
+    description: Indicate whether blood was collected for plasma level.
+    enum:
+      - Collected
+      - Collected, Unable to Process/Ship
+      - Not Collected
+      - Not Required
+      - Partial Collection
+
+  blood_for_safety_labs:
+    description: Indicate whether blood was collected for safety labs.
+    enum:
+      - Collected
+      - Collected, Unable to Process/Ship
+      - Not Collected
+      - Not Required
+      - Partial Collection
+
+  blood_for_serum:
+    description: Indicate whether blood was collected for serum.
+    enum:
+      - Collected
+      - Collected, Unable to Process/Ship
+      - Not Collected
+      - Not Required
+      - Partial Collection
+
+  blood_fractionation_method:
+    description: 'The name or description of the method used to obtain the blood fraction
+      sample. (e.g. Ficoll Method, Novartis Protocol #001, 2000 g centrifuge at 4C
+      with gentle deceleration).'
+    type: string
+
+  blood_sample_collected:
+    description: Blood Sample Collected
+    enum:
+      - Collected
+      - Collected, Unable To Process/Ship
+      - Not Collected
+
+  buffy_coat_collected:
+    description: Plasma - Buffy Coat
+    enum:
+      - Collected
+      - Collected, Unable To Process/Ship
+      - Not Collected
+
+  cassette_number:
+    description: Cassette number
+    type: number
+
+  cell_line_quantity:
+    description: Cell Line Quantity
+    type: string
+
+  cell_line_quantity_units:
+    description: Cell Line Quantity Units
+    type: string
+
+  cell_type:
+    description: Cell Type
+    type: string
+
+  cells_per_container:
+    description: Cells Per Container
+    type: integer
+
+  centrifugation_duration:
+    description: Duration Of centrifugation or spin (min)
+    type: number
+
+  centrifugation_rate:
+    description: Rate of centrifugation or spin (xg)
+    type: number
+
+  centrifugation_temperature:
+    description: Sample temperature (Celsius) during centrifugation or spin
+    type: number
+
+  centrifuged_at_room_temperature:
+    description: Was the sample spun At Room Temperature?
+    type: boolean
+
+  clinical_site:
+    description: The name or identifier for the clinical site at which the biospecimen
+      was taken from the patient.
+    type: string
+
+  collaboration_id:
+    description: In cases where the same biospecimen is used by multiple institutions,
+      a deidenfitied id may be provided here to tie those together. Work with your
+      collaborators assure the same id is used in all projects.
+    type: string
+
+  collection_duration:
+    description: The number of minutes it took to complete sample collection
+    type: number
+
+  collection_not_completed_specify:
+    description: Specify why collection was not completed
+    type: string
+
+  comments:
+    description: General comments about the sampling procedure
+    type: string
+
+  compartment_present_mucosa:
+    description: Compartment present - mucosa
+    type: boolean
+
+  compartment_present_submucosa:
+    description: Compartment present - submucosa
+    type: boolean
+
+  complications_1st_foregoing_last_more_than_7_days:
+    description: Have 1st foregoing complications lasted more than 7 days?
+    type: string
+
+  complications_1st_foregoing_requiring_hospitalization:
+    description: Have 1st foregoing complications required hospitalization?
+    type: string
+
+  complications_2nd_foregoing_last_more_than_7days:
+    description: Have 2nd foregoing complications lasted more than 7 days?
+    type: string
+
+  complications_2nd_foregoing_requiring_hospitalization:
+    description: Have 2nd foregoing complications required hospitalization?
+    type: string
+
+  complications_3rd_foregoing_last_more_than_7days:
+    description: Have 3rd foregoing complications lasted more than 7 days?
+    type: string
+
+  complications_3rd_foregoing_requiring_hospitalization:
+    description: Have 3rd foregoing complications required hospitalization?
+    type: string
+
+  complications_during_collection:
+    description: Were there complications during sample collection?
+    type: boolean
+
+  composition:
+    description: The text term that describes the composition of the biospecimen
+    enum:
+      - Bone Marrow Components
+      - Bone Marrow Components NOS
+      - Buccal Cells
+      - Buffy Coat
+      - Cell
+      - Cerebrospinal Fluid (CSF)
+      - Circulating Tumor Cell (CTC)
+      - Control Analyte
+      - Derived Cell Line
+      - EBV Immortalized
+      - Fibroblasts from Bone Marrow Normal
+      - Granulocytes
+      - Human Original Cells
+      - Lymphocytes
+      - Mononuclear Cells from Bone Marrow Normal
+      - Oral Swab
+      - Other (specify)
+      - Peripheral Blood Components NOS
+      - Peripheral Blood Nucleated Cells
+      - Peripheral Whole Blood
+      - Plasma
+      - Pleural Effusion
+      - RBC-WBC
+      - Saliva
+      - Serum
+      - Solid Normal Tissue
+      - Solid Tumor Tissue
+      - Sputum
+      - Unknown
+      - Urine
+      - Whole Blood
+      - Whole Bone Marrow
+
+  composition_other:
+    type: string
+
+  days_to_collection:
+    description: The number of days between the case Index Date and the date that
+      the biospecimen was collected
+    type: integer
+
+  days_to_fluoroscopy:
+    description: Days to fluoroscopy since consent
+    type: integer
+
+  days_to_freezing:
+    description: Days to samples  frozen (Paxgene) since consent
+    type: integer
+
+  days_to_frozen:
+    description: The number of days between the case Index Date and the Date PAXgene
+      Sample Placed In Freezer
+    type: integer
+
+  days_to_last_meal:
+    description: Days to last meal since consent
+    type: integer
+
+  days_to_last_pd_med_dose:
+    description: The number of days between the case Index Date and the Date Of Most
+      Recent PD Med Dose
+    type: integer
+
+  days_to_lumbar_puncture:
+    description: Days from the index date to the date of Lumbar Puncture
+    type: integer
+
+  days_to_lumbar_spine_film:
+    description: Days to lumbar spine film
+    type: integer
+
+  days_to_procurement:
+    description: The number of days between the index date and the date the biospecimen
+      was taken from the patient (such as the blood draw).
+    type: integer
+
+  days_to_shipped:
+    description: The number of days between the case Index Date and the Date Shipped
+      To Central Lab
+    type: integer
+
+  density_score:
+    description: Pathologist consensus score used for analyses
+    type: number
+
+  density_score_mucosa:
+    description: Density score - mucosa
+    type: number
+
+  density_score_submucosa:
+    description: Density score - submucosa
+    type: number
+
+  device_used:
+    description: List device used
+    type: string
+
+  diastolic_blood_pressure_post_procedure:
+    description: Blood Pressure Post Procedure - Diastolic (mmHg)
+    type: integer
+
+  diastolic_blood_pressure_pre_procedure:
+    description: Blood Pressure pre Procedure - Diastolic (mmHg)
+    type: integer
+
+  dna_collected:
+    description: DNA Collected
+    type: boolean
+
+  electrocardiogram_performed:
+    description: Was electrocardiogram performed during sample collection?
+    type: boolean
+
+  fasting_status:
+    description: Fasting Status at the time of sample collection
+    enum:
+      - Fasted (Minimum Of 8 Hours)
+      - Low Fat Diet
+      - Not Fasted, No Low Fat Diet
+
+  fixative_used:
+    description: Type of fixative used
+    enum:
+      - Formalin
+      - Zamboni
+
+  fluoroscopy_performed:
+    description: Was fluoroscopy performed during sample collection? (lumbar puncture)
+    type: boolean
+
+  formalin_lot:
+    description: Formalin lot number
+    type: integer
+
+  formalin_manufacturer:
+    description: Formalin manufacturer
+    type: string
+
+  freezing_method:
+    description: Freezing Media
+    type: string
+
+  heart_rate_post_procedure:
+    description: Heart Rate Post Procedure (beats per minute)
+    type: integer
+
+  heart_rate_pre_procedure:
+    description: Heart Rate pre Procedure (beats per minute)
+    type: integer
+
+  heparin_prior_to_draw:
+    description: iPSC Blood Sample- Subject Take Heparin Prior To Draw
+    type: boolean
+
+  hours_to_fractionation_lower:
+    description: The lower limit on the amount of time, in hours, between the blood
+      draw and the fractionation into its components.
+    type: number
+
+  hours_to_fractionation_upper:
+    description: The upper limit on the amount of time, in hours, between the blood
+      draw and the fractionation into its components.
+    type: number
+
+  identity_test_result:
+    description: Identity Test Result
+    type: string
+
+  initial_volume:
+    description: The initial volume of the sample in milliliters (mL)
+    type: number
+
+  initial_weight:
+    description: The initial mass of the sample in milligrams (mg)
+    type: number
+
+  karotype_procedure:
+    description: Karotype Procedure
+    type: string
+
+  labs_done:
+    description: Description of the labs done
+    type: string
+
+  lumbar_puncture_blood_batch_performed:
+    description: Lumbar Puncture- Blood Batch Performed
+    enum:
+      - "No"
+      - "Yes"
+
+  lumbar_puncture_bloody_tap:
+    description: Lumbar Puncture- Bloody Tap
+    type: boolean
+
+  lumbar_puncture_for_csf:
+    description: Lumbar Puncture for Cerebrospinal Fluid (CSF)
+    enum:
+      - Attempted
+      - Collected
+      - No Collection
+      - Not Collected
+      - Not Done
+      - Partial Collection
+
+  lumbar_puncture_hour:
+    description: LP Hour
+    type: integer
+
+  lumbar_puncture_method:
+    description: Lumbar Puncture- Method Used For CSF
+    enum:
+      - Gravity
+      - Syringe Suction
+
+  lumbar_puncture_needle_type:
+    description: Lumbar Puncture- Needle Used For CSF
+    enum:
+      - 18g
+      - 19g
+      - 20g Quincke (Sharp Bevelled) Needle
+      - 22g Quincke (Sharp Bevelled) Needle
+      - 22g Sprotte (Atraumatic) Needle
+      - 24g Sprotte (Atraumatic) Needle
+      - 25g Quincke (Sharp Bevelled) Needle
+      - Other (specify)
+
+  lumbar_puncture_needle_type_other:
+    description: Lumbar Puncture Needle type used if 'Other (specify)' was chosen
+      for 'lumbar_puncture_needle_type
+    type: string
+
+  lumbar_puncture_performed:
+    description: Was lumbar puncture performed?
+    type: boolean
+
+  lumbar_puncture_position:
+    description: Lumbar Puncture Position
+    enum:
+      - Lying, Curled Up On Side
+      - Other, Specify In Comments
+      - Sitting, Leaned Over
+      - Unknown
+
+  lumbar_puncture_reason_not_done:
+    description: Lumbar Puncture Not Done Reason
+    enum:
+      - Aborted Due To Radicular Discomfort
+      - Deviations From LP Protocol (e.g. Overnight Bed Rest, Abstention From Food
+        Or Activity Or Medication)
+      - Due To Spinal Issues
+      - Grossly Bloody Tap
+      - Hyposmic With Permission To Forego LP
+      - Inadequate Flow
+      - Medical Contraindications To LP
+      - More Than One
+      - On Meds That Preclude LP
+      - Other (specify)
+      - Patient Refused LP
+      - Site Issues (e.g. Scheduling)
+      - Subj Hx Of Difficulty Obtaining LP
+      - Subj Refused/Not Feeling Well
+      - Unable To Puncture Lumbar Sac
+
+  lumbar_puncture_reason_not_done_other:
+    description: Lumbar Puncture Not Done Reason if 'Other (specify)' was chosen for
+      'lumbar_puncture_reason_not_done
+    type: string
+
+  lumbar_puncture_site:
+    description: Lumbar Puncture Site
+    enum:
+      - L2-L3 Interspace
+      - L3-L4 Interspace
+      - L4-L5 Interspace
+      - Unknown
+
+  lumbar_puncture_year:
+    description: The year lumbar puncture was performed
+    type: integer
+
+  lumbar_spine_film_performed:
+    description: Was Lumbar Spine Film Performed
+    type: boolean
+
+  lymphocytes_collected:
+    description: Lymphocytes Collected
+    type: boolean
+
+  method_of_procurement:
+    description: The text term that describes the method used to extract the biospecimen
+      from the individual
+    enum:
+      - Abdomino-perineal Resection of Rectum
+      - Anterior Resection of Rectum
+      - Aspirate
+      - Autopsy
+      - Biopsy
+      - Blood Draw
+      - Bone Marrow Aspirate
+      - Cisternal Puncture
+      - Core Biopsy
+      - Cystectomy
+      - Endo Rectal Tumor Resection
+      - Endoscopic Biopsy
+      - Endoscopic Mucosal Resection (EMR)
+      - Enucleation
+      - Excisional Biopsy
+      - Fine Needle Aspiration
+      - Full Hysterectomy
+      - Gross Total Resection
+      - Hand Assisted Laparoscopic Radical Nephrectomy
+      - Hysterectomy NOS
+      - Incisional Biopsy
+      - Indeterminant
+      - Laparoscopic Biopsy
+      - Laparoscopic Partial Nephrectomy
+      - Laparoscopic Radical Nephrectomy
+      - Laparoscopic Radical Prostatectomy with Robotics
+      - Laparoscopic Radical Prostatectomy without Robotics
+      - Left Hemicolectomy
+      - Lobectomy
+      - Local Resection (Exoresection, wall resection)
+      - Lumbar Puncture
+      - Lumpectomy
+      - Modified Radical Mastectomy
+      - Needle Biopsy
+      - Not Reported
+      - Open Craniotomy
+      - Open Partial Nephrectomy
+      - Open Radical Nephrectomy
+      - Open Radical Prostatectomy
+      - Orchiectomy
+      - Other (specify)
+      - Other Surgical Resection
+      - Pan-Procto Colectomy
+      - Pancreatectomy
+      - Paracentesis
+      - Pneumonectomy
+      - Right Hemicolectomy
+      - Sigmoid Colectomy
+      - Simple Mastectomy
+      - Subtotal Resection
+      - Surgical Resection
+      - Thoracoscopic Biopsy
+      - Total Colectomy
+      - Total Mastectomy
+      - Transplant
+      - Transurethral resection (TURBT)
+      - Transverse Colectomy
+      - Tumor Resection
+      - Unknown
+      - Ventricular Puncture
+      - Wedge Resection
+      - Whipple Procedure
+
+  method_of_procurement_other:
+    description: If 'Other (specify)' was chosen for 'method_of_procurement', specify
+      the method of sample procurement here.
+    type: string
+
+  number_aliquots_available:
+    description: The number of aliquots available for a sample
+    type: integer
+
+  number_biopsy_slide:
+    description: Number of biopsies on slide
+    type: integer
+
+  number_of_tubes_shipped:
+    description: The number of tubes shipped
+    type: integer
+
+  number_samples_cassette:
+    description: Number of samples in cassette
+    type: integer
+
+  number_slides_scored:
+    description: Number of slides scored
+    type: integer
+
+  passage_count:
+    description: Passage Number At Freeze
+    type: integer
+
+  placed_in_freezer:
+    description: Lumbar Puncture- CSF Placed In Freezer
+    type: string
+
+  plasma_volume_aliquoted_after_spinning:
+    description: The volume of plasma aliquoted after spinning the sample.
+    type: number
+
+  post_mortem_brain_collected:
+    description: Post Mortem Brain Collected
+    type: boolean
+
+  preservation_method:
+    description: The text term that describes the method used to preserve the biospecimen
+      after collection
+    enum:
+      - Cryopreserved
+      - FFPE
+      - Fresh
+      - Frozen
+      - Not Reported
+      - OCT
+      - Snap Frozen
+      - Unknown
+
+  procured_or_purchased:
+    description: Was the biospecimen purchased from a vendor or procured from a study
+      participant.
+    enum:
+      - Procured
+      - Purchased
+
+  protease_inhibitor_lot:
+    description: Protease inhibitor lot
+    type: string
+
+  radial_jaw_forceps:
+    description: Radial jaw forceps used
+    type: boolean
+
+  reason_sample_unacceptable:
+    description: Describe the reason the sample was unacceptable
+    enum:
+      - Blood In Sample
+      - Deviations From Collection
+      - Inadequate Flow
+      - More Than One
+      - Other (specify)
+
+  reason_sample_unacceptable_other:
+    description: Describe the reason the sample was unacceptable if 'Other (specify)'
+      was chosen for 'reason_sample_unacceptable
+    type: string
+
+  reprogramming_method:
+    description: Reprogramming Method
+    type: string
+
+  respiratory_rate_post_procedure:
+    description: Respiratory Rate Post Procedure (breaths per minute)
+    type: integer
+
+  respiratory_rate_pre_procedure:
+    description: Respiratory Rate pre Procedure (breaths per minute)
+    type: integer
+
+  saliva_sample_collected:
+    enum:
+      - Attempted, Not Collected
+      - Collected
+      - Collected, Unable to Process/Ship
+      - Not Collected
+      - Not Required
+      - Partial Collection
+
+  sample_id:
+    description: Specimen Sample ID
+    type: string
+
+  sample_quantity:
+    description: For solid samples, the mass of the sample in milligrams (mg).
+    type: number
+
+  sample_sent_to_local_lab:
+    description: Lumbar Puncture- Sample Sent To Local Lab
+    type: boolean
+
+  sample_type:
+    description: The text term that describes the general type of sample
+    enum:
+      - Additional - New Primary
+      - Additional Metastatic
+      - Blood Derived Cancer - Bone Marrow, Post-treatment
+      - Blood Derived Cancer - Peripheral Blood, Post-treatment
+      - Blood Derived Normal
+      - Bone Marrow Normal
+      - Buccal Cell Normal
+      - Cell Line Derived Xenograft Tissue
+      - Cell Lines
+      - Control Analyte
+      - DNA
+      - EBV Immortalized Normal
+      - FFPE Recurrent
+      - FFPE Scrolls
+      - Fibroblasts from Bone Marrow Normal
+      - GenomePlex (Rubicon) Amplified DNA
+      - Granulocytes
+      - Human Tumor Original Cells
+      - Lymphoid Normal
+      - Metastatic
+      - Mononuclear Cells from Bone Marrow Normal
+      - Next Generation Cancer Model
+      - Not Allowed To Collect
+      - Not Reported
+      - Other (specify)
+      - Pleural Effusion
+      - Post neo-adjuvant therapy
+      - Primary Blood Derived Cancer - Bone Marrow
+      - Primary Blood Derived Cancer - Peripheral Blood
+      - Primary Tumor
+      - Primary Xenograft Tissue
+      - RNA
+      - Recurrent Blood Derived Cancer - Bone Marrow
+      - Recurrent Blood Derived Cancer - Peripheral Blood
+      - Recurrent Tumor
+      - Repli-G (Qiagen) DNA
+      - Repli-G X (Qiagen) DNA
+      - Slides
+      - Solid Tissue Normal
+      - Total RNA
+      - Tumor
+      - Tumor Adjacent Normal - Post Neo-adjuvant Therapy
+      - Unknown
+      - Xenograft Tissue
+
+  sample_type_other:
+    description: A description of the specific biospecimen or sample type if 'Other
+      (specify)' was chosen for 'sample_type
+    type: string
+
+  serum_volume_aliquoted_after_spinning:
+    description: The volume of serum aliquoted after spinning the sample
+    type: number
+
+  shipped_with_cold_gel_packs:
+    description: Were Cold Gel Packs Used For Shipping?
+    type: boolean
+
+  skin_biopsy_location:
+    description: Location Of Skin Biopsy
+    enum:
+      - Cervical Spine
+      - Thigh
+      - Upper Arm
+      - Upper Leg
+
+  skin_fibroblasts_collected:
+    description: Skin Fibroblasts Collected
+    type: boolean
+
+  specimen_number:
+    description: Specimen Number
+    type: string
+
+  storage_temperature:
+    description: The sample storage temperature (C)
+    type: number
+
+  subject_on_pd_meds:
+    description: Was the subject on medication for Parkinson's Disease at the time
+      of sample collection?
+    type: boolean
+
+  systolic_blood_pressure_post_procedure:
+    description: Blood Pressure Post Procedure - Systolic (mmHg)
+    type: integer
+
+  systolic_blood_pressure_pre_procedure:
+    description: Blood Pressure pre Procedure - Systolic (mmHg)
+    type: integer
+
+  taking_pd_medication:
+    description: Subject on PD medication
+    type: boolean
+
+  temperature_post_procedure:
+    description: Temperature Post Procedure (C)
+    type: number
+
+  temperature_pre_procedure:
+    description: Temperature pre Procedure (C)
+    type: number
+
+  time_formalin:
+    description: Time sample was placed in formalin
+    type: string
+
+  time_from_last_food_intake:
+    description: Duration of Time bewteen Last Intake Of Food and Time Of Sampling
+      (min)
+    type: number
+
+  time_from_last_oral_hygiene_products:
+    description: Time since last use of oral hygiene products, Hours
+    type: string
+
+  time_frozen_dryice:
+    description: Time sample was either placed in freezer or placed on dry ice
+    type: string
+
+  time_in_fixative:
+    description: Time sample placed in fixative
+    type: string
+
+  time_of_centrifugation:
+    description: Time Sample Centrifugation or Spin Started
+    type: string
+
+  time_of_collection:
+    description: Time sample was collected
+    type: string
+
+  time_of_last_meal:
+    description: Time Of Last Intake Of Food Prior to Sampling
+    type: string
+
+  time_of_last_pd_med_dose:
+    description: Time Of Most Recent Parkinson's Disease Medication Dose
+    type: string
+
+  time_refrigerated:
+    description: Time Specimen Was Refrigerated
+    type: string
+
+  time_since_last_alcohol_intake:
+    description: Time since last alcohol use
+    type: string
+
+  time_since_last_tobacco_intake:
+    description: Time since last tobacco use
+    type: string
+
+  time_to_centrifugation:
+    description: Duration From Sample Collection To Start Of Centrifugation (min)
+    type: number
+
+  time_to_freezing:
+    description: Duration of Time between Sample Collection and Freezing (min)
+    type: number
+
+  tissue_type:
+    description: A classification of the tissue as normal or tumor if taken from a
+      cancer patient
+    enum:
+      - Abnormal
+      - Normal
+      - Not Reported
+      - Peritumoral
+      - Tumor
+      - Unknown
+
+  tocopherol_blood:
+    description: Was blood collected for tocopherol?
+    type: boolean
+
+  total_number_tubes:
+    description: Total Number Of Sample Collection Tubes
+    type: integer
+
+  tube_inversions_number:
+    description: Number Of Sample Collection Tube Inversions
+    type: integer
+
+  tube_number_in_collection_order:
+    description: The sample's order number if more than one tube was collected at
+      the time of sampling
+    type: integer
+
+  tube_type:
+    description: The tube type used for sample collection
+    enum:
+      - Cell Preparation Tube
+      - EDTA
+      - Lithium Heparin
+      - Serum Separator Tube
+      - Streck
+
+  tumor_primary_site:
+    description: The site of the primary tumor for the patient from which the biospecimen
+      was taken.
+    enum:
+      - Bone
+      - Bone Marrow
+      - Brain
+      - Breast
+      - Central Nervous System
+      - Cervix
+      - Colorectal
+      - Corpus Uteri
+      - Digestive Organs
+      - Endocrine Gland
+      - Esophagus
+      - Eye
+      - Female Genital Organs
+      - Head and Neck
+      - Hematopoietic System
+      - Integumentary System
+      - Joints and Articular Cartilage
+      - Kidney
+      - Liver
+      - Lung
+      - Lymph Node
+      - Male Genital Organs
+      - Other Sites
+      - Ovary
+      - Pancreas
+      - Pleura
+      - Prostate
+      - Retroperitoneum and Peritoneum
+      - Skin
+      - Soft Tissue
+      - Stomach
+      - Testis
+      - Thoracic Organs
+      - Thymus
+      - Thyroid
+      - Unknown
+      - Urinary System
+      - Uterus
+
+  turbidity:
+    description: Turbidity
+    enum:
+      - Clear
+      - Cloudy
+      - Slightly Cloudy
+      - Very Cloudy
+
+  urine_specimen:
+    description: Indicate whether urine was collected.
+    enum:
+      - Collected
+      - Collected, Unable to Process/Ship
+      - Not Collected
+      - Not Required
+      - Partial Collection
+
+  warfarin_prior_to_draw:
+    description: Did Subject Take Warfarin Prior To Sample Collection?
+    type: boolean
+
+  wound_closure_type:
+    description: Type Of Wound Closure
+    enum:
+      - Dressing Only
+      - Steri Strips
+      - Suture
+
+  year_sample_obtained:
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

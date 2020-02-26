@@ -1,0 +1,131 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "electrocardiogram"
+title: Electrocardiogram
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Electrocardiogram data.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: electrocardiograms
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  days_to_ecg:
+    description: Days to  electrocardiogram
+    type: integer
+
+  ecg_performed:
+    description: Indicator of whether electrocardiogram was performed
+    type: boolean
+
+  ecg_result_interpretation:
+    description: Overall electrocardiogram interpretation
+    enum:
+      - Clinically Significant Abnormality
+      - Normal
+      - Not Clinically Significant Abnormality
+
+  hrv_ecg_performed:
+    description: Indicator of whether a heart rate variability electrocardiogram was
+      performed
+    type: boolean
+
+  hrv_hf:
+    description: Total spectral power of all NN intervals between 0.15 and 0.4 Hz
+      - absolute power of high frequency (HF) (ms^2)
+    type: number
+
+  hrv_hf_nu:
+    description: Relative power of high frequency (HF), nu - normal units
+    type: number
+
+  hrv_lf:
+    description: Total spectral power of all NN intervals between 0.04 and 0.15 Hz
+      - absolute power of low frequency (ms^2)
+    type: number
+
+  hrv_lf_hf_ratio:
+    description: Ratio of low to high frequency power (LF/HF)
+    type: number
+
+  hrv_lf_nu:
+    description: Relative power of low frequency (LF), nu - normal units
+    type: number
+
+  hrv_pnn50:
+    description: pNN50 Percentage of NNs More Than 50 msec Different from prior NN
+      - Percentage of Successive RR Intervals That Differ By More Than 50_ms
+    type: number
+
+  hrv_rmssd_nns:
+    description: The square root of the mean squared difference (RMSSD) of successive
+      NNs
+    type: number
+
+  hrv_sd1:
+    description: SD1 - Short-Term Heart Rate Variability (ms)
+    type: number
+
+  hrv_sd2:
+    description: SD2 - Long-Term Heart Rate Variability (ms)
+    type: number
+
+  hrv_sd_heart_rate:
+    description: Standard deviation of heart rate (beats/min)
+    type: number
+
+  hrv_tinn:
+    description: Triangular Interpolation of RR Intervals (TINN)
+    type: number
+
+  hrv_vlf:
+    description: Total spectral power of all NN intervals between 0.003 and 0.04 Hz
+      - the very low-frequency (VLF) band of heart rate variability (HRV)
+    type: number
+
+  rr_tri_index:
+    description: Triangular index (RR TRI Index) Measure - integral of the density
+      of the RR interval histogram divided by its height
+    type: number
+
+  sd_nns_intervals:
+    description: Standard Deviation of all NNs intervals (ms)
+    type: number
+
+  time_of_ecg:
+    description: Time when electrocardiogram performed
+    type: string
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

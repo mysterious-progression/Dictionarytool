@@ -1,0 +1,86 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "nuclear_magnetic_resonance"
+title: Nuclear Magnetic Resonance
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: experimental_methods
+program: '*'
+project: '*'
+description: Parameters associated with a nuclear magnetic resonance (NMR) experiment
+  aimed at quantifying or identifying a particular molecule, analyte or biological
+  marker in a biospecimen collected from a study subject
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: metabolomics_results
+    backref: nuclear_magnetic_resonances
+    label: performed_on
+    target_type: metabolomics_result
+    multiplicity: many_to_many
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - metabolomics_results
+  - test_type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  comments:
+    description: Specific comments about or customization of the NMR experiment
+    type: string
+
+  days_to_test:
+    description: The total number of days between the test and the index date. The
+      date of the test less the date of index.
+    type: integer
+
+  equipment_manufacturer:
+    description: In the case where measurements are taken using some sort of equpiment,
+      provide the name of the manufacturer.
+    type: string
+
+  equipment_model:
+    description: In the case where measurements are taken using some sort of equipment,
+      provide the model and version of the equpiment.
+    type: string
+
+  test_method:
+    description: The method used to obtain the test results
+    enum:
+      - Carbon NMR
+      - Proton NMR
+
+  test_method_other:
+    description: The method used to obtain the test results if 'Other (specify)' was
+      chosen for 'test_method
+    type: string
+
+  test_type:
+    description: The type or name of the NMR experiment
+    type: string
+
+  year_of_test:
+    description: Year the test was performed
+    type: integer
+
+  metabolomics_results:
+    $ref: "_definitions.yaml#/to_many"

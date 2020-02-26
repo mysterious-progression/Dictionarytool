@@ -1,0 +1,272 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "benton_judgement_line_orientation"
+title: Benton Judgment of Line Orientation
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Benton Judgment of Line Orientation
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: benton_judgement_line_orientations
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  benton_test_info_source:
+    description: Benton Test Source Of Information
+    enum:
+      - Caregiver
+      - Patient
+      - Patient and Caregiver
+
+  benton_test_item_01:
+    description: Benton Test Item 01
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_02:
+    description: Benton Test Item 02
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_03:
+    description: Benton Test Item 03
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_04:
+    description: Benton Test Item 04
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_05:
+    description: Benton Test Item 05
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_06:
+    description: Benton Test Item 06
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_07:
+    description: Benton Test Item 07
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_08:
+    description: Benton Test Item 08
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_09:
+    description: Benton Test Item 09
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_10:
+    description: Benton Test Item 10
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_11:
+    description: Benton Test Item 11
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_12:
+    description: Benton Test Item 12
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_13:
+    description: Benton Test Item 13
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_14:
+    description: Benton Test Item 14
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_15:
+    description: Benton Test Item 15
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_16:
+    description: Benton Test Item 16
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_17:
+    description: Benton Test Item 17
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_18:
+    description: Benton Test Item 18
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_19:
+    description: Benton Test Item 19
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_20:
+    description: Benton Test Item 20
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_21:
+    description: Benton Test Item 21
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_22:
+    description: Benton Test Item 22
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_23:
+    description: Benton Test Item 23
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_24:
+    description: Benton Test Item 24
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_25:
+    description: Benton Test Item 25
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_26:
+    description: Benton Test Item 26
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_27:
+    description: Benton Test Item 27
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_28:
+    description: Benton Test Item 28
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_29:
+    description: Benton Test Item 29
+    enum:
+      - Correct
+      - Incorrect
+
+  benton_test_item_30:
+    description: Benton Test Item 30
+    enum:
+      - Correct
+      - Incorrect
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  derived_moans_age:
+    description: Derived-MOANS (Age)
+    type: integer
+
+  derived_moans_age_educ:
+    description: Derived-MOANS (Age and Education)
+    type: number
+
+  line_orientation_sum_15_item:
+    description: Line Orientation-Sum 15 item
+    type: integer
+
+  line_orientation_sum_15_item_x2:
+    description: Line Orientation-Sum 15 item X2
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

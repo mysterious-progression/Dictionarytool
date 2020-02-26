@@ -1,0 +1,103 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "clinical_global_impression"
+title: Clinical Global Impression (CGI)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Clinical Global Impression (CGI)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: clinical_global_impressions
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  cgii_clin_global_impression_scale_investigator:
+    description: Clinical Global Impression Scale (CGII) (Investigator)- Clinical
+      Global Impression - Investigator
+    enum:
+      - Marked Improvement
+      - Marked Worsening
+      - Minimal Improvement
+      - Minimal Worsening
+      - Moderate Improvement
+      - Moderate Worsening
+      - No Change
+      - Unknown
+
+  cgii_days_from_enroll_visit:
+    description: Clinical Global Impression Scale (CGII) (Investigator)- Days From
+      Enrollment Visit
+    type: integer
+
+  cgip_days_from_enroll_visit:
+    description: Clinical Global Impression (CGIP)- Days From Enrollment Visit
+    type: integer
+
+  cgip_global_improvement:
+    description: Clinical Global Impression (CGIP)- Global Improvement
+    enum:
+      - Marked Improvement
+      - Marked Worsening
+      - Minimal Improvement
+      - Minimal Worsening
+      - Moderate Improvement
+      - Moderate Worsening
+      - No Change
+      - Unknown
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

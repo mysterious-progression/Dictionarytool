@@ -1,0 +1,178 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "modified_schwab_england_scale"
+title: Modified Schwab and England Activities of Daily Living Scale
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Modified Schwab and England Activities of Daily Living Scale
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: modified_schwab_england_scales
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  mod_schwab_england_pct_adl_scale:
+    description: Modified Schwab And England Percent ADL Scale
+    enum:
+      - 0 Pct - Vegetative Functions Such As Swallowing, Bladder, And Bowel Functions
+        Are Not Functioning. Bedridden.
+      - 010 Pct - Totally Dependent, Helpless. Complete Invalid.
+      - 020 Pct - Nothing Alone. Can Be A Slight Help With Some Chores. Severe Invalid.
+      - 030 Pct - With Effort, Now And Then Does A Few Chores Alone Or Begins Alone.
+        Much Help Needed.
+      - 040 Pct - Very Dependent. Can Assist With All Chores But Few Alone.
+      - 050 Pct - More Dependent. Help With Half, Slower, Etc. Difficulty With Everything.
+      - 060 Pct - Some Dependency. Can Do Most Chores, But Exceedingly Slowly And
+        With Much Effort. Errors, Some Impossible.
+      - 070 Pct - Not Completely Independent. More Difficulty With Some Chores. Three
+        To Four Times As Long In Some. Must Spend A Large Part Of The Day With Chores.
+      - 080 Pct - Completely Independent In Most Chores. Takes Twice As Long. Conscious
+        Of Difficulty And Slowness.
+      - 090 Pct - Completely Independent. Able To Do All Chores With Some Degree Of
+        Slowness, Difficulty And Impairment. Might Take Twice As Long. Beginning To
+        Be Aware Of Difficulty.
+      - 100 Pct - Completely Independent. Able To Do All Chores Without Slowness,
+        Difficulty Or Impairment. Essentially Normal. Unaware Of Any Difficulty.
+
+  mod_schwab_england_pct_adl_scale_off:
+    description: Modified Schwab And England Percent ADL Scale OFF State
+    enum:
+      - 020 Pct - Nothing Alone. Can Be A Slight Help With Some Chores. Severe Invalid.
+      - 030 Pct -With Effort, Now And Then Does A Few Chores Alone Or Begins Alone.
+        Much Help Needed.
+      - 040 Pct -Very Dependent. Can Assist With All Chores, But Few Alone.
+      - 060 Pct - Some Dependency. Can Do Most Chores, But Exceedingly Slowly And
+        With Much Effort. Errors, Some Impossible.
+      - 070 Pct - Not Completely Independent. More Difficulty With Some Chores. Three
+        To Four Times As Long In Some. Must Spend A Large Part Of The Day With Chores.
+      - 080 Pct - Completely Independent In Most Chores. Takes Twice As Long. Conscious
+        Of Difficulty And Slowness.
+      - 090 Pct - Completely Independent. Able To Do All Chores With Some Degree Of
+        Slowness, Difficulty And Impairment. Might Take Twice As Long. Beginning To
+        Be Aware Of Difficulty.
+      - 100 Pct - Completely Independent. Able To Do All Chores Without Slowness,
+        Difficulty Or Impairment. Essentially Normal. Unaware Of Any Difficulty.
+
+  mod_schwab_england_pct_adl_scale_on:
+    description: Modified Schwab And England Percent ADL Scale ON State
+    enum:
+      - 010 Pct - Total Dependent, Helpless. Complete Invalid.
+      - 020 Pct - Nothing Alone. Can Be A Slight Help With Some Chores. Severe Invalid.
+      - 030 Pct - With Effort, Now And Then Does A Few Chores Alone Or Begins Alone.
+        Much Help Needed.
+      - 040 Pct - Very Dependent. Can Assist With All Chores, But Few Alone.
+      - 050 Pct - More Dependent. Help With Half, Slower, Et Cetera. Difficulty With
+        Everything.
+      - 060 Pct - Some Dependency. Can Do Most Chores, But Exceedingly Slowly And
+        With Much Effort. Errors, Some Impossible.
+      - 070 Pct - Not Completely Independent. More Difficulty With Some Chores. Three
+        To Four Times As Long In Some. Must Spend A Large Part Of The Day With Chores.
+      - 080 Pct - Completely Independent In Most Chores. Takes Twice As Long. Conscious
+        Of Difficulty And Slowness.
+      - 090 Pct - Completely Independent. Able To Do All Chores With Some Degree Of
+        Slowness, Difficulty And Impairment. Might Take Twice As Long. Beginning To
+        Be Aware Of Difficulty.
+      - 100 Pct - Completely Independent. Able To Do All Chores Without Slowness,
+        Difficulty Or Impairment. Essentially Normal. Unaware Of Any Difficulty.
+
+  mod_schwab_england_pct_adl_scale_overall:
+    description: Modified Schwab And England Percent ADL Scale Overall
+    enum:
+      - 010 Pct - Total Dependent, Helpless. Complete Invalid.
+      - 020 Pct - Nothing Alone. Can Be A Slight Help With Some Chores. Severe Invalid.
+      - 030 Pct - With Effort, Now And Then Does A Few Chores Alone Or Begins Alone.
+        Much Help Needed.
+      - 040 Pct - Very Dependent. Can Assist With All Chores, But Few Alone.
+      - 050 Pct - More Dependent. Help With Half, Slower, Et Cetera. Difficulty With
+        Everything.
+      - 060 Pct - Some Dependency. Can Do Most Chores, But Exceedingly Slowly And
+        With Much Effort. Errors, Some Impossible.
+      - 070 Pct - Not Completely Independent. More Difficulty With Some Chores. Three
+        To Four Times As Long In Some. Must Spend A Large Part Of The Day With Chores.
+      - 080 Pct - Completely Independent In Most Chores. Takes Twice As Long. Conscious
+        Of Difficulty And Slowness.
+      - 090 Pct - Completely Independent. Able To Do All Chores With Some Degree Of
+        Slowness, Difficulty And Impairment. Might Take Twice As Long. Beginning To
+        Be Aware Of Difficulty.
+      - 100 Pct - Completely Independent. Able To Do All Chores Without Slowness,
+        Difficulty Or Impairment. Essentially Normal. Unaware Of Any Difficulty.
+
+  mod_schwab_england_pct_adl_score:
+    description: Modified Schwab And England Percent ADL Score
+    type: integer
+
+  mod_schwab_england_pct_adl_score_off:
+    description: Modified Schwab And England Percent ADL Score OFF State
+    type: integer
+
+  mod_schwab_england_pct_adl_score_on:
+    description: Modified Schwab And England Percent ADL Score ON State
+    type: integer
+
+  mod_schwab_england_pct_adl_score_overall:
+    description: Modified Schwab And England Percent ADL Score Overall
+    type: integer
+
+  pd_symptoms_fluctuator_non_fluctuator:
+    description: Modified Schwab And England Percent ADL Score- PD Symptoms Fluctuator
+      Or Non Fluctuator
+    enum:
+      - Fluctuator
+      - Non Fluctuator
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

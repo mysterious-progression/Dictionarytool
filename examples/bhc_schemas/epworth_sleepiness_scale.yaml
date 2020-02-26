@@ -1,0 +1,155 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "epworth_sleepiness_scale"
+title: Epworth Sleepiness Scale
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: Epworth Sleepiness Scale
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: epworth_sleepiness_scales
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  days_to_assessment:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed
+    type: integer
+
+  ess0101_sitting_and_reading:
+    description: 01. ESS - Sitting And Reading
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0102_watching_tv:
+    description: 02. ESS - Watching TV
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0103_sitting_inactive_in_public_place:
+    description: 03. ESS - Sitting, Inactive In A Public Place
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0104_passenger_in_car_for_hour:
+    description: 04. ESS - As A Passenger In A Car For An Hour Without A Break
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0105_lying_down_to_rest_in_afternoon:
+    description: 05. ESS - Lying Down To Rest In The Afternoon When Circumstances
+      Permit
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0106_sitting_and_talking_to_someone:
+    description: 06. ESS - Sitting And Talking To Someone
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0107_sitting_after_lunch:
+    description: 07. ESS - Sitting Quietly After A Lunch Without Alcohol
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess0108_car_stopped_in_traffic:
+    description: 08. ESS - In A Car, While Stopped For A Few Minutes In The Traffic
+    enum:
+      - High Chance Of Dozing
+      - Moderate Chance Of Dozing
+      - Slight Chance Of Dozing
+      - Would Never Doze
+
+  ess_info_source:
+    description: ESS- Source Of Information
+    enum:
+      - Caregiver
+      - Patient
+      - Patient and Caregiver
+
+  ess_mean_value:
+    description: ESS Mean Value
+    type: number
+
+  ess_summary_score:
+    description: ESS Summary Score
+    type: integer
+
+  sleepiness:
+    description: Sleepiness
+    enum:
+      - Not Sleepy
+      - Sleepy
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

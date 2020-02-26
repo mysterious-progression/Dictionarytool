@@ -1,0 +1,186 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "clinical_diagnosis_management"
+title: Clinical Diagnosis And Management Questionnaire (SWEDD)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Clinical Diagnosis And Management Questionnaire (SWEDD)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: clinical_diagnosis_managements
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  change_in_clinical_dx:
+    description: 04. Change In Clinical Diagnosis
+    type: boolean
+
+  clin_dx_manag_most_likely_primary_dx:
+    description: Most Likely Primary Diagnosis
+    enum:
+      - Alzheimer's Disease
+      - Dementia With Lewy Bodies
+      - Dopa-Responsive Dystonia
+      - Essential Tremor
+      - Idiopathic PD
+      - Motor Neuron Disease With Parkinsonism
+      - Multiple System Atrophy
+      - No PD Nor Other Neurological Disorder
+      - Other Neurological Disorder(s) (Specify)
+      - Psychogenic Illness
+      - Spinocerebellar Ataxia (SCA)
+      - Vascular Parkinsonism
+
+  clin_dx_manag_other_neurol_disorders:
+    description: Other Neurological Disorder(s) Specify
+    type: string
+
+  clinical_management_change:
+    description: 05. Change In Clinical Management
+    type: boolean
+
+  days_to_info:
+    description: Number of days between the case Index Date and the date the assessment
+      was performed or information was recorded
+    type: integer
+
+  diagnostic_testing:
+    description: 06d. Diagnostic Testing
+    type: boolean
+
+  enrolled_in_trial:
+    description: 06b. Enrolled In Trial
+    type: boolean
+
+  factors_in_dx_clinical_signs:
+    description: 04b. Factors In Diagnosis - Clinical Signs
+    type: boolean
+
+  factors_in_dx_imaging_data:
+    description: 04a. Factors In Diagnosis - Imaging Data
+    type: boolean
+
+  factors_in_dx_natural_history:
+    description: 04d. Factors In Diagnosis - Natural History
+    type: boolean
+
+  factors_in_dx_other:
+    description: 04e. Factors In Diagnosis - Other
+    type: boolean
+
+  factors_in_dx_other_comment:
+    description: 04ec. Factors In Diagnosis - Other Comment
+    type: string
+
+  factors_in_dx_pd_medications_response:
+    description: 04c. Factors In Diagnosis - Response To PD Medication
+    type: boolean
+
+  motor_signs_of_parkinsonian_syndrome_confidence_level:
+    description: 01. Confidence Level - Motor Signs Of Parkinsonian Syndrome
+    enum:
+      - Motor Abnormalities Are PS (90-100 Pct)
+      - Motor Abnormalities Likely PS (70-89 Pct
+      - Motor Abnormalities May Be PS (50-69 Pct)
+      - No Evidence Of Parkinsonian Motor Signs (0-24 Pct)
+      - Non-Specific Motor Abnormalities (25-49 Pct)
+
+  no_motor_signs_consistent_with_parkinsonian_syndrome:
+    description: 02a. No Motor Signs Consistent With Parkinsonian Syndrome
+    type: boolean
+
+  no_treatment:
+    description: 06e. No Treatment
+    type: boolean
+
+  other_neurologist_working_dx:
+    description: 07a. Other Neurologist Working Diagnosis
+    type: string
+
+  other_signs_parkinsonian_syndrome_related:
+    description: 02f. Other Signs Related To Parkinsonian Syndrome
+    type: boolean
+
+  other_signs_parkinsonian_syndrome_related_comment:
+    description: 02fc. Other Signs Related To Parkinsonian Syndrome - Comment
+    type: string
+
+  pd_treatment_symptoms:
+    description: 06a. Treatment Symptoms Of PD
+    type: boolean
+
+  postural_and_gait_disturbances_pd_typical:
+    description: 02e. Postural And Gait Disturbances Are Typical Of PD
+    type: boolean
+
+  present_for_dx_pd_bradykinesia:
+    description: 02d. Present For Diagnosis PD - Bradykinesia
+    type: boolean
+
+  present_for_dx_pd_rest_tremor:
+    description: 02b. Present For Diagnosis PD - Rest Tremor
+    type: boolean
+
+  present_for_dx_pd_rigidity:
+    description: 02c. Present For Diagnosis PD - Rigidity
+    type: boolean
+
+  seen_another_neurologist:
+    description: 07. Seen Another Neurologist
+    type: boolean
+
+  treatment_other_than_pd:
+    description: 06c. Treatment Other Than PD
+    type: boolean
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

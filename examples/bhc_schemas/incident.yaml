@@ -1,0 +1,61 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "incident"
+title: Incident
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Information about incidents related to a treatment.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: incidents
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  days_to_discontinued_study_drug:
+    description: Days From Index Date To Date Discontinued Study Drug
+    type: integer
+
+  days_to_incident_call:
+    description: Days From Index Date To Call Date
+    type: integer
+
+  incident_drug_disclosure:
+    description: Was drug disclosed?
+    type: boolean
+
+  treatment_suspended_incident:
+    description: Was treatment suspended?
+    type: boolean
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

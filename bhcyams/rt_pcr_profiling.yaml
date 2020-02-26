@@ -1,0 +1,198 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "rt_pcr_profiling"
+title: RT-PCR Profiling
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: experimental_methods
+program: '*'
+project: '*'
+description: Parameters associated with RT-PCR profiling aimed at quantifying or identifying
+  the expression of a particular gene, miRNA, RNA, or other biological molecule or
+  marker in a biospecimen collected from a study subject
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: expression_results
+        backref: rt_pcr_profilings
+        label: performed_on
+        target_type: expression_result
+        multiplicity: many_to_one
+        required: false
+      - name: genotyping_results
+        backref: rt_pcr_profilings
+        label: performed_on
+        target_type: genotyping_result
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - sample_composition
+  - equipment_manufacturer
+  - equipment_model
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  assay_kit_name:
+    description: Name of the assay kit used.
+    type: string
+
+  assay_kit_vendor:
+    description: Vendor that provided the assay kit.
+    type: string
+
+  assay_kit_version:
+    description: Version of the assay kit used.
+    type: string
+
+  assay_target:
+    description: The specific target for the assay- can be a gene, protein, panel
+      or otherwise.
+    type: string
+
+  comments:
+    description: Specific comments about or customization of the RT-PCR experiment
+    type: string
+
+  days_to_test:
+    description: The total number of days between the test and the index date. The
+      date of the test less the date of index.
+    type: integer
+
+  equipment_manufacturer:
+    description: In the case where measurements are taken using some sort of equpiment,
+      provide the name of the manufacturer.
+    type: string
+
+  equipment_model:
+    description: In the case where measurements are taken using some sort of equipment,
+      provide the model and version of the equpiment.
+    type: string
+
+  primers:
+    description: Describe the primers used for the PCR profiling experiment
+    type: string
+
+  sample_composition:
+    description: The type or composition of the sample or biological specimen taken
+      from a study subject used for the test
+    enum:
+      - Bone Marrow
+      - Buccal Mucosa
+      - Buffy Coat
+      - Cerebrospinal Fluid
+      - Connective Tissue
+      - Embryonic Fluid
+      - Embryonic Tissue
+      - Feces
+      - Granulocyte
+      - Muscle Tissue
+      - Nerve Tissue
+      - Not Reported
+      - Oral Swab
+      - Other (specify)
+      - Peritoneal Fluid
+      - Plasma
+      - Pleural Fluid
+      - Saliva
+      - Serum
+      - Skin
+      - Soft Tissue
+      - Tissue, NOS
+      - Tumor
+      - Unknown
+      - Urine
+      - Whole Blood
+
+  sample_composition_other:
+    description: If 'other' was chosen for 'sample_composition', the type or composition
+      of the sample or biological specimen taken from a study subject used for the
+      test
+    type: string
+
+  target_alt:
+    description: The observed alternate sequence for the genomic region being investigated.
+    type: string
+
+  target_chromosome:
+    description: The chromosome on which the gene of interest is located.
+    enum:
+      - '1'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '2'
+      - '20'
+      - '21'
+      - '22'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - X
+      - Y
+
+  target_position:
+    description: The position on the chromosome on which the gene of interest is located.
+    type: integer
+
+  target_ref:
+    description: The reference sequence for the genomic region that is being investigated.
+    type: string
+
+  test_code:
+    description: The code used for a laboratory test
+    type: string
+
+  test_name:
+    description: The name or type of the laboratory test
+    type: string
+
+  test_panel:
+    description: The name of the laboratory test panel
+    type: string
+
+  test_project_id:
+    description: The identifier of a project for the laboratory test
+    type: string
+
+  year_of_test:
+    description: Year the experiment was performed
+    type: integer
+
+  expression_results:
+    $ref: "_definitions.yaml#/to_one"
+
+  genotyping_results:
+    $ref: "_definitions.yaml#/to_one"

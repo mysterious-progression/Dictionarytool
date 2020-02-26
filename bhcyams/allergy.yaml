@@ -1,0 +1,71 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "allergy"
+title: Allergy
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: Allergy information for a study participant. Optional link for allergies
+  related to medication or treatment.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: allergies
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  allergies_to_drugs:
+    description: Allergies To Drug?
+    type: boolean
+
+  allergies_to_foods_inhalants:
+    description: Allergies To Foods or Inhalants?
+    type: boolean
+
+  days_to_allergic_reaction:
+    description: The number of days between the Index Date and the date of an allergic
+      reaction to drug, medication or treatment.
+    type: integer
+
+  drug_name:
+    description: The name of a medication or drug the person is allergic to
+    type: string
+
+  food_name:
+    description: The name of a food the person is allergic to
+    type: string
+
+  inhalant_name:
+    description: The name of an inhalant the person is allergic to
+    type: string
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

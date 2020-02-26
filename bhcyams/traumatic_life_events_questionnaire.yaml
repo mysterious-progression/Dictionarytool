@@ -1,0 +1,176 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "traumatic_life_events_questionnaire"
+title: Traumatic Life Events Questionnaire (TLEQ)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A self-administered questionnaire to assess current and prior exposure
+  to potentially traumatic events.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: traumatic_life_events_questionnaires
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  X_tleq_critA:
+    description: Count of all events that happened I or more times and resulted in
+      helplessness or horror
+    type: integer
+
+  X_tleq_critA_accident:
+    description: Count of Criteria A in questions (1, 2, 3)
+    type: integer
+
+  X_tleq_critA_adultsex:
+    description: Count of Criteria A in questions (18)
+    type: integer
+
+  X_tleq_critA_after:
+    description: Count of Criteria A after military
+    type: integer
+
+  X_tleq_critA_attack:
+    description: Count of Criteria A in questions (8, 9, 10, 11, 14, 19)
+    type: integer
+
+  X_tleq_critA_before:
+    description: Count of Criteria A before military
+    type: integer
+
+  X_tleq_critA_childsex:
+    description: Count of Criteria A in questions (15, 16, 17)
+    type: integer
+
+  X_tleq_critA_childvio:
+    description: Count of Criteria A in questions (12, 13)
+    type: integer
+
+  X_tleq_critA_during:
+    description: Count of Criteria A during military
+    type: integer
+
+  X_tleq_critA_illness:
+    description: Count of Criteria A in questions (5, 6, 7, 20, 21)
+    type: integer
+
+  questionnaire_ordinal:
+    description: The ordinal of the Traumatic Life Events Questionnaire (TLEQ) completed
+      by the subject.
+    enum:
+      - '1'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '2'
+      - '20'
+      - '21'
+      - '22'
+      - '23'
+      - '24'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+
+  tleq_1:
+    description: Have you ever experienced a natural disaster (a flood, hurricane,
+      earthquake, etc.)?
+    enum:
+      - 3 times
+      - 4 times
+      - 5 times
+      - More than 5
+      - Never
+      - Once
+      - Twice
+
+  tleq_2:
+    description: Did you experience intense fear, helplessness, or horror when it
+      happened?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_3:
+    description: Were you seriously injured?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_4:
+    description: Was someone you cared about or close by seriously injured or killed?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_5:
+    description: Did you think you or a loved one was in danger of being killed by
+      the disaster?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_6:
+    description: Did it happen before the military?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_7:
+    description: Did it happen while on active duty?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_8:
+    description: Did it happen as a veteran?
+    enum:
+      - "No"
+      - "Yes"
+
+  tleq_9:
+    description: How old were you when it first happened?
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

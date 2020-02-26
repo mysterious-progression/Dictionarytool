@@ -1,0 +1,451 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "neurological_exam"
+title: Neurological Exam
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: medical_history
+program: '*'
+project: '*'
+description: The results of a neurological exam
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: neurological_exams
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_assessment:
+    description: The age of the subject when the information was recorded in days,
+      if the age is less than 90 years
+    type: integer
+    maximum: 32872
+    minimum: 0
+
+  age_at_assessment_gt89:
+    description: Indicates whether the age of the subject when the information was
+      recorded is greater than 89 years
+    enum:
+      - "No"
+      - "Yes"
+
+  assessment_version:
+    description: The version number of the form, survey, checklist or questionnaire
+      used for the assessment
+    type: string
+
+  coordination_left_finger_to_nose:
+    description: General Neurological Exam- Coordination - Left Finger-To-Nose
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  coordination_left_finger_to_nose_description:
+    description: General Neurological Exam- Coordination Left Finger-To-Nose Description
+    type: string
+
+  coordination_left_heel_to_shin:
+    description: General Neurological Exam- Coordination - Left Heel-To-Shin
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  coordination_left_heel_to_shin_description:
+    description: General Neurological Exam- Coordination Left Heel-To-Shin Description
+    type: string
+
+  coordination_right_finger_to_nose:
+    description: General Neurological Exam- Coordination - Right Finger-To-Nose
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  coordination_right_finger_to_nose_description:
+    description: General Neurological Exam- Coordination Right Finger-To-Nose Description
+    type: string
+
+  coordination_right_heel_to_shin:
+    description: General Neurological Exam- Coordination - Right Heel-To-Shin
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  coordination_right_heel_to_shin_description:
+    description: General Neurological Exam- Coordination Right Heel-To-Shin Description
+    type: string
+
+  cranial_nerve_i:
+    description: Cranial Nerve I
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_i_description:
+    description: Cranial Nerve I Description
+    type: string
+
+  cranial_nerve_ii:
+    description: Cranial Nerve II
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_ii_description:
+    description: Cranial Nerve II Description
+    type: string
+
+  cranial_nerve_iii_iv_vi:
+    description: Cranial Nerve III,IV,VI
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_iii_iv_vi_description:
+    description: Cranial Nerve III, IV, VI Description
+    type: string
+
+  cranial_nerve_ix_x:
+    description: Cranial Nerve IX, X
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_ix_x_description:
+    description: Cranial Nerve IX, X Description
+    type: string
+
+  cranial_nerve_v:
+    description: Cranial Nerve V
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_v_description:
+    description: Cranial Nerve V Description
+    type: string
+
+  cranial_nerve_vii:
+    description: Cranial Nerve VII
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_vii_description:
+    description: Cranial Nerve VII Description
+    type: string
+
+  cranial_nerve_viii:
+    description: Cranial Nerve VIII
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_viii_description:
+    description: Cranial Nerve VIII Description
+    type: string
+
+  cranial_nerve_xi:
+    description: Cranial Nerve XI
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_xi_description:
+    description: Cranial Nerve XI Description
+    type: string
+
+  cranial_nerve_xii:
+    description: Cranial Nerve XII
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  cranial_nerve_xii_description:
+    description: Cranial Nerve XII Description
+    type: string
+
+  days_to_exam:
+    description: Number of days between the case Index Date and the date the exam
+      was performed
+    type: integer
+
+  muscle_strength_left_arm:
+    description: General Neurological Exam- Muscle Strength - Left Arm
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_strength_left_arm_description:
+    description: General Neurological Exam- Muscle Strength - Left Arm - Description
+    type: string
+
+  muscle_strength_left_leg:
+    description: General Neurological Exam- Muscle Strength - Left Leg
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_strength_left_leg_description:
+    description: General Neurological Exam- Muscle Strength - Left Leg - Description
+    type: string
+
+  muscle_strength_right_arm:
+    description: General Neurological Exam- Muscle Strength - Right Arm
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_strength_right_arm_description:
+    description: General Neurological Exam- Muscle Strength - Right Arm - Description
+    type: string
+
+  muscle_strength_right_leg:
+    description: General Neurological Exam- Muscle Strength - Right Leg
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_strength_right_leg_description:
+    description: General Neurological Exam- Muscle Strength - Right Leg - Description
+    type: string
+
+  muscle_stretch_left_arm:
+    description: General Neurological Exam- Muscle Stretch - Left Arm
+    enum:
+      - Absent
+      - Hyperactive clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_stretch_left_arm_description:
+    description: General Neurological Exam- Muscle Stretch - Left Arm - Description
+    type: string
+
+  muscle_stretch_left_leg:
+    description: General Neurological Exam- Muscle Stretch - Left Leg
+    enum:
+      - Absent
+      - Hyperactive clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_stretch_left_leg_description:
+    description: General Neurological Exam- Muscle Stretch - Left Leg - Description
+    type: string
+
+  muscle_stretch_right_arm:
+    description: General Neurological Exam- Muscle Stretch - Right Arm
+    enum:
+      - Absent
+      - Hyperactive clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_stretch_right_arm_description:
+    description: General Neurological Exam- Muscle Stretch - Right Arm - Description
+    type: string
+
+  muscle_stretch_right_leg:
+    description: General Neurological Exam- Muscle Stretch - Right Leg
+    enum:
+      - Absent
+      - Hyperactive clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  muscle_stretch_right_leg_description:
+    description: General Neurological Exam- Muscle Stretch - Right Leg - Description
+    type: string
+
+  plantar_left:
+    description: General Neurological Exam- Plantar - Left
+    enum:
+      - Extensor
+      - Flexor
+      - Indeterminate
+      - Not tested
+      - Unable to test
+
+  plantar_left_description:
+    description: General Neurological Exam- Plantar - Left - Description
+    type: string
+
+  plantar_right:
+    description: General Neurological Exam- Plantar - Right
+    enum:
+      - Extensor
+      - Flexor
+      - Indeterminate
+      - Not tested
+      - Unable to test
+
+  plantar_right_description:
+    description: General Neurological Exam- Plantar - Right - Description
+    type: string
+
+  reflex_left_arm:
+    description: General Neurological Exam- Reflex - Left Arm
+    enum:
+      - Absent
+      - Hyperactive, clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  reflex_left_leg:
+    description: General Neurological Exam- Reflex - Left Leg
+    enum:
+      - Absent
+      - Hyperactive, clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  reflex_right_arm:
+    description: General Neurological Exam- Reflex - Right Arm
+    enum:
+      - Absent
+      - Hyperactive, clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  reflex_right_leg:
+    description: General Neurological Exam- Reflex - Right Leg
+    enum:
+      - Absent
+      - Hyperactive, clonus
+      - Hyperactive, no clonus
+      - Hypoactive
+      - Normal
+      - Not tested
+      - Unable to test
+
+  sensory_left_arm:
+    description: General Neurological Exam- Sensory - Left Arm
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  sensory_left_arm_description:
+    description: General Neurological Exam- Sensory - Left Arm - Description
+    type: string
+
+  sensory_left_leg:
+    description: General Neurological Exam- Sensory - Left Leg
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  sensory_left_leg_description:
+    description: General Neurological Exam- Sensory - Left Leg - Description
+    type: string
+
+  sensory_right_arm:
+    description: General Neurological Exam- Sensory - Right Arm
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  sensory_right_arm_description:
+    description: General Neurological Exam- Sensory - Right Arm- Description
+    type: string
+
+  sensory_right_leg:
+    description: General Neurological Exam- Sensory - Right Leg
+    enum:
+      - Abnormal
+      - Normal
+      - Not tested
+      - Unable to test
+
+  sensory_right_leg_description:
+    description: General Neurological Exam- Sensory - Right Leg- Description
+    type: string
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

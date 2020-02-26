@@ -1,0 +1,89 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "mass_cytometry_image"
+title: Mass Cytometry Image
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_file
+program: '*'
+project: '*'
+description: Following an imaging mass cytometry experiment, the raw data output can
+  be converted into antibody-specific images.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: mass_cytometry_images
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: mass_cytometry_files
+        backref: mass_cytometry_images
+        label: data_from
+        target_type: mass_cytometry_file
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+  - assay_target
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  assay_target:
+    description: The protein marker identified in this assay.
+    type: string
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Mass Cytometry
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - JPG
+      - PNG
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - Single Channel IMC Image
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  mass_cytometry_files:
+    $ref: "_definitions.yaml#/to_one"

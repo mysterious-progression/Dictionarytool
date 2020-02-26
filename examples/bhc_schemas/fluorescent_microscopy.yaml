@@ -1,0 +1,171 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "fluorescent_microscopy"
+title: Fluorescent Microscopy
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_observations
+program: '*'
+project: '*'
+description: Parameters associated with the results of a fluorescent microscopy experiment.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: fluorescent_microscopies
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - sample_composition
+  - test_method
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  comments:
+    description: Specific comments about or customization of the experiment
+    type: string
+
+  days_to_test:
+    description: The total number of days between the test and the index date. The
+      date of the test less the date of index.
+    type: integer
+
+  equipment_manufacturer:
+    description: In the case where measurements are taken using some sort of equpiment,
+      provide the name of the manufacturer.
+    type: string
+
+  equipment_model:
+    description: In the case where measurements are taken using some sort of equipment,
+      provide the model and version of the equpiment.
+    type: string
+
+  high_range:
+    description: Lab Test High Range
+    type: number
+
+  low_range:
+    description: Lab Test Low Range
+    type: number
+
+  primary_antibody:
+    description: The primary antibody used in the experiment, e.g., in immunofluorescence,
+      if applicable
+    type: string
+
+  sample_composition:
+    description: The type or composition of the sample or biological specimen taken
+      from a study subject used for the test
+    enum:
+      - Bone Marrow
+      - Buccal Mucosa
+      - Buffy Coat
+      - Cerebrospinal Fluid
+      - Connective Tissue
+      - Embryonic Fluid
+      - Embryonic Tissue
+      - Feces
+      - Granulocyte
+      - Muscle Tissue
+      - Nerve Tissue
+      - Not Reported
+      - Oral Swab
+      - Other (specify)
+      - Peritoneal Fluid
+      - Plasma
+      - Pleural Fluid
+      - Saliva
+      - Serum
+      - Skin
+      - Soft Tissue
+      - Tissue, NOS
+      - Tumor
+      - Unknown
+      - Urine
+      - Whole Blood
+
+  sample_composition_other:
+    description: If 'other' was chosen for 'sample_composition', the type or composition
+      of the sample or biological specimen taken from a study subject used for the
+      test
+    type: string
+
+  secondary_antibody:
+    description: The secondary antibody used in the experiment, e.g., in immunofluorescence,
+      if applicable
+    type: string
+
+  test_analyte_type:
+    description: The analyte or biological molecule that was being imaged in the experiment
+    enum:
+      - Individual Amyloid Protein Aggregates
+
+  test_method:
+    description: The method used to obtain the test results
+    enum:
+      - Confocal
+      - Epifluorescence
+      - Single Aggregate Visualization by Enhancement (SAVE)
+      - Total Internal Reflection Fluorescence (TIRF)
+
+  test_method_other:
+    description: The method used to obtain the test results if 'Other (specify)' was
+      chosen for 'test_method
+    type: string
+
+  test_project_id:
+    description: The identifier of a project for the laboratory test
+    type: string
+
+  test_result:
+    description: The categorical result of the laboratory test.
+    enum:
+      - Abnormal
+      - Clinically Significant Abnormal
+      - Equivocal
+      - Negative
+      - "No"
+      - Normal
+      - Not Reported
+      - Positive
+      - Too High
+      - Too Low
+      - Unknown
+      - "Yes"
+
+  test_units:
+    description: The units corresponding to a test_value for a test_analyte_type
+    type: string
+
+  test_value:
+    description: The numerical value representing the result for the test_analyte_type
+    type: number
+
+  year_of_experiment:
+    description: Year the experiment was performed
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

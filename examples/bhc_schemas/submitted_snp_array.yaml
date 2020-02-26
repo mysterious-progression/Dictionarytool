@@ -1,0 +1,99 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "submitted_snp_array"
+title: Submitted SNP array
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_file
+program: '*'
+project: '*'
+description: DNA array data files contain information on genome-wide SNP and genetic
+  variant for genetic studies.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: submitted_snp_array_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: aliquots
+        backref: submitted_snp_array_files
+        label: data_from
+        target_type: aliquot
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - data_category
+  - data_type
+  - data_format
+  - md5sum
+  - file_size
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - SNP Array Data
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - GCT
+      - GTC
+      - IDAT
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - SNP Raw Intensity
+
+  experimental_strategy:
+    term:
+      $ref: "_terms.yaml#/experimental_strategy"
+    enum:
+      - SNP Array Genotyping
+
+  platform:
+    term:
+      $ref: "_terms.yaml#/platform"
+    enum:
+      - Illumina Infinium HumanExome BeadChip
+      - Illumina OMNI 2.5M SNP Array
+      - Illumina OMNI 5M SNP Array
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  aliquots:
+    $ref: "_definitions.yaml#/to_one"

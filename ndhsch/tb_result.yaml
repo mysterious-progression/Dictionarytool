@@ -1,0 +1,120 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "tb_result"
+title: TB Result
+type: object
+nodeTerms: null
+namespace: https://niaid.bionimbus.org
+category: clinical
+program: '*'
+project: '*'
+description: Tuberculosis test Values obtained from laboratory tests required by a
+  medical professional and performed at one of the recurrent patient visit
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: samples
+    backref: tb_results
+    label: performed_on
+    target_type: sample
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - samples
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  culture:
+    description: Result of culture. Examples include positive growth of mycobacterium,
+      more than 200 colonies, not done, study in progress, results not entered, nonspecific
+      microflora, and more
+    terms: null
+    enumTerms:
+      1 to 19: null
+      100 to 200: null
+      20 to 100: null
+      MOTT: null
+      More than 200: null
+      Negative: null
+      Nonspecific microflora: null
+      Not done: null
+      Positive: null
+      Study in progress: null
+      Unknown result: null
+
+  drug:
+    description: Resistance to drug tested for DST test
+    terms: null
+    enumTerms:
+      ag_cp: null
+      am: null
+      amx_clv: null
+      bdq: null
+      cfz: null
+      clr: null
+      cm: null
+      cs: null
+      dld: null
+      e: null
+      eto: null
+      fq: null
+      h: null
+      ipm_cln: null
+      km: null
+      lfx: null
+      lzd: null
+      mb: null
+      mfx: null
+      ofx: null
+      pas: null
+      pto: null
+      r: null
+      s: null
+      z: null
+
+  microscopy:
+    description: Result of microscopy. Examples include 10-99 acid-resistant bacteria
+      in 1 field of view when stained by Ziehl-Nielsen, 1 to 9 in 1, 10 to 99 in 100,
+      and more.
+    terms: null
+    type: string
+
+  response:
+    description: Response to DST test S -- sensitive R -- resistant I -- intermediate
+    terms: null
+    enumTerms:
+      I: null
+      R: null
+      S: null
+      not reported: null
+
+  test_type:
+    description: Type of DST test
+    terms: null
+    enumTerms:
+      bactec: null
+      dst: null
+      genexpert: null
+      hain: null
+      le: null
+
+  samples:
+    $ref: "_definitions.yaml#/to_one"

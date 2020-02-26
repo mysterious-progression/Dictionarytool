@@ -1,0 +1,115 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "derived_image_file"
+title: Derived Image File
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: data_file
+program: '*'
+project: '*'
+description: Data file containing a derived image or a composite image created from
+  the combination of individual slices or scans
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: derived_image_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: imaging_analysis_workflows
+        backref: derived_image_files
+        label: derived_from
+        target_type: imaging_analysis_workflow
+        multiplicity: many_to_many
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - file_name
+  - file_size
+  - data_format
+  - data_type
+  - data_category
+  - md5sum
+  - derivation_method
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  atlas:
+    description: Atlas used for data output from scans.
+    type: string
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    type: string
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - DICOM/DCM
+      - GIF
+      - JPEG
+      - PNG
+      - TIF
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - Amygdala Nuclei
+      - Cortical
+      - Cortical Thickness
+      - DTI Analysis
+      - Hippocampal Subfield
+      - Resting State
+      - Subcortical GWAS Cortical GWAS
+      - Subcortical GWAS DTI GWAS
+      - Subcortical GWAS Hippocampal Subfield GWAS
+      - Subcortical GWAS Resting State Canonical Network
+      - Subcortical GWAS Resting State Connectomic Network
+      - Subcortical GWAS Resting State Dynamic Functional
+      - Subcortical GWAS Resting State GWAS
+      - Subcortical GWAS Resting State Machine Learning
+      - Subcortical Volume
+      - Surface Area
+
+  derivation_method:
+    description: The name and version of the method, script or workflow used to generate
+      the derived or combined image
+    type: string
+
+  scan_identifier:
+    description: Identifier given to this scan.
+    type: string
+
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"
+
+  imaging_analysis_workflows:
+    $ref: "_definitions.yaml#/to_many"

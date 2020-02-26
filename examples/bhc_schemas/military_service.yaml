@@ -1,0 +1,562 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "military_service"
+title: Military Service
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: subject_characteristics
+program: '*'
+project: '*'
+description: A subject's background and status of their military service.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: military_services
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  awarded_medals:
+    description: Were you awarded any medals?
+    enum:
+      - "No"
+      - "Yes"
+
+  branch1_active:
+    description: Branch of active service
+    type: string
+
+  branch1_service:
+    description: Most recent branch of service
+    type: string
+
+  branch2_service:
+    description: Second most recent branch of service
+    type: string
+
+  branch3_service:
+    description: Third most recent branch of service
+    type: string
+
+  branch4_service:
+    description: Fourth most recent branch of service
+    type: string
+
+  branch5_service:
+    description: Fifth most recent branch of service
+    type: string
+
+  branch6_service:
+    description: Sixth most recent branch of service
+    type: string
+
+  days_to_discharge:
+    description: The number of days from the index date to the date the patient was
+      discharged from the military.
+    type: integer
+
+  days_to_service_end:
+    description: The number of days from the index date to the date the patient's
+      military service ended. Note if multiple the patient had multiple periods of
+      servive, complete one military_service node for each period.
+    type: integer
+
+  days_to_service_start:
+    description: The number of days from the index date to the date the patient's
+      military service began. Note if multiple the patient had multiple periods of
+      servive, complete one military_service node for each period.
+    type: integer
+
+  disability_filed:
+    description: Have you filed for a service-connected disability?
+    enum:
+      - "No"
+      - "Yes"
+
+  disability_plan_file:
+    description: Do you plan to file for disability?
+    enum:
+      - "No"
+      - "Yes"
+
+  era_service_enduring:
+    description: Enduring Freedom (Afghanistan) (2001-Present)
+    type: boolean
+
+  era_service_gulf:
+    description: Gulf War (1990-91)
+    type: boolean
+
+  era_service_iraqi:
+    description: Iraqi Freedom (Iraq) (2001-9/1/2010)
+    type: boolean
+
+  era_service_korea:
+    description: Korean War (1950-53)
+    type: boolean
+
+  era_service_korea_vietnam:
+    description: Between Korean and Vietnam Wars (1954-59)
+    type: boolean
+
+  era_service_newdawn:
+    description: New Dawn (Iraq) (9/1/2010-Present)
+    type: boolean
+
+  era_service_post_gulf:
+    description: Post Gulf War (1991-2OO1)
+    type: boolean
+
+  era_service_post_vietnam:
+    description: Post Vietnam War (1976-89)
+    type: boolean
+
+  era_service_pre_korea:
+    description: Pre-Korean War (1946-49)
+    type: boolean
+
+  era_service_pre_ww2:
+    description: Pre-World War II (1937-38)
+    type: boolean
+
+  era_service_vietnam:
+    description: Vietnam War (1960-75)
+    type: boolean
+
+  era_service_ww2:
+    description: World War 11 (1939-45)
+    type: boolean
+
+  fam_mem_veteran:
+    description: Indicates whether any of the patient's family members are veterans.
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  fam_mem_veteran_relationship:
+    description: Text term used to describe the patient's relationship to the family
+      member(s) who is in the military.
+    enum:
+      - Coparent (non-partner)
+      - Dependent Child
+      - Ex-Partner
+      - Father of Veteran
+      - Friend
+      - Mother of Veteran
+      - Non-Dependent Child
+      - Other
+      - Partner
+      - Sibling
+      - Unknown
+
+  family_military:
+    description: Do you have any sisters, brothers, half-sisters, half-brothers or
+      childen who served in the military?
+    enum:
+      - "No"
+      - "Yes"
+
+  family_military_brothers:
+    description: How many brothers who served in the military?
+    type: integer
+
+  family_military_children:
+    description: How many children who served in the military?
+    type: integer
+
+  family_military_halfbrothers:
+    description: How many half-brothers who served in the military?
+    type: integer
+
+  family_military_halfsisters:
+    description: How many half-sisters who served in the military?
+    type: integer
+
+  family_military_sisters:
+    description: How many sisters who served in the military?
+    type: integer
+
+  father_military:
+    description: Did father serve in the military?
+    enum:
+      - "No"
+      - "Yes"
+
+  fire_weapon:
+    description: Did you ever fire a weapon in a combat situation?
+    enum:
+      - "No"
+      - "Yes"
+
+  military_branch:
+    description: Text term used to describe the military branch in which the patient
+      has served.
+    enum:
+      - Army Reserve
+      - US Air Force
+      - US Air Force Reserve
+      - US Air National Guard
+      - US Army
+      - US Army National Guard
+      - US Coast Guard
+      - US Coast guard Reserve
+      - US Marine Corps
+      - US Marine Corps Reserve
+      - US Navy
+      - US Navy Reserve
+      - Unknown
+
+  military_service:
+    description: Indicates whether the patient has ever served in the military.
+    enum:
+      - "No"
+      - "Yes"
+
+  military_service_country:
+    description: The country in which the subject served the military.
+    enum:
+      - Canadian
+      - None
+      - Other (specify)
+      - United States
+
+  military_service_other:
+    description: If 'other (specify) was chosen for 'military_service', enter military
+      served in
+    type: string
+
+  military_status:
+    description: Current military status.
+    enum:
+      - Active Duty
+      - National Guard
+      - Reserve
+      - Veteran
+
+  military_status_active:
+    description: I am currently on active duty
+    type: boolean
+
+  military_status_discharged:
+    description: I am currently discharged from the military
+    type: boolean
+
+  military_status_discharged_type:
+    description: Characterization of military service at discharge
+    enum:
+      - General (Under honorable conditions)
+      - Honorable
+      - Other than honorable
+
+  military_status_ing:
+    description: I am currently in the inactive national guard
+    type: boolean
+
+  military_status_irr:
+    description: I am currently in the individual ready reserves
+    type: boolean
+
+  military_status_ng:
+    description: I am currently in the national guard
+    type: boolean
+
+  military_status_other:
+    description: I am currently other
+    type: boolean
+
+  military_status_other_description:
+    description: Please describe
+    type: string
+
+  military_status_readyreserves:
+    description: I am currently in the ready reserves
+    type: boolean
+
+  military_status_retired:
+    description: I am currently retired military
+    type: boolean
+
+  military_tours:
+    description: The total number of military tours on which the individual served.
+    type: integer
+
+  military_tours_count:
+    description: The total number of military tours on which the individual served.
+    type: integer
+
+  military_years:
+    description: The total number of years that the individual served in the military.
+    type: number
+    maximum: 89
+    minimum: 0
+
+  mos_branch:
+    description: Service branch
+    type: string
+
+  mos_category:
+    description: Major category
+    type: string
+
+  mos_job:
+    description: Job
+    type: string
+
+  mos_other:
+    description: If other job, please describe
+    type: string
+
+  mos_rank:
+    description: Rank Structure
+    type: string
+
+  mother_military:
+    description: Did she serve in the military?
+    enum:
+      - "No"
+      - "Yes"
+
+  oef_count:
+    description: This is the count of the total deployments for Operation Enduring
+      Freedom.
+    type: integer
+
+  oif_count:
+    description: This is the count of the total deployments for Operation Iraqi Freedom.
+    type: integer
+
+  ond_count:
+    description: This is the count of the total deployments for Operation New Dawn.
+    type: integer
+
+  post911_confirmed:
+    description: Post 9/11 military service confirmed by the DD 214 or active duty
+      status
+    enum:
+      - "No"
+      - "Yes"
+
+  prisoner_of_war:
+    description: Were you ever a Prisoner of War?
+    enum:
+      - "No"
+      - "Yes"
+
+  rank_highest:
+    description: What was your highest rank while in the military?
+    enum:
+      - 0-1
+      - 0-2
+      - 0-3
+      - 0-4
+      - 0-5
+      - 0-6
+      - 0-7
+      - 0-8
+      - 0-9
+      - E-1
+      - E-2
+      - E-3
+      - E-4
+      - E-5
+      - E-6
+      - E-7
+      - E-8
+      - E-9
+      - W-1
+      - W-2
+      - W-3
+      - W-4
+      - W-5
+
+  rank_left:
+    description: What was your rank when you left the military?
+    enum:
+      - 0-1
+      - 0-2
+      - 0-3
+      - 0-4
+      - 0-5
+      - 0-6
+      - 0-7
+      - 0-8
+      - 0-9
+      - E-1
+      - E-2
+      - E-3
+      - E-4
+      - E-5
+      - E-6
+      - E-7
+      - E-8
+      - E-9
+      - W-1
+      - W-2
+      - W-3
+      - W-4
+      - W-5
+
+  serve_afghan_oef:
+    description: Did you serve in Afghanistan during Operation Enduring Freedom?
+    enum:
+      - "No"
+      - "Yes"
+
+  serve_afghan_oef_months:
+    description: How long (months) were you deployed in Operation Enduring Freedom?
+    type: integer
+
+  serve_gulfwar:
+    description: Did you serve in the region of conflict during the first Gulf War?
+    enum:
+      - "No"
+      - "Yes"
+
+  serve_gulfwar_months:
+    description: How long (months) were you deployed in the first Gulf War?
+    type: integer
+
+  serve_iraq_oif:
+    description: Did you serve in Iraq during Operation Iraqi Freedom?
+    enum:
+      - "No"
+      - "Yes"
+
+  serve_iraq_oif_months:
+    description: How long (months) were you deployed in Iraq during Operation Iraqi
+      Freedom?
+    type: integer
+
+  serve_kuwait_oif:
+    description: Did you serve in Kuwait during Operation Iraqi Freedom?
+    enum:
+      - "No"
+      - "Yes"
+
+  serve_kuwait_oif_months:
+    description: How long (months) did you serve in Kuwait during Operation Iraqi
+      Freedom?
+    type: integer
+
+  serve_region_conflict_oif_oef:
+    description: Were you stationed in the region of conflict during either Operation
+      Iraqi Freedom or Operation Enduring Freedom?
+    enum:
+      - "No"
+      - "Yes"
+
+  serve_warzone:
+    description: Did you serve in a war or operation zone?
+    enum:
+      - "No"
+      - "Yes"
+
+  serve_warzone_combat:
+    description: Did you serve in a Combat unit (line combat unit) during war-zone
+      service?
+    type: boolean
+
+  serve_warzone_combatsupport:
+    description: Did you serve in a Combat Support unit (unit that directly supports
+      a combat unit) during war-zone service?
+    type: boolean
+
+  serve_warzone_servicesupport:
+    description: Did you serve in a Service Support unit (non-combat duty in the war
+      zone) during war-zone service?
+    type: boolean
+
+  service1_location:
+    description: Most recent service location in or near a war zone
+    type: string
+
+  service2_location:
+    description: Second most recent service location in or near a war zone
+    type: string
+
+  service3_location:
+    description: Third most recent service location in or near a war zone
+    type: string
+
+  service4_location:
+    description: Fourth most recent service location in or near a war zone
+    type: string
+
+  service_connected:
+    description: Are you considered service-connected by the VA?
+    enum:
+      - "No"
+      - "Yes"
+
+  service_connected_percentage:
+    description: What percentage is your service-connected designation?
+    type: integer
+
+  service_connected_reason:
+    description: What is the reason for your service-connected designation?
+    type: string
+
+  serving_military_currently:
+    description: Indicates whether the patient was serving the military at the time
+      they enrolled in the study.
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+
+  tours_served:
+    description: How many tours have you served?
+    type: integer
+
+  twin_military:
+    description: Did your twin serve in the military?
+    enum:
+      - "No"
+      - "Yes"
+
+  under_fire:
+    description: Were you ever under enemy fire?
+    enum:
+      - "No"
+      - "Yes"
+
+  vet_org_member:
+    description: Text term used to describe the organization(s) where the patient
+      is a member.
+    enum:
+      - WWP
+
+  wounded_in_warzone:
+    description: Were you wounded or injured in a war zone?
+    enum:
+      - "No"
+      - "Yes"
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

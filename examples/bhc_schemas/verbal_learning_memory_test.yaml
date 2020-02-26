@@ -1,0 +1,119 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "verbal_learning_memory_test"
+title: The Verbal Learning and Memory Test (VLMT)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: The Verbal Learning and Memory Test or Verbaler Lern- und Merkfahigkeitstest
+  (VLMT) is a tool to assess and differentiate verbal memory performance. It is the
+  German equivalent of the Rey auditory verbal learning test (RAVLT).
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: verbal_learning_memory_tests
+    label: data_from
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  vlmt_30min_delayed_recall:
+    description: VLMT - 30 min Delayed Recall
+    type: string
+
+  vlmt_adjusted_recognition:
+    description: VLMT - Adjusted Recognition
+    type: string
+
+  vlmt_adjusted_recognition_percentile:
+    description: VLMT - Adjusted Recognition Percentile
+    type: string
+
+  vlmt_delayed_recall:
+    description: VLMT - Delayed Recall
+    type: string
+
+  vlmt_delayed_recall_percentile:
+    description: VLMT - Delayed Recall Percentile
+    type: string
+
+  vlmt_immediate_recall:
+    description: VLMT - Immediate Recall
+    type: string
+
+  vlmt_immediate_recall_percentile:
+    description: VLMT - Immediate Recall Percentile
+    type: string
+
+  vlmt_interference_list:
+    description: VLMT - Interference List
+    type: string
+
+  vlmt_passage1:
+    description: VLMT - Passage 1
+    type: string
+
+  vlmt_passage2:
+    description: VLMT - Passage 2
+    type: string
+
+  vlmt_passage3:
+    description: VLMT - Passage 3
+    type: string
+
+  vlmt_passage4:
+    description: VLMT - Passage 4
+    type: string
+
+  vlmt_passage5:
+    description: VLMT - Passage 5
+    type: string
+
+  vlmt_perseveration:
+    description: VLMT - Perseveration
+    type: string
+
+  vlmt_perseveration_percentile:
+    description: VLMT - Perseveration Percentile
+    type: string
+
+  vlmt_recognition:
+    description: VLMT - Recognition
+    type: string
+
+  vlmt_total_number_recalled_words:
+    description: VLMT - Total Number Of Recalled Words
+    type: string
+
+  vlmt_total_number_recalled_words_percentile:
+    description: VLMT - Total Number Of Recalled Words Percentile
+    type: string
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,116 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "combat_exposure_scale"
+title: Combat Exposure Scale (CES)
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: A 7-item self-report measure that assesses wartime stressors experienced
+  by combatants.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: combat_exposure_scales
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  ces_1:
+    description: Did you ever go on combat patrols or have other very dangerous duty?
+    enum:
+      - 1-3 times
+      - 13-50 times
+      - 4-12 times
+      - 51 or more times
+      - "No"
+
+  ces_2:
+    description: Did you ever under enemy fire?
+    enum:
+      - 1-3 months
+      - 4-6 months
+      - 7months or more
+      - Less than 1 month
+      - Never
+
+  ces_3:
+    description: Were you ever surrounded by the enemy?
+    enum:
+      - 1-2 times
+      - 13-25 times
+      - 26 or moretimes
+      - 3-12 times
+      - "No"
+
+  ces_4:
+    description: What percentage of the men in your unit were killed (KIA), wounded,
+      or missing in action?
+    enum:
+      - 1-25%
+      - 26-50%
+      - 51-76%
+      - 76% or more
+      - None
+
+  ces_5:
+    description: How often did you fire rounds at the enemy?
+    enum:
+      - 1-2 times
+      - 13-50 times
+      - 3-12 times
+      - 51 or more times
+      - "No"
+
+  ces_6:
+    description: How often did you see someone hit by incoming or outgoing rounds?
+    enum:
+      - 1-2 times
+      - 13-50 times
+      - 3-12 times
+      - 51 or more times
+      - "No"
+
+  ces_7:
+    description: How often were you in danger of being killed (e.g. pinned down, overrun,
+      ambushed, near miss, etc.)?
+    enum:
+      - 1-2 times
+      - 13-50 times
+      - 3-12 times
+      - 51 or more times
+      - "No"
+
+  x_ces_score:
+    description: ces_1*2 + ces_2 + [if(ces_3=4, then 6) else (ces_3*2)] + [if(ces_4=4,
+      then 3) else ces_4 + ces_5 + ces_6 *2 + ces_7*2
+    type: integer
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"

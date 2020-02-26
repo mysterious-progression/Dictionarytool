@@ -1,0 +1,155 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "criterion_a_event"
+title: Criterion A Event
+type: object
+nodeTerms: null
+namespace: https://data.braincommons.org/
+category: clinical_assessment
+program: '*'
+project: '*'
+description: One of several criterion used by the American Psychiatric Association
+  to diagnosis PTSD. This criterion addresses the patient's exposure to trauma.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: visits
+    backref: criterion_a_events
+    label: related_to
+    target_type: visit
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - visits
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  criterionaevent_1_1:
+    description: Does subject have a criterion "A" trauma?
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_1_2:
+    description: The person's response was intense fear, helplessness or horror-
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_1_3:
+    description: The person denied fear, helplessness or horror but endorsed another
+      emotion (i.e. intense anger, sadness, feeling numb, "just doing my job",etc)
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_1_3_1:
+    description: Describe Response-
+    type: string
+
+  criterionaevent_2:
+    description: Index trauma summary
+    type: string
+
+  criterionaevent_3_0_1:
+    description: Trauma category- Combat
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_10:
+    description: Trauma category- Other
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_2:
+    description: Trauma category- Child Physical/Sexual Abuse
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_3:
+    description: Trauma category- Adult Physical/Sexual Abuse
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_4:
+    description: Trauma category- Accident/MVA/Fire
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_5:
+    description: Trauma category- Domestic Violence
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_6:
+    description: Trauma category- Death of Someone
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_7:
+    description: Trauma category- Witness/Experience Violence, Adult
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_8:
+    description: Trauma category- Natural Disaster
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_0_9:
+    description: Trauma category- Witness/Experience Violence, Child
+    enum:
+      - "No"
+      - "Yes"
+
+  criterionaevent_3_1:
+    description: Describe
+    type: string
+
+  criterionaevent_4:
+    description: Date of Index Trauma
+    type: string
+
+  criterionaevent_6:
+    description: Age at PTSD Onset due to Index Trauma
+    type: integer
+
+  criterionaevent_7:
+    description: Age at Earliest Suspected PTSD Onset
+    type: integer
+
+  criterionaevent_in_military:
+    description: Did it happen while the person was in the military?
+    enum:
+      - "No"
+      - "Yes"
+
+  visits:
+    $ref: "_definitions.yaml#/to_one"
